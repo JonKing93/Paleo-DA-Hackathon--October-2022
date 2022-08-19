@@ -61,5 +61,7 @@ html_static_path = []
 
 # The HTML header
 html_context = {
-  'display_github': True
+  'display_github': False
 }
+
+html_copy_source = False
