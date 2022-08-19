@@ -1,6 +1,10 @@
 Prerequisites
 =============
-Please complete the following tasks before the workshop begins.
+Please complete the following tasks before the workshop begins:
+
+1. `Install Matlab 2020b+ <#matlab-2020b>`_
+2. `Install the DASH toolbox <#dash-toolbox>`_
+3. `Download input datasets <#paleoclimate-data>`_
 
 
 Matlab 2020b+
