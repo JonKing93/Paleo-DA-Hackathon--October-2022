@@ -25,34 +25,34 @@ Use the ``dash.version`` command to print the current version of DASH in the con
 
 Step 2: Print help text
 -----------------------
-Use the `help` command to read the help text for `dash.version`::
+Use the ``help`` command to read the help text for ``dash.version``::
 
     >> help dash.version
 
 
 .. note::
 
-    Optionally click the `Documentation Page` link at the bottom of the help text to open the documentation as a webpage.
+    Optionally click the ``Documentation Page`` link at the bottom of the help text to open the documentation as a webpage.
 
 
 Step 3: Open help page
 ----------------------
-Use the `dash.doc` command to open the documentation as a webpage::
+Use the ``dash.doc`` command to open the documentation as a webpage::
 
     >> dash.doc('dash.version')
 
 
 Step 4: Compare
 ---------------
-Compare the help text for `dash.doc`::
+Compare the console help text for ``dash.doc``::
 
     >> help dash.doc
 
-with the documentation page for `dash.doc`::
+with its documentation page::
 
     >> dash.doc('dash.doc')
 
-Notice the `Examples` section on the documentation page, which is not included in the help text.
+Notice the **"Examples"** section on the documentation page, which is not included in the help text.
 
 
 .. note::
