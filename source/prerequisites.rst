@@ -35,13 +35,13 @@ Paleoclimate Data
 
 Please download any paleoclimate data you will need for assimilation and bring it to the workshop. In general, we recommend saving data in NetCDF, MAT-file, and/or delimited text file formats whenever possible.
 
-Paleoclimate proxy records
-++++++++++++++++++++++++++
+*Paleoclimate proxy records*
+++++++++++++++++++++++++++++
 Any proxy records or chronologies you want to assimilate. To keep things simple, **we recommend using 1-3 proxy types and 10-20 records**.
 
 
-Reconstruction targets
-++++++++++++++++++++++
+*Reconstruction targets*
+++++++++++++++++++++++++
 Climate model output for the target reconstruction variables. These can be a climate metric/index, or a spatiotemporal climate field. For example, if you want to reconstruct the global surface temperature field, please bring modeled global surface temperature fields. Similarly, if you would like to reconstruct the Nino 3.4 index, please bring modeled Nino 3.4 indices. For the workshop, **we recommend a maximum of 3 target fields**.
 
 .. important::
@@ -54,8 +54,8 @@ Climate model output for the target reconstruction variables. These can be a cli
     If using multiple reconstruction targets, the variables should be from the same time steps and/or model runs.
 
 
-Forward model inputs
-++++++++++++++++++++
+*Forward model inputs*
+++++++++++++++++++++++
 Climate model output for the climate variables required to run the proxy forward models. For example, if your forward model requires SSTs as an input, please bring modeled SST output.
 
 .. important::
