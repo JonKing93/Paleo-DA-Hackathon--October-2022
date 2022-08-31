@@ -1,5 +1,5 @@
-Open Coding Session 1
-=====================
+Open Coding 1
+=============
 
 Goals
 -----

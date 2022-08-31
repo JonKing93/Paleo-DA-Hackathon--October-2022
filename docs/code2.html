@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Open Coding 2 &mdash; Paleo DA Hackathon 0.0.1 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="gridMetadata" href="gridMetadata.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> Paleo DA Hackathon
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="welcome.html">Welcome!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="prerequisites.html">Prerequisites</a></li>
+<li class="toctree-l1"><a class="reference internal" href="overview.html">DASH Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="oop.html">Object-Oriented Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="docs.html">Getting Help</a></li>
+<li class="toctree-l1"><a class="reference internal" href="code1.html">Open Coding 1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gridMetadata.html">gridMetadata</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Open Coding 2</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#goals">Goals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#step-1-practice-creating-metadata">Step 1: Practice Creating Metadata</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#practice-a"><em>Practice A</em></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#practice-b"><em>Practice B</em></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#practice-c"><em>Practice C</em></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#practice-d"><em>Practice D</em></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#step-2-practice-metadata-attributes">Step 2: Practice Metadata Attributes</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#practice-e"><em>Practice E</em></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#step-3-create-metadata-for-real-datasets">Step 3: Create Metadata for Real Datasets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#solutions">Solutions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id1"><em>Practice A</em></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id2"><em>Practice B</em></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id3"><em>Practice C</em></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id4"><em>Practice D</em></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id5"><em>Practice E</em></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Paleo DA Hackathon</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Open Coding 2</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="open-coding-2">
+<h1>Open Coding 2<a class="headerlink" href="#open-coding-2" title="Permalink to this headline"></a></h1>
+<p>In this session, we will practice using the <code class="docutils literal notranslate"><span class="pre">gridMetadata</span></code> class to create metadata objects for climate datasets.</p>
+<section id="goals">
+<h2>Goals<a class="headerlink" href="#goals" title="Permalink to this headline"></a></h2>
+<ol class="arabic simple">
+<li><p>Practice creating metadata objects</p></li>
+<li><p>Practice using metadata attributes</p></li>
+<li><p>Create metadata objects for user datasets</p></li>
+</ol>
+</section>
+<section id="step-1-practice-creating-metadata">
+<h2>Step 1: Practice Creating Metadata<a class="headerlink" href="#step-1-practice-creating-metadata" title="Permalink to this headline"></a></h2>
+<p>Use the <code class="docutils literal notranslate"><span class="pre">gridMetadata</span></code> command to create metadata for the following datasets. Solutions are provided at the bottom of the page.</p>
+<section id="practice-a">
+<h3><em>Practice A</em><a class="headerlink" href="#practice-a" title="Permalink to this headline"></a></h3>
+<p>The dataset has 3 dimensions: latitude, longitude, and time. Latitude extends from the equator to the North pole in steps of 1 degree. Longitude metadata proceeds from 0 to 355 in steps of 5 degrees. The dataset extends over the Common Era from 1-2000 CE with an annual time step.</p>
+</section>
+<section id="practice-b">
+<h3><em>Practice B</em><a class="headerlink" href="#practice-b" title="Permalink to this headline"></a></h3>
+<p>Same as practice A, but with a monthly time step.</p>
+</section>
+<section id="practice-c">
+<h3><em>Practice C</em><a class="headerlink" href="#practice-c" title="Permalink to this headline"></a></h3>
+<p>The dataset consists of measurements from a series of proxy sites over time. The spatial coordinates and altitude of each proxy site are given below. The proxy dataset extends from the Last Glacial Maximum (at 24 ka) to present (0 ka) in steps of 3 kyr.</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">coordinates</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="w"> </span><span class="mi">2</span><span class="w"></span>
+<span class="w">               </span><span class="mi">3</span><span class="w"> </span><span class="mi">4</span><span class="w"></span>
+<span class="w">               </span><span class="mi">5</span><span class="w"> </span><span class="mi">6</span><span class="p">]</span><span class="w"></span>
+<span class="n">altitude</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="mi">100</span><span class="p">;</span><span class="w"> </span><span class="mi">200</span><span class="p">;</span><span class="w"> </span><span class="mi">300</span><span class="p">]</span><span class="w"></span>
+</pre></div>
+</div>
+</section>
+<section id="practice-d">
+<h3><em>Practice D</em><a class="headerlink" href="#practice-d" title="Permalink to this headline"></a></h3>
+<p>Same as practice C, but the metadata should also include each proxy site’s ID.</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">siteID</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="s">&quot;13AB1&quot;</span><span class="p">;</span><span class="w"> </span><span class="s">&quot;14CD2&quot;</span><span class="p">;</span><span class="w"> </span><span class="s">&quot;8Xa&quot;</span><span class="p">]</span><span class="w"></span>
+</pre></div>
+</div>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>You can use Matlab’s <code class="docutils literal notranslate"><span class="pre">string</span></code> command to convert numeric matrices to string matrices</p>
+</div>
+</section>
+</section>
+<section id="step-2-practice-metadata-attributes">
+<h2>Step 2: Practice Metadata Attributes<a class="headerlink" href="#step-2-practice-metadata-attributes" title="Permalink to this headline"></a></h2>
+<p>Add attributes to a metadata object. Do this by either including attributes in the <code class="docutils literal notranslate"><span class="pre">gridMetadata</span></code> command, or by using the <code class="docutils literal notranslate"><span class="pre">addAttributes</span></code> command to add attributes to an exisiting metadata object.</p>
+<section id="practice-e">
+<h3><em>Practice E</em><a class="headerlink" href="#practice-e" title="Permalink to this headline"></a></h3>
+<p>For the dataset from practice problem A, indicate that the units of the dataset are in Kelvin. Also include the following cell area weights as a metadata attribute:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">weights</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">repmat</span><span class="p">(</span><span class="nb">cosd</span><span class="p">(</span><span class="mi">0</span><span class="p">:</span><span class="mi">90</span><span class="p">),</span><span class="w"> </span><span class="mi">72</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="step-3-create-metadata-for-real-datasets">
+<h2>Step 3: Create Metadata for Real Datasets<a class="headerlink" href="#step-3-create-metadata-for-real-datasets" title="Permalink to this headline"></a></h2>
+<p>Create a gridMetadata object for a dataset you brought to the workshop. Create some dimensional metadata that you find useful - this could be metadata read from a NetCDF or MAT file, or some other value that you prefer. Use the <code class="docutils literal notranslate"><span class="pre">gridMetadata</span></code> command to create the metadata object. Optionally include some attributes to better document the dataset.</p>
+</section>
+<section id="solutions">
+<h2>Solutions<a class="headerlink" href="#solutions" title="Permalink to this headline"></a></h2>
+<section id="id1">
+<h3><em>Practice A</em><a class="headerlink" href="#id1" title="Permalink to this headline"></a></h3>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">lat</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">0</span><span class="p">:</span><span class="mi">90</span><span class="p">;</span><span class="w"></span>
+<span class="n">lon</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">0</span><span class="p">:</span><span class="mi">5</span><span class="p">:</span><span class="mi">355</span><span class="p">;</span><span class="w"></span>
+<span class="nb">time</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">1</span><span class="p">:</span><span class="mi">2000</span><span class="p">;</span><span class="w"></span>
+<span class="n">meta</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">gridMetadata</span><span class="p">(</span><span class="s">&quot;lat&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">lat</span><span class="o">&#39;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;lon&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">lon</span><span class="o">&#39;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;time&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">time</span><span class="o">&#39;</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Remember that <code class="docutils literal notranslate"><span class="pre">gridMetadata</span></code> interprets each <strong>row</strong> as a unique metadata value. Be sure that <code class="docutils literal notranslate"><span class="pre">lat</span></code>, <code class="docutils literal notranslate"><span class="pre">lon</span></code>, and <code class="docutils literal notranslate"><span class="pre">time</span></code>, are provided as column vectors.</p>
+</div>
+</section>
+<section id="id2">
+<h3><em>Practice B</em><a class="headerlink" href="#id2" title="Permalink to this headline"></a></h3>
+<p>There are a number of ways to create monthly time metadata. Potential options include using decimal years:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="nb">time</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">linspace</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2000</span><span class="p">,</span><span class="w"> </span><span class="mi">2000</span><span class="o">*</span><span class="mi">12</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
+<p>or a date vector:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="nb">years</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">repmat</span><span class="p">(</span><span class="mi">1</span><span class="p">:</span><span class="mi">2000</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">12</span><span class="p">);</span><span class="w"></span>
+<span class="n">months</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">repmat</span><span class="p">((</span><span class="mi">1</span><span class="p">:</span><span class="mi">12</span><span class="p">)</span><span class="o">&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">2000</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span><span class="w"></span>
+<span class="nb">time</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="nb">years</span><span class="o">&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">months</span><span class="p">];</span><span class="w"></span>
+</pre></div>
+</div>
+<p>However, we recommend using Matlab’s <code class="docutils literal notranslate"><span class="pre">datetime</span></code> format, which allow you to sort values by years, months, and days. (this functionality can be useful later when building state vector ensembles):</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="nb">time</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">datetime</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="nb">calmonths</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="nb">datetime</span><span class="p">(</span><span class="mi">2000</span><span class="p">,</span><span class="mi">12</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span><span class="w"></span>
+<span class="n">meta</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">gridMetadata</span><span class="p">(</span><span class="s">&quot;lat&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">lat</span><span class="o">&#39;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;lon&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">lon</span><span class="o">&#39;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;time&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">time</span><span class="o">&#39;</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
+</section>
+<section id="id3">
+<h3><em>Practice C</em><a class="headerlink" href="#id3" title="Permalink to this headline"></a></h3>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">site</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="n">coordinates</span><span class="p">,</span><span class="w"> </span><span class="n">altitude</span><span class="p">];</span><span class="w"></span>
+<span class="nb">time</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">24</span><span class="p">:</span><span class="o">-</span><span class="mi">3</span><span class="p">:</span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
+<span class="n">meta</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">gridMetadata</span><span class="p">(</span><span class="s">&quot;site&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">siteMetadata</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;time&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">time</span><span class="o">&#39;</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
+</section>
+<section id="id4">
+<h3><em>Practice D</em><a class="headerlink" href="#id4" title="Permalink to this headline"></a></h3>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">% Convert numeric metadata to string</span><span class="w"></span>
+<span class="n">coordinates</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">string</span><span class="p">(</span><span class="n">coordinates</span><span class="p">);</span><span class="w"></span>
+<span class="n">altitude</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">string</span><span class="p">(</span><span class="n">altitude</span><span class="p">);</span><span class="w"></span>
+
+<span class="c">% Build the metadata object</span><span class="w"></span>
+<span class="n">site</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="n">coordinates</span><span class="p">,</span><span class="w"> </span><span class="n">altitude</span><span class="p">,</span><span class="w"> </span><span class="n">siteID</span><span class="p">];</span><span class="w"></span>
+<span class="nb">time</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">24</span><span class="p">:</span><span class="o">-</span><span class="mi">3</span><span class="p">:</span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
+<span class="n">meta</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">gridMetadata</span><span class="p">(</span><span class="s">&quot;site&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">site</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;time&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">time</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
+</section>
+<section id="id5">
+<h3><em>Practice E</em><a class="headerlink" href="#id5" title="Permalink to this headline"></a></h3>
+<p>Using <code class="docutils literal notranslate"><span class="pre">gridMetadata</span></code>:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">attributes</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">struct</span><span class="p">(</span><span class="s">&#39;Units&#39;</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;Kelvin&#39;</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;areaWeights&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">weights</span><span class="p">);</span><span class="w"></span>
+<span class="n">meta</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">gridMetadata</span><span class="p">(</span><span class="s">&quot;lat&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">lat</span><span class="o">&#39;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;lon&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">lon</span><span class="o">&#39;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;time&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">time</span><span class="o">&#39;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;attributes&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">attributes</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Or using <code class="docutils literal notranslate"><span class="pre">addAttributes</span></code>:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">meta</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">gridMetadata</span><span class="p">(</span><span class="s">&quot;lat&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">lat</span><span class="o">&#39;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;lon&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">lon</span><span class="o">&#39;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;time&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">time</span><span class="o">&#39;</span><span class="p">);</span><span class="w"></span>
+<span class="n">meta</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">meta</span><span class="p">.</span><span class="n">addAttributes</span><span class="p">(</span><span class="s">&quot;Units&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Kelvin&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;areaWeights&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">weights</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="gridMetadata.html" class="btn btn-neutral float-left" title="gridMetadata" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Jonathan King.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
