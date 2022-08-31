@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>gridMetadata &mdash; Paleo DA Hackathon 0.0.1 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Open Coding 2" href="code2.html" />
+    <link rel="prev" title="Open Coding 1" href="code1.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> Paleo DA Hackathon
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="welcome.html">Welcome!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="prerequisites.html">Prerequisites</a></li>
+<li class="toctree-l1"><a class="reference internal" href="overview.html">DASH Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="oop.html">Object-Oriented Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="docs.html">Getting Help</a></li>
+<li class="toctree-l1"><a class="reference internal" href="code1.html">Open Coding 1</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">gridMetadata</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#n-dimensional-datasets">N-dimensional datasets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#dimensional-metadata">Dimensional metadata</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#non-dimensional-metadata-attributes">Non-dimensional metadata attributes</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="code2.html">Open Coding 2</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Paleo DA Hackathon</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>gridMetadata</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="gridmetadata">
+<h1>gridMetadata<a class="headerlink" href="#gridmetadata" title="Permalink to this headline"></a></h1>
+<p>We’ll begin our tour of the DASH toolbox with the gridMetadata class. This class assigns human-readable metadata to climate datasets, which allows users to manipulate data using human-readable values. The class operates by enabling users to build metadata objects that describe the information in a given dataset. These metadata objects are used as input to later DASH commands to catalogue and manipulate saved datasets.</p>
+<section id="n-dimensional-datasets">
+<h2>N-dimensional datasets<a class="headerlink" href="#n-dimensional-datasets" title="Permalink to this headline"></a></h2>
+<p>A gridMetadata object holds metadata values along each dimension of an N-dimensional gridded dataset. By default, the DASH toolbox includes support for up to 7 dataset dimensions:</p>
+<ol class="arabic simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">lat</span></code>: Latitude / X coordinate</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">lon</span></code>: Longitude / Y coordinate</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">lev</span></code>: Level / Height / Z coordinate</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">site</span></code>: Non-rectilinear spatial coordinate</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">time</span></code>: Time</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">run</span></code>: Model run / Ensemble member</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">var</span></code>: Climate variable</p></li>
+</ol>
+<p>although users can modify the toolbox to support additional dimensions (see open-coding session 2). Note that metadata objects <strong>do not</strong> need to define metadata for all 7 dimensions (in fact, this is almost never necessary). Instead, users should pick and choose the dimensions appropriate for their datasets.</p>
+<p>To create a metadata object, use the <code class="docutils literal notranslate"><span class="pre">gridMetadata</span></code> command. The inputs to this command are a series of (Dimension-Name, Metadata-Values) pairs. For example, to create metadata for a dataset over 3 spatial dimensions, you could do:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">metadataObject</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">gridMetadata</span><span class="p">(</span><span class="s">&quot;lat&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">latMetadata</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;lon&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">lonMetadata</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;lev&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">levMetadata</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Similarly, to create metadata for a series of randomly-distributed proxy sites over time, you could do:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">metadataObject</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">gridMetadata</span><span class="p">(</span><span class="s">&quot;site&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">siteMetadata</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;time&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">timeMetadata</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
+<p>In the next section, we will see how to design the metadata values for a given dataset dimension.</p>
+</section>
+<section id="dimensional-metadata">
+<h2>Dimensional metadata<a class="headerlink" href="#dimensional-metadata" title="Permalink to this headline"></a></h2>
+<p>The metadata for each dimension should be a matrix, and the number of rows should match the length of the dimension. The matrix may have any number of columns. The <code class="docutils literal notranslate"><span class="pre">gridMetadata</span></code> class aims to provide flexibility when defining dimensional metadata. Metadata values may be numeric, char, string, cellstring, or datetime data types, and there is no required format for the metadata along any dimension. Use whatever you find useful!</p>
+<p>Also note that the metadata matrices for different dimensions may have different data types and different numbers of columns. For example, say you have a dataset with both <code class="docutils literal notranslate"><span class="pre">site</span></code> and <code class="docutils literal notranslate"><span class="pre">time</span></code> dimensions. It is perfectly acceptable for the <code class="docutils literal notranslate"><span class="pre">site</span></code> metadata to be a string datatype with 4 columns, and the <code class="docutils literal notranslate"><span class="pre">time</span></code> metadata to be a numeric datatype with 1 column.</p>
+</section>
+<section id="non-dimensional-metadata-attributes">
+<h2>Non-dimensional metadata attributes<a class="headerlink" href="#non-dimensional-metadata-attributes" title="Permalink to this headline"></a></h2>
+<p>It’s often useful to associate some non-dimensional metadata with a dataset. For example, the name of the model associated with some climate model output, or the units of the dataset. The <code class="docutils literal notranslate"><span class="pre">gridMetadata</span></code> class supports such non-dimensional metadata, which are referred to as <strong>“attributes”</strong>. To include attributes in a metadata object, include a (<code class="docutils literal notranslate"><span class="pre">&quot;attributes&quot;</span></code>, Metadata-Attributes) pair in the inputs to the <code class="docutils literal notranslate"><span class="pre">gridMetadata</span></code> command. The Metadata-Attributes input should be a scalar <code class="docutils literal notranslate"><span class="pre">struct</span></code> with some fields. Each field is interpreted as the name of a metadata attributes. You may use any field names you find useful - there are no required names for metadata attributes. The content of each field is the metadata associated with the attribute. There are no formatting requirements for metadata attributes; they may be any data type, and may have any size.</p>
+<p>The metadata attributes should be included in the <code class="docutils literal notranslate"><span class="pre">gridMetadata</span></code> command. So for example:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">myAttributes</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">struct</span><span class="p">(</span><span class="s">&quot;Model&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;My Model Name&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Units&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Kelvin&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Some_data_field&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">rand</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span><span class="w"></span>
+<span class="n">meta</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">gridMetadata</span><span class="p">(</span><span class="s">&quot;site&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">siteMetadata</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;time&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">timeMetadata</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;attributes&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">myAttributes</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Alternatively, you can use <code class="docutils literal notranslate"><span class="pre">addAttributes</span></code> command to add attributes to an existing metadata object. For example:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">meta</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">gridMetadata</span><span class="p">(</span><span class="s">&quot;site&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">siteMetadata</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;time&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">timeMetadata</span><span class="p">);</span><span class="w"></span>
+<span class="n">meta</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">meta</span><span class="p">.</span><span class="n">addAttributes</span><span class="p">(</span><span class="s">&quot;Model&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;My Model Name&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Units&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Kelvin&quot;</span><span class="p">)</span><span class="w"></span>
+<span class="n">meta</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">meta</span><span class="p">.</span><span class="n">addAttributes</span><span class="p">(</span><span class="s">&quot;Some_data_field&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">rand</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span><span class="w"></span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The help page for <code class="docutils literal notranslate"><span class="pre">gridMetadata</span></code> reports additional commands that can be used to manipulate metadata attributes. Access the help page by entering <code class="docutils literal notranslate"><span class="pre">dash.doc(&quot;gridMetadata&quot;)</span></code> in the console.</p>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="code1.html" class="btn btn-neutral float-left" title="Open Coding 1" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="code2.html" class="btn btn-neutral float-right" title="Open Coding 2" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Jonathan King.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
