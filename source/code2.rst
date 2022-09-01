@@ -1,14 +1,13 @@
 Open Coding 2
 =============
 
-In this session, we will practice using the ``gridMetadata`` class to create metadata objects for climate datasets.
+In this session, we will practice using the ``gridMetadata`` class to create metadata objects for climate datasets. Steps 1 and 2 provide some practice problems for using ``gridMetadata``, and solutions are provided at the bottom of the page. If you already feel confident using the class, feel free to skip directly to step 3.
 
 
 Goals
 -----
-1. Practice creating metadata objects
-2. Practice using metadata attributes
-3. Create metadata objects for user datasets
+By the end of the session, participants should be able to create metadata objects for their own datasets.
+
 
 
 Step 1: Practice Creating Metadata
@@ -67,6 +66,15 @@ Create a gridMetadata object for a dataset you brought to the workshop. Create s
 
 
 
+Step 4: Optional Reading
+------------------------
+If you finish early, check out the ``gridMetadata`` documentation page to see additional commands and options. For example, the ``edit`` command can be used to alter the metadata for a dimension. Separately, the ``index`` command can be used to return metadata at specific elements along a dimension. To open the documentation page, enter::
+
+    dash.doc('gridMetadata')
+
+in the console.
+
+
 
 Solutions
 ---------
@@ -95,9 +103,9 @@ There are a number of ways to create monthly time metadata. Potential options in
 
 or a date vector::
 
-    years = repmat(1:2000, 1, 12);
+    years = repmat(1:2000, 12, 1);
     months = repmat((1:12)', 2000, 1);
-    time = [years', months];
+    time = [years(:), months];
 
 However, we recommend using Matlab's ``datetime`` format, which allow you to sort values by years, months, and days. (this functionality can be useful later when building state vector ensembles)::
 
