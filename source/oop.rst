@@ -9,12 +9,17 @@ Learning Objectives
 2. Introduce dot-indexing
 
 
+
+.. _classes:
+
 Classes
 -------
 The DASH toolbox is written in an object-oriented style. This means that the toolbox is divided into components called **classes**. A class is a piece of code that describes a specialized structure - this structure will have some data fields, and also some functions that operate using those data fields. The data fields are known as **properties**, and the functions are known as **methods**.
 
 For example, DASH includes a ``kalmanFilter`` class, which helps implement the Kalman filter algorithm. This class has various data fields (properties), such as the ensemble prior and the observations / proxy records. The class also includes various functions (methods) that help to run an ensemble Kalman filter. For example, the ``kalmanFilter`` class includes a ``localize`` method, which implements covariance localization, and a ``run`` method, which runs the Kalman filter algorithm.
 
+
+.. _objects:
 
 Objects
 -------
