@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Getting Help &mdash; Paleo DA Hackathon 0.0.1 documentation</title>
+  <title>Help and Documentation &mdash; Paleo DA Hackathon 0.0.1 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
@@ -42,7 +42,12 @@
 <li class="toctree-l1"><a class="reference internal" href="prerequisites.html">Prerequisites</a></li>
 <li class="toctree-l1"><a class="reference internal" href="overview.html">DASH Overview</a></li>
 <li class="toctree-l1"><a class="reference internal" href="oop.html">Object-Oriented Code</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Getting Help</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Help and Documentation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#console-help-text">Console Help Text</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#reference-guide">Reference Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#a-note-on-syntax">A note on syntax</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="code1.html">Open Coding 1</a></li>
 <li class="toctree-l1"><a class="reference internal" href="gridMetadata.html">gridMetadata</a></li>
 <li class="toctree-l1"><a class="reference internal" href="code2.html">Open Coding 2</a></li>
@@ -62,7 +67,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
-      <li>Getting Help</li>
+      <li>Help and Documentation</li>
       <li class="wy-breadcrumbs-aside">
       </li>
   </ul>
@@ -71,9 +76,57 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="getting-help">
-<h1>Getting Help<a class="headerlink" href="#getting-help" title="Permalink to this headline"></a></h1>
-<p>This page describes how to access the DASH documentation.</p>
+  <section id="help-and-documentation">
+<h1>Help and Documentation<a class="headerlink" href="#help-and-documentation" title="Permalink to this headline"></a></h1>
+<p>The DASH toolbox includes comprehensive documentation for every class and command. There are several ways to access this documentation.</p>
+<section id="console-help-text">
+<h2>Console Help Text<a class="headerlink" href="#console-help-text" title="Permalink to this headline"></a></h2>
+<p>You can display help text for components of the DASH toolbox using Matlab’s built-in <code class="docutils literal notranslate"><span class="pre">help</span></code> command. To print the help text, enter <code class="docutils literal notranslate"><span class="pre">help</span></code>, followed by the name of the DASH component, in the console. For example:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="nb">help</span><span class="w"> </span><span class="n">kalmanFilter</span><span class="w"></span>
+</pre></div>
+</div>
+<p>will display the help text for <code class="docutils literal notranslate"><span class="pre">kalmanFilter</span></code> class.</p>
+<p>To display help text for a function or method, use the full dot-indexing title of the method. For example, to display help for the <code class="docutils literal notranslate"><span class="pre">run</span></code> method of the <code class="docutils literal notranslate"><span class="pre">kalmanFilter</span></code> class, use:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="nb">help</span><span class="w"> </span><span class="n">kalmanFilter</span><span class="p">.</span><span class="n">run</span><span class="w"></span>
+</pre></div>
+</div>
+</section>
+<section id="reference-guide">
+<h2>Reference Guide<a class="headerlink" href="#reference-guide" title="Permalink to this headline"></a></h2>
+<p>DASH also includes an HTML reference guide with the documentation for every class and command in the toolbox. This reference guide is essentially an offline website - the reference guide will open in the Matlab internet browser, but does not require an internet connection to use. In general the reference guide is more comprehensive than the console help text and includes additional information such as usage examples, experiment demos, and tutorials.</p>
+<p>There are several ways to access the reference guide. The first is using the <code class="docutils literal notranslate"><span class="pre">dash.doc</span></code> command. Entering:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">dash</span><span class="p">.</span><span class="n">doc</span><span class="w"></span>
+</pre></div>
+</div>
+<p>in the Matlab console will open the reference guide at its first page. Alternatively, you can open the documentation page for a particular class or method by using the class or method name as the first input. For example:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">dash</span><span class="p">.</span><span class="n">doc</span><span class="p">(</span><span class="s">&#39;kalmanFilter&#39;</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
+<p>will open the documentation page for the <code class="docutils literal notranslate"><span class="pre">kalmanFilter</span></code> class, and:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">dash</span><span class="p">.</span><span class="n">doc</span><span class="p">(</span><span class="s">&#39;kalmanFilter.run&#39;</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
+<p>will open the documentation page for the <code class="docutils literal notranslate"><span class="pre">run</span></code> method.</p>
+<p>Alternatively, you can open specific documentation pages by clicking on the <strong>“Documentation Page”</strong> hyperlink at the end of console help text.</p>
+</section>
+<section id="a-note-on-syntax">
+<h2>A note on syntax<a class="headerlink" href="#a-note-on-syntax" title="Permalink to this headline"></a></h2>
+<p>Most of the commands in the DASH toolbox are <a class="reference internal" href="oop.html#classes"><span class="std std-ref">class methods</span></a> that act on individual <a class="reference internal" href="oop.html#objects"><span class="std std-ref">objects</span></a>. For example, we previously discussed how we could call the <code class="docutils literal notranslate"><span class="pre">run</span></code> method on different <code class="docutils literal notranslate"><span class="pre">kalmanFilter</span></code> objects to run the algorithm for different experimental parameters. In the documentation of these commands, you will often see the syntax <code class="docutils literal notranslate"><span class="pre">obj.&lt;method</span> <span class="pre">name&gt;</span></code>, where <code class="docutils literal notranslate"><span class="pre">&lt;method</span> <span class="pre">name&gt;</span></code> is the name of the command. This indicates that you should call the command using dot-indexing from individual objects.</p>
+<p>For example, in the documentation <code class="docutils literal notranslate"><span class="pre">kalmanFilter.run</span></code>, the command syntax is listed as:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">output</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">obj</span><span class="p">.</span><span class="n">run</span><span class="w"></span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">obj</span></code> prefix indicates that you should call the <code class="docutils literal notranslate"><span class="pre">run</span></code> command on individual <code class="docutils literal notranslate"><span class="pre">kalmanFilter</span></code> objects. For example:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">objectA</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">kalmanFilter</span><span class="p">(</span><span class="s">&#39;Experiment A&#39;</span><span class="p">);</span><span class="w"></span>
+<span class="n">outputA</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">objectA</span><span class="p">.</span><span class="n">run</span><span class="w"></span>
+</pre></div>
+</div>
+<p>or similarly:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">objectB</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">kalmanFilter</span><span class="p">(</span><span class="s">&#39;Experiment B&#39;</span><span class="p">);</span><span class="w"></span>
+<span class="n">outputB</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">objectB</span><span class="p">.</span><span class="n">run</span><span class="w"></span>
+</pre></div>
+</div>
+</section>
 </section>
 
 

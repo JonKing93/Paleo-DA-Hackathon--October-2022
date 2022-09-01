@@ -41,7 +41,7 @@
 <li class="toctree-l1"><a class="reference internal" href="prerequisites.html">Prerequisites</a></li>
 <li class="toctree-l1"><a class="reference internal" href="overview.html">DASH Overview</a></li>
 <li class="toctree-l1"><a class="reference internal" href="oop.html">Object-Oriented Code</a></li>
-<li class="toctree-l1"><a class="reference internal" href="docs.html">Getting Help</a></li>
+<li class="toctree-l1"><a class="reference internal" href="docs.html">Help and Documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="code1.html">Open Coding 1</a></li>
 <li class="toctree-l1"><a class="reference internal" href="gridMetadata.html">gridMetadata</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Open Coding 2</a><ul>
@@ -58,6 +58,7 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#step-3-create-metadata-for-real-datasets">Step 3: Create Metadata for Real Datasets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#step-4-optional-reading">Step 4: Optional Reading</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#solutions">Solutions</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#id1"><em>Practice A</em></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#id2"><em>Practice B</em></a></li>
@@ -95,14 +96,10 @@
              
   <section id="open-coding-2">
 <h1>Open Coding 2<a class="headerlink" href="#open-coding-2" title="Permalink to this headline"></a></h1>
-<p>In this session, we will practice using the <code class="docutils literal notranslate"><span class="pre">gridMetadata</span></code> class to create metadata objects for climate datasets.</p>
+<p>In this session, we will practice using the <code class="docutils literal notranslate"><span class="pre">gridMetadata</span></code> class to create metadata objects for climate datasets. Steps 1 and 2 provide some practice problems for using <code class="docutils literal notranslate"><span class="pre">gridMetadata</span></code>, and solutions are provided at the bottom of the page. If you already feel confident using the class, feel free to skip directly to step 3.</p>
 <section id="goals">
 <h2>Goals<a class="headerlink" href="#goals" title="Permalink to this headline"></a></h2>
-<ol class="arabic simple">
-<li><p>Practice creating metadata objects</p></li>
-<li><p>Practice using metadata attributes</p></li>
-<li><p>Create metadata objects for user datasets</p></li>
-</ol>
+<p>By the end of the session, participants should be able to create metadata objects for their own datasets.</p>
 </section>
 <section id="step-1-practice-creating-metadata">
 <h2>Step 1: Practice Creating Metadata<a class="headerlink" href="#step-1-practice-creating-metadata" title="Permalink to this headline"></a></h2>
@@ -152,6 +149,14 @@
 <h2>Step 3: Create Metadata for Real Datasets<a class="headerlink" href="#step-3-create-metadata-for-real-datasets" title="Permalink to this headline"></a></h2>
 <p>Create a gridMetadata object for a dataset you brought to the workshop. Create some dimensional metadata that you find useful - this could be metadata read from a NetCDF or MAT file, or some other value that you prefer. Use the <code class="docutils literal notranslate"><span class="pre">gridMetadata</span></code> command to create the metadata object. Optionally include some attributes to better document the dataset.</p>
 </section>
+<section id="step-4-optional-reading">
+<h2>Step 4: Optional Reading<a class="headerlink" href="#step-4-optional-reading" title="Permalink to this headline"></a></h2>
+<p>If you finish early, check out the <code class="docutils literal notranslate"><span class="pre">gridMetadata</span></code> documentation page to see additional commands and options. For example, the <code class="docutils literal notranslate"><span class="pre">edit</span></code> command can be used to alter the metadata for a dimension. Separately, the <code class="docutils literal notranslate"><span class="pre">index</span></code> command can be used to return metadata at specific elements along a dimension. To open the documentation page, enter:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">dash</span><span class="p">.</span><span class="n">doc</span><span class="p">(</span><span class="s">&#39;gridMetadata&#39;</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
+<p>in the console.</p>
+</section>
 <section id="solutions">
 <h2>Solutions<a class="headerlink" href="#solutions" title="Permalink to this headline"></a></h2>
 <section id="id1">
@@ -174,9 +179,9 @@
 </pre></div>
 </div>
 <p>or a date vector:</p>
-<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="nb">years</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">repmat</span><span class="p">(</span><span class="mi">1</span><span class="p">:</span><span class="mi">2000</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">12</span><span class="p">);</span><span class="w"></span>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="nb">years</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">repmat</span><span class="p">(</span><span class="mi">1</span><span class="p">:</span><span class="mi">2000</span><span class="p">,</span><span class="w"> </span><span class="mi">12</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span><span class="w"></span>
 <span class="n">months</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">repmat</span><span class="p">((</span><span class="mi">1</span><span class="p">:</span><span class="mi">12</span><span class="p">)</span><span class="o">&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">2000</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span><span class="w"></span>
-<span class="nb">time</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="nb">years</span><span class="o">&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">months</span><span class="p">];</span><span class="w"></span>
+<span class="nb">time</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="nb">years</span><span class="p">(:),</span><span class="w"> </span><span class="n">months</span><span class="p">];</span><span class="w"></span>
 </pre></div>
 </div>
 <p>However, we recommend using Matlab’s <code class="docutils literal notranslate"><span class="pre">datetime</span></code> format, which allow you to sort values by years, months, and days. (this functionality can be useful later when building state vector ensembles):</p>
