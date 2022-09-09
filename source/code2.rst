@@ -1,12 +1,18 @@
 Open Coding 2
 =============
 
-In this session, we will practice using the ``gridMetadata`` class to create metadata objects for climate datasets. Steps 1 and 2 provide some practice problems for using ``gridMetadata``, and solutions are provided at the bottom of the page. If you already feel confident using the class, feel free to skip directly to step 3.
+In this session, we will practice using the ``gridMetadata`` class to create metadata objects for climate datasets. Steps 1 and 2 provide some practice problems for using ``gridMetadata``, and solutions are provided at the bottom of the page. If you already feel confident using the class, feel free to skip directly to step 3 and create metadata objects for your own datasets.
 
 
 Goals
 -----
 By the end of the session, participants should be able to create metadata objects for their own datasets.
+
+
+
+Demo Data
+---------
+We encourage participants to work with their own data in the coding sessions. However, you can also follow along using a demo dataset. In the demo
 
 
 
