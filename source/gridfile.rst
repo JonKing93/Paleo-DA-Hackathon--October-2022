@@ -86,7 +86,7 @@ These transformations are often useful for converting the units of loaded data. 
 
 *Cross-catalogue arithmetic*
 ++++++++++++++++++++++++++++
-``gridfile`` includes support for applying arithmetic operations across multiple catalogues. This functionality is similar to NetCDF Operator (NCO) commands, but can be applied to any ``gridfile`` catalogue, regardless of formats of data source files. These arithmetic commands are often used when a climate variable of interest must be calculated from multiple climate model output variables.
+``gridfile`` includes support for applying arithmetic operations across multiple catalogues. This functionality is similar to NetCDF Operator (NCO) commands, but can be applied to any ``gridfile`` catalogue, regardless of formats of data source files. These arithmetic commands are often used when a climate variable of interest must be calculated using multiple output variables from a climate model.
 
 
 *And more!*

@@ -290,6 +290,9 @@ Here, **dimensions** is a string vector that lists a requested order for loaded 
 
 Try loading your proxy dataset with a different dimension order.
 
+.. note::
+    You don't need to list the name of every dimension in a ``.grid`` catalogue. Any unlisted data dimensions are automatically grouped at the end of the listed dimensions.
+
 
 Demo
 ~~~~
@@ -306,8 +309,6 @@ we can see that X is now a matrix with X rows (time steps) and 54 columns (proxy
 
     metadata
 
-.. note::
-    You don't need to list the name of every dimension in a ``.grid`` catalogue. Any unlisted data dimensions are automatically grouped at the end of the listed dimensions.
 
 
 *Data subsets*
