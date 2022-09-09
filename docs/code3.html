@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Open Coding 3 &mdash; Paleo DA Hackathon 0.0.1 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="gridfile" href="gridfile.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> Paleo DA Hackathon
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="welcome.html">Welcome!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="prerequisites.html">Prerequisites</a></li>
+<li class="toctree-l1"><a class="reference internal" href="overview.html">DASH Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="oop.html">Object-Oriented Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="docs.html">Help and Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="code1.html">Open Coding 1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gridMetadata.html">gridMetadata</a></li>
+<li class="toctree-l1"><a class="reference internal" href="code2.html">Open Coding 2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gridfile.html">gridfile</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Open Coding 3</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#goal">Goal</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#step-1-create-a-grid-file">Step 1: Create a <code class="docutils literal notranslate"><span class="pre">.grid</span></code> file</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#demo"><em>Demo</em></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#step-1b-load-existing-gridfile">Step 1b: Load existing <code class="docutils literal notranslate"><span class="pre">gridfile</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id1"><em>Demo</em></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#step-2-add-data-sources">Step 2: Add data sources</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#delimited-text-files"><em>Delimited text files</em></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#netcdf-and-mat-files"><em>NetCDF and MAT-files</em></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id2"><em>Demo</em></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#step-3-data-adjustments">Step 3: Data adjustments</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#fill-value"><em>Fill value</em></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#valid-range"><em>Valid Range</em></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#transformation"><em>Transformation</em></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id3"><em>Demo</em></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#step-4-load-data">Step 4: Load data</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#load-entire-catalogue"><em>Load entire catalogue</em></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id4">Demo</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#custom-dimension-order"><em>Custom dimension order</em></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id5">Demo</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#data-subsets"><em>Data subsets</em></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id6">Demo</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Paleo DA Hackathon</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Open Coding 3</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="open-coding-3">
+<h1>Open Coding 3<a class="headerlink" href="#open-coding-3" title="Permalink to this headline"></a></h1>
+<section id="goal">
+<h2>Goal<a class="headerlink" href="#goal" title="Permalink to this headline"></a></h2>
+<p>In this session, we’ll use <code class="docutils literal notranslate"><span class="pre">gridfile</span></code> to create a data catalogue for climate proxy records.</p>
+</section>
+<section id="step-1-create-a-grid-file">
+<h2>Step 1: Create a <code class="docutils literal notranslate"><span class="pre">.grid</span></code> file<a class="headerlink" href="#step-1-create-a-grid-file" title="Permalink to this headline"></a></h2>
+<p>Use the <code class="docutils literal notranslate"><span class="pre">gridfile.new</span></code> command to create a new, empty gridfile. The syntax of the command is as follows:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="nb">grid</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">gridfile</span><span class="p">.</span><span class="n">new</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span><span class="w"> </span><span class="n">metadata</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
+<p>The first input, <strong>filename</strong>, is a string listing the name for the new <code class="docutils literal notranslate"><span class="pre">.grid</span></code> file. If the file name does not end in a <code class="docutils literal notranslate"><span class="pre">.grid</span></code> extension, DASH adds the extension automatically. The file name may be an absolute or relative path - relative paths are interpreted relative to the current directory.</p>
+<p>The second input, <strong>metadata</strong>, is a <code class="docutils literal notranslate"><span class="pre">gridMetadata</span></code> object that defines the scope of the <code class="docutils literal notranslate"><span class="pre">gridfile</span></code> object’s N-dimensional grid. If your dataset spans multiple data source files, then this metadata should span the values for all those files.</p>
+<p>The output, <strong>grid</strong>, is a <code class="docutils literal notranslate"><span class="pre">gridfile</span></code> object for the new <code class="docutils literal notranslate"><span class="pre">.grid</span></code> file. We can use this output to add data source files to the catalogue, load values from the dataset, and implement other tasks.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>An optional third argument to <code class="docutils literal notranslate"><span class="pre">gridfile.new</span></code> allows you to overwrite an existing <code class="docutils literal notranslate"><span class="pre">.grid</span></code> file. Set it to <code class="docutils literal notranslate"><span class="pre">true</span></code> to enable overwriting. See <code class="docutils literal notranslate"><span class="pre">dash.doc('gridfile.new')</span></code> for details.</p>
+</div>
+<section id="demo">
+<h3><em>Demo</em><a class="headerlink" href="#demo" title="Permalink to this headline"></a></h3>
+<p>In the demo dataset, the proxy dataset consists of 54 proxy records that span most of the Common Era at annual resolution. We’ll start by defining metadata for this dataset and using the metadata to initialize a gridfile. The MAT-file <code class="docutils literal notranslate"><span class="pre">ntrend.mat</span></code> holds metadata values for the proxy sites and for the covered time steps. We’ll use this metadata to build a gridMetadata object:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">% Load metadata for the proxy dataset</span><span class="w"></span>
+<span class="n">proxyFile</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&quot;ntrend.mat&quot;</span><span class="p">;</span><span class="w"></span>
+<span class="n">info</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">load</span><span class="p">(</span><span class="n">proxyFile</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;IDs&#39;</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;latitudes&#39;</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;longitudes&#39;</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;seasons&#39;</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;years&#39;</span><span class="p">);</span><span class="w"></span>
+
+<span class="c">% Build a gridMetadata object</span><span class="w"></span>
+<span class="n">site</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="n">info</span><span class="p">.</span><span class="n">IDs</span><span class="p">,</span><span class="w"> </span><span class="n">info</span><span class="p">.</span><span class="n">latitudes</span><span class="p">,</span><span class="w"> </span><span class="n">info</span><span class="p">.</span><span class="n">longitudes</span><span class="p">,</span><span class="w"> </span><span class="n">info</span><span class="p">.</span><span class="n">seasons</span><span class="p">];</span><span class="w"></span>
+<span class="nb">time</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">info</span><span class="p">.</span><span class="n">years</span><span class="p">;</span><span class="w"></span>
+<span class="n">metadata</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">gridMetadata</span><span class="p">(</span><span class="s">&#39;site&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">site</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;time&#39;</span><span class="p">,</span><span class="w"> </span><span class="nb">time</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Then, we’ll use the metadata object to define the scope of a new <code class="docutils literal notranslate"><span class="pre">.grid</span></code> catalogue. Here, we’ll name the new file <code class="docutils literal notranslate"><span class="pre">ntrend.grid</span></code>:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">% Initialize a new .grid file</span><span class="w"></span>
+<span class="n">filename</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&quot;ntrend.grid&quot;</span><span class="p">;</span><span class="w"></span>
+<span class="n">proxies</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">gridfile</span><span class="p">.</span><span class="n">new</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span><span class="w"> </span><span class="n">metadata</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+<p>We can inspect the new <code class="docutils literal notranslate"><span class="pre">gridfile</span></code> object in the console to verify that it manages a data catalogue for 54 sites and the specified time steps:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="nb">disp</span><span class="p">(</span><span class="n">proxies</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>How large is the new <code class="docutils literal notranslate"><span class="pre">.grid</span></code> file on your computer? Typically, these files are quite small.</p>
+</div>
+</section>
+</section>
+<section id="step-1b-load-existing-gridfile">
+<h2>Step 1b: Load existing <code class="docutils literal notranslate"><span class="pre">gridfile</span></code><a class="headerlink" href="#step-1b-load-existing-gridfile" title="Permalink to this headline"></a></h2>
+<p>Since they are saved to file, you can reuse <code class="docutils literal notranslate"><span class="pre">.grid</span></code> catalogues between different coding sessions. Use the <code class="docutils literal notranslate"><span class="pre">gridfile</span></code> command to return a <code class="docutils literal notranslate"><span class="pre">gridfile</span></code> object for an existing <code class="docutils literal notranslate"><span class="pre">.grid</span></code> file:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="nb">grid</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">gridfile</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Here, the input <strong>filename</strong> is the name of a <code class="docutils literal notranslate"><span class="pre">.grid</span></code> file on your machine. As before, the filename may be either an absolute path, or a file on the active path. The output, <strong>grid</strong>, is the <code class="docutils literal notranslate"><span class="pre">gridfile</span></code> object for the existing <code class="docutils literal notranslate"><span class="pre">.grid</span></code> file.</p>
+<p>Try using the <code class="docutils literal notranslate"><span class="pre">gridfile</span></code> command on your new <code class="docutils literal notranslate"><span class="pre">.grid</span></code> file. The output <code class="docutils literal notranslate"><span class="pre">gridfile</span></code> object should match the object produced by the <code class="docutils literal notranslate"><span class="pre">gridfile.new</span></code> command.</p>
+<section id="id1">
+<h3><em>Demo</em><a class="headerlink" href="#id1" title="Permalink to this headline"></a></h3>
+<p>We can use the <code class="docutils literal notranslate"><span class="pre">gridfile</span></code> command to return a <code class="docutils literal notranslate"><span class="pre">gridfile</span></code> object for our new proxy dataset. Here, we’ll call the command on the new <code class="docutils literal notranslate"><span class="pre">ntrend.grid</span></code> file:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">filename</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&quot;ntrend.grid&quot;</span><span class="p">;</span><span class="w"></span>
+<span class="n">proxies</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">gridfile</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="step-2-add-data-sources">
+<h2>Step 2: Add data sources<a class="headerlink" href="#step-2-add-data-sources" title="Permalink to this headline"></a></h2>
+<p>After creating a <code class="docutils literal notranslate"><span class="pre">.grid</span></code> file, you can add data source files to the catalogue using the <code class="docutils literal notranslate"><span class="pre">gridfile.add</span></code> command. The basic syntax is:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">obj</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="nb">type</span><span class="p">,</span><span class="w"> </span><span class="n">filename</span><span class="p">,</span><span class="w"> </span><span class="k">...</span><span class="c">)</span><span class="w"></span>
+</pre></div>
+</div>
+<p>or alternatively:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">obj</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="nb">type</span><span class="p">,</span><span class="w"> </span><span class="n">opendapURL</span><span class="p">,</span><span class="w"> </span><span class="k">...</span><span class="c">)</span><span class="w"></span>
+</pre></div>
+</div>
+<p>for files accessed via OPeNDAP.</p>
+<p>The first input, <strong>type</strong>, is a string that indicates the type of file being added to the catalogue. The following options are supported:</p>
+<ol class="arabic simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;netcdf&quot;</span></code> or <code class="docutils literal notranslate"><span class="pre">&quot;nc&quot;</span></code>: A NetCDF file</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;mat&quot;</span></code>: A MAT-file</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;text&quot;</span></code> or <code class="docutils literal notranslate"><span class="pre">&quot;txt&quot;</span></code>: A delimited text file</p></li>
+</ol>
+<p>The second input, <strong>filename</strong>, is the name of the data source file. As before, you may either use an absolute path, or the name of a file on the active path. Again, DASH will use the <code class="docutils literal notranslate"><span class="pre">which</span></code> command to locate files on the active path. If using OPeNDAP, then the second input should be the full OPeNDAP URL used to access the file.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Remember that the <strong>obj</strong> preceding the <code class="docutils literal notranslate"><span class="pre">.add</span></code> indicates that you should use dot-indexing to add the data file to a particular <code class="docutils literal notranslate"><span class="pre">gridfile</span></code> object.</p>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">add</span></code> command requires at least 4 inputs, and the first two are always the file type, and the file name/OPeNDAP URL. However, the remaining inputs will vary depending on the type of file being added to the catalogue. The syntaxes for different file formats are described below.</p>
+<section id="delimited-text-files">
+<h3><em>Delimited text files</em><a class="headerlink" href="#delimited-text-files" title="Permalink to this headline"></a></h3>
+<p>Delimited text files are treated as a data matrix when added to a <code class="docutils literal notranslate"><span class="pre">.grid</span></code> catalogue. Each new line is a row of the matrix, and each delimiter indicates a new column. The base syntax for delimited text files is:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">obj</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="s">&quot;text&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">filename</span><span class="p">,</span><span class="w"> </span><span class="n">dimensions</span><span class="p">,</span><span class="w"> </span><span class="n">metadata</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
+<p>The <strong>dimensions</strong> input is a string vector with two elements. The first element lists the name of the <code class="docutils literal notranslate"><span class="pre">gridfile</span></code> dimension associated with the rows of the matrix, and the second element is the dimension associated with the columns.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>The dimensions of a proxy dataset are often <code class="docutils literal notranslate"><span class="pre">&quot;site&quot;</span></code> and <code class="docutils literal notranslate"><span class="pre">&quot;time&quot;</span></code>. The order of these dimensions will vary with the structure of your text file.</p>
+</div>
+<p>The <strong>metadata</strong> input is another <code class="docutils literal notranslate"><span class="pre">gridMetadata</span></code> object. This metadata object should list the metadata values associated with the data in the file. The metadata should include values for every dimension in the <code class="docutils literal notranslate"><span class="pre">.grid</span></code> catalgoue. If the proxy dataset is stored as a single data array in a single file, then <strong>metadata</strong> will be the same metadata object used to create the <code class="docutils literal notranslate"><span class="pre">.grid</span></code> file. If the file holds a subset of the full proxy dataset, then <strong>metadata</strong> should only have the metadata for those records.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>You can use the <code class="docutils literal notranslate"><span class="pre">gridfile.metadata</span></code> command to return the metadata object for a <code class="docutils literal notranslate"><span class="pre">.grid</span></code> catalogue.</p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>You can use <code class="docutils literal notranslate"><span class="pre">gridMetadata.index</span></code> to isolate the metadata for specific proxy sites.</p>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">gridfile</span></code> class also supports any options used by Matlab’s <code class="docutils literal notranslate"><span class="pre">readmatrix</span></code> command when reading data from a text file. These options should be specified after the first four inputs. For example:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">obj</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="s">&quot;text&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">filename</span><span class="p">,</span><span class="w"> </span><span class="n">dimensions</span><span class="p">,</span><span class="w"> </span><span class="n">metadata</span><span class="p">,</span><span class="w"> </span><span class="k">...</span><span class="w"></span>
+<span class="w">        </span><span class="s">&#39;NumHeaderLines&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;Delimiter&#39;</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;|&#39;</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+<p>indicates that the first 3 lines of the text file should be skipped when reading data, and that the <code class="docutils literal notranslate"><span class="pre">|</span></code> character should be used as a delimiter. See the documentation of the <code class="docutils literal notranslate"><span class="pre">readmatrix</span></code> function for a complete list of options.</p>
+</section>
+<section id="netcdf-and-mat-files">
+<h3><em>NetCDF and MAT-files</em><a class="headerlink" href="#netcdf-and-mat-files" title="Permalink to this headline"></a></h3>
+<p>The syntax for NetCDF and MAT-files is:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">obj</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="nb">type</span><span class="p">,</span><span class="w"> </span><span class="n">filename</span><span class="p">,</span><span class="w"> </span><span class="n">variable</span><span class="p">,</span><span class="w"> </span><span class="n">dimensions</span><span class="p">,</span><span class="w"> </span><span class="n">metadata</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Here, <strong>variable</strong> is a string listing the name of the variable in the source file that holds the relevant data.</p>
+<p>As with text files, the <strong>dimensions</strong> input is a string vector that list the names of the <code class="docutils literal notranslate"><span class="pre">gridfile</span></code> dimensions for the variable. Unlike text files, variables in NetCDF and MAT-files may store N-dimensional arrays, so the <strong>dimensions</strong> input may have more than 2 dimensions. The input should list each dimension of the variable, in the order they occur.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>The dimensions of a proxy dataset are often <code class="docutils literal notranslate"><span class="pre">&quot;site&quot;</span></code> and <code class="docutils literal notranslate"><span class="pre">&quot;time&quot;</span></code>.</p>
+</div>
+<p>The <strong>metadata</strong> input behaves the same as for text files. Essentially, it is a <code class="docutils literal notranslate"><span class="pre">gridMetadata</span></code> object that describes the scope of the data stored in the file variable. Again, we note that if the proxy dataset is stored as a single data array in a single file, then <strong>metadata</strong> will be the same metadata object used to create the <code class="docutils literal notranslate"><span class="pre">.grid</span></code> file. If the file holds a subset of the full proxy dataset, then <strong>metadata</strong> should only have the metadata for those records.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>You can use the <code class="docutils literal notranslate"><span class="pre">gridfile.metadata</span></code> command to return the metadata object for a <code class="docutils literal notranslate"><span class="pre">.grid</span></code> catalogue.</p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>You can use <code class="docutils literal notranslate"><span class="pre">gridMetadata.index</span></code> to isolate the metadata for specific proxy sites.</p>
+</div>
+</section>
+<section id="id2">
+<h3><em>Demo</em><a class="headerlink" href="#id2" title="Permalink to this headline"></a></h3>
+<p>The proxy dataset for the demo is stored in the MAT-file <code class="docutils literal notranslate"><span class="pre">ntrend.mat</span></code>. The dataset is located in the <code class="docutils literal notranslate"><span class="pre">crn</span></code> variable, which has dimensions of (time x site). In this example, the entire proxy dataset is located in the <code class="docutils literal notranslate"><span class="pre">crn</span></code> variable. Thus, we can reuse the metadata for the <code class="docutils literal notranslate"><span class="pre">.grid</span></code> file as the metadata for the data source file:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">% Get the gridfile and its metadata</span><span class="w"></span>
+<span class="n">proxies</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">gridfile</span><span class="p">(</span><span class="s">&#39;ntrend.grid&#39;</span><span class="p">);</span><span class="w"></span>
+<span class="n">metadata</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">proxies</span><span class="p">.</span><span class="n">metadata</span><span class="p">;</span><span class="w"></span>
+
+<span class="c">% Add the data source file</span><span class="w"></span>
+<span class="n">file</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&quot;ntrend.mat&quot;</span><span class="p">;</span><span class="w"></span>
+<span class="n">variable</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&quot;crn&quot;</span><span class="p">;</span><span class="w"></span>
+<span class="n">dimensions</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="s">&quot;time&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;site&quot;</span><span class="p">];</span><span class="w"></span>
+<span class="n">proxies</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="s">&quot;mat&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">file</span><span class="p">,</span><span class="w"> </span><span class="n">variable</span><span class="p">,</span><span class="w"> </span><span class="n">dimensions</span><span class="p">,</span><span class="w"> </span><span class="n">metadata</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="step-3-data-adjustments">
+<h2>Step 3: Data adjustments<a class="headerlink" href="#step-3-data-adjustments" title="Permalink to this headline"></a></h2>
+<p>Now we’ll specify any adjustments that need to be made to our dataset. The <code class="docutils literal notranslate"><span class="pre">gridfile</span></code> class supports 3 main data adjustments - fill values, valid ranges, and data transformations.</p>
+<section id="fill-value">
+<h3><em>Fill value</em><a class="headerlink" href="#fill-value" title="Permalink to this headline"></a></h3>
+<p>You can use <code class="docutils literal notranslate"><span class="pre">gridfile.fillValue</span></code> to specify a fill value for the catalogue. When data is loaded from the catalogue, any values matching the fill value are converted to NaN. The syntax for the command is:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">obj</span><span class="p">.</span><span class="n">fillValue</span><span class="p">(</span><span class="n">value</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
+<p>where <strong>value</strong> is the desired fill value. This syntax applies a common fill value to all data sources in the gridfile. Alternatively, you can apply a fill value to specific data sources using:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">obj</span><span class="p">.</span><span class="n">fillValue</span><span class="p">(</span><span class="n">value</span><span class="p">,</span><span class="w"> </span><span class="n">sources</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
+<p>where <strong>sources</strong> is the name or index of a data source file in the <code class="docutils literal notranslate"><span class="pre">.grid</span></code> catalogue.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Use the <code class="docutils literal notranslate"><span class="pre">gridfile.sources</span></code> command to return the list of data source files for a <code class="docutils literal notranslate"><span class="pre">.grid</span></code> file.</p>
+</div>
+</section>
+<section id="valid-range">
+<h3><em>Valid Range</em><a class="headerlink" href="#valid-range" title="Permalink to this headline"></a></h3>
+<p>You can use <code class="docutils literal notranslate"><span class="pre">gridfile.validRange</span></code> to specify a valid data range for the catalogue. When data is loaded, any values outside this range are converted to NaN. The syntax is:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">obj</span><span class="p">.</span><span class="n">validRange</span><span class="p">(</span><span class="n">range</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
+<p>where <strong>range</strong> is the desired range. The <strong>range</strong> input should be a vector with two elements - the first element is the lower bound of the range, and the second element in the upper bound.</p>
+<p>This syntax applies a common valid range to all data sources in the catalogue. Alternatively, you can apply a valid range to specific data sources using:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">obj</span><span class="p">.</span><span class="n">validRange</span><span class="p">(</span><span class="n">range</span><span class="p">,</span><span class="w"> </span><span class="n">sources</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
+<p>where <strong>sources</strong> is the name or index of a data source file in the <code class="docutils literal notranslate"><span class="pre">.grid</span></code> catalogue.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Use the <code class="docutils literal notranslate"><span class="pre">gridfile.sources</span></code> command to return the list of data source files for a <code class="docutils literal notranslate"><span class="pre">.grid</span></code> file.</p>
+</div>
+</section>
+<section id="transformation">
+<h3><em>Transformation</em><a class="headerlink" href="#transformation" title="Permalink to this headline"></a></h3>
+<p>You can use <code class="docutils literal notranslate"><span class="pre">gridfile.transform</span></code> to apply a mathematical transformation to data loaded from the catalogue. <code class="docutils literal notranslate"><span class="pre">gridfile</span></code> currently supports the following transformations:</p>
+<div class="line-block">
+<div class="line">Addition: <code class="docutils literal notranslate"><span class="pre">A</span> <span class="pre">+</span> <span class="pre">X</span></code></div>
+<div class="line">Multiplication: <code class="docutils literal notranslate"><span class="pre">A</span> <span class="pre">*</span> <span class="pre">X</span></code></div>
+<div class="line">Linear transform:  <code class="docutils literal notranslate"><span class="pre">A</span> <span class="pre">+</span> <span class="pre">B</span> <span class="pre">*</span> <span class="pre">X</span></code></div>
+<div class="line">Exponential: <code class="docutils literal notranslate"><span class="pre">exp(X)</span></code></div>
+<div class="line">Power: <code class="docutils literal notranslate"><span class="pre">X^A</span></code></div>
+<div class="line">Natural log: <code class="docutils literal notranslate"><span class="pre">ln(X)</span></code></div>
+<div class="line">Base-10 log: <code class="docutils literal notranslate"><span class="pre">log10(X)</span></code></div>
+</div>
+<p>The syntax for the command is:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">obj</span><span class="p">.</span><span class="n">transform</span><span class="p">(</span><span class="nb">type</span><span class="p">,</span><span class="w"> </span><span class="n">parameters</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
+<p>where <strong>type</strong> is a string that lists the type of transformation. Recognized types are as follows:</p>
+<div class="line-block">
+<div class="line">Addition: <code class="docutils literal notranslate"><span class="pre">&quot;add&quot;</span></code> or <code class="docutils literal notranslate"><span class="pre">&quot;plus&quot;</span></code> or <code class="docutils literal notranslate"><span class="pre">&quot;+&quot;</span></code></div>
+<div class="line">Multiplication: <code class="docutils literal notranslate"><span class="pre">&quot;times&quot;</span></code> or <code class="docutils literal notranslate"><span class="pre">&quot;multiply&quot;</span></code> or <code class="docutils literal notranslate"><span class="pre">&quot;*&quot;</span></code></div>
+<div class="line">Linear: <code class="docutils literal notranslate"><span class="pre">&quot;linear&quot;</span></code></div>
+<div class="line">Exponential: <code class="docutils literal notranslate"><span class="pre">&quot;exp&quot;</span></code></div>
+<div class="line">Power: <code class="docutils literal notranslate"><span class="pre">&quot;power&quot;</span></code></div>
+<div class="line">Natural Log: <code class="docutils literal notranslate"><span class="pre">&quot;ln&quot;</span></code> or <code class="docutils literal notranslate"><span class="pre">&quot;log&quot;</span></code></div>
+<div class="line">Base-10 Log: <code class="docutils literal notranslate"><span class="pre">&quot;log10&quot;</span></code></div>
+</div>
+<p>The second input, <strong>parameters</strong>, includes any mathematical parameters needed to implement the transformation. See <code class="docutils literal notranslate"><span class="pre">dash.doc('gridfile.transform')</span></code> for details. If a transformation does not require any parameters, you can either neglect the second input, or use an empty array.</p>
+<p>The previous syntax will apply a common data transformation to all data sources in a catalogue. Alternatively, you can use:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">obj</span><span class="p">.</span><span class="n">transfrom</span><span class="p">(</span><span class="nb">type</span><span class="p">,</span><span class="w"> </span><span class="n">parameters</span><span class="p">,</span><span class="w"> </span><span class="n">sources</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
+<p>to apply different transformations to specific data source files.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">gridfile.addAttributes</span></code> command can be useful for recording changes to the units of a data catalogue.</p>
+</div>
+</section>
+<section id="id3">
+<h3><em>Demo</em><a class="headerlink" href="#id3" title="Permalink to this headline"></a></h3>
+<p>In the demo, the proxy dataset (located in the <code class="docutils literal notranslate"><span class="pre">crn</span></code> variable of <code class="docutils literal notranslate"><span class="pre">ntrend.mat</span></code>) uses a -999 fill value to indicate missing values. We’ll add this fill value to the catalogue so that -999 values are converted to NaN upon load:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">proxies</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">gridfile</span><span class="p">(</span><span class="s">&quot;ntrend.grid&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="n">proxies</span><span class="p">.</span><span class="n">fillValue</span><span class="p">(</span><span class="o">-</span><span class="mi">999</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="step-4-load-data">
+<h2>Step 4: Load data<a class="headerlink" href="#step-4-load-data" title="Permalink to this headline"></a></h2>
+<section id="load-entire-catalogue">
+<h3><em>Load entire catalogue</em><a class="headerlink" href="#load-entire-catalogue" title="Permalink to this headline"></a></h3>
+<p>Now let’s take a look at the <code class="docutils literal notranslate"><span class="pre">load</span></code> command, which is used to load data from a catalogue. The most basic syntax is:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">X</span><span class="p">,</span><span class="w"> </span><span class="n">metadata</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">obj</span><span class="p">.</span><span class="n">load</span><span class="w"></span>
+</pre></div>
+</div>
+<p>which loads the entire data catalogue. Here, the <strong>X</strong> output is the loaded data array for the entire catalogue. The <strong>metadata</strong> output is a <code class="docutils literal notranslate"><span class="pre">gridMetadata</span></code> object for the loaded data array.</p>
+<p>Try loading the full catalogue for your own proxy dataset. What do you see in the output?</p>
+<section id="id4">
+<h4>Demo<a class="headerlink" href="#id4" title="Permalink to this headline"></a></h4>
+<p>We can load the entire proxy dataset using:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">X</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">proxies</span><span class="p">.</span><span class="n">load</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Inspecting the output:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="nb">size</span><span class="p">(</span><span class="n">X</span><span class="p">)</span><span class="w"></span>
+<span class="n">metadata</span><span class="w"></span>
+</pre></div>
+</div>
+<p>we can see that X is a matrix with 54 rows (proxy sites), and X columns (time steps), and the metadata for these dimensions is provided in the <strong>metadata</strong> output.</p>
+</section>
+</section>
+<section id="custom-dimension-order">
+<h3><em>Custom dimension order</em><a class="headerlink" href="#custom-dimension-order" title="Permalink to this headline"></a></h3>
+<p>It’s often useful to load data in a specific dimension order. You can specify the order of dimensions of the loaded data using the first input:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">X</span><span class="p">,</span><span class="w"> </span><span class="n">metadata</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">obj</span><span class="p">.</span><span class="n">load</span><span class="p">(</span><span class="n">dimensions</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Here, <strong>dimensions</strong> is a string vector that lists a requested order for loaded dimensions.</p>
+<p>Try loading your proxy dataset with a different dimension order.</p>
+<section id="id5">
+<h4>Demo<a class="headerlink" href="#id5" title="Permalink to this headline"></a></h4>
+<p>In the previous demo, we saw that the data loaded as a (site x time) matrix. Let’s instead load the data as a (time x site) matrix. We’ll indicate the requested order as the first input:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">dimensions</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="s">&quot;time&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;site&quot;</span><span class="p">];</span><span class="w"></span>
+<span class="p">[</span><span class="n">X</span><span class="p">,</span><span class="w"> </span><span class="n">metadata</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">obj</span><span class="p">.</span><span class="n">load</span><span class="p">(</span><span class="n">dimensions</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Inspecting the output:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="nb">size</span><span class="p">(</span><span class="n">X</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
+<p>we can see that X is now a matrix with X rows (time steps) and 54 columns (proxy sites). Note that the order of dimensions in the metadata object has likewise changed:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">metadata</span><span class="w"></span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>You don’t need to list the name of every dimension in a <code class="docutils literal notranslate"><span class="pre">.grid</span></code> catalogue. Any unlisted data dimensions are automatically grouped at the end of the listed dimensions.</p>
+</div>
+</section>
+</section>
+<section id="data-subsets">
+<h3><em>Data subsets</em><a class="headerlink" href="#data-subsets" title="Permalink to this headline"></a></h3>
+<p>Often, we’ll only want to load a subset of the data in a catalogue. You can request a subset of data along a dimension using the second input:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">X</span><span class="p">,</span><span class="w"> </span><span class="n">metadata</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">obj</span><span class="p">.</span><span class="n">load</span><span class="p">(</span><span class="n">dimensions</span><span class="p">,</span><span class="w"> </span><span class="n">indices</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Here, <strong>indices</strong> is a cell vector with one element per listed dimension. Each element holds the requested indices along that data dimension. Loaded data will match the order of requested indices. This syntax will also load data in the listed dimension order. If you want to include a dimension in the custom order, but don’t want to load a subset of that dimension, use an empty array for the dimension’s indices.</p>
+<section id="id6">
+<h4>Demo<a class="headerlink" href="#id6" title="Permalink to this headline"></a></h4>
+<p>Let’s start by loading data for proxy sites 1, 19, and 3. Let’s limit the data for these sites to time steps 10-20:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">dimensions</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="w">  </span><span class="s">&quot;site&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;time&quot;</span><span class="p">];</span><span class="w"></span>
+<span class="n">indices</span><span class="w">    </span><span class="p">=</span><span class="w"> </span><span class="p">{[</span><span class="mi">1</span><span class="w"> </span><span class="mi">19</span><span class="w"> </span><span class="mi">3</span><span class="p">],</span><span class="w">  </span><span class="mi">10</span><span class="p">:</span><span class="mi">20</span><span class="p">};</span><span class="w"></span>
+<span class="p">[</span><span class="n">X</span><span class="p">,</span><span class="w"> </span><span class="n">metadata</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">proxies</span><span class="p">.</span><span class="n">load</span><span class="p">(</span><span class="n">dimensions</span><span class="p">,</span><span class="w"> </span><span class="n">indices</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Inspecting the output:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="nb">size</span><span class="p">(</span><span class="n">X</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
+<p>we can see that X is a matrix with 3 rows (proxy sites), and 11 columns (time steps). Investigating the site metadata:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">metadata</span><span class="p">.</span><span class="n">site</span><span class="w"></span>
+</pre></div>
+</div>
+<p>we see that row 1 corresponds to site 1, row 2 corresponds to site 19, and row 3 corresponds to site 3. Similarly, the time metadata:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">metadata</span><span class="p">.</span><span class="n">time</span><span class="w"></span>
+</pre></div>
+</div>
+<p>indicates that the columns are for time steps 10-20.</p>
+<p>Now let’s suppose that we want to load all time steps for proxy sites 1, 19, and 3, and that we want the loaded data matrix to have dimensions of (time x site). Here, we can use an empty array to load all elements along the time dimension:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">dimensions</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="s">&quot;time&quot;</span><span class="p">,</span><span class="w">   </span><span class="s">&quot;site&quot;</span><span class="p">];</span><span class="w"></span>
+<span class="n">indices</span><span class="w">    </span><span class="p">=</span><span class="w"> </span><span class="p">{</span><span class="w">    </span><span class="p">[],</span><span class="w">  </span><span class="p">[</span><span class="mi">1</span><span class="w"> </span><span class="mi">19</span><span class="w"> </span><span class="mi">3</span><span class="p">]};</span><span class="w"></span>
+<span class="p">[</span><span class="n">X</span><span class="p">,</span><span class="w"> </span><span class="n">metadata</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">proxies</span><span class="p">.</span><span class="n">load</span><span class="p">(</span><span class="n">dimensions</span><span class="p">,</span><span class="w"> </span><span class="n">indices</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Inspecting the output:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="nb">size</span><span class="p">(</span><span class="n">X</span><span class="p">)</span><span class="w"></span>
+<span class="n">metadata</span><span class="w"></span>
+<span class="s">metadata.site</span><span class="w"></span>
+</pre></div>
+</div>
+<p>we can see that X is a (time x site) matrix consisting of proxy sites 1, 19, and 3 in all time steps.</p>
+</section>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="gridfile.html" class="btn btn-neutral float-left" title="gridfile" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Jonathan King.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
