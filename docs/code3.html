@@ -18,6 +18,7 @@
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Open Coding 4" href="code4.html" />
     <link rel="prev" title="gridfile" href="gridfile.html" /> 
 </head>
 
@@ -86,6 +87,7 @@
 </li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="code4.html">Open Coding 4</a></li>
 </ul>
 
         </div>
@@ -378,6 +380,10 @@
 </div>
 <p>Here, <strong>dimensions</strong> is a string vector that lists a requested order for loaded dimensions.</p>
 <p>Try loading your proxy dataset with a different dimension order.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>You don’t need to list the name of every dimension in a <code class="docutils literal notranslate"><span class="pre">.grid</span></code> catalogue. Any unlisted data dimensions are automatically grouped at the end of the listed dimensions.</p>
+</div>
 <section id="id5">
 <h4>Demo<a class="headerlink" href="#id5" title="Permalink to this headline"></a></h4>
 <p>In the previous demo, we saw that the data loaded as a (site x time) matrix. Let’s instead load the data as a (time x site) matrix. We’ll indicate the requested order as the first input:</p>
@@ -392,10 +398,6 @@
 <p>we can see that X is now a matrix with X rows (time steps) and 54 columns (proxy sites). Note that the order of dimensions in the metadata object has likewise changed:</p>
 <div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">metadata</span><span class="w"></span>
 </pre></div>
-</div>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>You don’t need to list the name of every dimension in a <code class="docutils literal notranslate"><span class="pre">.grid</span></code> catalogue. Any unlisted data dimensions are automatically grouped at the end of the listed dimensions.</p>
 </div>
 </section>
 </section>
@@ -450,6 +452,7 @@
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="gridfile.html" class="btn btn-neutral float-left" title="gridfile" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="code4.html" class="btn btn-neutral float-right" title="Open Coding 4" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
