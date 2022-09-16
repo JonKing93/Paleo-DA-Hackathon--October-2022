@@ -16,7 +16,6 @@ Use the ``dash.version`` command to print the current version of DASH in the con
 
     >> dash.version
 
-
 .. note::
 
     If this causes an error message, you may not have the toolbox installed correctly. Try `reinstalling the toolbox <prerequisites.html#dash-toolbox>`_ or ask an organizer for help.

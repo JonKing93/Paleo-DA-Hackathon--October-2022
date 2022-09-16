@@ -10,12 +10,6 @@ By the end of the session, participants should be able to create metadata object
 
 
 
-Demo Data
----------
-We encourage participants to work with their own data in the coding sessions. However, you can also follow along using a demo dataset. In the demo
-
-
-
 Step 1: Practice Creating Metadata
 ----------------------------------
 Use the ``gridMetadata`` command to create metadata for the following datasets. Solutions are provided at the bottom of the page.
@@ -68,7 +62,80 @@ For the dataset from practice problem A, indicate that the units of the dataset 
 
 Step 3: Create Metadata for Real Datasets
 -----------------------------------------
-Create a gridMetadata object for a dataset you brought to the workshop. Create some dimensional metadata that you find useful - this could be metadata read from a NetCDF or MAT file, or some other value that you prefer. Use the ``gridMetadata`` command to create the metadata object. Optionally include some attributes to better document the dataset.
+Create a gridMetadata object for at least one dataset you brought to the workshop. Create some dimensional metadata that you find useful - this could be metadata read from a NetCDF or MAT file, or some other values that you prefer. Use the ``gridMetadata`` command to create the metadata object. Optionally include some attributes to better document the dataset.
+
+
+*Demo 1*
+++++++++
+In the demo dataset, the proxy dataset consists of 54 proxy records that span most of the Common Era at annual resolution. We'll start by defining metadata for this dataset. The MAT-file ``ntrend.mat`` holds metadata values for the proxy sites and for the covered time steps. We'll use this metadata to build a ``gridMetadata`` object:
+
+.. code::
+    :class: input
+
+    % Load metadata for the proxy dataset
+    proxyFile = "ntrend.mat";
+    info = load(proxyFile, 'IDs', 'latitudes', 'longitudes', 'seasons', 'years');
+
+    % Build a gridMetadata object
+    site = [info.IDs, info.latitudes, info.longitudes, info.seasons];
+    time = info.years;
+    metadata = gridMetadata('site', site, 'time', time);
+
+
+.. code::
+    :class: output
+
+    metadata =
+
+      gridMetadata with metadata:
+
+        site: [54×4 string]
+        time: [1262×1 double]
+
+
+*Demo 2*
+++++++++
+The demo also includes climate model output for surface temperatures. This output is arranged on a global latitude-longitude grid over time. Time proceeds from 850 CE to 2005 CE at monthly resolution. The output is split over two NetCDF files with the first 1000 years of output in the first file, and the remaining years in the second file.
+
+We'll use the latitude and longitude metadata from the NetCDF files, but we'll create custom metadata for the time dimension using Matlab's ``datetime`` format. We'll use this metadata to create a ``gridMetadata`` object:
+
+.. code::
+    :class: input
+
+    % Get the output files
+    outputFile1 = 'b.e11.BLMTRC5CN.f19_g16.002.cam.h0.TREFHT.085001-184912.nc';
+    outputFile2 = 'b.e11.BLMTRC5CN.f19_g16.002.cam.h0.TREFHT.185001-200512.nc';
+
+    % Use the latitude/longitude metadata stored in the NetCDF files...
+    lat = ncread(outputFile1, 'lat');
+    lon = ncread(outputFile1, 'lon');
+
+    % ... but use a custom metadata format for time
+    % (These are monthly "datetime" values from January 850 to December 2005)
+    time = datetime(850,1,15) : calmonths(1) : datetime(2005,12,15);
+
+    % Create the metadata object and include some attributes
+    metadata = gridMetadata("lat", lat, "lon", lon, "time", time');
+    metadata = metadata.addAttributes("Units", "Kelvin", "Model", "CESM 1.0")
+
+.. code::
+    :class: output
+
+    metadata =
+
+      gridMetadata with metadata:
+
+               lon: [144×1 double]
+               lat: [96×1 double]
+              time: [13872×1 datetime]
+        attributes: [1×1 struct]
+
+      Show attributes
+
+            Units: "Kelvin"
+            Model: "CESM 1.0"
+
+
 
 
 
