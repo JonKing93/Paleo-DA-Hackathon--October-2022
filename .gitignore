@@ -1,3 +1,6 @@
 # Cached builds
 docs/_sources/**
 docs/.doctrees/**
+
+# Demo
+demo/**
