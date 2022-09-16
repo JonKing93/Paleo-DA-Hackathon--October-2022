@@ -35,7 +35,7 @@ Because of this uniqueness, each data point on the grid is associated with a uni
 
 *Data source files*
 +++++++++++++++++++
- When you create a new ``gridfile`` catalogue, its N-dimensional grid is initially empty. However, you can fill the grid with values by adding data source files to the catalogue.
+ When you create a new ``gridfile`` catalogue, its N-dimensional grid is initially empty. However, you can fill the grid with values by adding data source files to the catalogue. A data source file is a file with some data saved in it. When you add a source file to a catalogue, the contents of the source file are associated with a portion of the N-dimensional grid.
 
  .. figure:: images/grid-sources.svg
      :alt: Axes for latitude, longitude, and time dimensions define the outline of a large cube in three dimensional space. Two smaller cubes are nestled within the outline of the large cube. The first is colored red and labeled as File 1. The second is colored blue and labeled as File 2. The two small cubes do not overlap, and regions of empty space remain in the large cube.
@@ -43,7 +43,7 @@ Because of this uniqueness, each data point on the grid is associated with a uni
 
      A 3-dimensional gridfile catalogue with two data source files.
 
-Currently, DASH supports the following data file formats: NetCDF, MAT-files, delimited text files, and NetCDF OPeNDAP URLs.
+Currently, DASH supports the following data file formats: NetCDF, MAT-files, delimited text files, and NetCDF files accessed via OPeNDAP URLs.
 
 
 ``.grid`` *files*
@@ -59,7 +59,7 @@ Now we'll take a quick look at some features of the ``gridfile`` class. This sec
 
 *Load Interface*
 ++++++++++++++++
-One of the most useful feature of ``gridfile`` catalogues is the ability to load data from any portion of the catalogue using a single ``load`` command. This command allows users to load data arrays that may span multiple files, and even multiple file formats, without needing to interact with any of the individual files.
+One of the most useful feature of ``gridfile`` catalogues is the ability to load data from any portion of the catalogue usingthe ``load`` command. This command allows users to load data arrays that may span multiple files, and even multiple file formats, without needing to interact with any of the individual files.
 
 Furthermore, the ``load`` command allows users to load specific subsets of the data catalogue by querying specific metadata values. The use of human-readable metadata, rather than array indices or other syntaxes, helps make code more readable and easier to use.
 
