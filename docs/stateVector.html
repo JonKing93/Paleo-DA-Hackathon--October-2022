@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Index &mdash; Paleo DA Hackathon 0.0.1 documentation</title>
+  <title>stateVector &mdash; Paleo DA Hackathon 0.0.1 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/matlab-io.css" type="text/css" />
@@ -17,8 +18,9 @@
         <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="_static/doctools.js"></script>
     <script src="_static/js/theme.js"></script>
-    <link rel="index" title="Index" href="#" />
-    <link rel="search" title="Search" href="search.html" /> 
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Open Coding 4" href="code4.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -36,7 +38,7 @@
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <ul>
+              <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="welcome.html">Welcome!</a></li>
 <li class="toctree-l1"><a class="reference internal" href="prerequisites.html">Prerequisites</a></li>
 <li class="toctree-l1"><a class="reference internal" href="overview.html">DASH Overview</a></li>
@@ -48,7 +50,11 @@
 <li class="toctree-l1"><a class="reference internal" href="gridfile.html">gridfile</a></li>
 <li class="toctree-l1"><a class="reference internal" href="code3.html">Open Coding 3</a></li>
 <li class="toctree-l1"><a class="reference internal" href="code4.html">Open Coding 4</a></li>
-<li class="toctree-l1"><a class="reference internal" href="stateVector.html">stateVector</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">stateVector</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#new-concepts">New Concepts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#state-vectors">State Vectors</a></li>
+</ul>
+</li>
 </ul>
 
         </div>
@@ -65,7 +71,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
-      <li>Index</li>
+      <li>stateVector</li>
       <li class="wy-breadcrumbs-aside">
       </li>
   </ul>
@@ -74,17 +80,36 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-
-<h1 id="index">Index</h1>
-
-<div class="genindex-jumpbox">
- 
-</div>
+  <section id="statevector">
+<h1>stateVector<a class="headerlink" href="#statevector" title="Permalink to this heading"></a></h1>
+<p>This page should introduce concepts needed to build state vectors. It should include</p>
+<ol class="arabic simple">
+<li><p>State vectors</p></li>
+<li><p>ensembles</p></li>
+<li><p>State vs Ensemble dimensions</p></li>
+<li><p>Sequences</p></li>
+<li><p>Reference indices</p></li>
+<li><p>Sequence indices</p></li>
+<li><p>Mean Indices</p></li>
+</ol>
+<hr class="docutils" />
+<p>The <code class="docutils literal notranslate"><span class="pre">stateVector</span></code> class is used to design and build state vector ensembles. The class implements <code class="docutils literal notranslate"><span class="pre">stateVector</span></code> objects, which act as design templates for state vector ensembles. Users can edit a template to describe an ensemble that matches their requirements. When finished, they can then use the template to automatically build a state vector ensemble that conforms to its design.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">stateVector</span></code> class relies on <code class="docutils literal notranslate"><span class="pre">.grid</span></code> catalogues to describe climate data in a systematic manner. This allows users to use <code class="docutils literal notranslate"><span class="pre">gridfile</span></code> metadata values to design their state vector ensembles. In a typical workflow, users will these metadata values to select the gridfile data that should be used in a state vector.</p>
+<section id="new-concepts">
+<h2>New Concepts<a class="headerlink" href="#new-concepts" title="Permalink to this heading"></a></h2>
+<p>….write an intro to the next few sections….</p>
+</section>
+<section id="state-vectors">
+<h2>State Vectors<a class="headerlink" href="#state-vectors" title="Permalink to this heading"></a></h2>
+</section>
+</section>
 
 
            </div>
           </div>
-          <footer>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="code4.html" class="btn btn-neutral float-left" title="Open Coding 4" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
 
   <hr/>
 

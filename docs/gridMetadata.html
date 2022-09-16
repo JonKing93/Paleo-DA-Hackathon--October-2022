@@ -7,6 +7,7 @@
   <title>gridMetadata &mdash; Paleo DA Hackathon 0.0.1 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/matlab-io.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
@@ -14,6 +15,7 @@
         <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="_static/doctools.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
@@ -47,13 +49,17 @@
 <li class="toctree-l1 current"><a class="current reference internal" href="#">gridMetadata</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#n-dimensional-datasets">N-dimensional datasets</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#dimensional-metadata">Dimensional metadata</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#non-dimensional-metadata-attributes">Non-dimensional metadata attributes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#non-dimensional-metadata-attributes">Non-dimensional metadata attributes</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#returning-attributes"><em>Returning Attributes</em></a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="code2.html">Open Coding 2</a></li>
 <li class="toctree-l1"><a class="reference internal" href="gridfile.html">gridfile</a></li>
 <li class="toctree-l1"><a class="reference internal" href="code3.html">Open Coding 3</a></li>
 <li class="toctree-l1"><a class="reference internal" href="code4.html">Open Coding 4</a></li>
+<li class="toctree-l1"><a class="reference internal" href="stateVector.html">stateVector</a></li>
 </ul>
 
         </div>
@@ -80,10 +86,10 @@
            <div itemprop="articleBody">
              
   <section id="gridmetadata">
-<h1>gridMetadata<a class="headerlink" href="#gridmetadata" title="Permalink to this headline"></a></h1>
+<h1>gridMetadata<a class="headerlink" href="#gridmetadata" title="Permalink to this heading"></a></h1>
 <p>We’ll begin our tour of the DASH toolbox with the gridMetadata class. This class assigns human-readable metadata to climate datasets, which allows users to manipulate data using human-readable values. The class operates by enabling users to build metadata objects that describe the information in a given dataset. These metadata objects are used as input to later DASH commands to catalogue and manipulate saved datasets.</p>
 <section id="n-dimensional-datasets">
-<h2>N-dimensional datasets<a class="headerlink" href="#n-dimensional-datasets" title="Permalink to this headline"></a></h2>
+<h2>N-dimensional datasets<a class="headerlink" href="#n-dimensional-datasets" title="Permalink to this heading"></a></h2>
 <p>A gridMetadata object holds metadata values along each dimension of an N-dimensional gridded dataset. By default, the DASH toolbox includes support for up to 7 dataset dimensions:</p>
 <ol class="arabic simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">lat</span></code>: Latitude / X coordinate</p></li>
@@ -106,28 +112,120 @@
 <p>In the next section, we will see how to design the metadata values for a given dataset dimension.</p>
 </section>
 <section id="dimensional-metadata">
-<h2>Dimensional metadata<a class="headerlink" href="#dimensional-metadata" title="Permalink to this headline"></a></h2>
+<h2>Dimensional metadata<a class="headerlink" href="#dimensional-metadata" title="Permalink to this heading"></a></h2>
 <p>The metadata for each dimension should be a matrix, and the number of rows should match the length of the dimension. The matrix may have any number of columns. The <code class="docutils literal notranslate"><span class="pre">gridMetadata</span></code> class aims to provide flexibility when defining dimensional metadata. Metadata values may be numeric, char, string, cellstring, or datetime data types, and there is no required format for the metadata along any dimension. Use whatever you find useful!</p>
 <p>Also note that the metadata matrices for different dimensions may have different data types and different numbers of columns. For example, say you have a dataset with both <code class="docutils literal notranslate"><span class="pre">site</span></code> and <code class="docutils literal notranslate"><span class="pre">time</span></code> dimensions. It is perfectly acceptable for the <code class="docutils literal notranslate"><span class="pre">site</span></code> metadata to be a string datatype with 4 columns, and the <code class="docutils literal notranslate"><span class="pre">time</span></code> metadata to be a numeric datatype with 1 column.</p>
+<p>You can return a metadata object’s dimensional metadata using dot-indexing with the dimension’s name. For example, if you create a metadata object with <code class="docutils literal notranslate"><span class="pre">lat</span></code> metadata:</p>
+<div class="input highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">latMetadata</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">(</span><span class="o">-</span><span class="mi">90</span><span class="p">:</span><span class="mi">90</span><span class="p">)</span><span class="o">&#39;</span><span class="p">;</span><span class="w"></span>
+<span class="n">myObject</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">gridMetadata</span><span class="p">(</span><span class="s">&#39;lat&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">latMetadata</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
+<div class="output highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">myObject</span><span class="w"> </span><span class="p">=</span><span class="w"></span>
+
+<span class="w">  </span><span class="n">gridMetadata</span><span class="w"> </span><span class="n">with</span><span class="w"> </span><span class="n">metadata</span><span class="p">:</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">lat</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>181<span class="n">x1</span><span class="w"> </span><span class="nb">double</span><span class="p">]</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Then you can return the <code class="docutils literal notranslate"><span class="pre">lat</span></code> metadata using:</p>
+<div class="input highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">myObject</span><span class="p">.</span><span class="n">lat</span><span class="w"></span>
+</pre></div>
+</div>
+<div class="output highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="nb">ans</span><span class="w"> </span><span class="p">=</span><span class="w"></span>
+
+<span class="w">    </span><span class="o">-</span><span class="mi">90</span><span class="w"></span>
+<span class="w">    </span><span class="o">-</span><span class="mi">89</span><span class="w"></span>
+<span class="w">    </span><span class="o">-</span><span class="mi">88</span><span class="w"></span>
+<span class="w">    </span><span class="k">...</span><span class="w"></span>
+<span class="w">     </span><span class="mi">88</span><span class="w"></span>
+<span class="w">     </span><span class="mi">89</span><span class="w"></span>
+<span class="w">     </span><span class="mi">90</span><span class="w"></span>
+</pre></div>
+</div>
 </section>
 <section id="non-dimensional-metadata-attributes">
-<h2>Non-dimensional metadata attributes<a class="headerlink" href="#non-dimensional-metadata-attributes" title="Permalink to this headline"></a></h2>
+<h2>Non-dimensional metadata attributes<a class="headerlink" href="#non-dimensional-metadata-attributes" title="Permalink to this heading"></a></h2>
 <p>It’s often useful to associate some non-dimensional metadata with a dataset. For example, the name of the model associated with some climate model output, or the units of the dataset. The <code class="docutils literal notranslate"><span class="pre">gridMetadata</span></code> class supports such non-dimensional metadata, which are referred to as <strong>“attributes”</strong>. To include attributes in a metadata object, include a (<code class="docutils literal notranslate"><span class="pre">&quot;attributes&quot;</span></code>, Metadata-Attributes) pair in the inputs to the <code class="docutils literal notranslate"><span class="pre">gridMetadata</span></code> command. The Metadata-Attributes input should be a scalar <code class="docutils literal notranslate"><span class="pre">struct</span></code> with some fields. Each field is interpreted as the name of a metadata attributes. You may use any field names you find useful - there are no required names for metadata attributes. The content of each field is the metadata associated with the attribute. There are no formatting requirements for metadata attributes; they may be any data type, and may have any size.</p>
 <p>The metadata attributes should be included in the <code class="docutils literal notranslate"><span class="pre">gridMetadata</span></code> command. So for example:</p>
-<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">myAttributes</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">struct</span><span class="p">(</span><span class="s">&quot;Model&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;My Model Name&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Units&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Kelvin&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Some_data_field&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">rand</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span><span class="w"></span>
-<span class="n">meta</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">gridMetadata</span><span class="p">(</span><span class="s">&quot;site&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">siteMetadata</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;time&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">timeMetadata</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;attributes&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">myAttributes</span><span class="p">)</span><span class="w"></span>
+<div class="input highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">myAttributes</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">struct</span><span class="p">(</span><span class="s">&quot;Model&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;My Model Name&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Units&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Kelvin&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Some_array&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">rand</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span><span class="w"></span>
+<span class="n">meta</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">gridMetadata</span><span class="p">(</span><span class="s">&quot;lat&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">latMetadata</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;lon&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">lonMetadata</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;attributes&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">myAttributes</span><span class="p">)</span><span class="w"></span>
 </pre></div>
 </div>
-<p>Alternatively, you can use <code class="docutils literal notranslate"><span class="pre">addAttributes</span></code> command to add attributes to an existing metadata object. For example:</p>
-<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">meta</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">gridMetadata</span><span class="p">(</span><span class="s">&quot;site&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">siteMetadata</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;time&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">timeMetadata</span><span class="p">);</span><span class="w"></span>
-<span class="n">meta</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">meta</span><span class="p">.</span><span class="n">addAttributes</span><span class="p">(</span><span class="s">&quot;Model&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;My Model Name&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Units&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Kelvin&quot;</span><span class="p">)</span><span class="w"></span>
-<span class="n">meta</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">meta</span><span class="p">.</span><span class="n">addAttributes</span><span class="p">(</span><span class="s">&quot;Some_data_field&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">rand</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span><span class="w"></span>
+<div class="output highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">meta</span><span class="w"> </span><span class="p">=</span><span class="w"></span>
+
+<span class="w">  </span><span class="n">gridMetadata</span><span class="w"> </span><span class="n">with</span><span class="w"> </span><span class="n">metadata</span><span class="p">:</span><span class="w"></span>
+
+<span class="w">           </span><span class="n">lon</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mi">360</span>×<span class="mi">1</span><span class="w"> </span><span class="nb">double</span><span class="p">]</span><span class="w"></span>
+<span class="w">           </span><span class="n">lat</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mi">181</span>×<span class="mi">1</span><span class="w"> </span><span class="nb">double</span><span class="p">]</span><span class="w"></span>
+<span class="w">    </span><span class="n">attributes</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span>×<span class="mi">1</span><span class="w"> </span><span class="nb">struct</span><span class="p">]</span><span class="w"></span>
+
+<span class="w">  </span><span class="n">Show</span><span class="w"> </span><span class="n">attributes</span><span class="w"></span>
+
+<span class="w">             </span><span class="n">Model</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;My Model Name&quot;</span><span class="w"></span>
+<span class="w">             </span><span class="n">Units</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Kelvin&quot;</span><span class="w"></span>
+<span class="w">        </span><span class="n">Some_array</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mi">4</span>×<span class="mi">5</span>×<span class="mi">6</span><span class="w"> </span><span class="nb">double</span><span class="p">]</span><span class="w"></span>
 </pre></div>
 </div>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
+<p>Alternatively, you can use the <code class="docutils literal notranslate"><span class="pre">addAttributes</span></code> command to add attributes to an existing metadata object. The inputs to this command are a series of (Attribute-Name, Attribute-Value) pairs. The output is the updated metadata object. For example, if you have a metadata object with no attributes:</p>
+<div class="input highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">meta</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">gridMetadata</span><span class="p">(</span><span class="s">&quot;lat&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">latMetadata</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;lon&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">lonMetadata</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
+<div class="output highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">meta</span><span class="w"> </span><span class="p">=</span><span class="w"></span>
+
+<span class="w">  </span><span class="n">gridMetadata</span><span class="w"> </span><span class="n">with</span><span class="w"> </span><span class="n">metadata</span><span class="p">:</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">lon</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mi">360</span>×<span class="mi">1</span><span class="w"> </span><span class="nb">double</span><span class="p">]</span><span class="w"></span>
+<span class="w">    </span><span class="n">lat</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mi">181</span>×<span class="mi">1</span><span class="w"> </span><span class="nb">double</span><span class="p">]</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Then you could add attributes using:</p>
+<div class="input highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">meta</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">meta</span><span class="p">.</span><span class="n">addAttributes</span><span class="p">(</span><span class="s">&quot;Model&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;My Model Name&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Units&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Kelvin&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Some_array&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">rand</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span><span class="w"></span>
+</pre></div>
+</div>
+<div class="output highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">meta</span><span class="w"> </span><span class="p">=</span><span class="w"></span>
+
+<span class="w">  </span><span class="n">gridMetadata</span><span class="w"> </span><span class="n">with</span><span class="w"> </span><span class="n">metadata</span><span class="p">:</span><span class="w"></span>
+
+<span class="w">           </span><span class="n">lon</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mi">360</span>×<span class="mi">1</span><span class="w"> </span><span class="nb">double</span><span class="p">]</span><span class="w"></span>
+<span class="w">           </span><span class="n">lat</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mi">181</span>×<span class="mi">1</span><span class="w"> </span><span class="nb">double</span><span class="p">]</span><span class="w"></span>
+<span class="w">    </span><span class="n">attributes</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span>×<span class="mi">1</span><span class="w"> </span><span class="nb">struct</span><span class="p">]</span><span class="w"></span>
+
+<span class="w">  </span><span class="n">Show</span><span class="w"> </span><span class="n">attributes</span><span class="w"></span>
+
+<span class="w">             </span><span class="n">Model</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;My Model Name&quot;</span><span class="w"></span>
+<span class="w">             </span><span class="n">Units</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Kelvin&quot;</span><span class="w"></span>
+<span class="w">        </span><span class="n">Some_array</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mi">4</span>×<span class="mi">5</span>×<span class="mi">6</span><span class="w"> </span><span class="nb">double</span><span class="p">]</span><span class="w"></span>
+</pre></div>
+</div>
+<section id="returning-attributes">
+<h3><em>Returning Attributes</em><a class="headerlink" href="#returning-attributes" title="Permalink to this heading"></a></h3>
+<p>You can return a metadata object’s attributes using dot-indexing with <code class="docutils literal notranslate"><span class="pre">.attributes</span></code>. Continuing the previous example:</p>
+<div class="input highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">meta</span><span class="p">.</span><span class="n">attributes</span><span class="w"></span>
+</pre></div>
+</div>
+<div class="output highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="nb">ans</span><span class="w"> </span><span class="p">=</span><span class="w"></span>
+
+<span class="w">  </span><span class="nb">struct</span><span class="w"> </span><span class="n">with</span><span class="w"> </span><span class="n">fields</span><span class="p">:</span><span class="w"></span>
+
+<span class="w">         </span><span class="n">Model</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;My Model Name&quot;</span><span class="w"></span>
+<span class="w">         </span><span class="n">Units</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Kelvin&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="n">Some_array</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mi">4</span>×<span class="mi">5</span>×<span class="mi">6</span><span class="w"> </span><span class="nb">double</span><span class="p">]</span><span class="w"></span>
+</pre></div>
+</div>
+<p>You can return a specific attribute by using a second layer of dot-indexing with the name of the attribute. For example:</p>
+<div class="input highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">meta</span><span class="p">.</span><span class="n">attributes</span><span class="p">.</span><span class="n">Model</span><span class="w"></span>
+</pre></div>
+</div>
+<div class="output highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="nb">ans</span><span class="w"> </span><span class="p">=</span><span class="w"></span>
+
+<span class="w">    </span><span class="s">&quot;My Model Name&quot;</span><span class="w"></span>
+</pre></div>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
 <p>The help page for <code class="docutils literal notranslate"><span class="pre">gridMetadata</span></code> reports additional commands that can be used to manipulate metadata attributes. Access the help page by entering <code class="docutils literal notranslate"><span class="pre">dash.doc(&quot;gridMetadata&quot;)</span></code> in the console.</p>
 </div>
+</section>
 </section>
 </section>
 

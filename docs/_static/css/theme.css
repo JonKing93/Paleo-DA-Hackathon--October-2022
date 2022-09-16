@@ -190,3 +190,8 @@ details summary {
     transform-origin: center;
     transition: 0.4s;
 }
+
+.output.highlight-matlab .highlight {
+    background: #fcfcfc;
+    color: #212121;
+}

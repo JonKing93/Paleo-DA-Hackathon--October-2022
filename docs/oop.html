@@ -7,6 +7,7 @@
   <title>Object-Oriented Code &mdash; Paleo DA Hackathon 0.0.1 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/matlab-io.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
@@ -14,6 +15,7 @@
         <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="_static/doctools.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
@@ -56,6 +58,7 @@
 <li class="toctree-l1"><a class="reference internal" href="gridfile.html">gridfile</a></li>
 <li class="toctree-l1"><a class="reference internal" href="code3.html">Open Coding 3</a></li>
 <li class="toctree-l1"><a class="reference internal" href="code4.html">Open Coding 4</a></li>
+<li class="toctree-l1"><a class="reference internal" href="stateVector.html">stateVector</a></li>
 </ul>
 
         </div>
@@ -82,22 +85,22 @@
            <div itemprop="articleBody">
              
   <section id="object-oriented-code">
-<h1>Object-Oriented Code<a class="headerlink" href="#object-oriented-code" title="Permalink to this headline"></a></h1>
+<h1>Object-Oriented Code<a class="headerlink" href="#object-oriented-code" title="Permalink to this heading"></a></h1>
 <p>This section introduces a few concepts in object-oriented programming (OOP). DASH users do not need to be familiar with OOP to use the toolbox. However, we use a few OOP terms throughout the workshop, and so we define them here. We also introduce dot-indexing, which is how DASH users will access different functions in the toolbox. A <a class="reference internal" href="#glossary">glossary</a> of new vocabulary is provided at the bottom of the page.</p>
 <section id="learning-objectives">
-<h2>Learning Objectives<a class="headerlink" href="#learning-objectives" title="Permalink to this headline"></a></h2>
+<h2>Learning Objectives<a class="headerlink" href="#learning-objectives" title="Permalink to this heading"></a></h2>
 <ol class="arabic simple">
 <li><p>Define classes and objects, and</p></li>
 <li><p>Introduce dot-indexing</p></li>
 </ol>
 </section>
 <section id="classes">
-<span id="id1"></span><h2>Classes<a class="headerlink" href="#classes" title="Permalink to this headline"></a></h2>
+<span id="id1"></span><h2>Classes<a class="headerlink" href="#classes" title="Permalink to this heading"></a></h2>
 <p>The DASH toolbox is written in an object-oriented style. This means that the toolbox is divided into components called <strong>classes</strong>. A class is a piece of code that describes a specialized structure - this structure will have some data fields, and also some functions that operate using those data fields. The data fields are known as <strong>properties</strong>, and the functions are known as <strong>methods</strong>.</p>
 <p>For example, DASH includes a <code class="docutils literal notranslate"><span class="pre">kalmanFilter</span></code> class, which helps implement the Kalman filter algorithm. This class has various data fields (properties), such as the ensemble prior and the observations / proxy records. The class also includes various functions (methods) that help to run an ensemble Kalman filter. For example, the <code class="docutils literal notranslate"><span class="pre">kalmanFilter</span></code> class includes a <code class="docutils literal notranslate"><span class="pre">localize</span></code> method, which implements covariance localization, and a <code class="docutils literal notranslate"><span class="pre">run</span></code> method, which runs the Kalman filter algorithm.</p>
 </section>
 <section id="objects">
-<span id="id2"></span><h2>Objects<a class="headerlink" href="#objects" title="Permalink to this headline"></a></h2>
+<span id="id2"></span><h2>Objects<a class="headerlink" href="#objects" title="Permalink to this heading"></a></h2>
 <p>An <strong>object</strong> is a specific instance of a class. Essentially, a class is the blueprint of a structure, and an object is the actual structure itself. To create an object for a particular class, you usually use a function that matches the name of the class. The output of the function is the object. For example, to create a <code class="docutils literal notranslate"><span class="pre">kalmanFilter</span></code> object, you would use:</p>
 <div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">myObject</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">kalmanFilter</span><span class="p">;</span><span class="w"></span>
 </pre></div>
@@ -111,7 +114,7 @@
 <p>Here, objects 1 and 2 could hold data values for two different experiments, and could run the Kalman filter algorithm using different experimental parameters.</p>
 </section>
 <section id="dot-indexing">
-<h2>Dot Indexing<a class="headerlink" href="#dot-indexing" title="Permalink to this headline"></a></h2>
+<h2>Dot Indexing<a class="headerlink" href="#dot-indexing" title="Permalink to this heading"></a></h2>
 <p>Dot indexing provides a way for users to:</p>
 <ol class="arabic simple">
 <li><p>Access an object’s data fields, and</p></li>
@@ -143,7 +146,7 @@
 </div>
 </section>
 <section id="glossary">
-<h2>Glossary<a class="headerlink" href="#glossary" title="Permalink to this headline"></a></h2>
+<h2>Glossary<a class="headerlink" href="#glossary" title="Permalink to this heading"></a></h2>
 <p><strong>class</strong>: Describes a specialized structure that has both data fields and functions that operate using those data fields.</p>
 <p><strong>property</strong>: A data field in a class.</p>
 <p><strong>method</strong>: A function for a class.</p>

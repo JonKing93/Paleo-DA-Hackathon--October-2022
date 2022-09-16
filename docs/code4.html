@@ -7,6 +7,7 @@
   <title>Open Coding 4 &mdash; Paleo DA Hackathon 0.0.1 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/matlab-io.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
@@ -14,10 +15,12 @@
         <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="_static/doctools.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="stateVector" href="stateVector.html" />
     <link rel="prev" title="Open Coding 3" href="code3.html" /> 
 </head>
 
@@ -66,6 +69,7 @@
 </li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="stateVector.html">stateVector</a></li>
 </ul>
 
         </div>
@@ -92,13 +96,13 @@
            <div itemprop="articleBody">
              
   <section id="open-coding-4">
-<h1>Open Coding 4<a class="headerlink" href="#open-coding-4" title="Permalink to this headline"></a></h1>
+<h1>Open Coding 4<a class="headerlink" href="#open-coding-4" title="Permalink to this heading"></a></h1>
 <section id="goal">
-<h2>Goal<a class="headerlink" href="#goal" title="Permalink to this headline"></a></h2>
+<h2>Goal<a class="headerlink" href="#goal" title="Permalink to this heading"></a></h2>
 <p>In this session, we’ll use <code class="docutils literal notranslate"><span class="pre">gridfile</span></code> to create a data catalogue for climate model output.</p>
 </section>
 <section id="step-1-create-grid-file">
-<h2>Step 1: Create <code class="docutils literal notranslate"><span class="pre">.grid</span></code> file<a class="headerlink" href="#step-1-create-grid-file" title="Permalink to this headline"></a></h2>
+<h2>Step 1: Create <code class="docutils literal notranslate"><span class="pre">.grid</span></code> file<a class="headerlink" href="#step-1-create-grid-file" title="Permalink to this heading"></a></h2>
 <p>We’ll use the <code class="docutils literal notranslate"><span class="pre">gridfile.new</span></code> command again to create a new catalogue for our climate model dataset. As a reminder, the syntax is:</p>
 <div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="nb">grid</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">gridfile</span><span class="p">.</span><span class="n">new</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span><span class="w"> </span><span class="n">metadata</span><span class="p">)</span><span class="w"></span>
 </pre></div>
@@ -110,9 +114,8 @@
 <p>Ultimately, there’s no “correct” way. Use whichever style works best for you.</p>
 </div>
 <section id="demo">
-<h3><em>Demo</em><a class="headerlink" href="#demo" title="Permalink to this headline"></a></h3>
-<p>In the demo, we have climate model output for surface temperatures. This output is arranged on a global latitude-longitude grid over time. Time proceeds from 850 CE to 2005 CE at monthly resolution. The output is split over two NetCDF files with the first 1000 years of output in the first file, and the remaining years in the second file.</p>
-<p>We’ll use the latitude and longitude metadata from the NetCDF files, but we’ll create custom metadata for the time dimension using Matlab’s <code class="docutils literal notranslate"><span class="pre">datetime</span></code> format. We’ll save the catalogue in a file named “temperature-cesm.grid”:</p>
+<h3><em>Demo</em><a class="headerlink" href="#demo" title="Permalink to this heading"></a></h3>
+<p>As a reminder, we have demo climate model output for surface temperatures. The output is arranged on a global latitude-longitude grid over time. Time proceeds from 850 CE to 2005 CE at monthly resolution. The output is split over two NetCDF files with the first 1000 years of output in the first file, and the remaining years in the second file. We <a class="reference external" href="code2.html#demo-2">previously showed</a> how to build a <code class="docutils literal notranslate"><span class="pre">gridMetadata</span></code> object for this dataset:</p>
 <div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">% Get the output files</span><span class="w"></span>
 <span class="n">outputFile1</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&#39;b.e11.BLMTRC5CN.f19_g16.002.cam.h0.TREFHT.085001-184912.nc&#39;</span><span class="p">;</span><span class="w"></span>
 <span class="n">outputFile2</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&#39;b.e11.BLMTRC5CN.f19_g16.002.cam.h0.TREFHT.185001-200512.nc&#39;</span><span class="p">;</span><span class="w"></span>
@@ -125,20 +128,24 @@
 <span class="c">% Create a metadata object</span><span class="w"></span>
 <span class="n">metadata</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">gridMetadata</span><span class="p">(</span><span class="s">&quot;lat&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">lat</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;lon&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">lon</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;time&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">time</span><span class="p">);</span><span class="w"></span>
 <span class="n">metadata</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">metadata</span><span class="p">.</span><span class="n">addAttributes</span><span class="p">(</span><span class="s">&quot;Units&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Kelvin&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Model&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;CESM 1.0&quot;</span><span class="p">);</span><span class="w"></span>
-
-<span class="c">% Use the metadata to initialize a new gridfile catalgoue</span><span class="w"></span>
-<span class="n">file</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&quot;temperature-cesm.grid&quot;</span><span class="p">;</span><span class="w"></span>
-<span class="n">gridfile</span><span class="p">.</span><span class="n">new</span><span class="p">(</span><span class="n">file</span><span class="p">,</span><span class="w"> </span><span class="n">metadata</span><span class="p">);</span><span class="w"></span>
 </pre></div>
 </div>
+<p>Now we’ll use the metadata object to define the scope of a catalogue for the climate model output. Here, we’ll name the new catalogue <code class="docutils literal notranslate"><span class="pre">temperature-cesm.grid</span></code>.</p>
+<blockquote>
+<div><p>% Use the metadata to initialize a new gridfile catalogue
+file = “temperature-cesm.grid”;
+gridfile.new(file, metadata);</p>
+</div></blockquote>
 </section>
 </section>
 <section id="step-2-add-data-sources">
-<h2>Step 2: Add data sources<a class="headerlink" href="#step-2-add-data-sources" title="Permalink to this headline"></a></h2>
+<h2>Step 2: Add data sources<a class="headerlink" href="#step-2-add-data-sources" title="Permalink to this heading"></a></h2>
 <p>We’ll again use the <code class="docutils literal notranslate"><span class="pre">gridfile.add</span></code> command to add data source files to the catalogue. We’ll need to call the command once for each data file. As a reminder, the syntaxes are:</p>
-<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">obj</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="nb">type</span><span class="p">,</span><span class="w"> </span><span class="n">filename</span><span class="p">,</span><span class="w"> </span><span class="n">variable</span><span class="p">,</span><span class="w"> </span><span class="n">dimensions</span><span class="p">,</span><span class="w"> </span><span class="n">metadata</span><span class="p">)</span><span class="w">   </span><span class="c">% NetCDF and MAT-file</span><span class="w"></span>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">% NetCDF and MAT-files</span><span class="w"></span>
+<span class="n">obj</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="nb">type</span><span class="p">,</span><span class="w"> </span><span class="n">filename</span><span class="p">,</span><span class="w"> </span><span class="n">variable</span><span class="p">,</span><span class="w"> </span><span class="n">dimensions</span><span class="p">,</span><span class="w"> </span><span class="n">metadata</span><span class="p">)</span><span class="w"></span>
 
-<span class="n">obj</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="s">&quot;text&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">filename</span><span class="p">,</span><span class="w"> </span><span class="n">dimensions</span><span class="p">,</span><span class="w"> </span><span class="n">metadata</span><span class="p">,</span><span class="w"> </span><span class="p">..,</span><span class="w"> </span><span class="n">options</span><span class="p">,</span><span class="w"> </span><span class="p">..)</span><span class="w">  </span><span class="c">% Delimited text files</span><span class="w"></span>
+<span class="c">% Delimited text files</span><span class="w"></span>
+<span class="n">obj</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="s">&quot;text&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">filename</span><span class="p">,</span><span class="w"> </span><span class="n">dimensions</span><span class="p">,</span><span class="w"> </span><span class="n">metadata</span><span class="p">,</span><span class="w"> </span><span class="p">..,</span><span class="w"> </span><span class="n">options</span><span class="p">,</span><span class="w"> </span><span class="p">..)</span><span class="w"></span>
 </pre></div>
 </div>
 <p>Remember that the metadata object for each data file should only have metadata values for the data subset in the file. Also recall that the metadata should include values for each dimension in the <code class="docutils literal notranslate"><span class="pre">.grid</span></code> catalogue. The <code class="docutils literal notranslate"><span class="pre">gridMetadata.index</span></code> command can be useful for extracting metadata subsets from the gridfile’s metadata.</p>
@@ -147,7 +154,7 @@
 <p>If you’re dataset uses tripolar coordinates or another non-rectilinear coordinate system, please see the next section.</p>
 </div>
 <section id="merged-dimensions-tripolar-coordinates">
-<h3><em>Merged dimensions / Tripolar coordinates</em><a class="headerlink" href="#merged-dimensions-tripolar-coordinates" title="Permalink to this headline"></a></h3>
+<h3><em>Merged dimensions / Tripolar coordinates</em><a class="headerlink" href="#merged-dimensions-tripolar-coordinates" title="Permalink to this heading"></a></h3>
 <p>The <code class="docutils literal notranslate"><span class="pre">gridfile</span></code> class requires each element along a data dimension to have unique, fixed metadata. However, some climate model coordinate systems don’t fall neatly into this paradigm, and so an additional step may be required to add model output to a <code class="docutils literal notranslate"><span class="pre">.grid</span></code> catalogue.</p>
 <p>This often occurs for variables on tripolar spatial grids. Tripolar output is often organized as a 2D (longitude x latitude) spatial grid, but spatial metadata is not fixed at a given point along either data dimension. For example, the latitude coordinate at (latitude_j, longitude_k) is typically not the same as at (latitude_j, longitude_k+1). Essentially, these spatial grids describe values at a set of unique (latitude, longitude) points, rather than values on a rectilinear (latitude x longitude) grid.</p>
 <p>To facilitate the use of such grids, <code class="docutils literal notranslate"><span class="pre">gridfile</span></code> allows users to merge multiple data file dimensions into a single, vectorized dimension within a <code class="docutils literal notranslate"><span class="pre">.grid</span></code> catalogue. For example, consider our tripolar (latitude x longitude) spatial grid. As noted, this spatial grid represents a collection of unique (latitude, longitude) points, and this matches the description of the <code class="docutils literal notranslate"><span class="pre">site</span></code> dimension, rather than distinct <code class="docutils literal notranslate"><span class="pre">lat</span></code> and <code class="docutils literal notranslate"><span class="pre">lon</span></code> dimensions. As such, we should merge the latitude and longitude dimensions of the data file into a single <code class="docutils literal notranslate"><span class="pre">site</span></code> dimension for the <code class="docutils literal notranslate"><span class="pre">.grid</span></code> catalogue.</p>
@@ -157,39 +164,53 @@
 </div>
 <p>To merge data file dimensions, you should use a repeated dimension name in the <strong>dimensions</strong> input. The <strong>dimensions</strong> input should still have one element per data file dimension, but the elements for merged dimensions should list the same dimension name.</p>
 <section id="example">
-<h4>Example<a class="headerlink" href="#example" title="Permalink to this headline"></a></h4>
-<p>In this example, we have climate model output of sea-surface temperatures over time. The SSTs are provided on a tripolar spatial grid over X years at monthly resoluation. The dataset is saved in a NetCDF file <code class="docutils literal notranslate"><span class="pre">sst.nc</span></code> within the <code class="docutils literal notranslate"><span class="pre">SST</span></code> variable. The NetCDF also contains spatial and temporal metadata for the grid.</p>
-<p>By examining the NetCDF file:</p>
-<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">file</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&quot;sst.nc&quot;</span><span class="p">;</span><span class="w"></span>
+<h4>Example<a class="headerlink" href="#example" title="Permalink to this heading"></a></h4>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>You can find the files for this example in the <code class="docutils literal notranslate"><span class="pre">tripolar-example</span></code> folder of the demo download.</p>
+</div>
+<p>In this example , we have climate model output of sea-surface temperatures (SSTs) over time. The SSTs are provided on a tripolar spatial grid. The dataset progresses from 1200-1299 CE at monthly resolution. The dataset is saved in the NetCDF file <code class="docutils literal notranslate"><span class="pre">b.e11.BLMTRC5CN.f19_g16.002.pop.h.SST.120001-129912.nc</span></code> within the <code class="docutils literal notranslate"><span class="pre">SST</span></code> variable.</p>
+<p>By examining the SST variable:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">file</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&quot;b.e11.BLMTRC5CN.f19_g16.002.pop.h.SST.120001-129912.nc&quot;</span><span class="p">;</span><span class="w"></span>
 <span class="n">variable</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&quot;SST&quot;</span><span class="p">;</span><span class="w"></span>
 <span class="nb">ncdisp</span><span class="p">(</span><span class="n">file</span><span class="p">,</span><span class="w"> </span><span class="n">variable</span><span class="p">)</span><span class="w"></span>
 </pre></div>
 </div>
-<p>we can see that the dataset has dimensions (size) of Longitude (X) x Latitude (Y) x Time(Z). However, if we load and examine the spatial metadata:</p>
-<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">lat</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">ncread</span><span class="p">(</span><span class="n">file</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;latitude&#39;</span><span class="p">);</span><span class="w"></span>
+<p>we can see that the dataset has a size of (320 x 384 x 1 x 1200), which corresponds to a Longitude (nlon) x Latitude (nlat) x Depth (z_t) x Time array. However, if we load and examine metadata for the <code class="docutils literal notranslate"><span class="pre">lat</span></code> dimension, we can see that the spatial metadata is a matrix:</p>
+<div class="input highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">lat</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">ncread</span><span class="p">(</span><span class="n">file</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;TLAT&#39;</span><span class="p">);</span><span class="w"></span>
 <span class="nb">size</span><span class="p">(</span><span class="n">lat</span><span class="p">)</span><span class="w"></span>
 </pre></div>
 </div>
-<p>we can see that the spatial metadata is a matrix, and values are not fixed along each dimension:</p>
-<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">% Fixed latitude index, changing longitude</span><span class="w"></span>
-<span class="n">A</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">lat</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span><span class="w"></span>
-<span class="n">B</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">lat</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span><span class="w"></span>
+<div class="output highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="nb">ans</span><span class="w"> </span><span class="p">=</span><span class="w"></span>
 
-<span class="nb">disp</span><span class="p">(</span><span class="n">A</span><span class="p">)</span><span class="w"></span>
-<span class="nb">disp</span><span class="p">(</span><span class="n">B</span><span class="p">)</span><span class="w"></span>
+<span class="w">   </span><span class="mi">320</span><span class="w">   </span><span class="mi">384</span><span class="w"></span>
+</pre></div>
+</div>
+<p>and values are not fixed along the latitude dimension:</p>
+<div class="input highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">% Changing longitude index, Fixed latitude index</span><span class="w"></span>
+<span class="n">latA</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">lat</span><span class="p">(</span><span class="mi">83</span><span class="p">,</span><span class="w"> </span><span class="mi">359</span><span class="p">)</span><span class="w"></span>
+<span class="n">latB</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">lat</span><span class="p">(</span><span class="mi">84</span><span class="p">,</span><span class="w"> </span><span class="mi">359</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
+<div class="output highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">latA</span><span class="w"> </span><span class="p">=</span><span class="w"></span>
+<span class="w">          </span><span class="mf">73.1</span><span class="w"></span>
+
+<span class="n">latB</span><span class="w"> </span><span class="p">=</span><span class="w"></span>
+<span class="w">          </span><span class="mf">73.3</span><span class="w"></span>
 </pre></div>
 </div>
 <p>so the spatial grid represents a collection of unique points, rather than a rectilinear grid. Thus, we should merge the longitude and latitude dimensions of the data file into a single <code class="docutils literal notranslate"><span class="pre">site</span></code> dimension for the <code class="docutils literal notranslate"><span class="pre">.grid</span></code> catalogue. We’ll start by using the latitude and longitude metadata to define metadata for a <code class="docutils literal notranslate"><span class="pre">.grid</span></code> file with a <code class="docutils literal notranslate"><span class="pre">site</span></code> dimension:</p>
 <div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">% Get the spatial metadata</span><span class="w"></span>
-<span class="n">lat</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">ncread</span><span class="p">(</span><span class="n">file</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;latitude&#39;</span><span class="p">);</span><span class="w"></span>
-<span class="n">lon</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">ncread</span><span class="p">(</span><span class="n">file</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;longitude&#39;</span><span class="p">);</span><span class="w"></span>
+<span class="n">lat</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">ncread</span><span class="p">(</span><span class="n">file</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;TLAT&#39;</span><span class="p">);</span><span class="w"></span>
+<span class="n">lon</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">ncread</span><span class="p">(</span><span class="n">file</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;TLONG&#39;</span><span class="p">);</span><span class="w"></span>
 
 <span class="c">% Reshape metadata as a collection of unique points</span><span class="w"></span>
 <span class="n">site</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="n">lat</span><span class="p">(:),</span><span class="w"> </span><span class="n">lon</span><span class="p">(:)];</span><span class="w"></span>
 
 <span class="c">% Build metadata object</span><span class="w"></span>
+<span class="n">lev</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&quot;Surface&quot;</span><span class="p">;</span><span class="w"></span>
 <span class="nb">time</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">ncread</span><span class="p">(</span><span class="n">file</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;time&#39;</span><span class="p">);</span><span class="w"></span>
-<span class="n">metadata</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">gridMetadata</span><span class="p">(</span><span class="s">&#39;site&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">site</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;time&#39;</span><span class="p">,</span><span class="w"> </span><span class="nb">time</span><span class="p">);</span><span class="w"></span>
+<span class="n">metadata</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">gridMetadata</span><span class="p">(</span><span class="s">&#39;site&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">site</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;lev&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">lev</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;time&#39;</span><span class="p">,</span><span class="w"> </span><span class="nb">time</span><span class="p">);</span><span class="w"></span>
 
 <span class="c">% Create gridfile</span><span class="w"></span>
 <span class="nb">grid</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">gridfile</span><span class="p">.</span><span class="n">new</span><span class="p">(</span><span class="s">&#39;sst.grid&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">metadata</span><span class="p">);</span><span class="w"></span>
@@ -197,14 +218,12 @@
 </div>
 <p>Next, we’ll merge the latitude and longitude dimensions when we add data source files:</p>
 <div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">% Whereas we might initially write</span><span class="w"></span>
-<span class="c">% dimensions = [&quot;lon&quot;, &quot;lat&quot;, &quot;time&quot;];</span><span class="w"></span>
+<span class="c">% dimensions = [&quot;lon&quot;, &quot;lat&quot;, &quot;lev&quot;, &quot;time&quot;];</span><span class="w"></span>
 
 <span class="c">% We&#39;ll change this to</span><span class="w"></span>
-<span class="n">dimensions</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="s">&quot;site&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;site&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;time&quot;</span><span class="p">];</span><span class="w"></span>
+<span class="n">dimensions</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="s">&quot;site&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;site&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;lev&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;time&quot;</span><span class="p">];</span><span class="w"></span>
 
 <span class="c">% Then add the data source file to the catalogue</span><span class="w"></span>
-<span class="n">file</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&quot;sst.nc&quot;</span><span class="p">;</span><span class="w"></span>
-<span class="n">variable</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&quot;SST&quot;</span><span class="p">;</span><span class="w"></span>
 <span class="n">metadata</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">grid</span><span class="p">.</span><span class="n">metadata</span><span class="p">;</span><span class="w"></span>
 <span class="nb">grid</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="s">&quot;netcdf&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">file</span><span class="p">,</span><span class="w"> </span><span class="n">variable</span><span class="p">,</span><span class="w"> </span><span class="n">dimensions</span><span class="p">,</span><span class="w"> </span><span class="n">metadata</span><span class="p">);</span><span class="w"></span>
 </pre></div>
@@ -213,7 +232,7 @@
 </section>
 </section>
 <section id="step-3-data-adjustments">
-<h2>Step 3: Data Adjustments<a class="headerlink" href="#step-3-data-adjustments" title="Permalink to this headline"></a></h2>
+<h2>Step 3: Data Adjustments<a class="headerlink" href="#step-3-data-adjustments" title="Permalink to this heading"></a></h2>
 <p>Once again, we’ll apply any data adjustments to our dataset. As a reminder, the syntaxes for data adjustments are:</p>
 <div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">obj</span><span class="p">.</span><span class="n">fillValue</span><span class="p">(</span><span class="n">value</span><span class="p">)</span><span class="w"></span>
 
@@ -223,7 +242,7 @@
 </pre></div>
 </div>
 <section id="id1">
-<h3><em>Demo</em><a class="headerlink" href="#id1" title="Permalink to this headline"></a></h3>
+<h3><em>Demo</em><a class="headerlink" href="#id1" title="Permalink to this heading"></a></h3>
 <p>In the demo, our climate model temperature output is provided in units of Kelvin. However, we’d prefer to use units of Celsius, so we’ll apply a data transformation to convert Kelvin to Celsius:</p>
 <div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">% Add the data conversion</span><span class="w"></span>
 <span class="n">proxies</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">gridfile</span><span class="p">(</span><span class="s">&quot;ntrend.grid&quot;</span><span class="p">);</span><span class="w"></span>
@@ -233,6 +252,29 @@
 <span class="n">proxies</span><span class="p">.</span><span class="n">addAttributes</span><span class="p">(</span><span class="s">&quot;converted_units&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Celsius&quot;</span><span class="p">);</span><span class="w"></span>
 </pre></div>
 </div>
+<p>Examining the gridfile:</p>
+<div class="input highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="nb">disp</span><span class="p">(</span><span class="n">proxies</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
+<div class="output highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">gridfile</span><span class="w"> </span><span class="s">with</span><span class="w"> </span><span class="s">properties:</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">File</span><span class="p">:</span><span class="w"> </span><span class="n">some</span><span class="o">/</span><span class="nb">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">Hackathon</span><span class="o">/</span><span class="nb">demo</span><span class="o">/</span><span class="n">ntrend</span><span class="p">.</span><span class="n">grid</span><span class="w"></span>
+<span class="w">  </span><span class="n">Dimensions</span><span class="p">:</span><span class="w"> </span><span class="n">site</span><span class="p">,</span><span class="w"> </span><span class="nb">time</span><span class="w"></span>
+
+<span class="w">  </span><span class="n">Dimension</span><span class="w"> </span><span class="n">Sizes</span><span class="w"> </span><span class="n">and</span><span class="w"> </span><span class="n">Metadata</span><span class="p">:</span><span class="w"></span>
+<span class="w">      </span><span class="n">site</span><span class="p">:</span><span class="w">   </span><span class="mi">54</span><span class="w"></span>
+<span class="w">      </span><span class="nb">time</span><span class="p">:</span><span class="w"> </span><span class="mi">1262</span><span class="w">    </span><span class="p">(</span><span class="mi">750</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="mi">2011</span><span class="p">)</span><span class="w"></span>
+
+<span class="w">  </span><span class="n">Attributes</span><span class="p">:</span><span class="w"></span>
+<span class="w">      </span><span class="n">converted_units</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Celsius&quot;</span><span class="w"></span>
+
+<span class="w">  </span><span class="n">Fill</span><span class="w"> </span><span class="n">Value</span><span class="p">:</span><span class="w"> </span><span class="o">-</span><span class="mf">999.000000</span><span class="w"></span>
+<span class="w">   </span><span class="n">Transform</span><span class="p">:</span><span class="w"> </span><span class="n">X</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="o">-</span><span class="mf">273.150000</span><span class="w"></span>
+
+<span class="w">  </span><span class="n">Data</span><span class="w"> </span><span class="n">Sources</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w"></span>
+</pre></div>
+</div>
+<p>we can see that loaded values will converted from Kelvin to Celsius.</p>
 </section>
 </section>
 </section>
@@ -242,6 +284,7 @@
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="code3.html" class="btn btn-neutral float-left" title="Open Coding 3" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="stateVector.html" class="btn btn-neutral float-right" title="stateVector" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
