@@ -37,23 +37,152 @@ The metadata for each dimension should be a matrix, and the number of rows shoul
 
 Also note that the metadata matrices for different dimensions may have different data types and different numbers of columns. For example, say you have a dataset with both ``site`` and ``time`` dimensions. It is perfectly acceptable for the ``site`` metadata to be a string datatype with 4 columns, and the ``time`` metadata to be a numeric datatype with 1 column.
 
+You can return a metadata object's dimensional metadata using dot-indexing with the dimension's name. For example, if you create a metadata object with ``lat`` metadata:
+
+.. code::
+    :class: input
+
+    latMetadata = (-90:90)';
+    myObject = gridMetadata('lat', latMetadata)
+
+.. code::
+    :class: output
+
+    myObject =
+
+      gridMetadata with metadata:
+
+        lat: [181x1 double]
+
+Then you can return the ``lat`` metadata using:
+
+.. code::
+    :class: input
+
+    myObject.lat
+
+.. code::
+    :class: output
+
+    ans =
+
+        -90
+        -89
+        -88
+        ...
+         88
+         89
+         90
+
 
 Non-dimensional metadata attributes
 -----------------------------------
 
 It's often useful to associate some non-dimensional metadata with a dataset. For example, the name of the model associated with some climate model output, or the units of the dataset. The ``gridMetadata`` class supports such non-dimensional metadata, which are referred to as **"attributes"**. To include attributes in a metadata object, include a (``"attributes"``, Metadata-Attributes) pair in the inputs to the ``gridMetadata`` command. The Metadata-Attributes input should be a scalar ``struct`` with some fields. Each field is interpreted as the name of a metadata attributes. You may use any field names you find useful - there are no required names for metadata attributes. The content of each field is the metadata associated with the attribute. There are no formatting requirements for metadata attributes; they may be any data type, and may have any size.
 
-The metadata attributes should be included in the ``gridMetadata`` command. So for example::
+The metadata attributes should be included in the ``gridMetadata`` command. So for example:
 
-    myAttributes = struct("Model", "My Model Name", "Units", "Kelvin", "Some_data_field", rand(4,5,6))
-    meta = gridMetadata("site", siteMetadata, "time", timeMetadata, "attributes", myAttributes)
+.. code::
+    :class: input
+
+    myAttributes = struct("Model", "My Model Name", "Units", "Kelvin", "Some_array", rand(4,5,6))
+    meta = gridMetadata("lat", latMetadata, "lon", lonMetadata, "attributes", myAttributes)
+
+.. code::
+    :class: output
+
+    meta =
+
+      gridMetadata with metadata:
+
+               lon: [360×1 double]
+               lat: [181×1 double]
+        attributes: [1×1 struct]
+
+      Show attributes
+
+                 Model: "My Model Name"
+                 Units: "Kelvin"
+            Some_array: [4×5×6 double]
 
 
-Alternatively, you can use ``addAttributes`` command to add attributes to an existing metadata object. For example::
+Alternatively, you can use the ``addAttributes`` command to add attributes to an existing metadata object. The inputs to this command are a series of (Attribute-Name, Attribute-Value) pairs. The output is the updated metadata object. For example, if you have a metadata object with no attributes:
 
-    meta = gridMetadata("site", siteMetadata, "time", timeMetadata);
-    meta = meta.addAttributes("Model", "My Model Name", "Units", "Kelvin")
-    meta = meta.addAttributes("Some_data_field", rand(4,5,6))
+.. code::
+    :class: input
+
+    meta = gridMetadata("lat", latMetadata, "lon", lonMetadata)
+
+.. code::
+    :class: output
+
+    meta =
+
+      gridMetadata with metadata:
+
+        lon: [360×1 double]
+        lat: [181×1 double]
+
+Then you could add attributes using:
+
+.. code::
+    :class: input
+
+    meta = meta.addAttributes("Model", "My Model Name", "Units", "Kelvin", "Some_array", rand(4,5,6))
+
+.. code::
+    :class: output
+
+    meta =
+
+      gridMetadata with metadata:
+
+               lon: [360×1 double]
+               lat: [181×1 double]
+        attributes: [1×1 struct]
+
+      Show attributes
+
+                 Model: "My Model Name"
+                 Units: "Kelvin"
+            Some_array: [4×5×6 double]
+
+
+*Returning Attributes*
+++++++++++++++++++++++
+
+You can return a metadata object's attributes using dot-indexing with ``.attributes``. Continuing the previous example:
+
+.. code::
+    :class: input
+
+    meta.attributes
+
+.. code::
+    :class: output
+
+    ans =
+
+      struct with fields:
+
+             Model: "My Model Name"
+             Units: "Kelvin"
+        Some_array: [4×5×6 double]
+
+
+You can return a specific attribute by using a second layer of dot-indexing with the name of the attribute. For example:
+
+.. code::
+    :class: input
+
+    meta.attributes.Model
+
+.. code::
+    :class: output
+
+    ans =
+
+        "My Model Name"
 
 .. tip::
 

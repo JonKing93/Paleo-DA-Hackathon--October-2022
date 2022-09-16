@@ -19,11 +19,10 @@ Climate model output often spans multiple data files, so be sure that the **meta
 
     Ultimately, there's no "correct" way. Use whichever style works best for you.
 
+
 *Demo*
 ++++++
-In the demo, we have climate model output for surface temperatures. This output is arranged on a global latitude-longitude grid over time. Time proceeds from 850 CE to 2005 CE at monthly resolution. The output is split over two NetCDF files with the first 1000 years of output in the first file, and the remaining years in the second file.
-
-We'll use the latitude and longitude metadata from the NetCDF files, but we'll create custom metadata for the time dimension using Matlab's ``datetime`` format. We'll save the catalogue in a file named "temperature-cesm.grid"::
+As a reminder, we have demo climate model output for surface temperatures. The output is arranged on a global latitude-longitude grid over time. Time proceeds from 850 CE to 2005 CE at monthly resolution. The output is split over two NetCDF files with the first 1000 years of output in the first file, and the remaining years in the second file. We `previously showed <code2.html#demo-2>`_ how to build a ``gridMetadata`` object for this dataset::
 
     % Get the output files
     outputFile1 = 'b.e11.BLMTRC5CN.f19_g16.002.cam.h0.TREFHT.085001-184912.nc';
@@ -38,7 +37,9 @@ We'll use the latitude and longitude metadata from the NetCDF files, but we'll c
     metadata = gridMetadata("lat", lat, "lon", lon, "time", time);
     metadata = metadata.addAttributes("Units", "Kelvin", "Model", "CESM 1.0");
 
-    % Use the metadata to initialize a new gridfile catalgoue
+Now we'll use the metadata object to define the scope of a catalogue for the climate model output. Here, we'll name the new catalogue ``temperature-cesm.grid``.
+
+    % Use the metadata to initialize a new gridfile catalogue
     file = "temperature-cesm.grid";
     gridfile.new(file, metadata);
 
@@ -47,9 +48,11 @@ Step 2: Add data sources
 ------------------------
 We'll again use the ``gridfile.add`` command to add data source files to the catalogue. We'll need to call the command once for each data file. As a reminder, the syntaxes are::
 
-    obj.add(type, filename, variable, dimensions, metadata)   % NetCDF and MAT-file
+    % NetCDF and MAT-files
+    obj.add(type, filename, variable, dimensions, metadata)
 
-    obj.add("text", filename, dimensions, metadata, .., options, ..)  % Delimited text files
+    % Delimited text files
+    obj.add("text", filename, dimensions, metadata, .., options, ..)
 
 Remember that the metadata object for each data file should only have metadata values for the data subset in the file. Also recall that the metadata should include values for each dimension in the ``.grid`` catalogue. The ``gridMetadata.index`` command can be useful for extracting metadata subsets from the gridfile's metadata.
 
@@ -73,56 +76,79 @@ To merge data file dimensions, you should use a repeated dimension name in the *
 
 Example
 ~~~~~~~
-In this example, we have climate model output of sea-surface temperatures over time. The SSTs are provided on a tripolar spatial grid over X years at monthly resoluation. The dataset is saved in a NetCDF file ``sst.nc`` within the ``SST`` variable. The NetCDF also contains spatial and temporal metadata for the grid.
 
-By examining the NetCDF file::
+.. note::
+    You can find the files for this example in the ``tripolar-example`` folder of the demo download.
 
-    file = "sst.nc";
+In this example , we have climate model output of sea-surface temperatures (SSTs) over time. The SSTs are provided on a tripolar spatial grid. The dataset progresses from 1200-1299 CE at monthly resolution. The dataset is saved in the NetCDF file ``b.e11.BLMTRC5CN.f19_g16.002.pop.h.SST.120001-129912.nc`` within the ``SST`` variable.
+
+By examining the SST variable::
+
+    file = "b.e11.BLMTRC5CN.f19_g16.002.pop.h.SST.120001-129912.nc";
     variable = "SST";
     ncdisp(file, variable)
 
-we can see that the dataset has dimensions (size) of Longitude (X) x Latitude (Y) x Time(Z). However, if we load and examine the spatial metadata::
+we can see that the dataset has a size of (320 x 384 x 1 x 1200), which corresponds to a Longitude (nlon) x Latitude (nlat) x Depth (z_t) x Time array. However, if we load and examine metadata for the ``lat`` dimension, we can see that the spatial metadata is a matrix:
 
-    lat = ncread(file, 'latitude');
+.. code::
+    :class: input
+
+    lat = ncread(file, 'TLAT');
     size(lat)
 
-we can see that the spatial metadata is a matrix, and values are not fixed along each dimension::
+.. code::
+    :class: output
 
-    % Fixed latitude index, changing longitude
-    A = lat(1, 1);
-    B = lat(2, 1);
+    ans =
 
-    disp(A)
-    disp(B)
+       320   384
+
+and values are not fixed along the latitude dimension:
+
+.. code::
+    :class: input
+
+    % Changing longitude index, Fixed latitude index
+    latA = lat(83, 359)
+    latB = lat(84, 359)
+
+.. code::
+    :class: output
+
+    latA =
+              73.1
+
+    latB =
+              73.3
 
 so the spatial grid represents a collection of unique points, rather than a rectilinear grid. Thus, we should merge the longitude and latitude dimensions of the data file into a single ``site`` dimension for the ``.grid`` catalogue. We'll start by using the latitude and longitude metadata to define metadata for a ``.grid`` file with a ``site`` dimension::
 
     % Get the spatial metadata
-    lat = ncread(file, 'latitude');
-    lon = ncread(file, 'longitude');
+    lat = ncread(file, 'TLAT');
+    lon = ncread(file, 'TLONG');
 
     % Reshape metadata as a collection of unique points
     site = [lat(:), lon(:)];
 
     % Build metadata object
+    lev = "Surface";
     time = ncread(file, 'time');
-    metadata = gridMetadata('site', site, 'time', time);
+    metadata = gridMetadata('site', site, 'lev', lev, 'time', time);
 
     % Create gridfile
     grid = gridfile.new('sst.grid', metadata);
 
 
+
 Next, we'll merge the latitude and longitude dimensions when we add data source files::
 
     % Whereas we might initially write
-    % dimensions = ["lon", "lat", "time"];
+    % dimensions = ["lon", "lat", "lev", "time"];
 
     % We'll change this to
-    dimensions = ["site", "site", "time"];
+    dimensions = ["site", "site", "lev", "time"];
 
     % Then add the data source file to the catalogue
-    file = "sst.nc";
-    variable = "SST";
     metadata = grid.metadata;
     grid.add("netcdf", file, variable, dimensions, metadata);
 
@@ -149,3 +175,32 @@ In the demo, our climate model temperature output is provided in units of Kelvin
 
     % Note the conversion in the metadata attributes
     proxies.addAttributes("converted_units", "Celsius");
+
+Examining the gridfile:
+
+.. code::
+    :class: input
+
+    disp(proxies)
+
+.. code::
+    :class: output
+
+    gridfile with properties:
+
+            File: some/path/to/Hackathon/demo/ntrend.grid
+      Dimensions: site, time
+
+      Dimension Sizes and Metadata:
+          site:   54
+          time: 1262    (750 to 2011)
+
+      Attributes:
+          converted_units: "Celsius"
+
+      Fill Value: -999.000000
+       Transform: X + -273.150000
+
+      Data Sources: 1
+
+we can see that loaded values will converted from Kelvin to Celsius.

@@ -3,7 +3,7 @@ Open Coding 3
 
 Goal
 ----
-In this session, we'll use ``gridfile`` to create a data catalogue for climate proxy records.
+Use ``gridfile`` to create a data catalogue for climate proxy records.
 
 
 Step 1: Create a ``.grid`` file
@@ -24,7 +24,7 @@ The output, **grid**, is a ``gridfile`` object for the new ``.grid`` file. We ca
 
 *Demo*
 ++++++
-In the demo dataset, the proxy dataset consists of 54 proxy records that span most of the Common Era at annual resolution. We'll start by defining metadata for this dataset and using the metadata to initialize a gridfile. The MAT-file ``ntrend.mat`` holds metadata values for the proxy sites and for the covered time steps. We'll use this metadata to build a gridMetadata object::
+As a reminder, the demo proxy dataset consists of 54 proxy records that span most of Common Era at annual resolution. We `previously showed <code2.html#demo-1>`_ how to build a ``gridMetadata`` object for this dataset::
 
     % Load metadata for the proxy dataset
     proxyFile = "ntrend.mat";
@@ -35,15 +35,34 @@ In the demo dataset, the proxy dataset consists of 54 proxy records that span mo
     time = info.years;
     metadata = gridMetadata('site', site, 'time', time);
 
-Then, we'll use the metadata object to define the scope of a new ``.grid`` catalogue. Here, we'll name the new file ``ntrend.grid``::
+Now, we'll use the metadata object to define the scope of a new ``.grid`` file that will catalogue the proxy database. Here, we'll name the new file ``ntrend.grid``::
 
     % Initialize a new .grid file
     filename = "ntrend.grid";
     proxies = gridfile.new(filename, metadata);
 
-We can inspect the new ``gridfile`` object in the console to verify that it manages a data catalogue for 54 sites and the specified time steps::
+We can inspect the new ``gridfile`` object in the console to verify that it manages the expected data catalogue:
+
+.. code::
+    :class: input
 
     disp(proxies);
+
+.. code::
+    :class: output
+
+    gridfile with properties:
+
+            File: some/path/to/Hackathon/demo/ntrend.grid
+      Dimensions: site, time
+
+      Dimension Sizes and Metadata:
+          site:   54
+          time: 1262    (750 to 2011)
+
+      Data Sources: 0
+
+Here we can see that the ``.grid`` file matches our expectations and catalogues a dataset with 54 proxy sites, and 1262 time steps (ranging from 750 CE to 2011 CE). We can also see that the new catalogue does not have any data source files associated with it yet.
 
 
 .. note::
@@ -68,7 +87,29 @@ Try using the ``gridfile`` command on your new ``.grid`` file. The output ``grid
 We can use the ``gridfile`` command to return a ``gridfile`` object for our new proxy dataset. Here, we'll call the command on the new ``ntrend.grid`` file::
 
     filename = "ntrend.grid";
-    proxies = gridfile(filename)
+    proxies = gridfile(filename);
+
+We can inspect the new ``gridfile`` in the console to verify that it matches our expectations:
+
+.. code::
+    :class: input
+
+    disp(proxies)
+
+.. code::
+    :class: output
+
+    gridfile with properties:
+
+            File: some/path/to/Hackathon/demo/ntrend.grid
+      Dimensions: site, time
+
+      Dimension Sizes and Metadata:
+          site:   54
+          time: 1262    (750 to 2011)
+
+      Data Sources: 0
+
 
 
 
@@ -162,7 +203,34 @@ The proxy dataset for the demo is stored in the MAT-file ``ntrend.mat``. The dat
     file = "ntrend.mat";
     variable = "crn";
     dimensions = ["time", "site"];
-    proxies.add("mat", file, variable, dimensions, metadata);
+    proxies.add("mat", file, variable, dimensions, metadata)
+
+Inspecting the gridfile in the console:
+
+.. code::
+    :class: input
+
+    disp(proxies)
+
+.. code::
+    :class: output
+
+      gridfile with properties:
+
+              File: some/path/to/Hackathon/demo/ntrend.grid
+        Dimensions: site, time
+
+        Dimension Sizes and Metadata:
+            site:   54
+            time: 1262    (750 to 2011)
+
+        Data Sources: 1
+
+      Show data sources
+
+            1. some/path/to/Hackathon/demo/ntrend.mat   Show details
+
+we can see that the catalogue now includes the ``ntrend.mat`` data source file.
 
 
 
@@ -248,7 +316,35 @@ to apply different transformations to specific data source files.
 In the demo, the proxy dataset (located in the ``crn`` variable of ``ntrend.mat``) uses a -999 fill value to indicate missing values. We'll add this fill value to the catalogue so that -999 values are converted to NaN upon load::
 
     proxies = gridfile("ntrend.grid");
-    proxies.fillValue(-999)
+    proxies.fillValue(-999);
+
+Inspecting the gridfile:
+
+.. code::
+    :class: input
+
+    disp(proxies)
+
+.. code::
+    :class: output
+
+    proxies =
+
+      gridfile with properties:
+
+              File: C:/Users/jonki/Documents/Hackathon/demo/ntrend.grid
+        Dimensions: site, time
+
+        Dimension Sizes and Metadata:
+            site:   54
+            time: 1262    (750 to 2011)
+
+        Fill Value: -999.000000
+
+        Data Sources: 1
+
+we can see the -999 fill value.
+
 
 
 
@@ -270,14 +366,37 @@ Demo
 ~~~~
 We can load the entire proxy dataset using::
 
-    X = proxies.load
+    [X, metadata] = proxies.load;
 
-Inspecting the output::
+Inspecting the output:
+
+.. code::
+    :class: input
 
     size(X)
-    metadata
 
-we can see that X is a matrix with 54 rows (proxy sites), and X columns (time steps), and the metadata for these dimensions is provided in the **metadata** output.
+.. code::
+    :class: output
+
+    ans =
+
+              54        1262
+
+we can see that X is a matrix with 54 rows (proxy sites), and 1262 columns (time steps). The metadata for these dimensions is provided in the **metadata** output:
+
+.. code::
+    :class: input
+
+    disp(metadata)
+
+.. code::
+    :class: output
+
+    gridMetadata with metadata:
+
+      site: [54×4 string]
+      time: [1262×1 double]
+
 
 
 *Custom dimension order*
@@ -299,15 +418,36 @@ Demo
 In the previous demo, we saw that the data loaded as a (site x time) matrix. Let's instead load the data as a (time x site) matrix. We'll indicate the requested order as the first input::
 
     dimensions = ["time", "site"];
-    [X, metadata] = obj.load(dimensions)
+    [X, metadata] = obj.load(dimensions);
 
-Inspecting the output::
+Inspecting the output:
+
+.. code::
+    :class: input
 
     size(X)
 
-we can see that X is now a matrix with X rows (time steps) and 54 columns (proxy sites). Note that the order of dimensions in the metadata object has likewise changed::
+.. code::
+    :class: output
 
-    metadata
+    ans =
+
+        1262          54
+
+we can see that X is now a matrix with 1262 rows (time steps) and 54 columns (proxy sites). Note that the order of dimensions in the metadata object has likewise changed:
+
+.. code::
+    :class: input
+
+    disp(metadata)
+
+.. code::
+    :class: output
+
+    gridMetadata with metadata:
+
+      time: [1262×1 double]
+      site: [54×4 string]
 
 
 
@@ -319,39 +459,153 @@ Often, we'll only want to load a subset of the data in a catalogue. You can requ
 
 Here, **indices** is a cell vector with one element per listed dimension. Each element holds the requested indices along that data dimension. Loaded data will match the order of requested indices. This syntax will also load data in the listed dimension order. If you want to include a dimension in the custom order, but don't want to load a subset of that dimension, use an empty array for the dimension's indices.
 
+.. important::
+    Although you can specify data indices directly, we strongly recommend using metadata to select indices. This keeps your code more readable for other humans.
+
+
 Demo
 ~~~~
-Let's start by loading data for proxy sites 1, 19, and 3. Let's limit the data for these sites to time steps 10-20::
+Let's start by loading data for proxy sites NTR (site 1), TYR (site 19), and WRAx (site 3). Let's limit the data for these sites to the years 1970-1980 CE (time steps 1221-1231). Although we *could* select these indices directly::
 
     dimensions = [  "site", "time"];
-    indices    = {[1 19 3],  10:20};
-    [X, metadata] = proxies.load(dimensions, indices)
+    indices    = {[1 19 3],  1221:1231};
+    [X, metadata] = proxies.load(dimensions, indices);
 
-Inspecting the output::
+this is poor practice because the code does not clearly indicate what data is being loaded. Instead, we should select the indices using the gridfile's metadata::
+
+    % Get the metadata for the catalogue
+    meta = proxies.metadata;
+
+    % Locate the requested sites
+    sites = ["NTR", "TYR", "WRAx"];
+    siteNames = meta.site(:,1);
+    [~, siteIndices] = ismember(sites, siteNames);
+
+    % Locate the requested time steps
+    times = 1970:1980;
+    timeIndices = ismember(meta.time, times);
+
+    % Load the data
+    dimensions = ["site", "time"];
+    indices = {siteIndices, timeIndices};
+    [X, metadata] = proxies.load(dimensions, indices);
+
+Inspecting the output:
+
+.. code::
+    :class: input
 
     size(X)
 
-we can see that X is a matrix with 3 rows (proxy sites), and 11 columns (time steps). Investigating the site metadata::
+.. code::
+    :class: output
 
-    metadata.site
+    ans =
 
-we see that row 1 corresponds to site 1, row 2 corresponds to site 19, and row 3 corresponds to site 3. Similarly, the time metadata::
+         3    11
+
+we can see that X is a matrix with 3 rows (proxy sites), and 11 columns (time steps). Investigating the returned metadata, we can see that the metadata describes a dataset with 3 proxy-site rows, and 11 time-step columns:
+
+.. code::
+    :class: input
+
+    disp(metadata)
+
+.. code::
+    :class: output
+
+    gridMetadata with metadata:
+
+      site: [3x4 string]
+      time: [11x1 double]
+
+The three rows correspond to sites NTR, TYR, and WRAx (in that order):
+
+.. code::
+    :class: input
+
+    metadata.site(:,1)
+
+.. code::
+    :class: output
+
+    ans =
+
+        "NTR"
+        "TYR"
+        "WRAx"
+
+And the columns correspond to the years from 1970-1980 CE:
+
+.. code::
+    :class: input
 
     metadata.time
 
-indicates that the columns are for time steps 10-20.
+.. code::
+    :class: output
 
+    ans =
 
-Now let's suppose that we want to load all time steps for proxy sites 1, 19, and 3, and that we want the loaded data matrix to have dimensions of (time x site). Here, we can use an empty array to load all elements along the time dimension::
+            1970
+            1971
+            1972
+            ...
+            1978
+            1979
+            1980
 
-    dimensions = ["time",   "site"];
-    indices    = {    [],  [1 19 3]};
-    [X, metadata] = proxies.load(dimensions, indices)
+Now let's suppose that we want to load all time steps for the three proxy sites, and that we want the loaded data matrix to have dimensions of (time x site). Here, we can use an empty array to load all elements along the time dimension::
 
-Inspecting the output::
+    dimensions = ["time", "site"];
+    indices    = {[], siteIndices};
+    [X, metadata] = proxies.load(dimensions, indices);
+
+Inspecting the output:
+
+.. code::
+    :class: input
 
     size(X)
-    metadata
-    metadata.site
 
-we can see that X is a (time x site) matrix consisting of proxy sites 1, 19, and 3 in all time steps.
+.. code::
+    :class: output
+
+    ans =
+
+            1262           3
+
+we can see that X is a (time x site) matrix with values in all 1262 time steps for the three proxy sites. We can use the returned metadata to verify the loaded data is (time x site):
+
+.. code::
+    :class: input
+
+    disp(metadata)
+
+.. code::
+    :class: output
+
+    gridMetadata with metadata:
+
+      time: [1262x1 double]
+      site: [3x4 string]
+
+and that the loaded data covers the years from 750-2011 CE:
+
+.. code::
+    :class: input
+
+    metadata.time
+
+.. code::
+    :class: output
+
+    ans =
+
+             750
+             751
+             752
+             ...
+            2009
+            2010
+            2011

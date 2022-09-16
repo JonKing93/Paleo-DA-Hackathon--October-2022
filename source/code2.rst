@@ -162,7 +162,7 @@ Solutions
     time = 1:2000;
     meta = gridMetadata("lat", lat', "lon", lon', "time", time')
 
-.. warning::
+.. caution::
 
     Remember that ``gridMetadata`` interprets each **row** as a unique metadata value. Be sure that ``lat``, ``lon``, and ``time``, are provided as column vectors.
 
