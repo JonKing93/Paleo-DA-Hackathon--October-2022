@@ -55,6 +55,6 @@ Alternatively, you can use ``addAttributes`` command to add attributes to an exi
     meta = meta.addAttributes("Model", "My Model Name", "Units", "Kelvin")
     meta = meta.addAttributes("Some_data_field", rand(4,5,6))
 
-.. note::
+.. tip::
 
     The help page for ``gridMetadata`` reports additional commands that can be used to manipulate metadata attributes. Access the help page by entering ``dash.doc("gridMetadata")`` in the console.
