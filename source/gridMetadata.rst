@@ -147,6 +147,8 @@ Then you could add attributes using:
                  Units: "Kelvin"
             Some_array: [4×5×6 double]
 
+Note that the attribute names must all be valid Matlab variable names when using the ``addAttributes`` command.
+
 
 *Returning Attributes*
 ++++++++++++++++++++++
