@@ -1,5 +1,5 @@
-stateVector
-===========
+Concepts
+========
 
 The ``stateVector`` class is used to design and build state vector ensembles. The class implements ``stateVector`` objects, which act as design templates for state vector ensembles. Users can edit a template to describe an ensemble that matches their requirements. When finished, they can then use the template to automatically build a state vector ensemble that conforms to its design.
 
@@ -20,7 +20,7 @@ In some cases, a variable can fall into both categories.
 
 Whatever the application, a state vector can include data from a variety of climate variables at different spatial and temporal resolutions. Figure 1 illustrates an example state vector.
 
-.. figure:: images/state-vector.svg
+.. figure:: ../images/state-vector.svg
     :alt: A single column runs from the top of the figure to the bottom and is labeled as a state vector. The column has three colored sections. A long, light-orange section runs from the top to the center and is labeled as monthly, gridded temperature. A short, dark-orange section in the center is labeled as annual, global mean temperature. A long, blue section runs from the center to the bottom and is labeled as monthly, gridded precipitation.
 
     Figure 1: A state vector with temperature, mean temperature, and precipitation variables.
@@ -41,7 +41,7 @@ and we often refer to the different state vectors in an ensemble as **ensemble m
 
 Continuing the previous example, a small ensemble for our state vector might look like:
 
-.. figure:: images/ensemble.svg
+.. figure:: ../images/ensemble.svg
     :alt: Five state vector columns are aligned into a matrix. The first column is labeled as Year 1, Run 1. The second is Year 5, Run 1. The third is Year 19, Run 1. The fourth is Year 27, Run 1. The fifth is Year 1, Run 2.
 
     Figure 2: An example ensemble (N=5) selected from different time points and/or model runs.
@@ -55,7 +55,7 @@ The ``stateVector`` class uses data from ``gridfile`` catalogues to build state 
 
 Returning to our earlier figure:
 
-.. figure:: images/state-vector.svg
+.. figure:: ../images/state-vector.svg
     :alt: A single column runs from the top of the figure to the bottom and is labeled as a state vector. The column has three colored sections. A long, light-orange section runs from the top to the center and is labeled as monthly, gridded temperature. A short, dark-orange section in the center is labeled as annual, global mean temperature. A long, blue section runs from the center to the bottom and is labeled as monthly, gridded precipitation.
 
     Figure 1: A state vector with temperature, mean temperature, and precipitation variables.
@@ -71,7 +71,7 @@ In the ``DASH`` toolbox, we will often refer to "state dimensions" and "ensemble
 
 Zooming in on the temperature (**T**) variable in our example ensemble:
 
-.. figure:: images/ensemble-dimensions.svg
+.. figure:: ../images/ensemble-dimensions.svg
     :alt: The top of the figure is labeled as "Ensemble Dimensions". A matrix representing an ensemble is divided into 5 columns representing ensemble members. Above the matrix are metadata values for the time and run dimensions. Each column has a specific metadata value for time, and a specific metadata value for run. The lines dividing the columns indicate that each set of metadata values is fixed along each column.
 
     Figure 3: Ensemble dimensions for a state vector ensemble.
@@ -80,7 +80,7 @@ we can see that ``time`` and ``run`` are the ensemble dimensions, because indivi
 
 By contrast, **state dimensions** are the remaining gridfile dimensions - that is, they are the dimensions that **are not** used to select ensemble members. State dimensions have constant metadata values along each row of a state vector ensemble (this is somewhat the inverse of ensemble dimensions). Continuing the example:
 
-.. figure:: images/state-dimensions.svg
+.. figure:: ../images/state-dimensions.svg
     :alt: The top of the figure is labeled as "State Dimensions". A matrix representing an ensemble is divided into five rows. Along the matrix's rows are metadata values for the lat and lon dimensions. Each row has a specific metadata value for lat, and a specific metadata value for lon. The lines dividing the rows indicate that each set of metadata values is fixed along each row.
 
     Figure 4: State dimensions for a state vector ensemble.
@@ -105,7 +105,7 @@ Analogously, you may want a state vector to include data from several years foll
 
 Returning to the previous figures, let's say I want the **T** temperature variable to include the spatial temperature grid from each of June, July, and August. In this case, the state vector ensemble for the **T** variable would have the following structure:
 
-.. figure:: images/sequence.svg
+.. figure:: ../images/sequence.svg
     :alt: A matrix is divided into 5 columns and 3 rows. The columns represent ensemble members and are labeled with time and run metadata. The time metadata for each column indicates the year associated with the ensemble member. The rows represent blocks of data associated with particular months. Each row has time metadata associated with it, and the rows are labeled as June, July, and August. Each row also has lat and lon metadata. The lat and lon metadata indicate that each row contains data values for all N spatial points.
 
     Figure 5: An example of a sequence for the time dimension. Each ensemble member (column) has time metadata listing the associated year. Each state vector element (row) has time metadata indicating a particular month.

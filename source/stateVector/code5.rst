@@ -111,16 +111,3 @@ Each A given variable may include one or more climate variables, so long as thos
 Next, we'll use the ``stateVector.add`` command to add variables to our state vector. The base syntax for this command is:
 
     obj = obj.add()
-
-
-
-
-
-
-.. code::
-    :class: input
-
-    sv = stateVector
-
-.. code::
-    :class: output

@@ -11,7 +11,7 @@ How it works
 ++++++++++++++++++++
 Each ``gridfile`` object catalogues data on an abstract N-dimensional data grid. This data grid does not actually exist. Rather, the data grid is an abstraction that describes how the data in different files fits together. The dimensions of this grid and their sizes are defined using a ``gridMetadata`` object:
 
-.. figure:: images/grid-empty.svg
+.. figure:: ../images/grid-empty.svg
     :alt: Axes for three dimensions in an empty space. The axes are labeled as latitude, longitude, and time.
     :width: 75%
 
@@ -22,7 +22,7 @@ Each ``gridfile`` object catalogues data on an abstract N-dimensional data grid.
 +++++++++++++++++
 The dimensions of the grid are associated with the metadata from the ``gridMetadata`` object. This way, each data point on the grid is associated with a particular set of metadata values - essentially, a metadata coordinate:
 
-.. figure:: images/grid-metadata.svg
+.. figure:: ../images/grid-metadata.svg
     :alt: Axes for three dimensions in an empty space. The first axis is labeled as latitude and has tick marks from -90 to 90. The second axis is labeled as longitude and has tick marks from 0 to 270. The third axis is labeled as time and has tick marks for years 1, 2, and 3.
     :width: 75%
 
@@ -37,7 +37,7 @@ Because of this uniqueness, each data point on the grid is associated with a uni
 +++++++++++++++++++
  When you create a new ``gridfile`` catalogue, its N-dimensional grid is initially empty. However, you can fill the grid with values by adding data source files to the catalogue. A data source file is a file with some data saved in it. When you add a source file to a catalogue, the contents of the source file are associated with a portion of the N-dimensional grid.
 
- .. figure:: images/grid-sources.svg
+ .. figure:: ../images/grid-sources.svg
      :alt: Axes for latitude, longitude, and time dimensions define the outline of a large cube in three dimensional space. Two smaller cubes are nestled within the outline of the large cube. The first is colored red and labeled as File 1. The second is colored blue and labeled as File 2. The two small cubes do not overlap, and regions of empty space remain in the large cube.
      :width: 75%
 

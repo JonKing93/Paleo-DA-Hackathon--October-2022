@@ -16,17 +16,9 @@ If you are not redirected, please follow `this link <welcome>`_ or click the "Ne
     :caption: Workshop
     :hidden:
 
-    overview
-    oop
-    docs
-    code1
-    gridMetadata
-    code2
-    gridfile
-    code3
-    code4
-    stateVector
-    code5
+    Introduction <introduction/outline>
+    gridfile <gridfile/outline>
+    stateVector <stateVector/outline>
 
 
 .. toctree::
