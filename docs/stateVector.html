@@ -20,6 +20,7 @@
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Open Coding 5" href="code5.html" />
     <link rel="prev" title="Open Coding 4" href="code4.html" /> 
 </head>
 
@@ -38,9 +39,13 @@
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <ul class="current">
+              <p class="caption" role="heading"><span class="caption-text">About</span></p>
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="welcome.html">Welcome!</a></li>
 <li class="toctree-l1"><a class="reference internal" href="prerequisites.html">Prerequisites</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Workshop</span></p>
+<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="overview.html">DASH Overview</a></li>
 <li class="toctree-l1"><a class="reference internal" href="oop.html">Object-Oriented Code</a></li>
 <li class="toctree-l1"><a class="reference internal" href="docs.html">Help and Documentation</a></li>
@@ -53,8 +58,16 @@
 <li class="toctree-l1 current"><a class="current reference internal" href="#">stateVector</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#new-concepts">New Concepts</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#state-vectors">State Vectors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ensembles">Ensembles</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="code5.html">Open Coding 5</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Resources</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="demo.html">Demo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab-primer.html">Matlab Primer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="da-primer.html">DA Primer</a></li>
 </ul>
 
         </div>
@@ -101,6 +114,37 @@
 </section>
 <section id="state-vectors">
 <h2>State Vectors<a class="headerlink" href="#state-vectors" title="Permalink to this heading"></a></h2>
+<p>State vectors are a fundamental concept for ensemble-based assimilation methods. In brief, a <strong>state vector</strong> is a collection of climate variables and parameters that describe the state of the climate system over some period of time. These variables are reshaped into a vector of data values, hence a “state vector”. Typically, state vectors are constructed from climate model output, so each state vector provides one <strong>potential</strong> description of the climate system (or at least, the part of the system that we’re interested in). There is no strict definition for the contents of a state vector, but they often contain one or more climate variables at a set of spatial points. In some cases, a state vector may include a trajectory of several points in time - for example, successive months of the year, or successive years after a volcanic event.</p>
+<p>In the context of assimilation, state vectors will generally include two types of variables:</p>
+<ol class="arabic simple">
+<li><p>Reconstruction targets, and</p></li>
+<li><p>Climate variables required to run proxy forward models</p></li>
+</ol>
+<p>In some cases, a variable can fall into both categories.</p>
+<p>Whatever the application, a state vector can include data from a variety of climate variables at different spatial and temporal resolutions. Figure 1 illustrates an example state vector.</p>
+<figure class="align-default" id="id1">
+<img alt="A single column runs from the top of the figure to the bottom and is labeled as a state vector. The column has three colored sections. A long, light-orange section runs from the top to the center and is labeled as monthly, gridded temperature. A short, dark-orange section in the center is labeled as annual, global mean temperature. A long, blue section runs from the center to the bottom and is labeled as monthly, gridded precipitation." src="_images/state-vector.svg" /><figcaption>
+<p><span class="caption-text">Figure 1: A state vector with temperature, mean temperature, and precipitation variables.</span><a class="headerlink" href="#id1" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>This example state vector includes data derived from two different climate variables (temperature and precipitation), data with different spatial resolutions (global-mean and spatial gridded), and different temporal resolutions (annual and monthly). Most likely, this state vector describes the state of the climate system for some modeled year.</p>
+</section>
+<section id="ensembles">
+<h2>Ensembles<a class="headerlink" href="#ensembles" title="Permalink to this heading"></a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">DASH</span></code> toolbox focuses on <em>ensemble</em> DA methods, which rely on state vector ensembles. A state vector <strong>ensemble</strong> is a collection of multiple state vectors organized into a matrix. Since each individual state vector represents a possible description of the climate system, an ensemble provides an empirical <em>distribution</em> of possible climate states. For paleoclimate applications, the state vectors in an ensemble are typically selected from:</p>
+<ol class="upperalpha simple">
+<li><p>Different time steps,</p></li>
+<li><p>Different climate models, and/or</p></li>
+<li><p>Different model runs</p></li>
+</ol>
+<p>and we often refer to the different state vectors in an ensemble as <strong>ensemble members</strong>.</p>
+<p>Continuing the previous example, a small ensemble for our state vector might look like:</p>
+<figure class="align-default" id="id2">
+<img alt="Five state vector columns are aligned into a matrix. The first column is labeled as Year 1, Run 1. The second is Year 5, Run 1. The third is Year 19, Run 1. The fourth is Year 27, Run 1. The fifth is Year 1, Run 2." src="_images/ensemble.svg" /><figcaption>
+<p><span class="caption-text">Figure 2: An example ensemble (N=5) selected from different time points and/or model runs.</span><a class="headerlink" href="#id2" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>Here, each column is a different state vector (ensemble member). Each ensemble member has data for the temperature, mean temperature, and precipitation variables, but from different time steps. In the case of ensemble member 5, the ensemble member is from the same time step as ensemble member 1, but from a different climate model run.</p>
 </section>
 </section>
 
@@ -109,6 +153,7 @@
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="code4.html" class="btn btn-neutral float-left" title="Open Coding 4" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="code5.html" class="btn btn-neutral float-right" title="Open Coding 5" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

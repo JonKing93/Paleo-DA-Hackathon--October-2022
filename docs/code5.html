@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Open Coding 5 &mdash; Paleo DA Hackathon 0.0.1 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/matlab-io.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Demo" href="demo.html" />
+    <link rel="prev" title="stateVector" href="stateVector.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> Paleo DA Hackathon
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">About</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="welcome.html">Welcome!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="prerequisites.html">Prerequisites</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Workshop</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="overview.html">DASH Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="oop.html">Object-Oriented Code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="docs.html">Help and Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="code1.html">Open Coding 1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gridMetadata.html">gridMetadata</a></li>
+<li class="toctree-l1"><a class="reference internal" href="code2.html">Open Coding 2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gridfile.html">gridfile</a></li>
+<li class="toctree-l1"><a class="reference internal" href="code3.html">Open Coding 3</a></li>
+<li class="toctree-l1"><a class="reference internal" href="code4.html">Open Coding 4</a></li>
+<li class="toctree-l1"><a class="reference internal" href="stateVector.html">stateVector</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Open Coding 5</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#goal">Goal</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#step-1-create-new-state-vector">Step 1: Create new state vector</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#demo"><em>Demo</em></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#step-2-add-variables">Step 2: Add variables</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#multiple-variables"><em>Multiple variables</em></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id1"><em>Demo</em></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Resources</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="demo.html">Demo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab-primer.html">Matlab Primer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="da-primer.html">DA Primer</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Paleo DA Hackathon</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Open Coding 5</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="open-coding-5">
+<h1>Open Coding 5<a class="headerlink" href="#open-coding-5" title="Permalink to this heading"></a></h1>
+<section id="goal">
+<h2>Goal<a class="headerlink" href="#goal" title="Permalink to this heading"></a></h2>
+<p>Use the <code class="docutils literal notranslate"><span class="pre">stateVector</span></code> class to design and build a state vector ensemble.</p>
+</section>
+<section id="step-1-create-new-state-vector">
+<h2>Step 1: Create new state vector<a class="headerlink" href="#step-1-create-new-state-vector" title="Permalink to this heading"></a></h2>
+<p>Use the <code class="docutils literal notranslate"><span class="pre">stateVector</span></code> command to create a new <code class="docutils literal notranslate"><span class="pre">stateVector</span></code> object.</p>
+<blockquote>
+<div><p>newObject = stateVector</p>
+</div></blockquote>
+<p>where <strong>newObject</strong> is the new state vector object.</p>
+<p>You can optionally label the object using the first input:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">newObject</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">stateVector</span><span class="p">(</span><span class="n">label</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
+<p>where <strong>label</strong> is a string used as the label.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>You can also label an existing <code class="docutils literal notranslate"><span class="pre">stateVector</span></code> object using the <code class="docutils literal notranslate"><span class="pre">stateVector.label</span></code> command.</p>
+</div>
+<p>In either case, the new <code class="docutils literal notranslate"><span class="pre">stateVector</span></code> object will be empty. It does not yet have any variables, and so the state vector will initially have a length of zero. In the next section, we’ll start adding variables to the state vector.</p>
+<section id="demo">
+<h3><em>Demo</em><a class="headerlink" href="#demo" title="Permalink to this heading"></a></h3>
+<p>We’ll create a new <code class="docutils literal notranslate"><span class="pre">stateVector</span></code> object and label it as “NTREND Temperature Demo”</p>
+<div class="input highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">label</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&quot;NTREND Temperature Demo&quot;</span><span class="p">;</span><span class="w"></span>
+<span class="n">sv</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">stateVector</span><span class="p">(</span><span class="n">label</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
+<div class="output highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">sv</span><span class="w"> </span><span class="p">=</span><span class="w"></span>
+
+<span class="w">  </span><span class="n">stateVector</span><span class="w"> </span><span class="n">with</span><span class="w"> </span><span class="nb">properties</span><span class="p">:</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">Label</span><span class="p">:</span><span class="w"> </span><span class="n">NTREND</span><span class="w"> </span><span class="n">Temperature</span><span class="w"> </span><span class="n">Demo</span><span class="w"></span>
+<span class="w">       </span><span class="n">Length</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="n">rows</span><span class="w"></span>
+<span class="w">    </span><span class="n">Variables</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w"></span>
+</pre></div>
+</div>
+<p>We can see from the console output that the state vector currently has 0 variables, and thus has a length of 0 rows.</p>
+</section>
+</section>
+<section id="step-2-add-variables">
+<h2>Step 2: Add variables<a class="headerlink" href="#step-2-add-variables" title="Permalink to this heading"></a></h2>
+<p>At this point, our <code class="docutils literal notranslate"><span class="pre">stateVector</span></code> object does not have any variables. In the context of DASH, a <strong>“state vector variable”</strong> refers to some subset of data extracted from a gridfile. Note that a state vector may include multiple variables derived from the same gridfile. Each variable is then defined by its own unique combination of indices, sequences, and means. For example, a state vector might include a spatial field, and a spatial mean derived from the same climate variable. Since the spatial field does not implement a mean, it represents a different state vector variable than the spatial mean.</p>
+<p>Note that the definition of a state vector variable says nothing about individual climate variables - a given state vector variable may include multiple climate variables, so long as those climate variables are derived from the same gridfile. For example, a state vector variable can include multiple climate variables along the <code class="docutils literal notranslate"><span class="pre">var</span></code> dimension of a gridfile, although this is not required. This definition is deliberately open-ended, and it allows for flexible design of different state vectors.</p>
+<p>In general, state vectors should include two types of variables:</p>
+<ol class="arabic simple">
+<li><p>Reconstruction targets, and</p></li>
+<li><p>Climate variables required to run proxy forward models</p></li>
+</ol>
+<p>To add a variable to a <code class="docutils literal notranslate"><span class="pre">stateVector</span></code> object, use the <code class="docutils literal notranslate"><span class="pre">stateVector.add</span></code> command. The base syntax for this command is:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">obj</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">obj</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">variableName</span><span class="p">,</span><span class="w"> </span><span class="nb">grid</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Here, <strong>variableName</strong> is a string listing the name of the new variable. The name must be a valid Matlab variable name.</p>
+<p>The <strong>grid</strong> input indicates the gridfile that is associated with the new variable. It may either be a <code class="docutils literal notranslate"><span class="pre">gridfile</span></code> object, or the name of a saved <code class="docutils literal notranslate"><span class="pre">.grid</span></code> file. If using a file name, the name may either be an absolute file path, or the name of a file on the active path.</p>
+<p>The <strong>obj</strong> output is the updated <code class="docutils literal notranslate"><span class="pre">stateVector</span></code> object.</p>
+<section id="multiple-variables">
+<h3><em>Multiple variables</em><a class="headerlink" href="#multiple-variables" title="Permalink to this heading"></a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">stateVector.add</span></code> command can also be used to add multiple variables to a state vector at once. In this case, the syntax becomes:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">obj</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">obj</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">variableNames</span><span class="p">,</span><span class="w"> </span><span class="n">grids</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
+<p>where <strong>variableNames</strong> is a vector of names, and <strong>grids</strong> is a vector with one <code class="docutils literal notranslate"><span class="pre">gridfile</span></code> or file name per new variable. If all of the new variables are derived from the same gridfile, then <strong>grids</strong> may instead be a single <code class="docutils literal notranslate"><span class="pre">gridfile</span></code> object or file name referencing the appropriate catalogue.</p>
+</section>
+<section id="id1">
+<h3><em>Demo</em><a class="headerlink" href="#id1" title="Permalink to this heading"></a></h3>
+<p>Note that the definition of a state vector variable says nothing about specific climate variables - a given state vector variable may include multiple climate variables, so long as those climate variables are derived from the same gridfile. This definition is deliberately open-ended, and it allows for flexible design of different state vectors.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">var</span></code> dimension in gridfile metadata also does not define a state v</p>
+</div>
+<p>Each A given variable may include one or more climate variables, so long as those variables are derived from the same gridfile. Likewise, a state vector may include multiple variables derived from the same gridfile. For example, a state vector that includes a spatial temperature field, as well as global-mean temperatures. This definition of a “variable” is deliberately open ended, and allows for flexible design of different state vectors.</p>
+<p>Next, we’ll use the <code class="docutils literal notranslate"><span class="pre">stateVector.add</span></code> command to add variables to our state vector. The base syntax for this command is:</p>
+<blockquote>
+<div><p>obj = obj.add()</p>
+</div></blockquote>
+<div class="input highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">sv</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">stateVector</span><span class="w"></span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="stateVector.html" class="btn btn-neutral float-left" title="stateVector" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="demo.html" class="btn btn-neutral float-right" title="Demo" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Jonathan King.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
