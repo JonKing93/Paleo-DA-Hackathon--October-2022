@@ -18,51 +18,28 @@ The ``ensemble`` class allows you to manipulate and interact with state vector e
 Features
 --------
 
-Placeholder for large ensembles
-+++++++++++++++++++++++++++++++
+Placeholder for large arrays
+++++++++++++++++++++++++++++
+You can use ensemble objects in lieu of data arrays within the ``DASH`` toolbox. A number of commands in ``DASH`` require an ensemble as input, but very large ensembles can be difficult to fit in a computer's active memory. To circumvent this problem, you can use ensemble objects to input ensembles for ``DASH`` commands. Many ``DASH`` commands include memory optimizations for large ensembles, and they can use the ensemble object to load necessary data without overwhelming your computer. The ensemble object itself only contains a small amount of metadata about the saved array, so should easily fit in active memory.
+
 
 
 Load Saved Ensemble
 +++++++++++++++++++
-The ``ensemble`` class implements a ``load`` command, which returns the ensemble saved in a file. You can then manipulate the loaded data array in the Matlab workspace. If you use an ensemble object to manipulate a saved ensemble, the ``load`` command will return the updated ensemble.
+The ``ensemble`` class implements a ``load`` command, which returns the ensemble saved in a file. The ensemble is returned directly as a data array, and if necessary, you can manipulate this data array in the Matlab workspace prior to assimilation. You can also modify the output of the ``load`` command using the commands described below.
 
 
-Select Variables or Members
+
+Select Variables and Members
 +++++++++++++++++++++++++++
+Sometimes, you may only need a few of the variables saved in an ensemble file. For example, when running an assimilation algorithm, you only need to update the variables that represent reconstruction targets. By using the ``useVariables`` command, you can modify an ensemble object so that it only represents a subset of variables saved in the file. If you then use the ``load`` command, the output will only include the requested variables.
+
+Similarly, you may want an ensemble to use a specific set of ensemble members. For example, if you are implementing a Monte Carlo procedure and rerunning an assimilation using different sets of ensemble members. You can use the ``useMembers`` command to select specific ensemble members saved in the file. If you then use the ``load`` command, the output will only include the requested variables.
 
 
 
 Evolving Ensembles
 ++++++++++++++++++
-In some cases, you may want to design an evolving ensemble for
+In some cases, you may want to design an evolving ensemble. This is typically the case when you want to use different prior ensembles for different assimilation time steps. You can use the ``evolving`` command to implement an evolving ensemble. This command allows you to select different sets of saved ensemble members. Each set of ensemble members is used to build a particular ensemble within an evolving set.
 
-
-
-A common manipulation in ``DASH`` is to load a few specific variables from an ensemble. For example, you may want to load the reconstruction target variables as inputs for
-
-
-
-
-
-
-Saving to file might initially seem to limit your ability to manipulate and interact with state vector ensembles. However, the ``ensemble`` class provides a solu
-
-
-
-, thereby increasing the speed of assimilation algorithms.
-
-By saving to file, you seemingly lose the ability to manipulate and interact with a state vector ensemble. However, the ``ensemble`` class provides a solution to this problem.
-
-In many ways, the ``ensemble`` class is actually more useful than directly
-
-Furthermore, the ``ensemble`` class includes routines that help implement evolving ensembles, and that
-
-
-
-
-
-
-The ``DASH`` includes a number of optimizations that conserve
-
-
-The ``ensemble`` class allows you to interact with a state vector ensemble saved in a ``.ens`` file. You can use the class to manipulate this saved data, without actually loading the ensemble into memory. The class uses ``ensemble`` objects to implement this functionality. Each object is associated with a particular ``.ens
+In some cases, you may want to build an evolving ensemble from data saved in different ensemble files. If this is the case, you can build an ensemble by concatenating individual ensemble objects into an vector. Each element of the vector is a particular ensemble in the evolving set. Finally, you can also build evolving ensembles directly from a data array. See the documentation in ``dash.doc('kalmanFilter')`` and ``dash.doc('kalmanFilter.prior')`` for more details on both of these uses.
