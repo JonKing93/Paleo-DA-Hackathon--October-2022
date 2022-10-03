@@ -12,19 +12,26 @@ Use the ``gridfile.new`` command to create a new, empty gridfile. The syntax of 
 
     grid = gridfile.new(filename, metadata)
 
-The first input, **filename**, is a string listing the name for the new ``.grid`` file. If the file name does not end in a ``.grid`` extension, DASH adds the extension automatically. The file name may be an absolute or relative path - relative paths are interpreted relative to the current directory.
 
-The second input, **metadata**, is a ``gridMetadata`` object that defines the scope of the ``gridfile`` object's N-dimensional grid. If your dataset spans multiple data source files, then this metadata should span the values for all those files.
+**filename**
+    The first input is a string listing the name of the new ``.grid`` file. If the file name does not end in a ``.grid`` extension, DASH adds the extension automatically. The file name may be an absolute or relative path - relative paths are interpreted relative to the current directory.
 
-The output, **grid**, is a ``gridfile`` object for the new ``.grid`` file. We can use this output to add data source files to the catalogue, load values from the dataset, and implement other tasks.
+**metadata**
+    The second input is a ``gridMetadata`` object that defines the scope of the ``gridfile`` object's N-dimensional grid. If your dataset spans multiple data source files, then this metadata should span the values for all those files.
 
-.. tip::
-    An optional third argument to ``gridfile.new`` allows you to overwrite an existing ``.grid`` file. Set it to ``true`` to enable overwriting. See ``dash.doc('gridfile.new')`` for details.
+----
+
+**grid**
+    The output is a ``gridfile`` object for the new ``.grid`` file. We can use this output to add data source files to the catalogue, load values from the dataset, and implement other tasks.
+
+By default, the ``new`` command will not overwrite an existing gridfile. However, you can use the optional third argument to alter this behavior. Set it to ``true`` to enable overwriting::
+
+    grid = gridfile.new(filename, metadata, true)
 
 
 *Demo*
 ++++++
-As a reminder, the demo proxy dataset consists of 54 proxy records that span most of Common Era at annual resolution. We `previously showed <code2.html#demo-1>`_ how to build a ``gridMetadata`` object for this dataset::
+As a reminder, the demo proxy dataset consists of 54 proxy records that span most of Common Era at annual resolution. We :ref:`previously showed <demo-ntrend-metadata>` how to build a ``gridMetadata`` object for this dataset::
 
     % Load metadata for the proxy dataset
     proxyFile = "ntrend.mat";
@@ -126,13 +133,15 @@ or alternatively::
 
 for files accessed via OPeNDAP.
 
-The first input, **type**, is a string that indicates the type of file being added to the catalogue. The following options are supported:
+**type**
+    The first input is a string that indicates the type of file being added to the catalogue. The following options are supported:
 
-1. ``"netcdf"`` or ``"nc"``: A NetCDF file
-2. ``"mat"``: A MAT-file
-3. ``"text"`` or ``"txt"``: A delimited text file
+    | ``"netcdf"`` or ``"nc"``: A NetCDF file
+    | ``"mat"``: A MAT-file
+    | ``"text"`` or ``"txt"``: A delimited text file
 
-The second input, **filename**, is the name of the data source file. As before, you may either use an absolute path, or the name of a file on the active path. Again, DASH will use the ``which`` command to locate files on the active path. If using OPeNDAP, then the second input should be the full OPeNDAP URL used to access the file.
+**filename** / **opendapURL**
+    The second input is the name of the data source file. As before, you may either use an absolute path, or the name of a file on the active path. Again, DASH will use the ``which`` command to locate files on the active path. If using OPeNDAP, then the second input should be the full OPeNDAP URL used to access the file.
 
 .. tip::
     Remember that the **obj** preceding the ``.add`` indicates that you should use dot-indexing to add the data file to a particular ``gridfile`` object.
@@ -146,18 +155,20 @@ Delimited text files are treated as a data matrix when added to a ``.grid`` cata
 
     obj.add("text", filename, dimensions, metadata)
 
-The **dimensions** input is a string vector with two elements. The first element lists the name of the ``gridfile`` dimension associated with the rows of the matrix, and the second element is the dimension associated with the columns.
+**dimensions**
+    This input is a string vector with two elements. The first element lists the name of the ``gridfile`` dimension associated with the rows of the matrix, and the second element is the dimension associated with the columns.
 
-.. tip::
-    The dimensions of a proxy dataset are often ``"site"`` and ``"time"``. The order of these dimensions will vary with the structure of your text file.
+    .. tip::
+        The dimensions of a proxy dataset are often ``"site"`` and ``"time"``. The order of these dimensions will vary with the structure of your text file.
 
-The **metadata** input is another ``gridMetadata`` object. This metadata object should list the metadata values associated with the data in the file. The metadata should include values for every dimension in the ``.grid`` catalgoue. If the proxy dataset is stored as a single data array in a single file, then **metadata** will be the same metadata object used to create the ``.grid`` file. If the file holds a subset of the full proxy dataset, then **metadata** should only have the metadata for those records.
+**metadata**
+    This input is another ``gridMetadata`` object. This metadata object should list the metadata values associated with the data in the file. The metadata should include values for every dimension in the ``.grid`` catalgoue. If the proxy dataset is stored as a single data array in a single file, then **metadata** will be the same metadata object used to create the ``.grid`` file. If the file holds a subset of the full proxy dataset, then **metadata** should only have the metadata for those records.
 
-.. tip::
-    You can use the ``gridfile.metadata`` command to return the metadata object for a ``.grid`` catalogue.
+    .. tip::
+        You can use the ``gridfile.metadata`` command to return the metadata object for a ``.grid`` catalogue.
 
-.. tip::
-    You can use ``gridMetadata.index`` to isolate the metadata for specific proxy sites.
+    .. tip::
+        You can use ``gridMetadata.index`` to isolate the metadata for specific proxy sites.
 
 
 The ``gridfile`` class also supports any options used by Matlab's ``readmatrix`` command when reading data from a text file. These options should be specified after the first four inputs. For example::
@@ -175,20 +186,23 @@ The syntax for NetCDF and MAT-files is::
 
     obj.add(type, filename, variable, dimensions, metadata);
 
-Here, **variable** is a string listing the name of the variable in the source file that holds the relevant data.
+**variable**
+    This input is a string listing the name of the variable in the source file that holds the relevant data.
 
-As with text files, the **dimensions** input is a string vector that list the names of the ``gridfile`` dimensions for the variable. Unlike text files, variables in NetCDF and MAT-files may store N-dimensional arrays, so the **dimensions** input may have more than 2 dimensions. The input should list each dimension of the variable, in the order they occur.
+**dimensions**
+    As with text files, the **dimensions** input is a string vector that list the names of the ``gridfile`` dimensions for the variable. Unlike text files, variables in NetCDF and MAT-files may store N-dimensional arrays, so the **dimensions** input may have more than 2 dimensions. The input should list each dimension of the variable, in the order they occur.
 
-.. tip::
-    The dimensions of a proxy dataset are often ``"site"`` and ``"time"``.
+    .. tip::
+        The dimensions of a proxy dataset are often ``"site"`` and ``"time"``.
 
-The **metadata** input behaves the same as for text files. Essentially, it is a ``gridMetadata`` object that describes the scope of the data stored in the file variable. Again, we note that if the proxy dataset is stored as a single data array in a single file, then **metadata** will be the same metadata object used to create the ``.grid`` file. If the file holds a subset of the full proxy dataset, then **metadata** should only have the metadata for those records.
+**metadata**
+    This input behaves similarly as for text files. Essentially, it is a ``gridMetadata`` object that describes the scope of the data stored in the file variable. Again, we note that if the proxy dataset is stored as a single data array in a single file, then **metadata** will be the same metadata object used to create the ``.grid`` file. If the file holds a subset of the full proxy dataset, then **metadata** should only have the metadata for those records.
 
-.. tip::
-    You can use the ``gridfile.metadata`` command to return the metadata object for a ``.grid`` catalogue.
+    .. tip::
+        You can use the ``gridfile.metadata`` command to return the metadata object for a ``.grid`` catalogue.
 
-.. tip::
-    You can use ``gridMetadata.index`` to isolate the metadata for specific proxy sites.
+    .. tip::
+        You can use ``gridMetadata.index`` to isolate the metadata for specific proxy sites.
 
 
 *Demo*
@@ -303,7 +317,7 @@ The second input, **parameters**, includes any mathematical parameters needed to
 
 The previous syntax will apply a common data transformation to all data sources in a catalogue. Alternatively, you can use::
 
-    obj.transfrom(type, parameters, sources)
+    obj.transform(type, parameters, sources)
 
 to apply different transformations to specific data source files.
 
@@ -343,7 +357,7 @@ Inspecting the gridfile:
 
         Data Sources: 1
 
-we can see the -999 fill value.
+we can see it now implements a -999 fill value.
 
 
 
@@ -609,3 +623,35 @@ and that the loaded data covers the years from 750-2011 CE:
             2009
             2010
             2011
+
+
+Full Demo
+---------
+This section recaps all the essential code from the demos. You can use it as a quick reference::
+
+    % Load metadata for the proxy dataset
+    proxyFile = "ntrend.mat";
+    info = load(proxyFile, 'IDs', 'latitudes', 'longitudes', 'seasons', 'years');
+
+    % Build a gridMetadata object
+    site = [info.IDs, info.latitudes, info.longitudes, info.seasons];
+    time = info.years;
+    metadata = gridMetadata('site', site, 'time', time);
+
+    % Initialize a new .grid file
+    filename = "ntrend.grid";
+    proxies = gridfile.new(filename, metadata);
+
+    % Add the data source file
+    variable = "crn";
+    dimensions = ["time", "site"];
+    proxies.add("mat", proxyFile, variable, dimensions, metadata)
+
+    % Implement a fill value
+    proxies.fillValue(-999);
+
+    % Load a subset of the catalogue in a specific dimension order
+    % (all proxy sites in time steps after 1950 CE)
+    order = ["time", "sites"];
+    times = metadata.time > 1950;
+    [X, metadata] = proxies.load(order, {times, []});

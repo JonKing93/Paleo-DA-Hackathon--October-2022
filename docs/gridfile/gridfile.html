@@ -73,6 +73,7 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../stateVector/outline.html">stateVector</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ensemble/outline.html">ensemble</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Resources</span></p>
 <ul>
@@ -155,7 +156,7 @@
 <p>Now we’ll take a quick look at some features of the <code class="docutils literal notranslate"><span class="pre">gridfile</span></code> class. This section is just meant as an overview - we’ll go in further depth in the next open coding session.</p>
 <section id="load-interface">
 <h3><em>Load Interface</em><a class="headerlink" href="#load-interface" title="Permalink to this heading"></a></h3>
-<p>One of the most useful feature of <code class="docutils literal notranslate"><span class="pre">gridfile</span></code> catalogues is the ability to load data from any portion of the catalogue usingthe <code class="docutils literal notranslate"><span class="pre">load</span></code> command. This command allows users to load data arrays that may span multiple files, and even multiple file formats, without needing to interact with any of the individual files.</p>
+<p>One of the most useful feature of <code class="docutils literal notranslate"><span class="pre">gridfile</span></code> catalogues is the ability to load data from any portion of the catalogue using the <code class="docutils literal notranslate"><span class="pre">load</span></code> command. This command allows users to load data arrays that may span multiple files, and even multiple file formats, without needing to interact with any of the individual files.</p>
 <p>Furthermore, the <code class="docutils literal notranslate"><span class="pre">load</span></code> command allows users to load specific subsets of the data catalogue by querying specific metadata values. The use of human-readable metadata, rather than array indices or other syntaxes, helps make code more readable and easier to use.</p>
 </section>
 <section id="fill-value-and-valid-range">
@@ -178,7 +179,7 @@
 </section>
 <section id="cross-catalogue-arithmetic">
 <h3><em>Cross-catalogue arithmetic</em><a class="headerlink" href="#cross-catalogue-arithmetic" title="Permalink to this heading"></a></h3>
-<p><code class="docutils literal notranslate"><span class="pre">gridfile</span></code> includes support for applying arithmetic operations across multiple catalogues. This functionality is similar to NetCDF Operator (NCO) commands, but can be applied to any <code class="docutils literal notranslate"><span class="pre">gridfile</span></code> catalogue, regardless of formats of data source files. These arithmetic commands are often used when a climate variable of interest must be calculated using multiple output variables from a climate model.</p>
+<p><code class="docutils literal notranslate"><span class="pre">gridfile</span></code> includes support for applying arithmetic operations across multiple catalogues. This functionality is similar to <a class="reference external" href="https://nco.sourceforge.net/">NetCDF Operator</a> (NCO) commands, but can be applied to any <code class="docutils literal notranslate"><span class="pre">gridfile</span></code> catalogue, regardless of the formats of data source files. These arithmetic commands are often used when a climate variable of interest must be calculated using multiple output variables from a climate model.</p>
 </section>
 <section id="and-more">
 <h3><em>And more!</em><a class="headerlink" href="#and-more" title="Permalink to this heading"></a></h3>

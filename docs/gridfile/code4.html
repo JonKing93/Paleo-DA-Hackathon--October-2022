@@ -63,17 +63,20 @@
 <li class="toctree-l5"><a class="reference internal" href="#example">Example</a></li>
 </ul>
 </li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#step-3-data-adjustments">Step 3: Data Adjustments</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#id1"><em>Demo</em></a></li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="#step-3-data-adjustments">Step 3: Data Adjustments</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id2"><em>Demo</em></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#full-demo">Full Demo</a></li>
 </ul>
 </li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../stateVector/outline.html">stateVector</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ensemble/outline.html">ensemble</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Resources</span></p>
 <ul>
@@ -137,16 +140,38 @@
 <span class="nb">time</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">datetime</span><span class="p">(</span><span class="mi">850</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">15</span><span class="p">):</span><span class="nb">calmonths</span><span class="p">(</span><span class="mi">1</span><span class="p">):</span><span class="nb">datetime</span><span class="p">(</span><span class="mi">2005</span><span class="p">,</span><span class="mi">12</span><span class="p">,</span><span class="mi">15</span><span class="p">);</span><span class="w"></span>
 
 <span class="c">% Create a metadata object</span><span class="w"></span>
-<span class="n">metadata</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">gridMetadata</span><span class="p">(</span><span class="s">&quot;lat&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">lat</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;lon&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">lon</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;time&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">time</span><span class="p">);</span><span class="w"></span>
+<span class="n">metadata</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">gridMetadata</span><span class="p">(</span><span class="s">&quot;lat&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">lat</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;lon&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">lon</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;time&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">time</span><span class="o">&#39;</span><span class="p">);</span><span class="w"></span>
 <span class="n">metadata</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">metadata</span><span class="p">.</span><span class="n">addAttributes</span><span class="p">(</span><span class="s">&quot;Units&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Kelvin&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Model&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;CESM 1.0&quot;</span><span class="p">);</span><span class="w"></span>
 </pre></div>
 </div>
-<p>Now we’ll use the metadata object to define the scope of a catalogue for the climate model output. Here, we’ll name the new catalogue <code class="docutils literal notranslate"><span class="pre">temperature-cesm.grid</span></code>.</p>
-<blockquote>
-<div><p>% Use the metadata to initialize a new gridfile catalogue
-file = “temperature-cesm.grid”;
-gridfile.new(file, metadata);</p>
-</div></blockquote>
+<p>Now we’ll use the metadata object to define the scope of a catalogue for the climate model output. Here, we’ll name the new catalogue <code class="docutils literal notranslate"><span class="pre">temperature-cesm.grid</span></code>:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">% Use the metadata to initialize a new gridfile catalogue</span><span class="w"></span>
+<span class="n">file</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&quot;temperature-cesm.grid&quot;</span><span class="p">;</span><span class="w"></span>
+<span class="nb">grid</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">gridfile</span><span class="p">.</span><span class="n">new</span><span class="p">(</span><span class="n">file</span><span class="p">,</span><span class="w"> </span><span class="n">metadata</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Inspecting the new gridfile:</p>
+<div class="input highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="nb">disp</span><span class="p">(</span><span class="nb">grid</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
+<div class="output highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="w">  </span><span class="n">gridfile</span><span class="w"> </span><span class="s">with</span><span class="w"> </span><span class="s">properties:</span><span class="w"></span>
+
+<span class="w">          </span><span class="n">File</span><span class="p">:</span><span class="w"> </span><span class="nb">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">Hackathon</span><span class="o">/</span><span class="nb">demo</span><span class="o">/</span><span class="n">temperature</span><span class="o">-</span><span class="n">cesm</span><span class="p">.</span><span class="n">grid</span><span class="w"></span>
+<span class="w">    </span><span class="n">Dimensions</span><span class="p">:</span><span class="w"> </span><span class="n">lon</span><span class="p">,</span><span class="w"> </span><span class="n">lat</span><span class="p">,</span><span class="w"> </span><span class="nb">time</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">Dimension</span><span class="w"> </span><span class="n">Sizes</span><span class="w"> </span><span class="n">and</span><span class="w"> </span><span class="n">Metadata</span><span class="p">:</span><span class="w"></span>
+<span class="w">         </span><span class="n">lon</span><span class="p">:</span><span class="w">   </span><span class="mi">144</span><span class="w">    </span><span class="p">(</span><span class="w">          </span><span class="mi">0</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="mf">357.5</span><span class="w">      </span><span class="p">)</span><span class="w"></span>
+<span class="w">         </span><span class="n">lat</span><span class="p">:</span><span class="w">    </span><span class="mi">96</span><span class="w">    </span><span class="p">(</span><span class="w">        </span><span class="o">-</span><span class="mi">90</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="mi">90</span><span class="w">         </span><span class="p">)</span><span class="w"></span>
+<span class="w">        </span><span class="nb">time</span><span class="p">:</span><span class="w"> </span><span class="mi">13872</span><span class="w">    </span><span class="p">(</span><span class="mi">15</span><span class="o">-</span><span class="n">Jan</span><span class="o">-</span><span class="mi">0850</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="mi">15</span><span class="o">-</span><span class="n">Dec</span><span class="o">-</span><span class="mi">2005</span><span class="p">)</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">Attributes</span><span class="p">:</span><span class="w"></span>
+<span class="w">        </span><span class="n">Units</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Kelvin&quot;</span><span class="w"></span>
+<span class="w">        </span><span class="n">Model</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;CESM 1.0&quot;</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">Data</span><span class="w"> </span><span class="n">Sources</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w"></span>
+</pre></div>
+</div>
+<p>we can see that it manages the data catalogue for our model output.</p>
 </section>
 </section>
 <section id="step-2-add-data-sources">
@@ -162,7 +187,7 @@ gridfile.new(file, metadata);</p>
 <p>Remember that the metadata object for each data file should only have metadata values for the data subset in the file. Also recall that the metadata should include values for each dimension in the <code class="docutils literal notranslate"><span class="pre">.grid</span></code> catalogue. The <code class="docutils literal notranslate"><span class="pre">gridMetadata.index</span></code> command can be useful for extracting metadata subsets from the gridfile’s metadata.</p>
 <div class="admonition important">
 <p class="admonition-title">Important</p>
-<p>If you’re dataset uses tripolar coordinates or another non-rectilinear coordinate system, please see the next section.</p>
+<p>If your dataset uses tripolar coordinates or another non-rectilinear coordinate system, please see the next section. If not, feel free to skip to the next demo.</p>
 </div>
 <section id="merged-dimensions-tripolar-coordinates">
 <h3><em>Merged dimensions / Tripolar coordinates</em><a class="headerlink" href="#merged-dimensions-tripolar-coordinates" title="Permalink to this heading"></a></h3>
@@ -241,6 +266,58 @@ gridfile.new(file, metadata);</p>
 </div>
 </section>
 </section>
+<section id="id1">
+<h3><em>Demo</em><a class="headerlink" href="#id1" title="Permalink to this heading"></a></h3>
+<p>The temperature output from the climate model is located in two NetCDF files.  In both files, the associated temperature data is stored in a variable named <code class="docutils literal notranslate"><span class="pre">TREFHT</span></code>. The <code class="docutils literal notranslate"><span class="pre">TREFHT</span></code> variable is organized as (<code class="docutils literal notranslate"><span class="pre">lon</span></code> x <code class="docutils literal notranslate"><span class="pre">lat</span></code> x <code class="docutils literal notranslate"><span class="pre">time</span></code>). The first file contains outputs from 850 CE to 1849 CE (the pre-industrial period), and the second file contains temperatures from 1850 CE to 2005 CE (post-industrial). We will use the <code class="docutils literal notranslate"><span class="pre">gridMetadata.index</span></code> command to return the metadata for each data source file, and then catalogue the file:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">% Get the output files, variable name, and dimensions</span><span class="w"></span>
+<span class="n">file1</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&#39;b.e11.BLMTRC5CN.f19_g16.002.cam.h0.TREFHT.085001-184912.nc&#39;</span><span class="p">;</span><span class="w"></span>
+<span class="n">file2</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&#39;b.e11.BLMTRC5CN.f19_g16.002.cam.h0.TREFHT.185001-200512.nc&#39;</span><span class="p">;</span><span class="w"></span>
+<span class="n">variable</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&quot;TREFHT&quot;</span><span class="p">;</span><span class="w"></span>
+<span class="n">dimensions</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="s">&quot;lon&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;lat&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;time&quot;</span><span class="p">];</span><span class="w"></span>
+
+<span class="c">% Get the gridfile and its metadata</span><span class="w"></span>
+<span class="n">temperature</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">gridfile</span><span class="p">(</span><span class="s">&#39;temperature-cesm.grid&#39;</span><span class="p">);</span><span class="w"></span>
+<span class="n">metadata</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">temperature</span><span class="p">.</span><span class="n">metadata</span><span class="p">;</span><span class="w"></span>
+
+<span class="c">% Get the metadata for the first file and add to the catalogue</span><span class="w"></span>
+<span class="n">preindustrial</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">year</span><span class="p">(</span><span class="n">metadata</span><span class="p">.</span><span class="n">time</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">1850</span><span class="p">;</span><span class="w"></span>
+<span class="n">metadata1</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">metadata</span><span class="p">.</span><span class="n">index</span><span class="p">(</span><span class="s">&#39;time&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">preindustrial</span><span class="p">);</span><span class="w"></span>
+<span class="n">temperature</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="s">&#39;netcdf&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">file1</span><span class="p">,</span><span class="w"> </span><span class="n">variable</span><span class="p">,</span><span class="w"> </span><span class="n">dimensions</span><span class="p">,</span><span class="w"> </span><span class="n">metadata1</span><span class="p">);</span><span class="w"></span>
+
+<span class="c">% Get metadata for the second file and add to the catalogue</span><span class="w"></span>
+<span class="n">postindustrial</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">year</span><span class="p">(</span><span class="n">metadata</span><span class="p">.</span><span class="n">time</span><span class="p">)</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">1850</span><span class="p">;</span><span class="w"></span>
+<span class="n">metadata2</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">metadata</span><span class="p">.</span><span class="n">index</span><span class="p">(</span><span class="s">&#39;time&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">postindustrial</span><span class="p">);</span><span class="w"></span>
+<span class="n">temperature</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="s">&#39;netcdf&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">file2</span><span class="p">,</span><span class="w"> </span><span class="n">variable</span><span class="p">,</span><span class="w"> </span><span class="n">dimensions</span><span class="p">,</span><span class="w"> </span><span class="n">metadata2</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Examining the gridfile:</p>
+<div class="input highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="nb">disp</span><span class="p">(</span><span class="n">temperature</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
+<div class="output highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">gridfile</span><span class="w"> </span><span class="s">with</span><span class="w"> </span><span class="s">properties:</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">File</span><span class="p">:</span><span class="w"> </span><span class="nb">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">Hackathon</span><span class="o">/</span><span class="nb">demo</span><span class="o">/</span><span class="n">temperature</span><span class="o">-</span><span class="n">cesm</span><span class="p">.</span><span class="n">grid</span><span class="w"></span>
+<span class="w">  </span><span class="n">Dimensions</span><span class="p">:</span><span class="w"> </span><span class="n">lon</span><span class="p">,</span><span class="w"> </span><span class="n">lat</span><span class="p">,</span><span class="w"> </span><span class="nb">time</span><span class="w"></span>
+
+<span class="w">  </span><span class="n">Dimension</span><span class="w"> </span><span class="n">Sizes</span><span class="w"> </span><span class="n">and</span><span class="w"> </span><span class="n">Metadata</span><span class="p">:</span><span class="w"></span>
+<span class="w">       </span><span class="n">lon</span><span class="p">:</span><span class="w">   </span><span class="mi">144</span><span class="w">    </span><span class="p">(</span><span class="w">          </span><span class="mi">0</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="mf">357.5</span><span class="w">      </span><span class="p">)</span><span class="w"></span>
+<span class="w">       </span><span class="n">lat</span><span class="p">:</span><span class="w">    </span><span class="mi">96</span><span class="w">    </span><span class="p">(</span><span class="w">        </span><span class="o">-</span><span class="mi">90</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="mi">90</span><span class="w">         </span><span class="p">)</span><span class="w"></span>
+<span class="w">      </span><span class="nb">time</span><span class="p">:</span><span class="w"> </span><span class="mi">13872</span><span class="w">    </span><span class="p">(</span><span class="mi">15</span><span class="o">-</span><span class="n">Jan</span><span class="o">-</span><span class="mi">0850</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="mi">15</span><span class="o">-</span><span class="n">Dec</span><span class="o">-</span><span class="mi">2005</span><span class="p">)</span><span class="w"></span>
+
+<span class="w">  </span><span class="n">Attributes</span><span class="p">:</span><span class="w"></span>
+<span class="w">      </span><span class="n">Units</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Kelvin&quot;</span><span class="w"></span>
+<span class="w">      </span><span class="n">Model</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;CESM 1.0&quot;</span><span class="w"></span>
+
+<span class="w">  </span><span class="n">Data</span><span class="w"> </span><span class="n">Sources</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="w"></span>
+
+<span class="n">Show</span><span class="w"> </span><span class="s">data</span><span class="w"> </span><span class="s">sources</span><span class="w"></span>
+
+<span class="w">      </span><span class="mf">1.</span><span class="w"> </span><span class="nb">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">Hackathon</span><span class="o">/</span><span class="nb">demo</span><span class="o">/</span><span class="n">b</span><span class="p">.</span><span class="n">e11</span><span class="p">.</span><span class="n">BLMTRC5CN</span><span class="p">.</span><span class="n">f19_g16</span><span class="p">.</span><span class="mi">002</span><span class="p">.</span><span class="n">cam</span><span class="p">.</span><span class="n">h0</span><span class="p">.</span><span class="n">TREFHT</span><span class="p">.</span><span class="mi">085001</span><span class="o">-</span><span class="mi">184912</span><span class="p">.</span><span class="n">nc</span><span class="w">   </span><span class="n">Show</span><span class="w"> </span><span class="nb">details</span><span class="w"></span>
+<span class="w">      </span><span class="mf">2.</span><span class="w"> </span><span class="nb">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">Hackathon</span><span class="o">/</span><span class="nb">demo</span><span class="o">/</span><span class="n">b</span><span class="p">.</span><span class="n">e11</span><span class="p">.</span><span class="n">BLMTRC5CN</span><span class="p">.</span><span class="n">f19_g16</span><span class="p">.</span><span class="mi">002</span><span class="p">.</span><span class="n">cam</span><span class="p">.</span><span class="n">h0</span><span class="p">.</span><span class="n">TREFHT</span><span class="p">.</span><span class="mi">185001</span><span class="o">-</span><span class="mi">200512</span><span class="p">.</span><span class="n">nc</span><span class="w">   </span><span class="n">Show</span><span class="w"> </span><span class="nb">details</span><span class="w"></span>
+</pre></div>
+</div>
+<p>we can see it now includes the two NetCDF files as data sources.</p>
+</section>
 </section>
 <section id="step-3-data-adjustments">
 <h2>Step 3: Data Adjustments<a class="headerlink" href="#step-3-data-adjustments" title="Permalink to this heading"></a></h2>
@@ -252,41 +329,83 @@ gridfile.new(file, metadata);</p>
 <span class="n">obj</span><span class="p">.</span><span class="n">transform</span><span class="p">(</span><span class="nb">type</span><span class="p">,</span><span class="w"> </span><span class="n">parameters</span><span class="p">)</span><span class="w"></span>
 </pre></div>
 </div>
-<section id="id1">
-<h3><em>Demo</em><a class="headerlink" href="#id1" title="Permalink to this heading"></a></h3>
+<section id="id2">
+<h3><em>Demo</em><a class="headerlink" href="#id2" title="Permalink to this heading"></a></h3>
 <p>In the demo, our climate model temperature output is provided in units of Kelvin. However, we’d prefer to use units of Celsius, so we’ll apply a data transformation to convert Kelvin to Celsius:</p>
 <div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">% Add the data conversion</span><span class="w"></span>
-<span class="n">proxies</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">gridfile</span><span class="p">(</span><span class="s">&quot;ntrend.grid&quot;</span><span class="p">);</span><span class="w"></span>
-<span class="n">proxies</span><span class="p">.</span><span class="n">transform</span><span class="p">(</span><span class="s">&quot;plus&quot;</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">273.15</span><span class="p">);</span><span class="w"></span>
+<span class="n">temperature</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">gridfile</span><span class="p">(</span><span class="s">&quot;temperature-cesm.grid&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="n">temperature</span><span class="p">.</span><span class="n">transform</span><span class="p">(</span><span class="s">&quot;plus&quot;</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">273.15</span><span class="p">);</span><span class="w"></span>
 
 <span class="c">% Note the conversion in the metadata attributes</span><span class="w"></span>
-<span class="n">proxies</span><span class="p">.</span><span class="n">addAttributes</span><span class="p">(</span><span class="s">&quot;converted_units&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Celsius&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="n">temperature</span><span class="p">.</span><span class="n">addAttributes</span><span class="p">(</span><span class="s">&quot;converted_units&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Celsius&quot;</span><span class="p">);</span><span class="w"></span>
 </pre></div>
 </div>
 <p>Examining the gridfile:</p>
-<div class="input highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="nb">disp</span><span class="p">(</span><span class="n">proxies</span><span class="p">)</span><span class="w"></span>
+<div class="input highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="nb">disp</span><span class="p">(</span><span class="n">temperature</span><span class="p">)</span><span class="w"></span>
 </pre></div>
 </div>
 <div class="output highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">gridfile</span><span class="w"> </span><span class="s">with</span><span class="w"> </span><span class="s">properties:</span><span class="w"></span>
 
-<span class="w">        </span><span class="n">File</span><span class="p">:</span><span class="w"> </span><span class="n">some</span><span class="o">/</span><span class="nb">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">Hackathon</span><span class="o">/</span><span class="nb">demo</span><span class="o">/</span><span class="n">ntrend</span><span class="p">.</span><span class="n">grid</span><span class="w"></span>
-<span class="w">  </span><span class="n">Dimensions</span><span class="p">:</span><span class="w"> </span><span class="n">site</span><span class="p">,</span><span class="w"> </span><span class="nb">time</span><span class="w"></span>
+<span class="w">        </span><span class="n">File</span><span class="p">:</span><span class="w"> </span><span class="nb">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">Hackathon</span><span class="o">/</span><span class="nb">demo</span><span class="o">/</span><span class="n">temperature</span><span class="o">-</span><span class="n">cesm</span><span class="p">.</span><span class="n">grid</span><span class="w"></span>
+<span class="w">  </span><span class="n">Dimensions</span><span class="p">:</span><span class="w"> </span><span class="n">lon</span><span class="p">,</span><span class="w"> </span><span class="n">lat</span><span class="p">,</span><span class="w"> </span><span class="nb">time</span><span class="w"></span>
 
 <span class="w">  </span><span class="n">Dimension</span><span class="w"> </span><span class="n">Sizes</span><span class="w"> </span><span class="n">and</span><span class="w"> </span><span class="n">Metadata</span><span class="p">:</span><span class="w"></span>
-<span class="w">      </span><span class="n">site</span><span class="p">:</span><span class="w">   </span><span class="mi">54</span><span class="w"></span>
-<span class="w">      </span><span class="nb">time</span><span class="p">:</span><span class="w"> </span><span class="mi">1262</span><span class="w">    </span><span class="p">(</span><span class="mi">750</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="mi">2011</span><span class="p">)</span><span class="w"></span>
+<span class="w">       </span><span class="n">lon</span><span class="p">:</span><span class="w">   </span><span class="mi">144</span><span class="w">    </span><span class="p">(</span><span class="w">          </span><span class="mi">0</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="mf">357.5</span><span class="w">      </span><span class="p">)</span><span class="w"></span>
+<span class="w">       </span><span class="n">lat</span><span class="p">:</span><span class="w">    </span><span class="mi">96</span><span class="w">    </span><span class="p">(</span><span class="w">        </span><span class="o">-</span><span class="mi">90</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="mi">90</span><span class="w">         </span><span class="p">)</span><span class="w"></span>
+<span class="w">      </span><span class="nb">time</span><span class="p">:</span><span class="w"> </span><span class="mi">13872</span><span class="w">    </span><span class="p">(</span><span class="mi">15</span><span class="o">-</span><span class="n">Jan</span><span class="o">-</span><span class="mi">0850</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="mi">15</span><span class="o">-</span><span class="n">Dec</span><span class="o">-</span><span class="mi">2005</span><span class="p">)</span><span class="w"></span>
 
 <span class="w">  </span><span class="n">Attributes</span><span class="p">:</span><span class="w"></span>
+<span class="w">                </span><span class="n">Units</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Kelvin&quot;</span><span class="w"></span>
+<span class="w">                </span><span class="n">Model</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;CESM 1.0&quot;</span><span class="w"></span>
 <span class="w">      </span><span class="n">converted_units</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Celsius&quot;</span><span class="w"></span>
 
-<span class="w">  </span><span class="n">Fill</span><span class="w"> </span><span class="n">Value</span><span class="p">:</span><span class="w"> </span><span class="o">-</span><span class="mf">999.000000</span><span class="w"></span>
-<span class="w">   </span><span class="n">Transform</span><span class="p">:</span><span class="w"> </span><span class="n">X</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="o">-</span><span class="mf">273.150000</span><span class="w"></span>
+<span class="w">  </span><span class="n">Transform</span><span class="p">:</span><span class="w"> </span><span class="n">X</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="o">-</span><span class="mf">273.150000</span><span class="w"></span>
 
-<span class="w">  </span><span class="n">Data</span><span class="w"> </span><span class="n">Sources</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w"></span>
+<span class="w">  </span><span class="n">Data</span><span class="w"> </span><span class="n">Sources</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="w"></span>
 </pre></div>
 </div>
-<p>we can see that loaded values will converted from Kelvin to Celsius.</p>
+<p>we can see that loaded values will be converted from Kelvin to Celsius.</p>
 </section>
+</section>
+<section id="full-demo">
+<h2>Full Demo<a class="headerlink" href="#full-demo" title="Permalink to this heading"></a></h2>
+<p>This section recaps all the essential code from the demos. You can use it as a quick reference:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">% Get the output files</span><span class="w"></span>
+<span class="n">outputFile1</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&#39;b.e11.BLMTRC5CN.f19_g16.002.cam.h0.TREFHT.085001-184912.nc&#39;</span><span class="p">;</span><span class="w"></span>
+<span class="n">outputFile2</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&#39;b.e11.BLMTRC5CN.f19_g16.002.cam.h0.TREFHT.185001-200512.nc&#39;</span><span class="p">;</span><span class="w"></span>
+
+<span class="c">% Define metadata that spans the climate model output dataset</span><span class="w"></span>
+<span class="n">lat</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">ncread</span><span class="p">(</span><span class="n">outputFile1</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;lat&#39;</span><span class="p">);</span><span class="w"></span>
+<span class="n">lon</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">ncread</span><span class="p">(</span><span class="n">outputFile1</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;lon&#39;</span><span class="p">);</span><span class="w"></span>
+<span class="nb">time</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">datetime</span><span class="p">(</span><span class="mi">850</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">15</span><span class="p">):</span><span class="nb">calmonths</span><span class="p">(</span><span class="mi">1</span><span class="p">):</span><span class="nb">datetime</span><span class="p">(</span><span class="mi">2005</span><span class="p">,</span><span class="mi">12</span><span class="p">,</span><span class="mi">15</span><span class="p">);</span><span class="w"></span>
+
+<span class="c">% Create a metadata object</span><span class="w"></span>
+<span class="n">metadata</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">gridMetadata</span><span class="p">(</span><span class="s">&quot;lat&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">lat</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;lon&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">lon</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;time&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">time</span><span class="o">&#39;</span><span class="p">);</span><span class="w"></span>
+<span class="n">metadata</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">metadata</span><span class="p">.</span><span class="n">addAttributes</span><span class="p">(</span><span class="s">&quot;Units&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Kelvin&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Model&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;CESM 1.0&quot;</span><span class="p">);</span><span class="w"></span>
+
+<span class="c">% Use the metadata to initialize a new gridfile catalogue</span><span class="w"></span>
+<span class="n">file</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&quot;temperature-cesm.grid&quot;</span><span class="p">;</span><span class="w"></span>
+<span class="n">gridfile</span><span class="p">.</span><span class="n">new</span><span class="p">(</span><span class="n">file</span><span class="p">,</span><span class="w"> </span><span class="n">metadata</span><span class="p">);</span><span class="w"></span>
+
+<span class="c">% Get the name and dimensions of the data variable in the output files</span><span class="w"></span>
+<span class="n">variable</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&quot;TREFHT&quot;</span><span class="p">;</span><span class="w"></span>
+<span class="n">dimensions</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="s">&quot;lon&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;lat&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;time&quot;</span><span class="p">];</span><span class="w"></span>
+
+<span class="c">% Add the first output file to the catalogue</span><span class="w"></span>
+<span class="n">preindustrial</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">year</span><span class="p">(</span><span class="n">metadata</span><span class="p">.</span><span class="n">time</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">1850</span><span class="p">;</span><span class="w"></span>
+<span class="n">metadata1</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">metadata</span><span class="p">.</span><span class="n">index</span><span class="p">(</span><span class="s">&#39;time&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">preindustrial</span><span class="p">)</span><span class="w"></span>
+<span class="n">temperature</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="s">&#39;netcdf&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">outputFile1</span><span class="p">,</span><span class="w"> </span><span class="n">variable</span><span class="p">,</span><span class="w"> </span><span class="n">dimensions</span><span class="p">,</span><span class="w"> </span><span class="n">metadata1</span><span class="p">);</span><span class="w"></span>
+
+<span class="c">% Get metadata for the second file and add to the catalogue</span><span class="w"></span>
+<span class="n">postindustrial</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">year</span><span class="p">(</span><span class="n">metadata</span><span class="p">.</span><span class="n">time</span><span class="p">)</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">1850</span><span class="p">;</span><span class="w"></span>
+<span class="n">metadata2</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">metadata</span><span class="p">.</span><span class="n">index</span><span class="p">(</span><span class="s">&#39;time&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">postindustrial</span><span class="p">);</span><span class="w"></span>
+<span class="n">temperature</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="s">&#39;netcdf&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">outputFile2</span><span class="p">,</span><span class="w"> </span><span class="n">variable</span><span class="p">,</span><span class="w"> </span><span class="n">dimensions</span><span class="p">,</span><span class="w"> </span><span class="n">metadata2</span><span class="p">);</span><span class="w"></span>
+
+<span class="c">% Apply a conversion from Kelvin to Celsius. Record the conversion</span><span class="w"></span>
+<span class="n">temperature</span><span class="p">.</span><span class="n">transform</span><span class="p">(</span><span class="s">&#39;plus&#39;</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">273.15</span><span class="p">);</span><span class="w"></span>
+<span class="n">temperature</span><span class="p">.</span><span class="n">addAttributes</span><span class="p">(</span><span class="s">&#39;converted_units&#39;</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;Celsius&#39;</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
 </section>
 </section>
 

@@ -60,6 +60,7 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../gridfile/outline.html">gridfile</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../stateVector/outline.html">stateVector</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ensemble/outline.html">ensemble</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Resources</span></p>
 <ul>
@@ -109,7 +110,7 @@
 </section>
 <section id="reference-guide">
 <h2>Reference Guide<a class="headerlink" href="#reference-guide" title="Permalink to this heading"></a></h2>
-<p>DASH also includes an HTML reference guide with the documentation for every class and command in the toolbox. This reference guide is essentially an offline website - the reference guide will open in the Matlab internet browser, but does not require an internet connection to use. In general the reference guide is more comprehensive than the console help text and includes additional information such as usage examples, experiment demos, and tutorials.</p>
+<p>The DASH documentation also includes an HTML reference guide for every class and command in the toolbox. This reference guide is essentially an offline website - the reference guide will open in an internet browser, but does not require an internet connection to use. The reference guide is more comprehensive than the console help text, and it includes additional information such as usage examples, experiment demos, and tutorials.</p>
 <p>There are several ways to access the reference guide. The first is using the <code class="docutils literal notranslate"><span class="pre">dash.doc</span></code> command. Entering:</p>
 <div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">dash</span><span class="p">.</span><span class="n">doc</span><span class="w"></span>
 </pre></div>
@@ -127,7 +128,7 @@
 </section>
 <section id="a-note-on-syntax">
 <h2>A note on syntax<a class="headerlink" href="#a-note-on-syntax" title="Permalink to this heading"></a></h2>
-<p>Most of the commands in the DASH toolbox are <a class="reference internal" href="oop.html#classes"><span class="std std-ref">class methods</span></a> that act on individual <a class="reference internal" href="oop.html#objects"><span class="std std-ref">objects</span></a>. For example, we previously discussed how we could call the <code class="docutils literal notranslate"><span class="pre">run</span></code> method on different <code class="docutils literal notranslate"><span class="pre">kalmanFilter</span></code> objects to run the algorithm for different experimental parameters. In the documentation of these commands, you will often see the syntax <code class="docutils literal notranslate"><span class="pre">obj.&lt;method</span> <span class="pre">name&gt;</span></code>, where <code class="docutils literal notranslate"><span class="pre">&lt;method</span> <span class="pre">name&gt;</span></code> is the name of the command. This indicates that you should call the command using dot-indexing from individual objects.</p>
+<p>Most of the commands in the DASH toolbox are <a class="reference internal" href="oop.html#classes"><span class="std std-ref">class methods</span></a> that act on individual <a class="reference internal" href="oop.html#objects"><span class="std std-ref">objects</span></a>. For example, we previously discussed how we could call the <code class="docutils literal notranslate"><span class="pre">run</span></code> method on different <code class="docutils literal notranslate"><span class="pre">kalmanFilter</span></code> objects to run the algorithm for different experimental parameters. In the documentation of these commands, you will often see the syntax <code class="docutils literal notranslate"><span class="pre">obj.&lt;method</span> <span class="pre">name&gt;</span></code>, where <code class="docutils literal notranslate"><span class="pre">&lt;method</span> <span class="pre">name&gt;</span></code> is the name of the command. This indicates that you should call the command using dot-indexing from individual <em>objects</em>.</p>
 <p>For example, in the documentation <code class="docutils literal notranslate"><span class="pre">kalmanFilter.run</span></code>, the command syntax is listed as:</p>
 <div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">output</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">obj</span><span class="p">.</span><span class="n">run</span><span class="w"></span>
 </pre></div>

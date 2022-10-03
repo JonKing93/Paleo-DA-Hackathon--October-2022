@@ -17,7 +17,7 @@ A gridMetadata object holds metadata values along each dimension of an N-dimensi
 6. ``run``: Model run / Ensemble member
 7. ``var``: Climate variable
 
-although users can modify the toolbox to support additional dimensions (see open-coding session 2). Note that metadata objects **do not** need to define metadata for all 7 dimensions (in fact, this is almost never necessary). Instead, users should pick and choose the dimensions appropriate for their datasets.
+although users can modify the toolbox to support additional dimensions (see :ref:`the next coding session <edit-dimensions>`). Note that metadata objects **do not** need to define metadata for all 7 dimensions (in fact, this is almost never necessary). Instead, users should pick and choose the dimensions appropriate for their datasets.
 
 To create a metadata object, use the ``gridMetadata`` command. The inputs to this command are a series of (Dimension-Name, Metadata-Values) pairs. For example, to create metadata for a dataset over 3 spatial dimensions, you could do::
 

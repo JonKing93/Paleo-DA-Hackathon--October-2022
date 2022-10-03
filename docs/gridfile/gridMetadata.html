@@ -64,6 +64,7 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../stateVector/outline.html">stateVector</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ensemble/outline.html">ensemble</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Resources</span></p>
 <ul>
@@ -111,7 +112,7 @@
 <li><p><code class="docutils literal notranslate"><span class="pre">run</span></code>: Model run / Ensemble member</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">var</span></code>: Climate variable</p></li>
 </ol>
-<p>although users can modify the toolbox to support additional dimensions (see open-coding session 2). Note that metadata objects <strong>do not</strong> need to define metadata for all 7 dimensions (in fact, this is almost never necessary). Instead, users should pick and choose the dimensions appropriate for their datasets.</p>
+<p>although users can modify the toolbox to support additional dimensions (see <a class="reference internal" href="code2.html#edit-dimensions"><span class="std std-ref">the next coding session</span></a>). Note that metadata objects <strong>do not</strong> need to define metadata for all 7 dimensions (in fact, this is almost never necessary). Instead, users should pick and choose the dimensions appropriate for their datasets.</p>
 <p>To create a metadata object, use the <code class="docutils literal notranslate"><span class="pre">gridMetadata</span></code> command. The inputs to this command are a series of (Dimension-Name, Metadata-Values) pairs. For example, to create metadata for a dataset over 3 spatial dimensions, you could do:</p>
 <div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">metadataObject</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">gridMetadata</span><span class="p">(</span><span class="s">&quot;lat&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">latMetadata</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;lon&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">lonMetadata</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;lev&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">levMetadata</span><span class="p">)</span><span class="w"></span>
 </pre></div>

@@ -34,14 +34,43 @@ As a reminder, we have demo climate model output for surface temperatures. The o
     time = datetime(850,1,15):calmonths(1):datetime(2005,12,15);
 
     % Create a metadata object
-    metadata = gridMetadata("lat", lat, "lon", lon, "time", time);
+    metadata = gridMetadata("lat", lat, "lon", lon, "time", time');
     metadata = metadata.addAttributes("Units", "Kelvin", "Model", "CESM 1.0");
 
-Now we'll use the metadata object to define the scope of a catalogue for the climate model output. Here, we'll name the new catalogue ``temperature-cesm.grid``.
+Now we'll use the metadata object to define the scope of a catalogue for the climate model output. Here, we'll name the new catalogue ``temperature-cesm.grid``::
 
     % Use the metadata to initialize a new gridfile catalogue
     file = "temperature-cesm.grid";
-    gridfile.new(file, metadata);
+    grid = gridfile.new(file, metadata);
+
+Inspecting the new gridfile:
+
+.. code::
+    :class: input
+
+    disp(grid)
+
+.. code::
+    :class: output
+
+      gridfile with properties:
+
+              File: path/to/Hackathon/demo/temperature-cesm.grid
+        Dimensions: lon, lat, time
+
+        Dimension Sizes and Metadata:
+             lon:   144    (          0 to 357.5      )
+             lat:    96    (        -90 to 90         )
+            time: 13872    (15-Jan-0850 to 15-Dec-2005)
+
+        Attributes:
+            Units: "Kelvin"
+            Model: "CESM 1.0"
+
+        Data Sources: 0
+
+we can see that it manages the data catalogue for our model output.
+
 
 
 Step 2: Add data sources
@@ -57,7 +86,7 @@ We'll again use the ``gridfile.add`` command to add data source files to the cat
 Remember that the metadata object for each data file should only have metadata values for the data subset in the file. Also recall that the metadata should include values for each dimension in the ``.grid`` catalogue. The ``gridMetadata.index`` command can be useful for extracting metadata subsets from the gridfile's metadata.
 
 .. important::
-    If you're dataset uses tripolar coordinates or another non-rectilinear coordinate system, please see the next section.
+    If your dataset uses tripolar coordinates or another non-rectilinear coordinate system, please see the next section. If not, feel free to skip to the next demo.
 
 
 *Merged dimensions / Tripolar coordinates*
@@ -153,6 +182,63 @@ Next, we'll merge the latitude and longitude dimensions when we add data source 
     grid.add("netcdf", file, variable, dimensions, metadata);
 
 
+*Demo*
+++++++
+The temperature output from the climate model is located in two NetCDF files.  In both files, the associated temperature data is stored in a variable named ``TREFHT``. The ``TREFHT`` variable is organized as (``lon`` x ``lat`` x ``time``). The first file contains outputs from 850 CE to 1849 CE (the pre-industrial period), and the second file contains temperatures from 1850 CE to 2005 CE (post-industrial). We will use the ``gridMetadata.index`` command to return the metadata for each data source file, and then catalogue the file::
+
+    % Get the output files, variable name, and dimensions
+    file1 = 'b.e11.BLMTRC5CN.f19_g16.002.cam.h0.TREFHT.085001-184912.nc';
+    file2 = 'b.e11.BLMTRC5CN.f19_g16.002.cam.h0.TREFHT.185001-200512.nc';
+    variable = "TREFHT";
+    dimensions = ["lon", "lat", "time"];
+
+    % Get the gridfile and its metadata
+    temperature = gridfile('temperature-cesm.grid');
+    metadata = temperature.metadata;
+
+    % Get the metadata for the first file and add to the catalogue
+    preindustrial = year(metadata.time) < 1850;
+    metadata1 = metadata.index('time', preindustrial);
+    temperature.add('netcdf', file1, variable, dimensions, metadata1);
+
+    % Get metadata for the second file and add to the catalogue
+    postindustrial = year(metadata.time) >= 1850;
+    metadata2 = metadata.index('time', postindustrial);
+    temperature.add('netcdf', file2, variable, dimensions, metadata2);
+
+Examining the gridfile:
+
+.. code::
+    :class: input
+
+    disp(temperature)
+
+.. code::
+    :class: output
+
+    gridfile with properties:
+
+            File: path/to/Hackathon/demo/temperature-cesm.grid
+      Dimensions: lon, lat, time
+
+      Dimension Sizes and Metadata:
+           lon:   144    (          0 to 357.5      )
+           lat:    96    (        -90 to 90         )
+          time: 13872    (15-Jan-0850 to 15-Dec-2005)
+
+      Attributes:
+          Units: "Kelvin"
+          Model: "CESM 1.0"
+
+      Data Sources: 2
+
+    Show data sources
+
+          1. path/to/Hackathon/demo/b.e11.BLMTRC5CN.f19_g16.002.cam.h0.TREFHT.085001-184912.nc   Show details
+          2. path/to/Hackathon/demo/b.e11.BLMTRC5CN.f19_g16.002.cam.h0.TREFHT.185001-200512.nc   Show details
+
+we can see it now includes the two NetCDF files as data sources.
+
 
 Step 3: Data Adjustments
 ------------------------
@@ -170,37 +256,79 @@ Once again, we'll apply any data adjustments to our dataset. As a reminder, the 
 In the demo, our climate model temperature output is provided in units of Kelvin. However, we'd prefer to use units of Celsius, so we'll apply a data transformation to convert Kelvin to Celsius::
 
     % Add the data conversion
-    proxies = gridfile("ntrend.grid");
-    proxies.transform("plus", -273.15);
+    temperature = gridfile("temperature-cesm.grid");
+    temperature.transform("plus", -273.15);
 
     % Note the conversion in the metadata attributes
-    proxies.addAttributes("converted_units", "Celsius");
+    temperature.addAttributes("converted_units", "Celsius");
 
 Examining the gridfile:
 
 .. code::
     :class: input
 
-    disp(proxies)
+    disp(temperature)
 
 .. code::
     :class: output
 
     gridfile with properties:
 
-            File: some/path/to/Hackathon/demo/ntrend.grid
-      Dimensions: site, time
+            File: path/to/Hackathon/demo/temperature-cesm.grid
+      Dimensions: lon, lat, time
 
       Dimension Sizes and Metadata:
-          site:   54
-          time: 1262    (750 to 2011)
+           lon:   144    (          0 to 357.5      )
+           lat:    96    (        -90 to 90         )
+          time: 13872    (15-Jan-0850 to 15-Dec-2005)
 
       Attributes:
+                    Units: "Kelvin"
+                    Model: "CESM 1.0"
           converted_units: "Celsius"
 
-      Fill Value: -999.000000
-       Transform: X + -273.150000
+      Transform: X + -273.150000
 
-      Data Sources: 1
+      Data Sources: 2
 
-we can see that loaded values will converted from Kelvin to Celsius.
+we can see that loaded values will be converted from Kelvin to Celsius.
+
+
+Full Demo
+---------------
+This section recaps all the essential code from the demos. You can use it as a quick reference::
+
+    % Get the output files
+    outputFile1 = 'b.e11.BLMTRC5CN.f19_g16.002.cam.h0.TREFHT.085001-184912.nc';
+    outputFile2 = 'b.e11.BLMTRC5CN.f19_g16.002.cam.h0.TREFHT.185001-200512.nc';
+
+    % Define metadata that spans the climate model output dataset
+    lat = ncread(outputFile1, 'lat');
+    lon = ncread(outputFile1, 'lon');
+    time = datetime(850,1,15):calmonths(1):datetime(2005,12,15);
+
+    % Create a metadata object
+    metadata = gridMetadata("lat", lat, "lon", lon, "time", time');
+    metadata = metadata.addAttributes("Units", "Kelvin", "Model", "CESM 1.0");
+
+    % Use the metadata to initialize a new gridfile catalogue
+    file = "temperature-cesm.grid";
+    gridfile.new(file, metadata);
+
+    % Get the name and dimensions of the data variable in the output files
+    variable = "TREFHT";
+    dimensions = ["lon", "lat", "time"];
+
+    % Add the first output file to the catalogue
+    preindustrial = year(metadata.time) < 1850;
+    metadata1 = metadata.index('time', preindustrial)
+    temperature.add('netcdf', outputFile1, variable, dimensions, metadata1);
+
+    % Get metadata for the second file and add to the catalogue
+    postindustrial = year(metadata.time) >= 1850;
+    metadata2 = metadata.index('time', postindustrial);
+    temperature.add('netcdf', outputFile2, variable, dimensions, metadata2);
+
+    % Apply a conversion from Kelvin to Celsius. Record the conversion
+    temperature.transform('plus', -273.15);
+    temperature.addAttributes('converted_units', 'Celsius');

@@ -64,13 +64,25 @@ Step 3: Create Metadata for Real Datasets
 -----------------------------------------
 Create a gridMetadata object for at least one dataset you brought to the workshop. Create some dimensional metadata that you find useful - this could be metadata read from a NetCDF or MAT file, or some other values that you prefer. Use the ``gridMetadata`` command to create the metadata object. Optionally include some attributes to better document the dataset.
 
+.. _edit-dimensions:
+
+.. note::
+    You can also edit the dimensions supported by the ``DASH`` toolbox by modifying the ``gridMetadata`` class (although this probably won't be necessary for the workshop). To modify the class, enter::
+
+        edit gridMetadata
+
+    in the console. Locate the line that states::
+
+        properties (SetAccess = private)
+
+    (near line 70), and follow the instructions below the line.
+
+
+.. _demo-ntrend-metadata:
 
 *Demo 1*
 ++++++++
-In the demo dataset, the proxy dataset consists of 54 proxy records that span most of the Common Era at annual resolution. We'll start by defining metadata for this dataset. The MAT-file ``ntrend.mat`` holds metadata values for the proxy sites and for the covered time steps. We'll use this metadata to build a ``gridMetadata`` object:
-
-.. code::
-    :class: input
+In the demo dataset, the proxy dataset consists of 54 proxy records that span most of the Common Era at annual resolution. We'll start by defining metadata for this dataset. The MAT-file ``ntrend.mat`` holds metadata values for the proxy sites and for the covered time steps. We'll use this metadata to build a ``gridMetadata`` object::
 
     % Load metadata for the proxy dataset
     proxyFile = "ntrend.mat";
@@ -80,6 +92,13 @@ In the demo dataset, the proxy dataset consists of 54 proxy records that span mo
     site = [info.IDs, info.latitudes, info.longitudes, info.seasons];
     time = info.years;
     metadata = gridMetadata('site', site, 'time', time);
+
+Examining the new metadata object:
+
+.. code::
+    :class: input
+
+    disp(metadata)
 
 
 .. code::
@@ -92,15 +111,14 @@ In the demo dataset, the proxy dataset consists of 54 proxy records that span mo
         site: [54×4 string]
         time: [1262×1 double]
 
+we can see that the metadata object defines metadata for 54 proxy sites over 1262 time steps.
+
 
 *Demo 2*
 ++++++++
 The demo also includes climate model output for surface temperatures. This output is arranged on a global latitude-longitude grid over time. Time proceeds from 850 CE to 2005 CE at monthly resolution. The output is split over two NetCDF files with the first 1000 years of output in the first file, and the remaining years in the second file.
 
-We'll use the latitude and longitude metadata from the NetCDF files, but we'll create custom metadata for the time dimension using Matlab's ``datetime`` format. We'll use this metadata to create a ``gridMetadata`` object:
-
-.. code::
-    :class: input
+We'll use the latitude and longitude metadata from the NetCDF files, but we'll create custom metadata for the time dimension using Matlab's ``datetime`` format. We'll use this metadata to create a ``gridMetadata`` object::
 
     % Get the output files
     outputFile1 = 'b.e11.BLMTRC5CN.f19_g16.002.cam.h0.TREFHT.085001-184912.nc';
@@ -116,7 +134,14 @@ We'll use the latitude and longitude metadata from the NetCDF files, but we'll c
 
     % Create the metadata object and include some attributes
     metadata = gridMetadata("lat", lat, "lon", lon, "time", time');
-    metadata = metadata.addAttributes("Units", "Kelvin", "Model", "CESM 1.0")
+    metadata = metadata.addAttributes("Units", "Kelvin", "Model", "CESM 1.0");
+
+We can examine the metadata object in the console to ensure it matches our expectations:
+
+.. code::
+    :class: input
+
+    disp(metadata)
 
 .. code::
     :class: output

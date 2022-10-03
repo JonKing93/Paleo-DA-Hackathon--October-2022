@@ -59,7 +59,7 @@ Now we'll take a quick look at some features of the ``gridfile`` class. This sec
 
 *Load Interface*
 ++++++++++++++++
-One of the most useful feature of ``gridfile`` catalogues is the ability to load data from any portion of the catalogue usingthe ``load`` command. This command allows users to load data arrays that may span multiple files, and even multiple file formats, without needing to interact with any of the individual files.
+One of the most useful feature of ``gridfile`` catalogues is the ability to load data from any portion of the catalogue using the ``load`` command. This command allows users to load data arrays that may span multiple files, and even multiple file formats, without needing to interact with any of the individual files.
 
 Furthermore, the ``load`` command allows users to load specific subsets of the data catalogue by querying specific metadata values. The use of human-readable metadata, rather than array indices or other syntaxes, helps make code more readable and easier to use.
 
@@ -86,7 +86,9 @@ These transformations are often useful for converting the units of loaded data. 
 
 *Cross-catalogue arithmetic*
 ++++++++++++++++++++++++++++
-``gridfile`` includes support for applying arithmetic operations across multiple catalogues. This functionality is similar to NetCDF Operator (NCO) commands, but can be applied to any ``gridfile`` catalogue, regardless of formats of data source files. These arithmetic commands are often used when a climate variable of interest must be calculated using multiple output variables from a climate model.
+``gridfile`` includes support for applying arithmetic operations across multiple catalogues. This functionality is similar to `NetCDF Operator`_ (NCO) commands, but can be applied to any ``gridfile`` catalogue, regardless of the formats of data source files. These arithmetic commands are often used when a climate variable of interest must be calculated using multiple output variables from a climate model.
+
+.. _NetCDF Operator: https://nco.sourceforge.net/
 
 
 *And more!*

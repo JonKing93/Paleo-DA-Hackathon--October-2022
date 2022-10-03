@@ -84,6 +84,7 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../stateVector/outline.html">stateVector</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ensemble/outline.html">ensemble</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Resources</span></p>
 <ul>
@@ -170,10 +171,22 @@
 <section id="step-3-create-metadata-for-real-datasets">
 <h2>Step 3: Create Metadata for Real Datasets<a class="headerlink" href="#step-3-create-metadata-for-real-datasets" title="Permalink to this heading"></a></h2>
 <p>Create a gridMetadata object for at least one dataset you brought to the workshop. Create some dimensional metadata that you find useful - this could be metadata read from a NetCDF or MAT file, or some other values that you prefer. Use the <code class="docutils literal notranslate"><span class="pre">gridMetadata</span></code> command to create the metadata object. Optionally include some attributes to better document the dataset.</p>
+<div class="admonition note" id="edit-dimensions">
+<p class="admonition-title">Note</p>
+<p>You can also edit the dimensions supported by the <code class="docutils literal notranslate"><span class="pre">DASH</span></code> toolbox by modifying the <code class="docutils literal notranslate"><span class="pre">gridMetadata</span></code> class (although this probably won’t be necessary for the workshop). To modify the class, enter:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="nb">edit</span><span class="w"> </span><span class="n">gridMetadata</span><span class="w"></span>
+</pre></div>
+</div>
+<p>in the console. Locate the line that states:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="k">properties</span><span class="w"> </span><span class="p">(</span><span class="nb">SetAccess</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">private</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
+<p>(near line 70), and follow the instructions below the line.</p>
+</div>
 <section id="demo-1">
-<h3><em>Demo 1</em><a class="headerlink" href="#demo-1" title="Permalink to this heading"></a></h3>
+<span id="demo-ntrend-metadata"></span><h3><em>Demo 1</em><a class="headerlink" href="#demo-1" title="Permalink to this heading"></a></h3>
 <p>In the demo dataset, the proxy dataset consists of 54 proxy records that span most of the Common Era at annual resolution. We’ll start by defining metadata for this dataset. The MAT-file <code class="docutils literal notranslate"><span class="pre">ntrend.mat</span></code> holds metadata values for the proxy sites and for the covered time steps. We’ll use this metadata to build a <code class="docutils literal notranslate"><span class="pre">gridMetadata</span></code> object:</p>
-<div class="input highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">% Load metadata for the proxy dataset</span><span class="w"></span>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">% Load metadata for the proxy dataset</span><span class="w"></span>
 <span class="n">proxyFile</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&quot;ntrend.mat&quot;</span><span class="p">;</span><span class="w"></span>
 <span class="n">info</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">load</span><span class="p">(</span><span class="n">proxyFile</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;IDs&#39;</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;latitudes&#39;</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;longitudes&#39;</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;seasons&#39;</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;years&#39;</span><span class="p">);</span><span class="w"></span>
 
@@ -181,6 +194,10 @@
 <span class="n">site</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="n">info</span><span class="p">.</span><span class="n">IDs</span><span class="p">,</span><span class="w"> </span><span class="n">info</span><span class="p">.</span><span class="n">latitudes</span><span class="p">,</span><span class="w"> </span><span class="n">info</span><span class="p">.</span><span class="n">longitudes</span><span class="p">,</span><span class="w"> </span><span class="n">info</span><span class="p">.</span><span class="n">seasons</span><span class="p">];</span><span class="w"></span>
 <span class="nb">time</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">info</span><span class="p">.</span><span class="n">years</span><span class="p">;</span><span class="w"></span>
 <span class="n">metadata</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">gridMetadata</span><span class="p">(</span><span class="s">&#39;site&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">site</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;time&#39;</span><span class="p">,</span><span class="w"> </span><span class="nb">time</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Examining the new metadata object:</p>
+<div class="input highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="nb">disp</span><span class="p">(</span><span class="n">metadata</span><span class="p">)</span><span class="w"></span>
 </pre></div>
 </div>
 <div class="output highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">metadata</span><span class="w"> </span><span class="p">=</span><span class="w"></span>
@@ -191,12 +208,13 @@
 <span class="w">    </span><span class="nb">time</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mi">1262</span>×<span class="mi">1</span><span class="w"> </span><span class="nb">double</span><span class="p">]</span><span class="w"></span>
 </pre></div>
 </div>
+<p>we can see that the metadata object defines metadata for 54 proxy sites over 1262 time steps.</p>
 </section>
 <section id="demo-2">
 <h3><em>Demo 2</em><a class="headerlink" href="#demo-2" title="Permalink to this heading"></a></h3>
 <p>The demo also includes climate model output for surface temperatures. This output is arranged on a global latitude-longitude grid over time. Time proceeds from 850 CE to 2005 CE at monthly resolution. The output is split over two NetCDF files with the first 1000 years of output in the first file, and the remaining years in the second file.</p>
 <p>We’ll use the latitude and longitude metadata from the NetCDF files, but we’ll create custom metadata for the time dimension using Matlab’s <code class="docutils literal notranslate"><span class="pre">datetime</span></code> format. We’ll use this metadata to create a <code class="docutils literal notranslate"><span class="pre">gridMetadata</span></code> object:</p>
-<div class="input highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">% Get the output files</span><span class="w"></span>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">% Get the output files</span><span class="w"></span>
 <span class="n">outputFile1</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&#39;b.e11.BLMTRC5CN.f19_g16.002.cam.h0.TREFHT.085001-184912.nc&#39;</span><span class="p">;</span><span class="w"></span>
 <span class="n">outputFile2</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&#39;b.e11.BLMTRC5CN.f19_g16.002.cam.h0.TREFHT.185001-200512.nc&#39;</span><span class="p">;</span><span class="w"></span>
 
@@ -210,7 +228,11 @@
 
 <span class="c">% Create the metadata object and include some attributes</span><span class="w"></span>
 <span class="n">metadata</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">gridMetadata</span><span class="p">(</span><span class="s">&quot;lat&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">lat</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;lon&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">lon</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;time&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">time</span><span class="o">&#39;</span><span class="p">);</span><span class="w"></span>
-<span class="n">metadata</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">metadata</span><span class="p">.</span><span class="n">addAttributes</span><span class="p">(</span><span class="s">&quot;Units&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Kelvin&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Model&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;CESM 1.0&quot;</span><span class="p">)</span><span class="w"></span>
+<span class="n">metadata</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">metadata</span><span class="p">.</span><span class="n">addAttributes</span><span class="p">(</span><span class="s">&quot;Units&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Kelvin&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Model&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;CESM 1.0&quot;</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+<p>We can examine the metadata object in the console to ensure it matches our expectations:</p>
+<div class="input highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="nb">disp</span><span class="p">(</span><span class="n">metadata</span><span class="p">)</span><span class="w"></span>
 </pre></div>
 </div>
 <div class="output highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">metadata</span><span class="w"> </span><span class="p">=</span><span class="w"></span>
