@@ -143,18 +143,28 @@ We'll also need to add state vector variables for any climate variables required
     nameSeason = metadata.site(:,[1 4]);
     disp(nameSeason)
 
-The ``stateVector`` class is flexible, and there are a number of ways we could add the data for the forward models to our state vector. In the demo, we'll include this data by adding a variable with a monthly temperature sequence - specifically, a sequence with each month of the year. This way, we will always be able to extract the necessary months for any required seasonal mean. We'll name the variable for this sequence as **T_monthly** and add it to the state vector::
+The ``stateVector`` class is flexible, and there are a number of ways we could add the data for the forward models to our state vector. In this workshop, we're going to illustrate two different approaches for implementing these forward model variables. The first approach (case A) is simpler to code, but includes some unnecessary data and results in a larger overall state vector. The second approach (case B) requires a bit more code, but results in a much smaller state vector. Case A is a good starting point, but case B might be better if you want to running many assimilations (such as in a Monte Carlo algorithm.) Feel free to follow either approach, as both will allow us to demo different commands in the ``DASH`` toolbox.
+
+To follow along with both demos, it might be useful to make a copy of the state vector for case A and case B::
+
+    sva = sv;
+    svb = sv;
+
+
+Case A
+~~~~~~
+In this approach, we'll include the forward model data by adding a variable with a monthly temperature sequence - specifically, a sequence with each month of the year. This way, we will always be able to extract the necessary months for any required seasonal mean. We'll name the variable for this sequence as **T_monthly** and add it to the state vector::
 
     variable = "T_monthly";
     catalogue = 'temperature-cesm';
-    sv = sv.add(variable, catalogue);
+    sva = sva.add(variable, catalogue);
 
 Examining the updated object:
 
 .. code::
     :class: input
 
-    disp(sv)
+    disp(sva)
 
 .. code::
     :class: output
@@ -173,16 +183,37 @@ Examining the updated object:
 
 we can see that the "T_monthly" variable has been added to the state vector, alongside the previously added **T** and **T_index** variables.
 
-An advantage of this approach is that it requires less coding overall, as we can include the data for all our forward models in a single variable. A tradeoff is that the state vector will include some unnecessary data elements - spatial sites in the monthly temperature sequence that are not near a proxy site, as well as months that are not used for a particular site's seasonal mean.
 
+Case B
+~~~~~~
+As an alternative approach, we could instead create a variable for each proxy site, and then use the ``dash.closest.latlon`` utility method to locate the climate model grid point closest to each site. We can then design each variable to only include data from the relevant grid point. This way, the state vector would only contain data elements strictly necessary to run the forward models. For this approach, we'll start by adding a variable for each proxy site::
 
-Alternate approach
-~~~~~~~~~~~~~~~~~~
-As an alternative approach, we could instead create a variable for each proxy site, and then use the ``dash.closest.latlon`` utility method to locate the climate model grid point closest to each site. This way, the state vector would only contain data elements strictly necessary to run the forward models. To implement this approach, we should create a ``for`` loop over the proxy sites. In each loop iteration, we'll add a state vector variable that matches the site ID of one of the sites. We'll then use the ``dash.closest.latlon`` utility to locate the climate model grid point closest
+    % Get the gridfile for the proxy records and the name of each site
+    proxies = gridfile("ntrend");
+    names = proxies.metadata.site(:,1);
 
-UNFINISHED
+    % Add a variable for each site
+    modelTemperature = 'temperature-cesm';
+    svb = svb.add(names, modelTemperature);
 
+Examining the output:
 
+.. code:
+    :class: input
+
+    disp(svb)
+
+.. code:
+    :class: output
+
+    stateVector with properties:
+
+          Label: NTREND Temperature Demo
+         Length: 10738925568 rows
+      Variables: 56
+       Coupling: All variables coupled
+
+we can see the that state vector now contains 56 variables - the 2 reconstruction targets, and a variable for each of the 54 proxy sites.
 
 
 
@@ -220,9 +251,12 @@ You can also use the option fourth input to specify the state indices or ensembl
 
 *Demo*
 ++++++
-In our demo, we'll be selecting ensemble members from individual years of model output. Thus, ``time`` is our ensemble dimension. Since we only want each year to be selected once, we should choose one month to use as the reference point for each year. We'll use January as the reference month here.
+In our demo, we'll be selecting ensemble members from individual years of model output. Thus, ``time`` is our ensemble dimension. Since we only want each year to be selected once, we should choose one month to use as the reference point for each year. We'll use January as the reference month here. We'll also use the command to limit the **T** and **T_index** variables to grid points north of 35°N.
 
-We'll also use the command to limit all the variables to grid points north of 35°N. In the case of the **T** and **T_mean** variables, this is the desired reconstruction domain. For the **T_monthly** variable, we only need data from the grid points nearest to the proxy sites, and all of the proxy sites are located north of this boundary. Although limiting the domain of **T_monthly** is not strictly necessary, it will help remove unnecessary data elements from the state vector, which can help speed up later steps.
+
+Case A
+~~~~~~
+For the **T_monthly** variable, we only need data from the grid points nearest to the proxy sites, and all of the proxy sites are located north of this boundary. Although limiting the domain of **T_monthly** is not strictly necessary, it will help remove unnecessary data elements from the state vector, which can help speed up later steps.
 
 For both dimensions, we'll select indices using gridfile metadata. Also, since we're applying the same indices to all three variables, we can use the ``-1`` option to select all the variables at once::
 
@@ -236,14 +270,14 @@ For both dimensions, we'll select indices using gridfile metadata. Also, since w
     dimensions = ["time", "lat"];
     types      = ["ensemble", "state"]
     indices    = {january, extratropical}
-    sv = sv.design(-1, dimensions, types, indices)
+    sva = sva.design(-1, dimensions, types, indices)
 
 Examining the updated state vector:
 
 .. code::
     :class: input
 
-    disp(sv)
+    disp(sva)
 
 .. code::
     :class: output
@@ -261,6 +295,83 @@ Examining the updated state vector:
           T_monthly - 4320 rows   |   lon (144) x lat (30)   Show details
 
 we can see that variables are now much more reasonable lengths. This is because the time dimension has been converted to an ensemble dimension and is no longer propagated down the state vector. Also, we have removed a number of unnecessary spatial points (those points south of 35°N).
+
+
+Case B
+~~~~~~
+This approach will require a bit more coding, because we'll need to design the variable for each proxy site individually. We'll start by making time the ensemble dimension for all variables::
+
+    metadata = gridfile('temperature-cesm').metadata;
+    january = month(metadata.time) == 1;
+    svb = svb.design(-1, "time", "ensemble", january);
+
+We'll also limit the two reconstruction targets to climate model grid points north of 35°N::
+
+    extratropical = metadata.lat > 35;
+    svb = svb.design(["T","T_index"], "lat", [], extratropical);
+
+Next, we'll need to design the forward model (proxy site) variables. To implement this, we'll first use the ``dash.closest.latlon`` utility to locate the model grid point closest to each proxy site. Next, we'll then create a ``for`` loop over the proxy site variable. We'll then use the ``design`` so that the variable only includes data from that grid point::
+
+    % Get proxy site and climate model metadata
+    modelMetadata = gridfile('temperature-cesm').metadata;
+    site = gridfile('ntrend').metadata.site;
+    coordinates = str2double( site(:,2:3) );
+    seasons = site(:,4);
+
+    % Locate the closest climate model grid point to each proxy coordinate
+    [~, latIndices, lonIndices] = ...
+          dash.closest.latlon(coordinates, modelMetadata.lat, modelMetadata.lon);
+
+    % Loop over the sites.
+    nSite = size(site, 1);
+    for s = 1:nSite
+
+        % Design the variable for each site
+        dimensions = ["lat", "lon"];
+        types = {'state', 'state'};
+        indices = {latIndices(s), lonIndices(s)};
+        svb = svb.design(s+2, dimensions, types, indices);
+    end
+
+Examining the final state vector:
+
+.. code::
+    :class: input
+
+    disp(svb)
+
+.. code::
+    :class: output
+
+    stateVector with properties:
+
+          Label: NTREND Temperature Demo
+         Length: 8694 rows
+      Variables: 56
+       Coupling: All variables coupled
+
+we can see that despite the 56 variables, this state vector is about 2/3s of the length of the vector in Case A. We can use the ``variable`` command to display the proxy variables in the console and verify that they indeed have a length of 1:
+
+.. code::
+    :class: input
+
+    svb.variable(3)
+
+.. code::
+    :class: output
+
+    Variable:  NTR
+        Parent: NTREND Temperature Demo
+         Index: 3
+      gridfile: C:/Users/jonki/Documents/Hackathon/demo/temperature-cesm.grid
+        Length: 1
+
+      Dimensions:
+             State: lon, lat
+          Ensemble: time
+
+
+
 
 
 Step 4: Implement Sequences
@@ -286,20 +397,20 @@ The inputs are as follows:
 You can also use the ``sequence`` command to specify a sequence for multiple dimensions at once. In this case, **dimensions** should be a string vector listing the names of the dimensions with sequences. The **indices** and **metadata** inputs should be cell vectors whose elements contain the sequence indices/metadata for the listed dimensions.
 
 
-*Demo*
-++++++
-In this demo, we want the **T_monthly** variable to implement a sequence such that the variable includes data for each month of the year. As a reminder, we're need this sequence so that we can implement various seasonal means for the forward models. This sequence proceeds along the ``time`` dimension. We previously specified January as a reference month, so our sequence indices will be the values from 0 to 11 (the offsets of each month from January). We'll use month numbers (the values from 1 to 12) as the metadata::
+*Demo (Case A)*
++++++++++++++++
+Case B won't require a sequence, because we'll implement the seasonal means individually for each site, so we'll only focus on case A here. In this demo, we want the **T_monthly** variable to implement a sequence such that the variable includes data for each month of the year. As a reminder, we're need this sequence so that we can implement various seasonal means for the forward models. This sequence proceeds along the ``time`` dimension. We previously specified January as a reference month, so our sequence indices will be the values from 0 to 11 (the offsets of each month from January). We'll use month numbers (the values from 1 to 12) as the metadata::
 
     indices = 0:11;
     metadata = (1:12)';
-    sv = sv.sequence("T_monthly", "time", indices, metadata);
+    sva = sva.sequence("T_monthly", "time", indices, metadata);
 
 Inspecting the updated state vector:
 
 .. code::
     :class: input
 
-    disp(sv);
+    disp(sva);
 
 .. code::
     :class: output
@@ -486,7 +597,9 @@ where **functionHandle** is a function handle to the conversion function. The gr
 
 Full Demo
 ---------
-This section recaps all the essential code from the demos. You can use it as a quick reference::
+This section recaps all the essential code from the demos. You can use it as a quick reference.
+
+Case A::
 
     % Initialize a new state vector
     label = "NTREND Temperature Demo";
