@@ -13,6 +13,8 @@ Matlab 2020b+
 Please download and install Matlab 2020b or higher. You can find the latest Matlab release `here <https://www.mathworks.com/downloads/>`_.
 
 
+.. _install-DASH:
+
 DASH Toolbox
 ------------
 

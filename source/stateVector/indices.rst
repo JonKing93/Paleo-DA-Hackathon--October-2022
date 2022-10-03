@@ -1,6 +1,6 @@
-Indices
-=======
-As previously mentioned, the ``stateVector`` class uses data from gridfiles to build a state vector ensemble. However, in most cases, we will only need a small subset of the data in a gridfile. Thus, when you design the template for a state vector ensemble, you'll use various types of indices to select the relevant data and implement design concepts like sequences.
+stateVector Indices
+===================
+As :ref:`previously mentioned <svv>`, the ``stateVector`` class uses data from gridfiles to build a state vector ensemble. However, in most cases, we will only need a small subset of the data in a gridfile. Thus, when you design the template for a state vector ensemble, you'll use various types of indices to select the relevant data and implement design concepts like sequences.
 
 On this page, we'll give an overview of the various types of indices used to build state vector ensembles. We'll also illustrate how these indices interact, in order to better explain how the ``stateVector`` class functions "under-the-hood". In general, state vector indices are defined within the scope of individual variables. Each variable may implement different sets of indices, and the indices are interpreted relative to the variable's associated gridfile.
 
@@ -9,6 +9,8 @@ State Indices
 -------------
 **State indices** indicate the elements along a state dimension that will be included in the state vector. For a given variable, each state dimension has an accompanying set of state indices. These state indices refer to the elements along the dimension in the variable's gridfile.
 
+
+.. _ref-indices:
 
 Reference Indices
 -----------------
@@ -57,11 +59,13 @@ At this point, you may be wondering: If ``stateVector`` only cares about metadat
 As we will see in the next two sections, using indices will allow us to implement other design features. Specifically, they will let us implement sequences and means along ensemble dimensions.
 
 
+.. _sequence-indices:
+
 Sequence Indices
 ----------------
-As mentioned on the `previous page <concepts#sequences>`_, you may want an ensemble dimension to exhibit some structure down the state vector. Typically, this occurs when a state vector should include data from several points in time. You can use sequence indices to implement these features. Like state and reference indices, sequence indices are defined individually for the dimensions of each variable. Since only ensemble dimensions can exhibit a sequence, you can only define sequence indices for ensemble dimensions.
+As :ref:`previously discussed <sequences>`, you may want an ensemble dimension to exhibit some structure down the state vector. Typically, this occurs when a state vector should include data from several points in time. You can use sequence indices to implement these features. Like state and reference indices, sequence indices are defined individually for the dimensions of each variable. Since only ensemble dimensions can exhibit a sequence, you can only define sequence indices for ensemble dimensions.
 
-Each set of **sequence indices** lists a series of offsets. These offsets are applied to the reference indices of the ensemble dimension to yield a set of adjusted indices, which we refer to as **sequence elements**. These sequence elements indicate the elements along the dimension that should be used in each potential ensemble member.
+Each set of **sequence indices** lists a series of offsets. These offsets are applied to the :ref:`reference indices <ref-indices>` of the ensemble dimension to yield a set of adjusted indices, which we refer to as **sequence elements**. These sequence elements indicate the elements along the dimension that should be used in each potential ensemble member.
 
 .. figure:: ../images/abstract-sequence-indices.svg
     :alt: A series of dots proceed from left to right. The dots are labeled as elements of an ensemble dimension. A series of black arrows, labeled as "Reference indices", point toward several elements along the dimension. A series of red arrows points from the end of each black arrow. These red arrows are labeled as "sequence indices" and they point to the elements several points after the black arrows. The elements indicated by the red arrows have red boxes around them. The same red arrows are applied to each black arrow.
@@ -92,11 +96,14 @@ Sequence indices are quite flexible. They do not need to be evenly spaced (and d
     The ``stateVector`` class will only select ensemble members that allow for complete sequences. The class will discard any ensemble members in which a sequence requires data outside of the associated gridfile.
 
 
+
+.. _mean-indices:
+
 Mean Indices
 ------------
 Implementing a mean over state dimensions is relatively straightforward, as ``stateVector`` can simply implement a mean over the data elements included in the state vector. However, you may also want to implement means over ensemble dimensions. For example, you may want each ensemble member to implement a temporal mean, or a mean over multiple model runs. We will use mean indices to implement means over ensemble dimensions.
 
-**Mean indices** function similarly to sequence indices and also list a series of offsets applied to reference indices. However, ``stateVector`` then takes a mean over the indicated data elements, rather than implementing a sequence.
+**Mean indices** function similarly to sequence indices and also list a series of offsets applied to :ref:`reference indices <ref-indices>`. However, ``stateVector`` then takes a mean over the indicated data elements, rather than implementing a sequence.
 
 .. figure:: ../images/abstract-mean-indices.svg
     :alt: A series of black dots proceeds from left to right. The dots are labeled as the elements of an ensemble dimension. Black arrows, labeled as "Reference indices", point to a few elements along the dimension. A blue arrow proceeds from the end of each black arrow. These blue arrows, labeled as "mean indices", point to several data elements after each black arrow. There is a blue box around each set of data elements. The same blue arrow is applied to each black arrow.
@@ -129,4 +136,44 @@ As with sequence indices, mean indices do not need to be evenly spaced or sorted
 
 Combining sequences and means
 -----------------------------
-In some cases, you may want a state vector to implement a sequence of means. For example, a series of seasonal means within a year, or a series of decadal means following a major climatic event.
+In some cases, you may want a state vector to implement a sequence of means. For example, a series of seasonal means within a year, or a series of decadal means following a climate event. When this occurs, you will need to use both sequence indices and mean indices. When you provide both sets of indices, ``stateVector`` uses the following procedure to build an ensemble member:
+
+1. Locate the ensemble member's reference point
+2. Apply sequence index offset to locate the sequence elements
+3. Apply mean indices to each individual sequence element
+
+The procedure is summarized in the following figure:
+
+.. figure:: ../images/abstract-ms-indices.svg
+    :alt: A series of black dots proceeds from left to right. The dots are labeled as the elements of an ensemble dimension. Black arrows, labeled as "Reference indices", point to a few elements along the dimension. A series of red arrows points from the end of each black arrow. These red arrows are labeled as "sequence indices" and they point to various elements several points after each black arrow. A blue box surrounds several elements at the end of each red arrow. The blue boxes are labeled as "Mean indices".
+
+    Figure 9: Combining sequence and mean indices. First, sequence indices modify the reference indices of an ensemble dimension. The offset indices form a reference point for each sequence element. Next, the mean indices are applied to each sequence element. The offset sequence elements point to the data elements used in the mean for each element of the sequence.
+
+Returning to the example, let's say I want each state vector to implement a moving, three-month seasonal mean from June-July-August (JJA) to September-October-November (SON). In this case, the state vector ensemble would resemble the following:
+
+.. figure:: ../images/ms-ensemble.svg
+    :alt: A matrix representing an ensemble is divided into 5 columns and 4 rows. The rows are labeled as JJA, JAS, ASO, and SON - representing seasonal means from June-July-August to September-October-November. The columns are labeled with different years of the Common Era.
+
+    Figure 10: A variable with a sequence of seasonal means.
+
+To implement this, we'll start by using sequence indices to locate the starting month of each seasonal mean. Since the reference indices point to individual June months, the sequence indices should indicate the offset between each June month and the associated June, July, August, and September. This gives us::
+
+    sequenceIndices = [0 1 2 3];
+
+Next, we'll use mean indices to locate the months that should be used in each seasonal mean. Since the sequence elements point to the starting month of each seasonal mean, the mean indices should indicate the offset between each starting month and the months used in the seasonal mean. This gives us::
+
+    meanIndices = [0 1 2];
+
+Using these indices, first sequence element will implement a JJA seasonal mean:
+
+.. figure:: ../images/ms1.svg
+
+    Figure 11: The first sequence element - a JJA seasonal mean.
+
+The second sequence element will be a JAS seasonal mean:
+
+.. figure:: ../images/ms2.svg
+
+    Figure 12: The second sequence element - a JAS seasonal mean
+
+and so on.

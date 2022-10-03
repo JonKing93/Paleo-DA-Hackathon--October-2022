@@ -1,9 +1,10 @@
-stateVector Concepts
-====================
+``stateVector`` Concepts
+========================
 
 The ``stateVector`` class is used to design and build state vector ensembles. The class implements ``stateVector`` objects, which act as design templates for state vector ensembles. Users can edit a template to describe an ensemble that matches their requirements. When finished, they can then use the template to automatically build a state vector ensemble that conforms to its design.
 
 The ``stateVector`` design templates allow you to design a state vector in a flexible manner, while limiting the manipulation of large data arrays. To facilitate the design process, we will need some vocabulary to help us describe state vector ensembles in a systematic way. The remainder of this page introduces some key concepts that will allow us to flexibly design diverse state vector ensembles.
+
 
 
 State Vectors
@@ -14,7 +15,7 @@ State vectors are a fundamental concept for ensemble-based assimilation methods.
 In the context of assimilation, state vectors will generally include two types of variables:
 
 1. Reconstruction targets, and
-2. Climate variables required to run proxy forward models
+2. Climate variables used to run proxy forward models
 
 In some cases, a variable can fall into both categories.
 
@@ -49,6 +50,8 @@ Continuing the previous example, a small ensemble for our state vector might loo
 Here, each column is a different state vector (ensemble member). Each ensemble member has data for the temperature, mean temperature, and precipitation variables, but from different time steps. In the case of ensemble member 5, the ensemble member is from the same time step as ensemble member 1, but from a different climate model run.
 
 
+.. _svv:
+
 State Vector Variables
 ----------------------
 The ``stateVector`` class uses data from ``gridfile`` catalogues to build state vector ensembles. In this workshop, we will often refer to state vector variables. In the context of DASH, we define a **state vector variable** as some subset of data from a gridfile. Multiple variables can be derived from the same gridfile, and each individual variable forms a contiguous block of the state vector.
@@ -62,7 +65,7 @@ Returning to our earlier figure:
 
 we can see that the example state vector includes three variables: temperature (**T**), global mean temperature (**Tmean**), and precipitation (**P**). The **T** and **Tmean** variables are probably derived from the same gridfile (and possibly the **P** variable as well).
 
-We'll discuss state vector variables in greater detail in the next coding session. For now, the important point is that each variable is built from data in an associated gridfile.
+Note that the definition of a state vector variable says nothing about specific *climate* variables. In fact, a given state vector variable can even include multiple climate variables, so long as those climate variables are derived from the same gridfile. (This can occur when a gridfile includes a ``var`` dimension with multiple variables). We'll discuss state vector variables again in the :ref:`next coding session <sv.add>`. For now, the important point is that each variable is built from data in an associated gridfile.
 
 
 Ensemble and State Dimensions
@@ -77,6 +80,8 @@ Zooming in on the temperature (**T**) variable in our example ensemble:
     Figure 3: Ensemble dimensions for a state vector ensemble.
 
 we can see that ``time`` and ``run`` are the ensemble dimensions, because individual ensemble members are selected from different (time, run) coordinates. Each ensemble member (column) is associated with fixed ``time`` metadata and fixed ``run`` metadata, although these metadata values change between individual ensemble members (columns). Note that the ``time = 1`` metadata value is repeated in ensemble members 1 and 5, but that the total metadata coordinate (time=1, run=1) and (time=1, run=2) is unique to each ensemble member.
+
+.. _state-dims:
 
 By contrast, **state dimensions** are the remaining gridfile dimensions - that is, they are the dimensions that **are not** used to select ensemble members. State dimensions have constant metadata values along each row of a state vector ensemble (this is somewhat the inverse of ensemble dimensions). Continuing the example:
 
@@ -94,6 +99,8 @@ As you design variables in a state vector ensemble, you will eventually specify 
 
 However, this is just a rule of thumb and not a strict requirement. Depending on your application, any dimension could be a state dimension or ensemble dimension.
 
+
+.. _sequences:
 
 Sequences
 ---------
