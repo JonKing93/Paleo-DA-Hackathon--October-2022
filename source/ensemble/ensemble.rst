@@ -31,7 +31,7 @@ The ``ensemble`` class implements a ``load`` command, which returns the ensemble
 
 
 Select Variables and Members
-+++++++++++++++++++++++++++
+++++++++++++++++++++++++++++
 Sometimes, you may only need a few of the variables saved in an ensemble file. For example, when running an assimilation algorithm, you only need to update the variables that represent reconstruction targets. By using the ``useVariables`` command, you can modify an ensemble object so that it only represents a subset of variables saved in the file. If you then use the ``load`` command, the output will only include the requested variables.
 
 Similarly, you may want an ensemble to use a specific set of ensemble members. For example, if you are implementing a Monte Carlo procedure and rerunning an assimilation using different sets of ensemble members. You can use the ``useMembers`` command to select specific ensemble members saved in the file. If you then use the ``load`` command, the output will only include the requested variables.

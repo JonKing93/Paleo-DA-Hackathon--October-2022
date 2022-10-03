@@ -222,7 +222,7 @@
 </figure>
 <p>Returning to the example, let’s say I want each state vector to implement a moving, three-month seasonal mean from June-July-August (JJA) to September-October-November (SON). In this case, the state vector ensemble would resemble the following:</p>
 <figure class="align-default" id="id12">
-<img alt="A matrix representing an ensemble is divided into 5 columns and three rows. The rows are labeled as JJA, JAS, ASO, and SON - representing seasonal means from June-July-August to September-October-November. The columns are labeled with different years of the Common Era." src="../_images/ms-ensemble.svg" /><figcaption>
+<img alt="A matrix representing an ensemble is divided into 5 columns and 4 rows. The rows are labeled as JJA, JAS, ASO, and SON - representing seasonal means from June-July-August to September-October-November. The columns are labeled with different years of the Common Era." src="../_images/ms-ensemble.svg" /><figcaption>
 <p><span class="caption-text">Figure 10: A variable with a sequence of seasonal means.</span><a class="headerlink" href="#id12" title="Permalink to this image"></a></p>
 </figcaption>
 </figure>
@@ -234,13 +234,13 @@
 <div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">meanIndices</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="mi">0</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">2</span><span class="p">];</span><span class="w"></span>
 </pre></div>
 </div>
-<p>Using these indices, the seasonal mean for the first sequence element will be implemented as:</p>
+<p>Using these indices, first sequence element will implement a JJA seasonal mean:</p>
 <figure class="align-default" id="id13">
 <img alt="../_images/ms1.svg" src="../_images/ms1.svg" /><figcaption>
 <p><span class="caption-text">Figure 11: The first sequence element - a JJA seasonal mean.</span><a class="headerlink" href="#id13" title="Permalink to this image"></a></p>
 </figcaption>
 </figure>
-<p>The second sequence element will be:</p>
+<p>The second sequence element will be a JAS seasonal mean:</p>
 <figure class="align-default" id="id14">
 <img alt="../_images/ms2.svg" src="../_images/ms2.svg" /><figcaption>
 <p><span class="caption-text">Figure 12: The second sequence element - a JAS seasonal mean</span><a class="headerlink" href="#id14" title="Permalink to this image"></a></p>
