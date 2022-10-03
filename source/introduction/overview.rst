@@ -1,3 +1,3 @@
 DASH Overview
 =============
-This page gives an overview of the DASH toolbox.
+This page will give an overview of the DASH toolbox.

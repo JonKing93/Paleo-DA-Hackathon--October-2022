@@ -19,7 +19,7 @@ To display help text for a function or method, use the full dot-indexing title o
 
 Reference Guide
 ---------------
-DASH also includes an HTML reference guide with the documentation for every class and command in the toolbox. This reference guide is essentially an offline website - the reference guide will open in the Matlab internet browser, but does not require an internet connection to use. In general the reference guide is more comprehensive than the console help text and includes additional information such as usage examples, experiment demos, and tutorials.
+The DASH documentation also includes an HTML reference guide for every class and command in the toolbox. This reference guide is essentially an offline website - the reference guide will open in an internet browser, but does not require an internet connection to use. The reference guide is more comprehensive than the console help text, and it includes additional information such as usage examples, experiment demos, and tutorials.
 
 There are several ways to access the reference guide. The first is using the ``dash.doc`` command. Entering::
 
@@ -41,7 +41,7 @@ Alternatively, you can open specific documentation pages by clicking on the **"D
 
 A note on syntax
 ----------------
-Most of the commands in the DASH toolbox are :ref:`class methods <classes>` that act on individual :ref:`objects <objects>`. For example, we previously discussed how we could call the ``run`` method on different ``kalmanFilter`` objects to run the algorithm for different experimental parameters. In the documentation of these commands, you will often see the syntax ``obj.<method name>``, where ``<method name>`` is the name of the command. This indicates that you should call the command using dot-indexing from individual objects.
+Most of the commands in the DASH toolbox are :ref:`class methods <classes>` that act on individual :ref:`objects <objects>`. For example, we previously discussed how we could call the ``run`` method on different ``kalmanFilter`` objects to run the algorithm for different experimental parameters. In the documentation of these commands, you will often see the syntax ``obj.<method name>``, where ``<method name>`` is the name of the command. This indicates that you should call the command using dot-indexing from individual *objects*.
 
 For example, in the documentation ``kalmanFilter.run``, the command syntax is listed as::
 

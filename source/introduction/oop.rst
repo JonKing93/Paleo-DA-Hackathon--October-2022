@@ -1,6 +1,6 @@
 Object-Oriented Code
 ====================
-This section introduces a few concepts in object-oriented programming (OOP). DASH users do not need to be familiar with OOP to use the toolbox. However, we use a few OOP terms throughout the workshop, and so we define them here. We also introduce dot-indexing, which is how DASH users will access different functions in the toolbox. A `glossary`_ of new vocabulary is provided at the bottom of the page.
+This section introduces a few concepts in object-oriented programming (OOP). DASH users do not need to be familiar with OOP to use the toolbox. However, we use a few OOP terms throughout the workshop, and so we define them here. We also introduce dot-indexing, which is how DASH users will access different functions in the toolbox. A :ref:`glossary <glossary>` of new vocabulary is provided at the bottom of the page.
 
 
 Learning Objectives
@@ -70,6 +70,7 @@ Remember that methods are essentially functions. Aside from the dot indexing, th
     These options are just for demonstration purposes. They aren't real options for ``kalmanFilter.run``.
 
 
+.. _glossary:
 
 Glossary
 --------

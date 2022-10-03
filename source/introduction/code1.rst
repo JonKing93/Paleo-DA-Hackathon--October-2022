@@ -18,7 +18,7 @@ Use the ``dash.version`` command to print the current version of DASH in the con
 
 .. note::
 
-    If this causes an error message, you may not have the toolbox installed correctly. Try `reinstalling the toolbox <prerequisites.html#dash-toolbox>`_ or ask an organizer for help.
+    If this causes an error message, you may not have the toolbox installed correctly. Try :ref:`reinstalling the toolbox <install-DASH>` or ask an organizer for help.
 
 
 
@@ -29,9 +29,9 @@ Use the ``help`` command to read the help text for ``dash.version``::
     >> help dash.version
 
 
-.. note::
+.. tip::
 
-    Optionally click the ``Documentation Page`` link at the bottom of the help text to open the documentation as a webpage.
+    Try clicking the ``Documentation Page`` link at the bottom of the help text to open the documentation as a webpage.
 
 
 Step 3: Open help page
@@ -56,4 +56,4 @@ Notice the **"Examples"** section on the documentation page, which is not includ
 
 .. note::
 
-    DASH documentation pages will typically include usage examples, but these examples are not available when displaying help text in the console.
+    DASH documentation pages will often include usage examples, but these examples are not available when displaying help text in the console.
