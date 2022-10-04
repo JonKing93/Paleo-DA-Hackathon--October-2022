@@ -9,7 +9,7 @@ In this section, we'll examine the ``PSM`` interface. This interface allows user
     We'll then move into the next open-coding session and will use the interface to generate proxy estimates for our proxy records.
 
 
-.. toctree:
+.. toctree::
     :hidden:
 
     psm

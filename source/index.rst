@@ -16,11 +16,12 @@ If you are not redirected, please follow `this link <welcome>`_ or click the "Ne
     :caption: Workshop
     :hidden:
 
-    Introduction <introduction/outline>
-    gridfile     <gridfile/outline>
-    stateVector  <stateVector/outline>
-    ensemble     <ensemble/outline>
-    PSM          <PSM/outline>
+    Introduction   <introduction/outline>
+    gridfile       <gridfile/outline>
+    stateVector    <stateVector/outline>
+    ensemble       <ensemble/outline>
+    PSM            <PSM/outline>
+    kalmanFilter   <kalmanFilter/outline>
 
 
 .. toctree::
