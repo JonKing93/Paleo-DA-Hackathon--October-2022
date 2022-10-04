@@ -510,8 +510,8 @@ This section recaps all the essential code from the demos. You can use it as a q
 
     % Implement a monthly sequence
     indices = 0:11;
-    metadata = (1:12)'';
-    sv = sv.sequence("T_monthly", 'time', indices, metadata);
+    sequenceMetadata = (1:12)';
+    sv = sv.sequence("T_monthly", 'time', indices, sequenceMetadata);
 
     % Implement JJA temporal means
     jja = [5 6 7];
