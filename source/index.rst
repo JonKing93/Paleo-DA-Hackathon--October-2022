@@ -20,7 +20,7 @@ If you are not redirected, please follow `this link <welcome>`_ or click the "Ne
     gridfile     <gridfile/outline>
     stateVector  <stateVector/outline>
     ensemble     <ensemble/outline>
-    PSM          <psm/outline>
+    PSM          <PSM/outline>
 
 
 .. toctree::
