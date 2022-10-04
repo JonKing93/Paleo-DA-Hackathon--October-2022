@@ -447,10 +447,10 @@ You can also combine the ``'file'`` option with the ``'overwrite'`` option, whic
 
 *Demo*
 ++++++
-In the demo, we will build an ensemble with 1000 members and save the ensemble to a file named ``ntrend.ens``::
+In the demo, we will build an ensemble using every possible ensemble member. We will build the ensemble sequentially, so that the ensemble members are ordered in time. We'll save the ensemble in a file named ``ntrend.ens``::
 
     filename = 'ntrend.ens';
-    ens = sv.build(1000, 'file', filename);
+    ens = sv.build('all', 'sequential', true, 'file', filename);
 
 
 Step 7: Resolve Metadata Conflicts
@@ -485,8 +485,6 @@ Full Demo
 ---------
 This section recaps all the essential code from the demos. You can use it as a quick reference.
 
-Case A::
-
     % Initialize a new state vector
     label = "NTREND Temperature Demo";
     sv = stateVector(label);
@@ -512,7 +510,7 @@ Case A::
 
     % Implement a monthly sequence
     indices = 0:11;
-    metadata = 1:12;
+    metadata = (1:12)'';
     sv = sv.sequence("T_monthly", 'time', indices, metadata);
 
     % Implement JJA temporal means
@@ -525,6 +523,6 @@ Case A::
     sv = sv.mean("T_index", 'lon');
     sv = sv.weightedMean("T_index", 'lat', weights);
 
-    % Build a 1000 member ensemble and save to file
+    % Build ensemble sequentially and save to file
     filename = 'ntrend.ens';
-    ens = sv.build(1000, 'file', filename);
+    ens = sv.build('all', 'sequential', true, 'file', filename);
