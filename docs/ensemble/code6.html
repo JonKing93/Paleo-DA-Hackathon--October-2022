@@ -50,6 +50,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../gridfile/outline.html">gridfile</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../stateVector/outline.html">stateVector</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="outline.html">ensemble</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="ensembleMetadata.html">ensembleMetadata</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ensemble.html">ensemble</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Open Coding 6</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#step-1-create-ensemble-object">Step 1: Create <code class="docutils literal notranslate"><span class="pre">ensemble</span></code> object</a><ul>
@@ -124,9 +125,9 @@
 </div>
 <p>where <strong>filename</strong> is the name of the saved ensemble file. The name should either be the name of a file on the active path, or an absolute file name. If you do not include a <code class="docutils literal notranslate"><span class="pre">.ens</span></code> extension, the method will apply one automatically.</p>
 <p>If the <code class="docutils literal notranslate"><span class="pre">stateVector</span></code> object used to build the ensemble had a label, then the ensemble object will automatically be given that label. You can optionally use the second input to apply a different label to the object:</p>
-<blockquote>
-<div><p>obj = ensemble(filename, label)</p>
-</div></blockquote>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">obj</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">ensemble</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span><span class="w"> </span><span class="n">label</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
 <p>You can also use the <code class="docutils literal notranslate"><span class="pre">ensemble.label</span></code> command at any later point to re-label the ensemble.</p>
