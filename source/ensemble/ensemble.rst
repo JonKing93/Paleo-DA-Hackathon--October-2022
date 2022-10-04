@@ -43,3 +43,8 @@ Evolving Ensembles
 In some cases, you may want to design an evolving ensemble. This is typically the case when you want to use different prior ensembles for different assimilation time steps. You can use the ``evolving`` command to implement an evolving ensemble. This command allows you to select different sets of saved ensemble members. Each set of ensemble members is used to build a particular ensemble within an evolving set.
 
 In some cases, you may want to build an evolving ensemble from data saved in different ensemble files. If this is the case, you can build an ensemble by concatenating individual ensemble objects into an vector. Each element of the vector is a particular ensemble in the evolving set. Finally, you can also build evolving ensembles directly from a data array. See the documentation in ``dash.doc('kalmanFilter')`` and ``dash.doc('kalmanFilter.prior')`` for more details on both of these uses.
+
+
+Regrid Variable
++++++++++++++++
+In some cases, you might want to load a state vector variable on its original data grid, rather than as a state vector. You can use the ``loadGrid`` command to implement this behavior. This command is best used when you want to double check an ensemble and ensure that everything looks correct. Later in the workshop, we will examine the ``regrid`` command, which also reshapes state vector variables to their original data grids. In general, the ``regrid`` command is a more powerful interface and we recommend its use in most cases.
