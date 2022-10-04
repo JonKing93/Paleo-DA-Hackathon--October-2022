@@ -58,6 +58,7 @@
 <li class="toctree-l4"><a class="reference internal" href="#load-saved-ensemble">Load Saved Ensemble</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#select-variables-and-members">Select Variables and Members</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#evolving-ensembles">Evolving Ensembles</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#regrid-variable">Regrid Variable</a></li>
 </ul>
 </li>
 </ul>
@@ -128,6 +129,10 @@
 <h3>Evolving Ensembles<a class="headerlink" href="#evolving-ensembles" title="Permalink to this heading"></a></h3>
 <p>In some cases, you may want to design an evolving ensemble. This is typically the case when you want to use different prior ensembles for different assimilation time steps. You can use the <code class="docutils literal notranslate"><span class="pre">evolving</span></code> command to implement an evolving ensemble. This command allows you to select different sets of saved ensemble members. Each set of ensemble members is used to build a particular ensemble within an evolving set.</p>
 <p>In some cases, you may want to build an evolving ensemble from data saved in different ensemble files. If this is the case, you can build an ensemble by concatenating individual ensemble objects into an vector. Each element of the vector is a particular ensemble in the evolving set. Finally, you can also build evolving ensembles directly from a data array. See the documentation in <code class="docutils literal notranslate"><span class="pre">dash.doc('kalmanFilter')</span></code> and <code class="docutils literal notranslate"><span class="pre">dash.doc('kalmanFilter.prior')</span></code> for more details on both of these uses.</p>
+</section>
+<section id="regrid-variable">
+<h3>Regrid Variable<a class="headerlink" href="#regrid-variable" title="Permalink to this heading"></a></h3>
+<p>In some cases, you might want to load a state vector variable on its original data grid, rather than as a state vector. You can use the <code class="docutils literal notranslate"><span class="pre">loadGrid</span></code> command to implement this behavior. This command is best used when you want to double check an ensemble and ensure that everything looks correct. Later in the workshop, we will examine the <code class="docutils literal notranslate"><span class="pre">regrid</span></code> command, which also reshapes state vector variables to their original data grids. In general, the <code class="docutils literal notranslate"><span class="pre">regrid</span></code> command is a more powerful interface and we recommend its use in most cases.</p>
 </section>
 </section>
 </section>

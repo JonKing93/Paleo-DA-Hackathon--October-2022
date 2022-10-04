@@ -51,7 +51,34 @@
 <li class="toctree-l1"><a class="reference internal" href="../stateVector/outline.html">stateVector</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="outline.html">ensemble</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="ensemble.html">ensemble</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Open Coding 6</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Open Coding 6</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#step-1-create-ensemble-object">Step 1: Create <code class="docutils literal notranslate"><span class="pre">ensemble</span></code> object</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#demo"><em>Demo</em></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#step-2-load-data">Step 2: Load data</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id1"><em>Demo</em></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#step-3-return-metadata">Step 3: Return Metadata</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id2"><em>Demo</em></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#step-4-select-variables">Step 4: Select Variables</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id3"><em>Demo</em></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#step-5-select-members">Step 5: Select Members</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id4"><em>Demo</em></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#step-6-evolving-ensemble">Step 6: Evolving Ensemble</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id5"><em>Demo</em></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#full-demo">Full Demo</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -88,6 +115,374 @@
              
   <section id="open-coding-6">
 <h1>Open Coding 6<a class="headerlink" href="#open-coding-6" title="Permalink to this heading"></a></h1>
+<p>In this section, we’ll practice using some of the most common commands in the <code class="docutils literal notranslate"><span class="pre">ensemble</span></code> class. We’ll see these commands again later in the workshop as we implement various other tasks.</p>
+<section id="step-1-create-ensemble-object">
+<h2>Step 1: Create <code class="docutils literal notranslate"><span class="pre">ensemble</span></code> object<a class="headerlink" href="#step-1-create-ensemble-object" title="Permalink to this heading"></a></h2>
+<p>You can use the <code class="docutils literal notranslate"><span class="pre">ensemble</span></code> command to create an ensemble object for a saved state vector ensemble. The syntax is:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">obj</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">ensemble</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
+<p>where <strong>filename</strong> is the name of the saved ensemble file. The name should either be the name of a file on the active path, or an absolute file name. If you do not include a <code class="docutils literal notranslate"><span class="pre">.ens</span></code> extension, the method will apply one automatically.</p>
+<p>If the <code class="docutils literal notranslate"><span class="pre">stateVector</span></code> object used to build the ensemble had a label, then the ensemble object will automatically be given that label. You can optionally use the second input to apply a different label to the object:</p>
+<blockquote>
+<div><p>obj = ensemble(filename, label)</p>
+</div></blockquote>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>You can also use the <code class="docutils literal notranslate"><span class="pre">ensemble.label</span></code> command at any later point to re-label the ensemble.</p>
+</div>
+<section id="demo">
+<h3><em>Demo</em><a class="headerlink" href="#demo" title="Permalink to this heading"></a></h3>
+<p>Recall that we saved the demo state vector ensemble in a file named <code class="docutils literal notranslate"><span class="pre">ntrend.ens</span></code>. We’ll create an ensemble object for the saved ensemble:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">file</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&quot;ntrend.ens&quot;</span><span class="p">;</span><span class="w"></span>
+<span class="n">ens</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">ensemble</span><span class="p">(</span><span class="n">file</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Inspecting the object:</p>
+<div class="input highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="nb">disp</span><span class="p">(</span><span class="n">ens</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
+<div class="output highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">static</span><span class="w"> </span><span class="s">ensemble</span><span class="w"> </span><span class="s">with</span><span class="w"> </span><span class="s">properties:</span><span class="w"></span>
+
+<span class="w">      </span><span class="n">Label</span><span class="p">:</span><span class="w"> </span><span class="n">NTREND</span><span class="w"> </span><span class="n">Temperature</span><span class="w"> </span><span class="n">Demo</span><span class="w"></span>
+<span class="w">  </span><span class="n">Variables</span><span class="p">:</span><span class="w"> </span><span class="n">T</span><span class="p">,</span><span class="w"> </span><span class="n">T_index</span><span class="p">,</span><span class="w"> </span><span class="n">T_monthly</span><span class="w"></span>
+<span class="w">     </span><span class="n">Length</span><span class="p">:</span><span class="w"> </span><span class="mi">56161</span><span class="w"></span>
+<span class="w">    </span><span class="n">Members</span><span class="p">:</span><span class="w"> </span><span class="mi">1000</span><span class="w"></span>
+</pre></div>
+</div>
+<p>we can see the saved state vector ensemble.</p>
+</section>
+</section>
+<section id="step-2-load-data">
+<h2>Step 2: Load data<a class="headerlink" href="#step-2-load-data" title="Permalink to this heading"></a></h2>
+<p>Use the <code class="docutils literal notranslate"><span class="pre">load</span></code> command to load data from the saved ensemble. The syntax is:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">X</span><span class="p">,</span><span class="w"> </span><span class="n">metadata</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">obj</span><span class="p">.</span><span class="n">load</span><span class="w"></span>
+</pre></div>
+</div>
+<dl class="simple">
+<dt><strong>X</strong></dt><dd><p>The first output is a numeric matrix. This is the loaded state vector ensemble. The columns of the matrix are ensemble members, and each row is a state vector element.</p>
+</dd>
+<dt><strong>metadata</strong></dt><dd><p>The second output is an <code class="docutils literal notranslate"><span class="pre">ensembleMetadata</span></code> object, which describes the data in the loaded array. We’ll discuss these objects in detail in the next section.</p>
+</dd>
+</dl>
+<section id="id1">
+<h3><em>Demo</em><a class="headerlink" href="#id1" title="Permalink to this heading"></a></h3>
+<p>We’ll use the <code class="docutils literal notranslate"><span class="pre">load</span></code> command to load the saved state vector ensemble:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">ens</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">ensemble</span><span class="p">(</span><span class="s">&quot;ntrend.ens&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="p">[</span><span class="n">X</span><span class="p">,</span><span class="w"> </span><span class="n">metadata</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">ens</span><span class="p">.</span><span class="n">load</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Examining the data array:</p>
+<div class="input highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="nb">size</span><span class="p">(</span><span class="n">X</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
+<div class="output highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="nb">ans</span><span class="w"> </span><span class="p">=</span><span class="w"></span>
+<span class="w">       </span><span class="mi">56161</span><span class="w">        </span><span class="mi">1000</span><span class="w"></span>
+</pre></div>
+</div>
+<p>we can see that the first output is a matrix with 56161 state vector elements, and 1000 ensemble members. The second output:</p>
+<div class="input highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="nb">disp</span><span class="p">(</span><span class="n">metadata</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
+<div class="output highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">ensembleMetadata</span><span class="w"> </span><span class="s">with</span><span class="w"> </span><span class="s">properties:</span><span class="w"></span>
+
+<span class="w">      </span><span class="n">Label</span><span class="p">:</span><span class="w"> </span><span class="n">NTREND</span><span class="w"> </span><span class="n">Temperature</span><span class="w"> </span><span class="n">Demo</span><span class="w"></span>
+<span class="w">  </span><span class="n">Variables</span><span class="p">:</span><span class="w"> </span><span class="n">T</span><span class="p">,</span><span class="w"> </span><span class="n">T_index</span><span class="p">,</span><span class="w"> </span><span class="n">T_monthly</span><span class="w"></span>
+<span class="w">     </span><span class="n">Length</span><span class="p">:</span><span class="w"> </span><span class="mi">56161</span><span class="w"></span>
+<span class="w">    </span><span class="n">Members</span><span class="p">:</span><span class="w"> </span><span class="mi">1000</span><span class="w"></span>
+
+<span class="w">  </span><span class="n">Vector</span><span class="p">:</span><span class="w"></span>
+<span class="w">              </span><span class="n">T</span><span class="w"> </span><span class="o">-</span><span class="w">  </span><span class="mi">4320</span><span class="w"> </span><span class="n">rows</span><span class="w">   </span><span class="o">|</span><span class="w">   </span><span class="n">lon</span><span class="w"> </span><span class="p">(</span><span class="mi">144</span><span class="p">)</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="n">lat</span><span class="w"> </span><span class="p">(</span><span class="mi">30</span><span class="p">)</span><span class="w"></span>
+<span class="w">        </span><span class="n">T_index</span><span class="w"> </span><span class="o">-</span><span class="w">     </span><span class="mi">1</span><span class="w"> </span><span class="n">rows</span><span class="w">   </span><span class="o">|</span><span class="w">   </span><span class="n">lon</span><span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="n">lat</span><span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="w"></span>
+<span class="w">      </span><span class="n">T_monthly</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">51840</span><span class="w"> </span><span class="n">rows</span><span class="w">   </span><span class="o">|</span><span class="w">   </span><span class="n">lon</span><span class="w"> </span><span class="p">(</span><span class="mi">144</span><span class="p">)</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="n">lat</span><span class="w"> </span><span class="p">(</span><span class="mi">30</span><span class="p">)</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="nb">time</span><span class="w"> </span><span class="n">sequence</span><span class="w"> </span><span class="p">(</span><span class="mi">12</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
+<p>reports some information about the loaded ensemble.</p>
+</section>
+</section>
+<section id="step-3-return-metadata">
+<h2>Step 3: Return Metadata<a class="headerlink" href="#step-3-return-metadata" title="Permalink to this heading"></a></h2>
+<p>It’s often useful to return the metadata object for an ensemble without actually loading the ensemble. You can use the <code class="docutils literal notranslate"><span class="pre">metadata</span></code> command to return the metadata object. The syntax is:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">metadata</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">obj</span><span class="p">.</span><span class="n">metadata</span><span class="w"></span>
+</pre></div>
+</div>
+<p>You don’t need to worry about using the metadata object just yet - for now, just know that this command exists.</p>
+<section id="id2">
+<h3><em>Demo</em><a class="headerlink" href="#id2" title="Permalink to this heading"></a></h3>
+<p>Here, we’ll return the metadata object for the saved ensemble:</p>
+<div class="input highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">% Load the metadata</span><span class="w"></span>
+<span class="n">ens</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">ensemble</span><span class="p">(</span><span class="s">&quot;ntrend&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="n">metadata</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">ens</span><span class="p">.</span><span class="n">metadata</span><span class="p">;</span><span class="w"></span>
+
+<span class="c">% Display in console</span><span class="w"></span>
+<span class="nb">disp</span><span class="p">(</span><span class="n">metadata</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
+<div class="output highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">ensembleMetadata</span><span class="w"> </span><span class="s">with</span><span class="w"> </span><span class="s">properties:</span><span class="w"></span>
+
+<span class="w">      </span><span class="n">Label</span><span class="p">:</span><span class="w"> </span><span class="n">NTREND</span><span class="w"> </span><span class="n">Temperature</span><span class="w"> </span><span class="n">Demo</span><span class="w"></span>
+<span class="w">  </span><span class="n">Variables</span><span class="p">:</span><span class="w"> </span><span class="n">T</span><span class="p">,</span><span class="w"> </span><span class="n">T_index</span><span class="p">,</span><span class="w"> </span><span class="n">T_monthly</span><span class="w"></span>
+<span class="w">     </span><span class="n">Length</span><span class="p">:</span><span class="w"> </span><span class="mi">56161</span><span class="w"></span>
+<span class="w">    </span><span class="n">Members</span><span class="p">:</span><span class="w"> </span><span class="mi">1000</span><span class="w"></span>
+
+<span class="w">  </span><span class="n">Vector</span><span class="p">:</span><span class="w"></span>
+<span class="w">              </span><span class="n">T</span><span class="w"> </span><span class="o">-</span><span class="w">  </span><span class="mi">4320</span><span class="w"> </span><span class="n">rows</span><span class="w">   </span><span class="o">|</span><span class="w">   </span><span class="n">lon</span><span class="w"> </span><span class="p">(</span><span class="mi">144</span><span class="p">)</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="n">lat</span><span class="w"> </span><span class="p">(</span><span class="mi">30</span><span class="p">)</span><span class="w"></span>
+<span class="w">        </span><span class="n">T_index</span><span class="w"> </span><span class="o">-</span><span class="w">     </span><span class="mi">1</span><span class="w"> </span><span class="n">rows</span><span class="w">   </span><span class="o">|</span><span class="w">   </span><span class="n">lon</span><span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="n">lat</span><span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="w"></span>
+<span class="w">      </span><span class="n">T_monthly</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">51840</span><span class="w"> </span><span class="n">rows</span><span class="w">   </span><span class="o">|</span><span class="w">   </span><span class="n">lon</span><span class="w"> </span><span class="p">(</span><span class="mi">144</span><span class="p">)</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="n">lat</span><span class="w"> </span><span class="p">(</span><span class="mi">30</span><span class="p">)</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="nb">time</span><span class="w"> </span><span class="n">sequence</span><span class="w"> </span><span class="p">(</span><span class="mi">12</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="step-4-select-variables">
+<h2>Step 4: Select Variables<a class="headerlink" href="#step-4-select-variables" title="Permalink to this heading"></a></h2>
+<p>Use the <code class="docutils literal notranslate"><span class="pre">useVariables</span></code> command to limit the ensemble object to a specific set of variables. Here the syntax is:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">obj</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">obj</span><span class="p">.</span><span class="n">useVariables</span><span class="p">(</span><span class="n">variables</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
+<dl class="simple">
+<dt><strong>variables</strong></dt><dd><p>The input is a list of variables in the ensemble. You can either list variable names, or the indices of variables within the ensemble. Using <code class="docutils literal notranslate"><span class="pre">-1</span></code> will reselect all the variables in the ensemble.</p>
+</dd>
+<dt><strong>obj</strong></dt><dd><p>The output is the updated ensemble object.</p>
+</dd>
+</dl>
+<p>After using the <code class="docutils literal notranslate"><span class="pre">useVariables</span></code> command, the <code class="docutils literal notranslate"><span class="pre">load</span></code> command will only load data for the specified variables. Likewise, the <code class="docutils literal notranslate"><span class="pre">metadata</span></code> command will only return metadata for these variables.</p>
+<section id="id3">
+<h3><em>Demo</em><a class="headerlink" href="#id3" title="Permalink to this heading"></a></h3>
+<p>We’ll use the <code class="docutils literal notranslate"><span class="pre">useVariables</span></code> command to limit the ensemble to the reconstruction targets - the <strong>T</strong> and <strong>T_index</strong> variables:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">variables</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="s">&quot;T&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;T_index&quot;</span><span class="p">];</span><span class="w"></span>
+<span class="n">ens</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">ens</span><span class="p">.</span><span class="n">useVariables</span><span class="p">(</span><span class="n">variables</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Inspecting the object:</p>
+<div class="input highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="nb">disp</span><span class="p">(</span><span class="n">ens</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
+<div class="output highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">static</span><span class="w"> </span><span class="s">ensemble</span><span class="w"> </span><span class="s">with</span><span class="w"> </span><span class="s">properties:</span><span class="w"></span>
+
+<span class="w">      </span><span class="n">Label</span><span class="p">:</span><span class="w"> </span><span class="n">NTREND</span><span class="w"> </span><span class="n">Temperature</span><span class="w"> </span><span class="n">Demo</span><span class="w"></span>
+<span class="w">  </span><span class="n">Variables</span><span class="p">:</span><span class="w"> </span><span class="n">T</span><span class="p">,</span><span class="w"> </span><span class="n">T_index</span><span class="w"></span>
+<span class="w">     </span><span class="n">Length</span><span class="p">:</span><span class="w"> </span><span class="mi">4321</span><span class="w"></span>
+<span class="w">    </span><span class="n">Members</span><span class="p">:</span><span class="w"> </span><span class="mi">1000</span><span class="w"></span>
+</pre></div>
+</div>
+<p>we can see that it only represents the two listed variables.</p>
+<p>If we now call the <code class="docutils literal notranslate"><span class="pre">load</span></code> command and examine the output:</p>
+<div class="input highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">X</span><span class="p">,</span><span class="w"> </span><span class="n">metadata</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">ens</span><span class="p">.</span><span class="n">load</span><span class="p">;</span><span class="w"></span>
+<span class="n">siz</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">size</span><span class="p">(</span><span class="n">X</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
+<div class="output highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">siz</span><span class="w"> </span><span class="p">=</span><span class="w"></span>
+<span class="w">        </span><span class="mi">4321</span><span class="w">        </span><span class="mi">1000</span><span class="w"></span>
+</pre></div>
+</div>
+<p>we can see that the loaded matrix only includes the 4321 rows associated with the <strong>T</strong> and <strong>T_index</strong> variables. It does not include the remaining rows associated with the <strong>T_monthly</strong> variable.</p>
+<p>Likewise the metadata object only includes information on the loaded variables:</p>
+<div class="input highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="nb">disp</span><span class="p">(</span><span class="n">metadata</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
+<div class="output highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">ensembleMetadata</span><span class="w"> </span><span class="s">with</span><span class="w"> </span><span class="s">properties:</span><span class="w"></span>
+
+<span class="w">      </span><span class="n">Label</span><span class="p">:</span><span class="w"> </span><span class="n">NTREND</span><span class="w"> </span><span class="n">Temperature</span><span class="w"> </span><span class="n">Demo</span><span class="w"></span>
+<span class="w">  </span><span class="n">Variables</span><span class="p">:</span><span class="w"> </span><span class="n">T</span><span class="p">,</span><span class="w"> </span><span class="n">T_index</span><span class="w"></span>
+<span class="w">     </span><span class="n">Length</span><span class="p">:</span><span class="w"> </span><span class="mi">4321</span><span class="w"></span>
+<span class="w">    </span><span class="n">Members</span><span class="p">:</span><span class="w"> </span><span class="mi">1000</span><span class="w"></span>
+
+<span class="w">  </span><span class="n">Vector</span><span class="p">:</span><span class="w"></span>
+<span class="w">            </span><span class="n">T</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">4320</span><span class="w"> </span><span class="n">rows</span><span class="w">   </span><span class="o">|</span><span class="w">   </span><span class="n">lon</span><span class="w"> </span><span class="p">(</span><span class="mi">144</span><span class="p">)</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="n">lat</span><span class="w"> </span><span class="p">(</span><span class="mi">30</span><span class="p">)</span><span class="w"></span>
+<span class="w">      </span><span class="n">T_index</span><span class="w"> </span><span class="o">-</span><span class="w">    </span><span class="mi">1</span><span class="w"> </span><span class="n">rows</span><span class="w">   </span><span class="o">|</span><span class="w">   </span><span class="n">lon</span><span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="n">lat</span><span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="step-5-select-members">
+<h2>Step 5: Select Members<a class="headerlink" href="#step-5-select-members" title="Permalink to this heading"></a></h2>
+<p>Use the <code class="docutils literal notranslate"><span class="pre">useMembers</span></code> command to limit the ensemble object to a specific set of ensemble members. Here the syntax is:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">obj</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">obj</span><span class="p">.</span><span class="n">useMembers</span><span class="p">(</span><span class="n">members</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
+<dl class="simple">
+<dt><strong>members</strong></dt><dd><p>The input is a vector of indices pointing to specific ensemble members in the saved state vector ensemble. Both linear and logical indices are acceptable. Using <code class="docutils literal notranslate"><span class="pre">-1</span></code> will reselect all saved ensemble members.</p>
+</dd>
+<dt><strong>obj</strong></dt><dd><p>The output is the updated ensemble object.</p>
+</dd>
+</dl>
+<p>After using the <code class="docutils literal notranslate"><span class="pre">useMembers</span></code> command, the <code class="docutils literal notranslate"><span class="pre">load</span></code> command will only load data for the specified members. Likewise, the <code class="docutils literal notranslate"><span class="pre">metadata</span></code> command will only return metadata for these members.</p>
+<section id="id4">
+<h3><em>Demo</em><a class="headerlink" href="#id4" title="Permalink to this heading"></a></h3>
+<p>Here, we’ll limit the ensemble to 100 randomly selected ensemble members. (Recall that there are 1000 members in the ensemble):</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">members</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">randsample</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span><span class="w"> </span><span class="mi">100</span><span class="p">);</span><span class="w"></span>
+<span class="n">ens</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">ensemble</span><span class="p">(</span><span class="s">&#39;ntrend&#39;</span><span class="p">)</span><span class="w"></span>
+<span class="n">ens</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">ens</span><span class="p">.</span><span class="n">useMembers</span><span class="p">(</span><span class="n">members</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Examining the ensemble object:</p>
+<div class="input highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="nb">disp</span><span class="p">(</span><span class="n">ens</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
+<div class="output highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">static</span><span class="w"> </span><span class="s">ensemble</span><span class="w"> </span><span class="s">with</span><span class="w"> </span><span class="s">properties:</span><span class="w"></span>
+
+<span class="w">      </span><span class="n">Label</span><span class="p">:</span><span class="w"> </span><span class="n">NTREND</span><span class="w"> </span><span class="n">Temperature</span><span class="w"> </span><span class="n">Demo</span><span class="w"></span>
+<span class="w">  </span><span class="n">Variables</span><span class="p">:</span><span class="w"> </span><span class="n">T</span><span class="p">,</span><span class="w"> </span><span class="n">T_index</span><span class="p">,</span><span class="w"> </span><span class="n">T_monthly</span><span class="w"></span>
+<span class="w">     </span><span class="n">Length</span><span class="p">:</span><span class="w"> </span><span class="mi">56161</span><span class="w"></span>
+<span class="w">    </span><span class="n">Members</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="w"></span>
+</pre></div>
+</div>
+<p>we see it now represents an ensemble with 100 members.</p>
+<p>If we now call the <code class="docutils literal notranslate"><span class="pre">load</span></code> command and examine the output:</p>
+<div class="input highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">X</span><span class="p">,</span><span class="w"> </span><span class="n">metadata</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">ens</span><span class="p">.</span><span class="n">load</span><span class="p">;</span><span class="w"></span>
+<span class="n">siz</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">size</span><span class="p">(</span><span class="n">X</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
+<div class="output highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">siz</span><span class="w"> </span><span class="p">=</span><span class="w"></span>
+<span class="w">       </span><span class="mi">56161</span><span class="w">         </span><span class="mi">100</span><span class="w"></span>
+</pre></div>
+</div>
+<p>we can see that the loaded matrix only include the 100 columns (ensemble members) associated with the object. Likewise the metadata object only includes information for the 100 members:</p>
+<div class="input highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="nb">disp</span><span class="p">(</span><span class="n">metadata</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
+<div class="output highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="w">  </span><span class="n">ensembleMetadata</span><span class="w"> </span><span class="s">with</span><span class="w"> </span><span class="s">properties:</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">Label</span><span class="p">:</span><span class="w"> </span><span class="n">NTREND</span><span class="w"> </span><span class="n">Temperature</span><span class="w"> </span><span class="n">Demo</span><span class="w"></span>
+<span class="w">    </span><span class="n">Variables</span><span class="p">:</span><span class="w"> </span><span class="n">T</span><span class="p">,</span><span class="w"> </span><span class="n">T_index</span><span class="p">,</span><span class="w"> </span><span class="n">T_monthly</span><span class="w"></span>
+<span class="w">       </span><span class="n">Length</span><span class="p">:</span><span class="w"> </span><span class="mi">56161</span><span class="w"></span>
+<span class="w">      </span><span class="n">Members</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="w"></span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="step-6-evolving-ensemble">
+<h2>Step 6: Evolving Ensemble<a class="headerlink" href="#step-6-evolving-ensemble" title="Permalink to this heading"></a></h2>
+<p>You can use the <code class="docutils literal notranslate"><span class="pre">evolving</span></code> command to implement an evolving ensemble. Each ensemble in an evolving set is built from a different selection of ensemble members. The syntax for the command is:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">obj</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">obj</span><span class="p">.</span><span class="n">evolving</span><span class="p">(</span><span class="n">members</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
+<dl class="simple">
+<dt><strong>members</strong></dt><dd><p>The first input indicates which ensemble members to use in each ensemble of an evolving set. This input is a matrix of indices. Each column lists the members for a particular ensemble in the evolving set. Both linear and logical indices are accepted, but each ensemble should have the same number of members.</p>
+</dd>
+<dt><strong>obj</strong></dt><dd><p>The output is the updated ensemble object.</p>
+</dd>
+</dl>
+<p>You can also use the optional second input to provide a set of labels for the ensembles in the evolving set:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">obj</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">obj</span><span class="p">.</span><span class="n">evolving</span><span class="p">(</span><span class="n">members</span><span class="p">,</span><span class="w"> </span><span class="n">labels</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
+<p>The <strong>labels</strong> input should be a vector of strings with one label per ensemble.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>You can also use the <code class="docutils literal notranslate"><span class="pre">evolvingLabels</span></code> command to apply labels to the evolving ensembles.</p>
+</div>
+<p>After using the <code class="docutils literal notranslate"><span class="pre">evolving</span></code> command, the <code class="docutils literal notranslate"><span class="pre">load</span></code> command will return a 3D data array, rather than a data matrix. The rows and columns are the same as before, and elements along the third dimension correspond to ensembles in the evolving set. The output metadata will become a vector of metadata objects with one object per ensemble in the set. The <code class="docutils literal notranslate"><span class="pre">metadata</span></code> command will similarly return a vector of metadata objects.</p>
+<p>Furthermore, you can now provide an optional input to the <code class="docutils literal notranslate"><span class="pre">load</span></code> and <code class="docutils literal notranslate"><span class="pre">metadata</span></code> commands. The syntax becomes:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">X</span><span class="p">,</span><span class="w"> </span><span class="n">metadata</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">obj</span><span class="p">.</span><span class="n">load</span><span class="p">(</span><span class="n">ensembles</span><span class="p">)</span><span class="w"></span>
+<span class="n">metadata</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">obj</span><span class="p">.</span><span class="n">metadata</span><span class="p">(</span><span class="n">ensembles</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
+<p>and allows you to return values for specific ensembles in the evolving set. The <strong>ensembles</strong> input is a list of ensembles for which to return values. You can either list the labels associated with particular ensembles, or the indices of ensembles in the evolving set.</p>
+<section id="id5">
+<h3><em>Demo</em><a class="headerlink" href="#id5" title="Permalink to this heading"></a></h3>
+<p>We’ll design an evolving ensemble with three individual ensembles. Each ensemble in the evolving set will be built from a different set of 100 ensemble members. We’ll apply some example labels to these ensembles.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The labels in this demo are not accurate. They are only used for demonstration purposes.</p>
+</div>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">ens</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">ensemble</span><span class="p">(</span><span class="s">&#39;ntrend&#39;</span><span class="p">);</span><span class="w"></span>
+<span class="n">members</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[(</span><span class="mi">1</span><span class="p">:</span><span class="mi">100</span><span class="p">)</span><span class="o">&#39;</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="mi">101</span><span class="p">:</span><span class="mi">200</span><span class="p">)</span><span class="o">&#39;</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="mi">201</span><span class="p">:</span><span class="mi">300</span><span class="p">)</span><span class="o">&#39;</span><span class="p">];</span><span class="w"></span>
+<span class="n">labels</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="s">&quot;Preindustrial&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Post 1850&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Mixed&quot;</span><span class="p">];</span><span class="w"></span>
+<span class="n">ens</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">ens</span><span class="p">.</span><span class="n">evolving</span><span class="p">(</span><span class="n">members</span><span class="p">,</span><span class="w"> </span><span class="n">labels</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Examining the ensemble object:</p>
+<div class="input highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="nb">disp</span><span class="p">(</span><span class="n">ens</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
+<div class="output highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">evolving</span><span class="w"> </span><span class="s">ensemble</span><span class="w"> </span><span class="s">with</span><span class="w"> </span><span class="s">properties:</span><span class="w"></span>
+
+<span class="w">      </span><span class="n">Label</span><span class="p">:</span><span class="w"> </span><span class="n">NTREND</span><span class="w"> </span><span class="n">Temperature</span><span class="w"> </span><span class="n">Demo</span><span class="w"></span>
+<span class="w">  </span><span class="n">Variables</span><span class="p">:</span><span class="w"> </span><span class="n">T</span><span class="p">,</span><span class="w"> </span><span class="n">T_index</span><span class="p">,</span><span class="w"> </span><span class="n">T_monthly</span><span class="w"></span>
+<span class="w">     </span><span class="n">Length</span><span class="p">:</span><span class="w"> </span><span class="mi">56161</span><span class="w"></span>
+<span class="w">    </span><span class="n">Members</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="w">  </span><span class="p">(</span><span class="n">per</span><span class="w"> </span><span class="n">ensemble</span><span class="p">)</span><span class="w"></span>
+
+<span class="w">  </span><span class="n">Evolving</span><span class="w"> </span><span class="n">Ensembles</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="w"></span>
+<span class="w">      </span><span class="mf">1.</span><span class="w"> </span><span class="n">Preindustrial</span><span class="w"></span>
+<span class="w">      </span><span class="mf">2.</span><span class="w"> </span><span class="n">Post</span><span class="w"> </span><span class="mi">1850</span><span class="w"></span>
+<span class="w">      </span><span class="mf">3.</span><span class="w"> </span><span class="n">Mixed</span><span class="w"></span>
+</pre></div>
+</div>
+<p>we can see that the object now represents an evolving ensemble with 3 individual ensembles in the evolving set.</p>
+<p>If we call the load command and examine the output:</p>
+<div class="input highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">X</span><span class="p">,</span><span class="w"> </span><span class="n">metadata</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">ens</span><span class="p">.</span><span class="n">load</span><span class="p">;</span><span class="w"></span>
+<span class="n">siz</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">size</span><span class="p">(</span><span class="n">X</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
+<div class="output highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">siz</span><span class="w"> </span><span class="p">=</span><span class="w"></span>
+<span class="w">   </span><span class="mi">56161</span><span class="w">         </span><span class="mi">100</span><span class="w">           </span><span class="mi">3</span><span class="w"></span>
+</pre></div>
+</div>
+<p>we can see that the loaded data array has 3 elements along the third dimension - one element per ensemble in the evolving set. Additionally, the array has 100 columns, so each individual ensemble is built from 100 ensemble members.</p>
+<p>Examining the metadata:</p>
+<div class="input highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="nb">disp</span><span class="p">(</span><span class="n">metadata</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
+<div class="output highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">3x1</span><span class="w"> </span><span class="s">ensembleMetadata</span><span class="w"> </span><span class="s">array</span><span class="w"></span>
+
+<span class="w">  </span><span class="n">Labels</span><span class="p">:</span><span class="w"></span>
+
+<span class="w">  </span><span class="s">&quot;Preindustrial&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="s">&quot;Post 1850&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="s">&quot;Mixed&quot;</span><span class="w"></span>
+</pre></div>
+</div>
+<p>we can see that it includes 3 metadata objects - one per ensemble.</p>
+<p>We can also use the <code class="docutils literal notranslate"><span class="pre">load</span></code> method to load specific ensembles within the evolving set. Here, we’ll load the Preindustrial and Mixed ensembles, but not the Post 1850 ensemble:</p>
+<div class="input highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">X</span><span class="p">,</span><span class="w"> </span><span class="n">metadata</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">ens</span><span class="p">.</span><span class="n">load</span><span class="p">([</span><span class="s">&quot;Preindustrial&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Mixed&quot;</span><span class="p">])</span><span class="w"></span>
+<span class="n">siz</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">size</span><span class="p">(</span><span class="n">X</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
+<div class="output highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">siz</span><span class="w"> </span><span class="p">=</span><span class="w"></span>
+<span class="w">   </span><span class="mi">56161</span><span class="w">         </span><span class="mi">100</span><span class="w">           </span><span class="mi">2</span><span class="w"></span>
+</pre></div>
+</div>
+<div class="input highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="nb">disp</span><span class="p">(</span><span class="n">metadata</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
+<div class="output highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">2x1</span><span class="w"> </span><span class="s">ensembleMetadata</span><span class="w"> </span><span class="s">array</span><span class="w"></span>
+
+<span class="w">  </span><span class="n">Labels</span><span class="p">:</span><span class="w"></span>
+
+<span class="w">  </span><span class="s">&quot;Preindustrial&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="s">&quot;Mixed&quot;</span><span class="w"></span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="full-demo">
+<h2>Full Demo<a class="headerlink" href="#full-demo" title="Permalink to this heading"></a></h2>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">% Create ensemble object</span><span class="w"></span>
+<span class="n">file</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&#39;ntrend.ens&#39;</span><span class="p">;</span><span class="w"></span>
+<span class="n">ens</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">ensemble</span><span class="p">(</span><span class="n">file</span><span class="p">);</span><span class="w"></span>
+
+<span class="c">% Select variables</span><span class="w"></span>
+<span class="n">variables</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="s">&quot;T&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;T_index&quot;</span><span class="p">];</span><span class="w"></span>
+<span class="n">ens</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">ens</span><span class="p">.</span><span class="n">useVariables</span><span class="p">(</span><span class="n">variables</span><span class="p">);</span><span class="w"></span>
+
+<span class="c">% Select ensemble members</span><span class="w"></span>
+<span class="n">members</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">randsample</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span><span class="w"> </span><span class="mi">100</span><span class="p">);</span><span class="w"></span>
+<span class="n">ens</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">ens</span><span class="p">.</span><span class="n">useMembers</span><span class="p">(</span><span class="n">members</span><span class="p">);</span><span class="w"></span>
+
+<span class="c">% Load</span><span class="w"></span>
+<span class="p">[</span><span class="n">X</span><span class="p">,</span><span class="w"> </span><span class="n">metadata</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">ens</span><span class="p">.</span><span class="n">load</span><span class="p">;</span><span class="w"></span>
+
+<span class="c">% Create evolving ensemble</span><span class="w"></span>
+<span class="n">members</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[(</span><span class="mi">1</span><span class="p">:</span><span class="mi">100</span><span class="p">)</span><span class="o">&#39;</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="mi">101</span><span class="p">:</span><span class="mi">200</span><span class="p">)</span><span class="o">&#39;</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="mi">201</span><span class="p">:</span><span class="mi">300</span><span class="p">)</span><span class="o">&#39;</span><span class="p">];</span><span class="w"></span>
+<span class="n">labels</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="s">&quot;Preindustrial&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Post 1850&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Mixed&quot;</span><span class="p">];</span><span class="w"></span>
+<span class="n">ens</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">ens</span><span class="p">.</span><span class="n">evolving</span><span class="p">(</span><span class="n">members</span><span class="p">,</span><span class="w"> </span><span class="n">labels</span><span class="p">);</span><span class="w"></span>
+
+<span class="c">% Load specific ensemble in evolving set</span><span class="w"></span>
+<span class="p">[</span><span class="n">X</span><span class="p">,</span><span class="w"> </span><span class="n">metadata</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">ens</span><span class="p">.</span><span class="n">load</span><span class="p">([</span><span class="s">&quot;Preindustrial&quot;</span><span class="p">,</span><span class="s">&quot;Mixed&quot;</span><span class="p">]);</span><span class="w"></span>
+</pre></div>
+</div>
+</section>
 </section>
 
 
