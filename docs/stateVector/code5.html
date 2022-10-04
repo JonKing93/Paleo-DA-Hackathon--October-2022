@@ -493,9 +493,9 @@
 </section>
 <section id="id4">
 <h3><em>Demo</em><a class="headerlink" href="#id4" title="Permalink to this heading"></a></h3>
-<p>In the demo, we will build an ensemble with 1000 members and save the ensemble to a file named <code class="docutils literal notranslate"><span class="pre">ntrend.ens</span></code>:</p>
+<p>In the demo, we will build an ensemble using every possible ensemble member. We will build the ensemble sequentially, so that the ensemble members are ordered in time. We’ll save the ensemble in a file named <code class="docutils literal notranslate"><span class="pre">ntrend.ens</span></code>:</p>
 <div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">filename</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&#39;ntrend.ens&#39;</span><span class="p">;</span><span class="w"></span>
-<span class="n">ens</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">sv</span><span class="p">.</span><span class="n">build</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;file&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">filename</span><span class="p">);</span><span class="w"></span>
+<span class="n">ens</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">sv</span><span class="p">.</span><span class="n">build</span><span class="p">(</span><span class="s">&#39;all&#39;</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;sequential&#39;</span><span class="p">,</span><span class="w"> </span><span class="nb">true</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;file&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">filename</span><span class="p">);</span><span class="w"></span>
 </pre></div>
 </div>
 </section>
@@ -527,50 +527,41 @@
 <section id="full-demo">
 <h2>Full Demo<a class="headerlink" href="#full-demo" title="Permalink to this heading"></a></h2>
 <p>This section recaps all the essential code from the demos. You can use it as a quick reference.</p>
-<p>Case A:</p>
-<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">% Initialize a new state vector</span><span class="w"></span>
-<span class="n">label</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&quot;NTREND Temperature Demo&quot;</span><span class="p">;</span><span class="w"></span>
-<span class="n">sv</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">stateVector</span><span class="p">(</span><span class="n">label</span><span class="p">);</span><span class="w"></span>
-
-<span class="c">% Get the temperature gridfile and its metadata</span><span class="w"></span>
-<span class="n">temperature</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">gridfile</span><span class="p">(</span><span class="s">&#39;temperature-cesm&#39;</span><span class="p">);</span><span class="w"></span>
-<span class="n">metadata</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">temperature</span><span class="p">.</span><span class="n">metadata</span><span class="p">;</span><span class="w"></span>
-
-<span class="c">% Add variables</span><span class="w"></span>
-<span class="n">variables</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="s">&quot;T&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;T_index&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;T_monthly&quot;</span><span class="p">];</span><span class="w"></span>
-<span class="n">sv</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">sv</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">variables</span><span class="p">,</span><span class="w"> </span><span class="n">temperature</span><span class="p">);</span><span class="w"></span>
-
-<span class="c">% Locate January months and spatial sites north of 35 N</span><span class="w"></span>
-<span class="n">january</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">month</span><span class="p">(</span><span class="n">metadata</span><span class="p">.</span><span class="n">time</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"></span>
-<span class="n">extratropical</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">metadata</span><span class="p">.</span><span class="n">lat</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">35</span><span class="p">;</span><span class="w"></span>
-
-<span class="c">% Make time an ensemble dimension with January reference moths.</span><span class="w"></span>
-<span class="c">% Limit variables to spatial sites north of 35 N</span><span class="w"></span>
-<span class="n">dimensions</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="s">&quot;time&quot;</span><span class="p">,</span><span class="s">&quot;lat&quot;</span><span class="p">];</span><span class="w"></span>
-<span class="n">types</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="s">&quot;ensemble&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;state&quot;</span><span class="p">];</span><span class="w"></span>
-<span class="n">indices</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">{</span><span class="n">january</span><span class="p">,</span><span class="w"> </span><span class="n">extratropical</span><span class="p">};</span><span class="w"></span>
-<span class="n">sv</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">sv</span><span class="p">.</span><span class="n">design</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">dimensions</span><span class="p">,</span><span class="w"> </span><span class="n">types</span><span class="p">,</span><span class="w"> </span><span class="n">indices</span><span class="p">);</span><span class="w"></span>
-
-<span class="c">% Implement a monthly sequence</span><span class="w"></span>
-<span class="n">indices</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">0</span><span class="p">:</span><span class="mi">11</span><span class="p">;</span><span class="w"></span>
-<span class="n">metadata</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">1</span><span class="p">:</span><span class="mi">12</span><span class="p">;</span><span class="w"></span>
-<span class="n">sv</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">sv</span><span class="p">.</span><span class="n">sequence</span><span class="p">(</span><span class="s">&quot;T_monthly&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;time&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">indices</span><span class="p">,</span><span class="w"> </span><span class="n">metadata</span><span class="p">);</span><span class="w"></span>
-
-<span class="c">% Implement JJA temporal means</span><span class="w"></span>
-<span class="n">jja</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="mi">5</span><span class="w"> </span><span class="mi">6</span><span class="w"> </span><span class="mi">7</span><span class="p">];</span><span class="w"></span>
-<span class="n">sv</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">sv</span><span class="p">.</span><span class="n">mean</span><span class="p">(</span><span class="n">variables</span><span class="p">(</span><span class="mi">1</span><span class="p">:</span><span class="mi">2</span><span class="p">),</span><span class="w"> </span><span class="s">&quot;time&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">jja</span><span class="p">);</span><span class="w"></span>
-
-<span class="c">% Implement latitude-weighted spatial mean</span><span class="w"></span>
-<span class="n">lats</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">metadata</span><span class="p">.</span><span class="n">lat</span><span class="p">(</span><span class="n">extratropical</span><span class="p">);</span><span class="w"></span>
-<span class="n">weights</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">cosd</span><span class="p">(</span><span class="n">lats</span><span class="p">);</span><span class="w"></span>
-<span class="n">sv</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">sv</span><span class="p">.</span><span class="n">mean</span><span class="p">(</span><span class="s">&quot;T_index&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;lon&#39;</span><span class="p">);</span><span class="w"></span>
-<span class="n">sv</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">sv</span><span class="p">.</span><span class="n">weightedMean</span><span class="p">(</span><span class="s">&quot;T_index&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;lat&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">weights</span><span class="p">);</span><span class="w"></span>
-
-<span class="c">% Build a 1000 member ensemble and save to file</span><span class="w"></span>
-<span class="n">filename</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&#39;ntrend.ens&#39;</span><span class="p">;</span><span class="w"></span>
-<span class="n">ens</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">sv</span><span class="p">.</span><span class="n">build</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;file&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">filename</span><span class="p">);</span><span class="w"></span>
-</pre></div>
-</div>
+<blockquote>
+<div><p>% Initialize a new state vector
+label = “NTREND Temperature Demo”;
+sv = stateVector(label);</p>
+<p>% Get the temperature gridfile and its metadata
+temperature = gridfile(‘temperature-cesm’);
+metadata = temperature.metadata;</p>
+<p>% Add variables
+variables = [“T”, “T_index”, “T_monthly”];
+sv = sv.add(variables, temperature);</p>
+<p>% Locate January months and spatial sites north of 35 N
+january = month(metadata.time) == 1;
+extratropical = metadata.lat &gt; 35;</p>
+<p>% Make time an ensemble dimension with January reference moths.
+% Limit variables to spatial sites north of 35 N
+dimensions = [“time”,”lat”];
+types = [“ensemble”, “state”];
+indices = {january, extratropical};
+sv = sv.design(-1, dimensions, types, indices);</p>
+<p>% Implement a monthly sequence
+indices = 0:11;
+sequenceMetadata = (1:12)’;
+sv = sv.sequence(“T_monthly”, ‘time’, indices, sequenceMetadata);</p>
+<p>% Implement JJA temporal means
+jja = [5 6 7];
+sv = sv.mean(variables(1:2), “time”, jja);</p>
+<p>% Implement latitude-weighted spatial mean
+lats = metadata.lat(extratropical);
+weights = cosd(lats);
+sv = sv.mean(“T_index”, ‘lon’);
+sv = sv.weightedMean(“T_index”, ‘lat’, weights);</p>
+<p>% Build ensemble sequentially and save to file
+filename = ‘ntrend.ens’;
+ens = sv.build(‘all’, ‘sequential’, true, ‘file’, filename);</p>
+</div></blockquote>
 </section>
 </section>
 

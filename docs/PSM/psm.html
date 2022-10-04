@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Outline &mdash; Paleo DA Hackathon 0.0.1 documentation</title>
+  <title>PSM &mdash; Paleo DA Hackathon 0.0.1 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/matlab-io.css" type="text/css" />
@@ -70,7 +70,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
-      <li>Outline</li>
+      <li>PSM</li>
       <li class="wy-breadcrumbs-aside">
       </li>
   </ul>
@@ -79,15 +79,10 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="outline">
-<h1>Outline<a class="headerlink" href="#outline" title="Permalink to this heading"></a></h1>
-<p>In this section, we’ll examine the <code class="docutils literal notranslate"><span class="pre">PSM</span></code> interface. This interface allows users to run proxy forward models using inputs from a state vector ensemble.</p>
-<dl class="simple">
-<dt><a class="reference internal" href="psm.html"><span class="doc">PSM</span></a></dt><dd><p>We’ll start with an overview of the <code class="docutils literal notranslate"><span class="pre">PSM</span></code> interface. The interface is designed to allow users to run <em>external</em> forward modeling codes using state vector ensembles. We’ll examine forward models officially supported by <code class="docutils literal notranslate"><span class="pre">DASH</span></code> and detail the main features of the interface.</p>
-</dd>
-<dt><a class="reference internal" href="code7.html"><span class="doc">Open Coding 7</span></a></dt><dd><p>We’ll then move into the next open-coding session and will use the interface to generate proxy estimates for our proxy records.</p>
-</dd>
-</dl>
+  <section id="psm">
+<h1>PSM<a class="headerlink" href="#psm" title="Permalink to this heading"></a></h1>
+<p>The <code class="docutils literal notranslate"><span class="pre">PSM</span></code> package provides an interface that allows you to run forward models using values in a state vector ensemble. Running the forward models produces the proxy estimates required for assimilation algorithms. The interface includes wrappers to several officially supported proxy system forward models, but we anticipate that many users will want to run forward models outside of this official set. To that end, <code class="docutils literal notranslate"><span class="pre">PSM</span></code> includes a template for writing new forward model wrappers.</p>
+<p>Ultimately though, the <code class="docutils literal notranslate"><span class="pre">PSM</span></code> interface is meant as a convenience. You are not required to use the interface to generate proxy estimates, and it’s perfectly acceptable to run the forward models outside of <code class="docutils literal notranslate"><span class="pre">DASH</span></code> using your own code. (If doing so, you may find the <code class="docutils literal notranslate"><span class="pre">ensembleMetadata</span></code> helpful for locating forward model inputs - see <code class="docutils literal notranslate"><span class="pre">dash.doc('ensembleMetadata')</span></code> for details). Here we detail the main features of the interface.</p>
 </section>
 
 
