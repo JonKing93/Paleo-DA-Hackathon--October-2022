@@ -17,9 +17,10 @@ If you are not redirected, please follow `this link <welcome>`_ or click the "Ne
     :hidden:
 
     Introduction <introduction/outline>
-    gridfile <gridfile/outline>
-    stateVector <stateVector/outline>
-    ensemble    <ensemble/outline>
+    gridfile     <gridfile/outline>
+    stateVector  <stateVector/outline>
+    ensemble     <ensemble/outline>
+    PSM          <psm/outline>
 
 
 .. toctree::
