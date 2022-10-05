@@ -13,27 +13,42 @@ Supported Forward Models
 ------------------------
 The ``DASH`` toolbox officially supports the following forward models:
 
-================  ===========
-     Model        Description
-================  ===========
-BayFOX            Bayesian model of planktic foraminiferal δ\ :sup:`18`\ O \ :sub:`c`
-BayMAG            Bayesian model of planktic foraminiferal Mg/Ca
-BaySPAR           Bayesian model for TEX'86
-BaySPLINE         Bayesian model for UK'37
-linear            General multi-variance linear model
-PDSI              Palmer Drought-Severity Index estimator
-PRYSM Cellulose   Cellulose δ\ :sup:`18`\ O sensor module
-PRYSM Coral       Coral δ\ :sup:`18`\ O sensor module
-PRYSM Ice-core    Ice-core  δ\ :sup:`18`\ O sensor module
-PRYSM Speleothem  Speleothm  δ\ :sup:`18`\ O sensor module
-VS-Lite           Vaganov-Shashkin Lite model of tree-ring width
-================  ===========
+===================  ===========
+     Model           Description
+===================  ===========
+`BayFOX`_            Bayesian model of planktic foraminiferal δ\ :sup:`18`\ O \ :sub:`c`
+`BayMAG`_            Bayesian model of planktic foraminiferal Mg/Ca
+`BaySPAR`_           Bayesian model for TEX'86
+`BaySPLINE`_         Bayesian model for UK'37
+linear               General multi-variance linear model
+`PDSI`_              Palmer Drought-Severity Index estimator
+`PRYSM Cellulose`_   Cellulose δ\ :sup:`18`\ O sensor module
+`PRYSM Coral`_       Coral δ\ :sup:`18`\ O sensor module
+`PRYSM Ice-core`_    Ice-core  δ\ :sup:`18`\ O sensor module
+`PRYSM Speleothem`_  Speleothm  δ\ :sup:`18`\ O sensor module
+`VS-Lite`_           Vaganov-Shashkin Lite model of tree-ring width
+===================  ===========
 
 As mentioned, ``PSM`` also includes a template for adding new forward models to the toolbox. We will not be covering this in the workshop, but if you are interested, enter::
 
     edit PSM.template
 
 in the console, and follow the instructions in the opened file.
+
+.. note::
+    The PRYSM forward models are written in Python and require some extra setup to run within Matlab. For the sake of time, we recommend not using the PRYSM PSM objects during the next open coding session. Instead, consider using the linear forward model as a practice run.
+
+.. _BayFOX: https://github.com/jesstierney/bayfoxm
+.. _BayMAG: https://github.com/jesstierney/BAYMAG
+.. _BaySPAR: https://github.com/jesstierney/BAYSPAR
+.. _BaySPLINE: https://github.com/jesstierney/BAYSPLINE
+.. _PDSI: https://github.com/jonking93/pdsi
+.. _PRYSM Cellulose: https://github.com/sylvia-dee/PRYSM
+.. _PRYSM Coral: https://github.com/sylvia-dee/PRYSM
+.. _PRYSM Ice-core: https://github.com/sylvia-dee/PRYSM
+.. _PRYSM Speleothem: https://github.com/sylvia-dee/PRYSM
+.. _VS-Lite: https://github.com/suztolwinskiward/vslite
+
 
 
 Standard Workflow
