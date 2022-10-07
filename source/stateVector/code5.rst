@@ -285,10 +285,10 @@ You can also use the ``sequence`` command to specify a sequence for multiple dim
 
 *Demo*
 ++++++
-In this demo, we want the **T_monthly** variable to implement a sequence such that the variable includes data for each month of the year. As a reminder, we're need this sequence so that we can implement various seasonal means for the forward models. This sequence proceeds along the ``time`` dimension. We previously specified January as a reference month, so our sequence indices will be the values from 0 to 11 (the offsets of each month from January). We'll use month numbers (the values from 1 to 12) as the metadata::
+In this demo, we want the **T_monthly** variable to implement a sequence such that the variable includes data for each month of the year. As a reminder, we're need this sequence so that we can implement various seasonal means for the forward models. This sequence proceeds along the ``time`` dimension. We previously specified January as a reference month, so our sequence indices will be the values from 0 to 11 (the offsets of each month from January). We'll use the names of the months (the values from 1 to 12) as the metadata::
 
     indices = 0:11;
-    metadata = (1:12)';
+    metadata = ["Jan";"Feb";"March";"April";"May";"June";"July";"Aug";"Sept";"Oct";"Nov";"Dec"];
     sv = sv.sequence("T_monthly", "time", indices, metadata);
 
 Inspecting the updated state vector:
@@ -421,7 +421,7 @@ In this most basic syntax, the ``build`` command will select ensemble members at
 
 *Sequential Build*
 ++++++++++++++++++
-You can use the ``'sequential'`` option to select ensemble members sequentially from the ensemble dimensions, rather than at random. For example, if you select ensemble members from ``time``, then using the ``'sequential'`` option will cause the ensemble members to be ordered in time. Here the syntax is::
+You can use the ``'sequential'`` option to select ensemble members sequentially from the ensemble dimensions, rather than at random. For example, if you select ensemble members from ``time``, then using the ``'sequential'`` option will cause the ensemble members to be ordered in time. This is often useful when designing an evolving (time-dependent ensemble) because you can more easily locate specific ensemble members. Here the syntax is::
 
     [X, ensMeta] = obj.build(..., 'sequential', true, ...)
 
@@ -510,7 +510,7 @@ This section recaps all the essential code from the demos. You can use it as a q
 
     % Implement a monthly sequence
     indices = 0:11;
-    sequenceMetadata = (1:12)';
+    sequenceMetadata = ["Jan";"Feb";"March";"April";"May";"June";"July";"Aug";"Sept";"Oct";"Nov";"Dec"];
     sv = sv.sequence("T_monthly", 'time', indices, sequenceMetadata);
 
     % Implement JJA temporal means

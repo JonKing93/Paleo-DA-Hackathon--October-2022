@@ -3,6 +3,12 @@ Open Coding 6
 In this section, we'll practice using some of the most common commands in the ``ensemble`` class. We'll see these commands again later in the workshop as we implement various other tasks.
 
 
+Goal
+----
+Practice using common ``ensemble`` commands in preparation for later tasks.
+
+
+
 Step 1: Create ``ensemble`` object
 ----------------------------------
 You can use the ``ensemble`` command to create an ensemble object for a saved state vector ensemble. The syntax is::
