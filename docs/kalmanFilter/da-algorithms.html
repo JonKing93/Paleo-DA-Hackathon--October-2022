@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Open Coding 8 &mdash; Paleo DA Hackathon 0.0.1 documentation</title>
+  <title>DA Algorithms in DASH &mdash; Paleo DA Hackathon 0.0.1 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/matlab-io.css" type="text/css" />
@@ -20,8 +20,8 @@
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Demo" href="../demo.html" />
-    <link rel="prev" title="kalmanFilter" href="kalmanFilter.html" /> 
+    <link rel="next" title="kalmanFilter" href="kalmanFilter.html" />
+    <link rel="prev" title="Outline" href="outline.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -52,9 +52,12 @@
 <li class="toctree-l1"><a class="reference internal" href="../ensemble/outline.html">ensemble</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../PSM/outline.html">PSM</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="outline.html">kalmanFilter</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="da-algorithms.html">DA Algorithms in DASH</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">DA Algorithms in DASH</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#algorithm-descriptions">Algorithm Descriptions</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="kalmanFilter.html">kalmanFilter</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Open Coding 8</a></li>
+<li class="toctree-l2"><a class="reference internal" href="code8.html">Open Coding 8</a></li>
 </ul>
 </li>
 </ul>
@@ -80,7 +83,7 @@
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
           <li><a href="outline.html">Outline</a> &raquo;</li>
-      <li>Open Coding 8</li>
+      <li>DA Algorithms in DASH</li>
       <li class="wy-breadcrumbs-aside">
       </li>
   </ul>
@@ -89,16 +92,30 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="open-coding-8">
-<h1>Open Coding 8<a class="headerlink" href="#open-coding-8" title="Permalink to this heading"></a></h1>
+  <section id="da-algorithms-in-dash">
+<h1>DA Algorithms in DASH<a class="headerlink" href="#da-algorithms-in-dash" title="Permalink to this heading"></a></h1>
+<p>The <code class="docutils literal notranslate"><span class="pre">DASH</span></code> toolbox contains code to implement three different data assimilation algorithms - specifically, the toolbox supports Kalman filter, particle filter, and optimal sensor analyses. Each of these algorithms is implemented by a class - specifically <code class="docutils literal notranslate"><span class="pre">kalmanFilter</span></code>, <code class="docutils literal notranslate"><span class="pre">particleFilter</span></code>, and <code class="docutils literal notranslate"><span class="pre">optimalSensor</span></code>. Each class implements an object that can be used to (1) set experimental parameters for a particular analysis, and (2) run the algorithm using those parameters. In this workshop, we’ll focus on using a Kalman filter, but you can find a summary of the other algorithms in the next section.</p>
+<p>It’s important to note that the three DA algorithms in DASH are independent of the rest of the toolbox. The other classes (<code class="docutils literal notranslate"><span class="pre">gridfile</span></code>, <code class="docutils literal notranslate"><span class="pre">stateVector</span></code>, <code class="docutils literal notranslate"><span class="pre">PSM</span></code>, etc.) are strictly meant for convenience. They are not required to implement an assimilation, and you can run any assimilation without them. However, we’ve included them in the workshop because we find they ultimately accelerate DA workflows.</p>
+<section id="algorithm-descriptions">
+<h2>Algorithm Descriptions<a class="headerlink" href="#algorithm-descriptions" title="Permalink to this heading"></a></h2>
+<p>The following section contains a brief description of the DA algorithms in DASH. You can find additional details within the DASH documentation and the paleoclimate DA literature.</p>
+<dl class="simple">
+<dt><strong>Kalman Filter</strong></dt><dd><p>The Kalman filter algorithm uses proxy estimates to estimate the covariance between proxy records and state vector elements. These covariances are down-weighted by the uncertainty associated with the innovation for each proxy record. The algorithm combines these covariances with the proxy innovations to update the ensemble members.</p>
+</dd>
+<dt><strong>Particle Filter</strong></dt><dd><p>The particle filter uses the proxy estimates and uncertainties to determine the similarity of each ensemble member to the proxy records. The algorithm uses these similarities to weight the ensemble members. These weights can be used to select the most similar ensemble member, or to implement a weighted mean over the ensemble. The most similar member or weighted mean is the updated ensemble.</p>
+</dd>
+<dt><strong>Optimal Sensor</strong></dt><dd><p>The optimal sensor algorithm is derived from a Kalman filter framework, but does not require proxy observations and does not update the ensemble. Instead, the algorithm is built around a climate metric calculated over an ensemble. The algorithm uses proxy estimates and uncertainties to quantify each proxy record’s ability to reduce uncertainty in this climate metric.</p>
+</dd>
+</dl>
+</section>
 </section>
 
 
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="kalmanFilter.html" class="btn btn-neutral float-left" title="kalmanFilter" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="../demo.html" class="btn btn-neutral float-right" title="Demo" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="outline.html" class="btn btn-neutral float-left" title="Outline" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="kalmanFilter.html" class="btn btn-neutral float-right" title="kalmanFilter" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
