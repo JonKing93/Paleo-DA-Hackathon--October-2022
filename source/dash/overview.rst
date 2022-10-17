@@ -10,6 +10,9 @@ DASH is organized into several different components, each implementing a particu
 * Build State Vector Ensembles: ``stateVector``
     The state vector ensemble is a key component of any ensemble DA method. The ``stateVector`` class allows users to flexibly design and build ensembles in a variety of styles.
 
+* Manipulate Ensembles: ``ensemble``
+    Large state vector ensembles can overwhelm computer memory, which can hinder workflows. The ``ensemble`` class allows you manipulate such ensembles, without loading them into memory. The class also includes tools for implementing evolving (time-dependent) ensembles.
+
 * Proxy Forward Models: ``PSM`` and ``ensembleMetadata``
     There are many different proxy forward models, written in a variety of styles. DASH provides the ``PSM`` interface to allow users to run external forward modeling codes within the DASH framework. A given forward model will require a unique set of climate variables, typically at a specific spatial location, as input. The ``ensembleMetadata`` class can assist users in locating these inputs within a state vector ensemble.
 
