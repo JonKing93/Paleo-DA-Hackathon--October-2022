@@ -54,7 +54,15 @@
 <li class="toctree-l1 current"><a class="reference internal" href="outline.html">kalmanFilter</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="da-algorithms.html">DA Algorithms in DASH</a></li>
 <li class="toctree-l2"><a class="reference internal" href="kalmanFilter.html">kalmanFilter</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Open Coding 8</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Open Coding 8</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#goal">Goal</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#step-1-create-kalmanfilter-object">Step 1: Create <code class="docutils literal notranslate"><span class="pre">kalmanFilter</span></code> object</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#demo"><em>Demo</em></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#step-2-essential-inputs">Step 2: Essential Inputs</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -91,6 +99,55 @@
              
   <section id="open-coding-8">
 <h1>Open Coding 8<a class="headerlink" href="#open-coding-8" title="Permalink to this heading"></a></h1>
+<section id="goal">
+<h2>Goal<a class="headerlink" href="#goal" title="Permalink to this heading"></a></h2>
+<p>In this session, we will use the <code class="docutils literal notranslate"><span class="pre">kalmanFilter</span></code> class to run an assimilation.</p>
+</section>
+<section id="step-1-create-kalmanfilter-object">
+<h2>Step 1: Create <code class="docutils literal notranslate"><span class="pre">kalmanFilter</span></code> object<a class="headerlink" href="#step-1-create-kalmanfilter-object" title="Permalink to this heading"></a></h2>
+<p>We’ll start by using the <code class="docutils literal notranslate"><span class="pre">kalmanFilter</span></code> command to create an object. The syntax is:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">obj</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">kalmanFilter</span><span class="w"></span>
+</pre></div>
+</div>
+<p>where <strong>obj</strong> is the new <code class="docutils literal notranslate"><span class="pre">kalmanFilter</span></code> object. You can optionally use the second input to label the object:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">obj</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">kalmanFilter</span><span class="p">(</span><span class="n">label</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
+<p>where <strong>label</strong> is a string.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>You can also use the <code class="docutils literal notranslate"><span class="pre">kalmanFilter.label</span></code> command to label the object at any later point.</p>
+</div>
+<section id="demo">
+<h3><em>Demo</em><a class="headerlink" href="#demo" title="Permalink to this heading"></a></h3>
+<p>Here, we’ll create a <code class="docutils literal notranslate"><span class="pre">kalmanFilter</span></code> object for the NTREND temperature assimilation. We’ll apply a label to the object:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">label</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&quot;NTREND Temperature Demo&quot;</span><span class="p">;</span><span class="w"></span>
+<span class="n">kf</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">kalmanFilter</span><span class="p">(</span><span class="n">label</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Inspecting the object:</p>
+<div class="input highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="nb">disp</span><span class="p">(</span><span class="n">kf</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
+<div class="output highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">kalmanFilter</span><span class="w"> </span><span class="s">with</span><span class="w"> </span><span class="s">properties:</span><span class="w"></span>
+
+<span class="w">            </span><span class="n">Label</span><span class="p">:</span><span class="w"> </span><span class="n">NTREND</span><span class="w"> </span><span class="n">Temperature</span><span class="w"> </span><span class="n">Demo</span><span class="w"></span>
+
+<span class="w">     </span><span class="n">Observations</span><span class="p">:</span><span class="w"> </span><span class="n">none</span><span class="w"></span>
+<span class="w">            </span><span class="n">Prior</span><span class="p">:</span><span class="w"> </span><span class="n">none</span><span class="w"></span>
+<span class="w">        </span><span class="n">Estimates</span><span class="p">:</span><span class="w"> </span><span class="n">none</span><span class="w"></span>
+<span class="w">    </span><span class="n">Uncertainties</span><span class="p">:</span><span class="w"> </span><span class="n">none</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">Returning</span><span class="p">:</span><span class="w"></span>
+<span class="w">            </span><span class="n">Mean</span><span class="w"></span>
+</pre></div>
+</div>
+<p>we can see the initialized Kalman filter. We can see that none of the 4 essential inputs (observations, prior, estimates, and uncertainties) have been set yet. We can also see that the object will only update the ensemble mean when running the Kalman filter algorithm.</p>
+</section>
+</section>
+<section id="step-2-essential-inputs">
+<h2>Step 2: Essential Inputs<a class="headerlink" href="#step-2-essential-inputs" title="Permalink to this heading"></a></h2>
+</section>
 </section>
 
 
