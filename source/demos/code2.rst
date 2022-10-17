@@ -50,6 +50,41 @@ We'll use the ``gridfile`` command to examine the ``ntrend.grid`` dataset.
 From the output, we can see that this catalogue manages data from 54 proxy sites over the period 750-2011 CE. The catalogue includes metadata for each site, and this metadata includes each site's ID, latitude, longitude, and optimal growing season. The data in the catalogue is sourced from the ``ntrend.mat`` file that was downloaded with the demo.
 
 
+*LGM Demo*
+++++++++++
+We'll use the ``gridfile`` command to examine the ``UK37.grid`` dataset.
+
+.. code::
+    :class: input
+
+    gridfile('UK37')
+
+.. code::
+    :class: output
+
+    gridfile with properties:
+
+            File: some/path/to/Hackathon/demos/LGM/UK37.grid
+      Dimensions: site, time
+
+      Dimension Sizes and Metadata:
+          site: 146
+          time:   1
+
+      Attributes:
+                     time_units: "ka"
+                     proxy_type: "UK'37"
+          site_metadata_columns: ["ID"    "Latitude"    "Longitude"]
+
+      Data Sources: 1
+
+    Show data sources
+
+          1. some/path/to/Hackathon/demos/LGM/UK37.mat   Show details
+
+From the output, we can see that this catalogue manages data from 146 UK'37 sites. The catalogue includes metadata for each site, and this metadata includes each site's ID, latitude, and longitude. The data in the catalogue is sourced from the ``UK37.mat`` file that was downloaded with the demo.
+
+
 
 Step 2: Examine metadata
 ------------------------
@@ -126,6 +161,56 @@ and see the ID, latitude, longitude, and growing season for each site. Similarly
 and see that the proxy data ranges from 750 CE to 2011 CE.
 
 
-.. collapse:: test
+*LGM Demo*
+----------
+We'll first use the ``metadata`` command to obtain the metadata for the ``uk37.grid`` catalogue:
 
-    This is a test collapse.
+.. code::
+    :class: input
+
+    metadata = gridfile('uk37').metadata
+
+.. code::
+    :class: output
+
+    metadata =
+
+      gridMetadata with metadata:
+
+              site: [146×3 string]
+              time: [18.0010 21]
+        attributes: [1×1 struct]
+
+From the output, we can see that the catalogue includes metadata for the ``site`` and ``time`` dimensions, as well as some non-dimensional attributes. We can inspect the metadata for the ``site`` dimension:
+
+.. code::
+    :class: input
+
+    metadata.site
+
+.. code::
+    :class: output
+
+    146×3 string array
+
+      "bs79-33"          "38.2617"     "14.03"
+      "ch07-98_ggc19"    "36.8667"     "-74.56667"
+      "churruca"         "-53.0548"    "-73.92933"
+      ...
+      "w8709a-8pc"       "42.242"      "-127.678"
+      "w8709a-8tc"       "42.242"      "-127.678"
+      "yj"               "21.524"      "112.1347"
+
+and see the ID, latitude, longitude, and growing season for each site. Similarly, we can inspect the metadata for the ``time`` dimension:
+
+.. code::
+    :class: input
+
+    metadata.time
+
+.. code::
+    :class: output
+
+    18.0010   21.0000
+
+and see that the proxy data is averaged over the interval from 18-21 ka.
