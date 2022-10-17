@@ -1,4 +1,4 @@
-Open Coding 7
+Open Coding 4
 =============
 
 Goal
@@ -21,9 +21,14 @@ The ``download`` command will add the downloaded code to the active Matlab path 
 The ``download`` command requires that you have (1) an internet connection, and (2) git installed on your operating system. If you don't have git installed, you can use the ``PSM.githubInfo`` command to find the location of supported forward models on Github.
 
 
-*Demo*
-++++++
-In this demo, we'll be using the multi-variate linear forward model. The linear model is built-in directly to DASH and doesn't need to be downloaded, so we'll use the VS-Lite forward model as an example. Using the ``PSM.info`` command:
+*NTREND Demo*
++++++++++++++
+In this demo, we'll be using the multi-variate linear forward model. The linear model is built-in directly to DASH, so we won't need to download anything. If you still want to practice using the ``PSM.download`` command, see the LGM demo for an example using the BaySPLINE forward model.
+
+
+*LGM Demo*
+++++++++++
+For this demo, we'll need to download the BaySPLINE UK'37 forward model. Using the  ``PSM.info`` command:
 
 .. code::
     :class: input
@@ -43,11 +48,11 @@ In this demo, we'll be using the multi-variate linear forward model. The linear 
     "linear"       "General linear model of form:  Y = Y = a1*X1 + a2*X2 + ... an*Xn + b"        false
     "vslite"       "Vaganov-Shashkin Lite tree ring model"                                       false
 
-we can see that DASH uses the name ``vslite`` to recognize this model. Using the ``download`` command::
+we can see that DASH uses the name ``bayspline`` to identify this model. Try using the ``download`` command::
 
     PSM.download("vslite")
 
-will download the code for this forward model to the current directory.
+to download the code for this forward model. After running the command, your current directory should contain a folder named ``BAYSPLINE``, which holds the code for the forward model.
 
 
 
@@ -70,11 +75,11 @@ The DASH documentation should include a description of all required parameters, 
 When building PSM objects for a group of proxies, it's typically best to organize the collection of PSM objects in a cell vector. Each element of the cell vector should hold the PSM object for a particular proxy record. Consider using the ``PSM.label`` command to apply labels to the PSM objects, as this can help clarify what each model represents.
 
 
-*Demo*
-++++++
-In the demo, we'll be using univariate linear forward models for the proxy records. Each forward model should be calibrated to the seasonal temperature mean for the associated proxy. Each proxy has a unique window of seasonal sensitivity, so the months used in the seasonal means will vary with the proxies. The slopes to use for the forward models are stored in the file ``forward-model-slopes.mat`` (these slopes were calculated by calibrating the proxy records against instrumental seasonal means).
+*NTREND Demo*
++++++++++++++
+In the demo, we'll be using univariate linear forward models for the proxy records. Each forward model should be calibrated to the seasonal temperature mean for the associated proxy. Each proxy has a unique window of seasonal sensitivity, so the months used in the seasonal means will vary with the proxies. The slopes to use for the forward models are stored in the ``ntrend.mat`` file (these slopes were calculated by calibrating the proxy records against instrumental seasonal means).
 
-Recall that **T_monthly** variable stores the data required to run these forward models. We applied a sequence to **T_monthly** so that it stores data from each month in a given year. To run a given forward model, we'll want to locate the climate model grid point closest to the associated proxy record, extract the months of seasonal sensitivity, take the mean temperature over those months, and then apply a linear slope to that mean temperature. Since we're using a linear model, we can combine the last two steps into one. Specifically, we can divide the linear slope by the number of seasonally sensitive months (i.e. implementing a mean) and apply that slope to the temperature in each sensitive month.
+Recall that the **T_monthly** variable stores the data required to run these forward models. We applied a sequence to **T_monthly** so that it stores data from each month in a given year. To run a given forward model, we'll want to locate the climate model grid point closest to the associated proxy record, extract the months of seasonal sensitivity, take the mean temperature over those months, and then apply a linear slope to that mean temperature. Since we're using a linear model, we can combine the last two steps into one. Specifically, we can divide the linear slope by the number of seasonally sensitive months (i.e. implementing a mean) and apply that slope to the temperature in each sensitive month.
 
 Reading the documentation of the linear constructor::
 
@@ -82,9 +87,10 @@ Reading the documentation of the linear constructor::
 
 we can see that function requires the linear slopes as input. In following code, we'll create a linear PSM object for each of the 54 proxy records. We'll label each object with both the name of the proxy and the seasonally sensitive months. Finally, we'll group the set of PSM objects into a cell vector::
 
-    % Load the linear slopes
-    slopes = load('ntrend-PSM-slopes.mat', 'slopes');
-    slopes = slopes.slopes;
+    % Load the parameters of the linear model
+    parameters = load('ntrend.mat', 'slopes', 'intercepts');
+    slopes = parameters.slopes;
+    intercepts = parameters.intercepts;
 
     % Get the name and seasonal window for each proxy
     metadata = gridfile('ntrend').metadata;
@@ -105,7 +111,7 @@ we can see that function requires the linear slopes as input. In following code,
         monthlySlopes = repmat(slope, [nMonths, 1]);
 
         % Create a linear forward model using the slopes
-        model = PSM.linear(monthlySlopes);
+        model = PSM.linear(monthlySlopes, intercepts(s));
 
         % Label the model and store in the cell vector
         label = strcat(names(s), " - ", seasons(s));
@@ -149,7 +155,7 @@ we can see that "models" is a cell vector with 54 elements, and that each elemen
 
         Parameters:
            slopes: [2×1 double]
-        intercept: 0
+        intercept: -4.3496
 
 we can see that the first PSM object is for the "NTR" proxy site, and that it implements a seasonal mean over July and August (months 7 and 8). Separately, the second model:
 
@@ -168,9 +174,81 @@ we can see that the first PSM object is for the "NTR" proxy site, and that it im
 
         Parameters:
            slopes: [9×1 double]
-        intercept: 0
+        intercept: 0.0675
 
 is for the "GOA" proxy site, and it implements a seasonal mean from January to September.
+
+
+
+*LGM Demo*
+++++++++++
+In this demo, we'll be using the BAYSPLINE forward model for UKL'37. Reading the documentation of its constructor::
+
+    help PSM.bayspline
+
+we can see the BAYSPLINE model does not require any site-specific parameteers. Thus, we can create a BAYSPLINE object for each proxy record without requiring any inputs.
+
+In the following code, we'll create a BAYSPLINE PSM object for each of the 139 UK'37 records. We'll label each object with the name of the associated proxy record, and we'll group the set of PSM objects into a cell vector::
+
+    % Get the ID for each proxy record
+    metadata = gridfile('uk37').metadata;
+    ID = metadata.site(:,1);
+
+    % Preallocate the cell vector for the PSM objects
+    nSite = numel(ID);
+    models = cell(nSite, 1);
+
+    % Build a BaySPLINE object for each proxy record
+    for s = 1:nSite
+        model = PSM.bayspline;
+
+        % Label the model, and store in the cell vector
+        model = model.label(ID(s));
+        models{s} = model;
+    end
+
+    Examining the output:
+
+    .. code::
+        :class: input
+
+        disp(models)
+
+    .. code::
+        :class: output
+
+        models =
+
+          139×1 cell array
+
+            {1×1 PSM.bayspline}
+            {1×1 PSM.bayspline}
+            ...
+            {1×1 PSM.bayspline}
+            {1×1 PSM.bayspline}
+
+we can see that "models" is a cell vector with 139 elements, and that each element holds a bayspline PSM object for a particular proxy record. We can inspect the elements of the cell to see the individual PSMs. For example:
+
+.. code::
+    :class: input
+
+    models{1}
+
+.. code::
+    :class: output
+
+    bayspline PSM with properties:
+
+        Label: bs79-33
+         Rows: none
+
+        Parameters:
+        bayes: {}
+
+
+
+
+
 
 
 Step 3: Locate Inputs in Ensemble
@@ -258,9 +336,9 @@ We will only cover the ``closestLatLon`` command in the workshop, but the ``ense
 These functions are also helpful for locating data inputs when running forward models outside of the ``DASH`` framework.
 
 
-*Demo: closestLatLon*
-+++++++++++++++++++++
-We'll start with a quick demo of the ``closestLatLon`` command. In the demo, we need to search through the **T_monthly** variable for data from the climate model grid point closest to each proxy record. Since **T_monthly** implements a sequence for each month of the year, the ``closestLatLon`` command should return 12 rows (one for each month of the year). We'll then select the rows that correspond to the months of the proxy's seasonal sensitivity.
+*NTREND Demo: closestLatLon*
+++++++++++++++++++++++++++++
+We'll start with a quick exploration of the ``closestLatLon`` command. In the demo, we need to search through the **T_monthly** variable for data from the climate model grid point closest to each proxy record. Since **T_monthly** implements a sequence for each month of the year, the ``closestLatLon`` command should return 12 rows (one for each month of the year). We'll then select the rows that correspond to the months of the proxy's seasonal sensitivity.
 
 Here, we'll demo the command for a single proxy record. We'll also use several ``ensembleMetadata`` commands to verify that the selected rows point to the correct data. We'll start by getting the coordinates and seasonal sensitivity window of the NTR proxy record (this is the first proxy record in our dataset):
 
@@ -427,8 +505,9 @@ We can do a final verification to ensure that these rows represent July and Augu
         "August"
 
 
-*Demo: Record rows*
-+++++++++++++++++++
+
+*NTREND Demo: Record rows*
+++++++++++++++++++++++++++
 Now that we've seen how to use the ``closestLatLon`` command, we can combine it with the ``rows`` command. Here, we need to update the forward model for each proxy record, so we'll be using these commands within a ``for`` loop. Within each loop iteration, we'll locate the appropriate state vector rows for the proxy record, and then pass these rows to the forward model using the ``rows`` command::
 
     % Get the coordinates and metadata for each proxy site
@@ -480,6 +559,111 @@ We can double-check the forward models to ensure they know which state vector ro
 we can see that the state vector rows have been set.
 
 
+*LGM Demo: closestLatLon*
++++++++++++++++++++++++++
+We'll start by exploring the ``closestLatLon`` command. In the demo, we need to search through the **SST** variable for data from the climate model grid point closest to each proxy record.
+
+Here, we'll demo the command for a single proxy record. We'll also use several ``ensembleMetadata`` commands to verify that the selected rows point to the correct data. We'll start by getting the coordinates of the "bs79-33" proxy record (this is the first proxy record in our dataset):
+
+.. code::
+    :class: input
+
+    site = gridfile('uk37').metadata.site(1,:);
+    lat = str2num(site(2));
+    lon = str2num(site(3));
+
+.. code::
+    :class: output
+
+    lat =
+       38.2617
+
+    lon =
+       14.0300
+
+   Here we can see that the site is located at 38.26N, 14.03E.
+
+   Next, we'll use the ``closestLatLon`` command to locate the data elements in the **SST** variable from the climate model grid point closest to this proxy site. Since the **SST** dataset is on a tripolar grid, it uses the ``site`` dimension to organize climate model grid points. Thus, we'll use the "site" option with this command - note that the latitude coordinate is the first column of the site metadata in ``SST.grid``, and that longitude is the second column:
+
+.. code::
+   :class: input
+
+   % Load the ensemble metadata object
+   ens = ensemble('lgm');
+   ensMeta = ens.metadata;
+
+   % Locate the closest data elements
+   coordinates = [lat, lon];
+   row = ensMeta.closestLatLon("SST", coordinates, 'site', [1 2])
+
+.. code::
+    :class: output
+
+    row =
+       94129
+
+Here we can see the command returned the state vector row of the climate model grid point closest to the proxy site. We can use the ``ensembleMetadata.rows`` command to verify that this row is near the proxy site:
+
+.. code::
+    :class: input
+
+    siteMetadata = ensMeta.rows("site", row)
+
+.. code::
+    :class: output
+
+    siteMetadata =
+
+       38.1033   13.7306
+
+
+*LGM Demo: Record Rows*
++++++++++++++++++++++++
+Now that we've seen how to use the ``closestLatLon`` command, we can combine it with the ``rows`` command. Here, we need to update the forward model for each proxy record, so we'll be using these commands within a ``for`` loop. Within each loop iteration, we'll locate the appropriate state vector row for the proxy record, and then pass the row to the forward model using the ``rows`` command::
+
+    % Get the coordinates for each proxy site
+    site = gridfile('uk37').metadata.site;
+    lats = str2double(site(:,2));
+    lons = str2double(site(:,3));
+
+    % Get the metadata object for the ensemble
+    ens = ensemble('lgm');
+    ensMeta = ens.metadata;
+
+    % Loop over the proxy sites / forward models
+    for s = 1:numel(models)
+        model = models{s};
+
+        % Search for the closest climate model grid point
+        coordinates = [lats(s), lons(s)];
+        row = ensMeta.closestLatLon("SST", coordinates, 'site', [1 2]);
+
+        % Provide the row to the forward model
+        model = model.rows(row);
+        models{s} = model;
+    end
+
+We can double-check the forward models to ensure they know which state vector rows to use as input. For example, if we inspect the first forward model:
+
+.. code::
+    :class: input
+
+    models{1}
+
+.. code::
+    :class: output
+
+    bayspline PSM with properties:
+
+        Label: bs79-33
+         Rows: set
+
+        Parameters:
+        bayes: {}
+
+we can see that the state vector row has been set.
+
+
 
 Step 4: Estimate Proxies
 ------------------------
@@ -504,15 +688,15 @@ You can run a set of forward models over an ensemble using the ``PSM.estimate`` 
     You can use the ``PSM.info`` method to see which forward models can estimate R variances.
 
 
-*Demo*
-++++++
+*NTREND Demo*
++++++++++++++
 Here, we'll run the forward models over the ensemble to produce the proxy estimates. The linear forward model does not estimate error-variances, so we'll only compute proxy estimates here::
 
     % Get the ensemble object
     ens = ensemble('ntrend');
 
     % Run the models over the ensemble
-    Ye = PSM.run(models, ens);
+    Ye = PSM.estimate(models, ens);
 
 Inspecting the output:
 
@@ -528,6 +712,49 @@ Inspecting the output:
               54        1156
 
 we can see that Ye is a matrix with one row for each of the 54 proxy records, and a column for each of the 1156 ensemble members.
+
+
+*LGM Demo*
+++++++++++
+Here, we'll run the forward models over the ensemble to produce proxy estimates. The BaySPLINE PSM is also able to estimate proxy uncertainties, so we'll also obtain those (as the second output):
+
+    % Get the ensemble object
+    ens = ensemble('lgm');
+
+    % Run the models over the ensemble
+    [Ye, R] = PSM.estimate(models, ens);
+
+Inspecting the output:
+
+.. code::
+    :class: input
+
+    siz = size(Ye)
+
+.. code::
+    :class: output
+
+    siz =
+       139    16
+
+we can see that Ye is a matrix with one row for each of the 139 proxy records, and a column for each of the 16 ensemble members. Similarly examining R:
+
+.. code::
+    :class: input
+
+    siz = size(R)
+
+.. code::
+    :class: output
+
+    siz =
+       139    16
+
+we can see that R has an uncertainty estimate for each proxy record and ensemble member. In reality, we only want one uncertainty estimate per proxy record, so we'll use the mean uncertainty estimates over the ensemble::
+
+    R = mean(R, 2);
+
+
 
 
 Step 4b: Estimate proxies externally

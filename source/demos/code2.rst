@@ -90,7 +90,7 @@ We'll use the ``gridfile`` command to examine the ``UK37.grid`` dataset.
       Dimensions: site, time
 
       Dimension Sizes and Metadata:
-          site: 146
+          site: 139
           time:   1
 
       Attributes:
@@ -104,7 +104,7 @@ We'll use the ``gridfile`` command to examine the ``UK37.grid`` dataset.
 
           1. some/path/to/Hackathon/demos/LGM/UK37.mat   Show details
 
-From the output, we can see that this catalogue manages data from 146 UK'37 sites. The catalogue includes metadata for each site, and this metadata includes each site's ID, latitude, and longitude. The data in the catalogue is sourced from the ``UK37.mat`` file that was downloaded with the demo.
+From the output, we can see that this catalogue manages data from 139 UK'37 sites. The catalogue includes metadata for each site, and this metadata includes each site's ID, latitude, and longitude. The data in the catalogue is sourced from the ``UK37.mat`` file that was downloaded with the demo.
 
 .. raw:: html
 
@@ -224,7 +224,7 @@ We'll first use the ``metadata`` command to obtain the metadata for the ``uk37.g
 
       gridMetadata with metadata:
 
-              site: [146×3 string]
+              site: [139×3 string]
               time: [18.0010 21]
         attributes: [1×1 struct]
 
@@ -244,9 +244,9 @@ From the output, we can see that the catalogue includes metadata for the ``site`
       "ch07-98_ggc19"    "36.8667"     "-74.56667"
       "churruca"         "-53.0548"    "-73.92933"
       ...
-      "w8709a-8pc"       "42.242"      "-127.678"
-      "w8709a-8tc"       "42.242"      "-127.678"
-      "yj"               "21.524"      "112.1347"
+      "vm19-30"           "-3.383"      "-83.52"
+      "w8709a-8pc"        "42.242"      "-127.678"
+      "w8709a-8tc"        "42.242"      "-127.678"
 
 and see the ID, latitude, and longitude for each site. Similarly, we can inspect the metadata for the ``time`` dimension:
 

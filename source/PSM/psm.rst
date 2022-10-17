@@ -70,7 +70,7 @@ Locate Forward Model Inputs
 +++++++++++++++++++++++++++
 Next, you'll need to locate the elements of the state vector ensemble that are required to run each forward model. Every PSM object includes a ``rows`` command, which allows you to specify which state vector rows contain the inputs for a given forward model.
 
-You'll typically use the ``ensembleMetadata`` class to locate these rows. The ``closestLatLon`` command is perhaps the most used - it will search a state vector variable for the data values closest to a proxy site. Other commands that may be useful include ``ensembleMetadata.find``, which locates specific state vector variables, and ``ensembleMetadata.variable``, which returns metadata along the rows of a state vector variable.
+You'll typically use the ``ensembleMetadata`` class to locate these rows. The ``closestLatLon`` command is perhaps the most frequently used - it will search a state vector variable for the data values closest to a proxy site. Other commands that may be useful include ``ensembleMetadata.find``, which locates specific state vector variables, and ``ensembleMetadata.variable``, which returns metadata along the rows of a state vector variable.
 
 
 
