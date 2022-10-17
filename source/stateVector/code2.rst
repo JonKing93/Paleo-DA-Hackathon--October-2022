@@ -1,4 +1,4 @@
-Open Coding 5
+Open Coding 2
 =============
 
 Goal
@@ -8,7 +8,7 @@ Use the ``stateVector`` class to design and build a state vector ensemble.
 
 Step 1: Create new state vector
 -------------------------------
-Use the ``stateVector`` command to create a new ``stateVector`` object.
+Use the ``stateVector`` command to create a new ``stateVector`` object::
 
     newObject = stateVector
 
@@ -26,8 +26,9 @@ where **label** is a string used as the label.
 In either case, the new ``stateVector`` object will be empty. It does not yet have any variables, and so the state vector will initially have a length of zero. In the next section, we'll start adding variables to the state vector.
 
 
-*Demo*
-++++++
+
+*NTREND Demo*
++++++++++++++
 
 We'll create a new ``stateVector`` object and label it as "NTREND Temperature Demo"
 
@@ -484,6 +485,8 @@ where **functionHandle** is a function handle to the conversion function. The gr
 Full Demo
 ---------
 This section recaps all the essential code from the demos. You can use it as a quick reference.
+
+::
 
     % Initialize a new state vector
     label = "NTREND Temperature Demo";
