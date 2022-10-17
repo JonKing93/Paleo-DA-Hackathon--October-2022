@@ -54,7 +54,7 @@ pygments_style = 'matlab'
 
 html_theme = 'sphinx_rtd_theme'
 html_static_path = ["_static"]
-html_css_files = ["css/matlab-io.css"]
+html_css_files = ["css/matlab-io.css","css/accordion.css"]
 
 html_copy_source = False
 

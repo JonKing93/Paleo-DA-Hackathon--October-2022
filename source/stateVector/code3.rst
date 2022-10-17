@@ -1,4 +1,4 @@
-Open Coding 2
+Open Coding 3
 =============
 
 Goal
@@ -30,12 +30,12 @@ In either case, the new ``stateVector`` object will be empty. It does not yet ha
 *NTREND Demo*
 +++++++++++++
 
-We'll create a new ``stateVector`` object and label it as "NTREND Temperature Demo"
+We'll create a new ``stateVector`` object and label it as "NTREND Demo"
 
 .. code::
     :class: input
 
-    label = "NTREND Temperature Demo";
+    label = "NTREND Demo";
     sv = stateVector(label)
 
 .. code::
@@ -45,11 +45,40 @@ We'll create a new ``stateVector`` object and label it as "NTREND Temperature De
 
       stateVector with properties:
 
-            Label: NTREND Temperature Demo
+            Label: NTREND Demo
            Length: 0 rows
         Variables: 0
 
 We can see from the console output that the state vector currently has 0 variables, and thus has a length of 0 rows.
+
+
+*LGM Demo*
+++++++++++
+
+We'll create a new ``stateVector`` object and label it as "LGM Demo"
+
+.. code::
+    :class: input
+
+    label = "LGM Demo";
+    sv = stateVector(label)
+
+.. code::
+    :class: output
+
+    sv =
+
+      stateVector with properties:
+
+            Label: LGM Demo
+           Length: 0 rows
+        Variables: 0
+
+We can see from the console output that the state vector currently has 0 variables, and thus has a length of 0 rows.
+
+
+
+
 
 
 .. _sv.add:
@@ -91,9 +120,9 @@ The ``stateVector.add`` command can also be used to add multiple variables to a 
 where **variableNames** is a vector of names, and **grids** is a vector with one ``gridfile`` or file name per new variable. If all of the new variables are derived from the same gridfile, then **grids** may instead be a single ``gridfile`` object or file name referencing the appropriate catalogue.
 
 
-*Demo: Reconstruction Targets*
-++++++++++++++++++++++++++++++
-We'll now add reconstruction target variables to the state vector. In this demo, we'll have two reconstruction targets:
+*NTREND Demo*
++++++++++++++
+We'll first add reconstruction target variables to the state vector. In this demo, we'll have two reconstruction targets:
 
 Mean summer temperature field
     Our first reconstruction target is the spatial field of mean summer temperatures. Here, we'll define "mean summer" as the mean over June, July and August (JJA). We'll only reconstruct the spatial field in the extratropical Northern Hemisphere (regions north of 35°N) because the proxy network is limited to this domain.
@@ -122,7 +151,7 @@ Inspecting the state vector:
 
     stateVector with properties:
 
-          Label: NTREND Temperature Demo
+          Label: NTREND Demo
          Length: 383533056 rows
       Variables: T, T_index
        Coupling: All variables coupled
@@ -133,12 +162,9 @@ Inspecting the state vector:
 
 we can see that the state vector now includes the two variables. At this point, the variables have extremely long state vectors. This is because all dimensions are currently set as :ref:`state dimensions <state-dims>`, so the state vector is being propagated over the very long time dimension. The variables will look more reasonable once we convert the time dimension to an ensemble dimension.
 
+----
 
-
-
-*Demo: Forward Model Variables*
-+++++++++++++++++++++++++++++++
-We'll also need to add state vector variables for any climate variables required to run the proxy forward models. In this demo, we will be using a univariate, linear forward model for each proxy site. Each forward model will estimate tree-ring widths using seasonal-mean temperatures from the climate model grid point closest to the proxy site. The specific seasonal mean used for each forward model will depend on the seasonal sensitivity of the associated site. (Recall that we can each site's seasonal sensitivity recorded in our proxy metadata)::
+At this point, we still need to add state vector variables for any climate variables required to run the proxy forward models. In this demo, we will be using a univariate, linear forward model for each proxy site. Each forward model will estimate tree-ring widths using seasonal-mean temperatures from the climate model grid point closest to the proxy site. The specific seasonal mean used for each forward model will depend on the seasonal sensitivity of the associated site. (Recall that we can each site's seasonal sensitivity recorded in our proxy metadata)::
 
     metadata = gridfile('ntrend').metadata;
     nameSeason = metadata.site(:,[1 4]);
@@ -168,7 +194,7 @@ Examining the updated object:
 
     stateVector with properties:
 
-          Label: NTREND Temperature Demo
+          Label: NTREND Demo
          Length: 575299584 rows
       Variables: T, T_index, T_monthly
        Coupling: All variables coupled
@@ -179,6 +205,46 @@ Examining the updated object:
           T_monthly - 191766528 rows   |   lon (144) x lat (96) x time (13872)   Show details
 
 we can see that the "T_monthly" variable has been added to the state vector, alongside the previously added **T** and **T_index** variables.
+
+
+
+*LGM Demo*
+++++++++++
+For this demo, we'll first note that our reconstruction target is the annual mean SST field. We also note that the BaySPLINE forward models will require annual-mean SSTs as input. Thus for this demo, the reconstruction target and forward model inputs are the same variable - so we'll only need to add a single variable to the state vector. We'll name this variable **SST**. Note that the climate model output for this variable is catalogued by the ``SST.grid`` file::
+
+    % Get the variable name and gridfile catalogue
+    variable = "SST";
+    grid = "SST.grid";
+
+    % Add the variable to the state vector
+    sv = sv.add(variable, grid);
+
+Inspecting the updated state vector:
+
+.. code::
+    :class: input
+
+    disp(sv)
+
+.. code::
+    :class: output
+
+    stateVector with properties:
+
+          Label: LGM Demo
+         Length: 23592960 rows
+      Variables: SST
+       Coupling: All variables coupled
+
+      Vector:
+          SST - 23592960 rows   |   site (122880) x time (12) x run (16)   Show details
+
+we can see that the **SST** variable has been added to the state vector. Currently, the variable is very long - this is because all dimensions are currently set as :ref:`state dimensions <state-dims>`, so the state vector is being propagated over all 16 ensemble climate model runs. Also, the time dimension currently includes elements for all 12 months, rather than an annual mean. The variable will look more reasonable once we convert the run dimension to an ensemble dimension and implement the annual mean.
+
+
+
+
+
 
 
 
@@ -215,9 +281,9 @@ You can also use the option fourth input to specify the state indices or ensembl
 
 
 
-*Demo*
-++++++
-In our demo, we'll be selecting ensemble members from individual years of model output. Thus, ``time`` is our ensemble dimension. Since we only want each year to be selected once, we should choose one month to use as the reference point for each year. We'll use January as the reference month here.
+*NTREND Demo*
++++++++++++++
+In this demo, we'll be selecting ensemble members from individual years of model output. Thus, ``time`` is our ensemble dimension. Since we only want each year to be selected once, we should choose one month to use as the reference point for each year. We'll use January as the reference month here.
 
 We'll also use the command to limit all the variables to grid points north of 35°N. In the case of the **T** and **T_mean** variables, this is the desired reconstruction domain. For the **T_monthly** variable, we only need data from the grid points nearest to the proxy sites, and all of the proxy sites are located north of this boundary. Although limiting the domain of **T_monthly** is not strictly necessary, it will help remove unnecessary data elements from the state vector, which can help speed up later steps.
 
@@ -261,6 +327,40 @@ we can see that variables are now much more reasonable lengths. This is because 
 
 
 
+*LGM Demo*
+++++++++++
+In this demo, we'll be selecting ensemble members from the 16 different climate model runs. Thus, ``run`` is our ensemble dimension. We'll use all 16 runs as ensemble members, so we don't need to restrict the dimension to a specific set of reference indices::
+
+    % Set the "run" dimension as the ensemble dimension
+    sv = sv.design("SST", "run", "ensemble");
+
+Inspecting the updated state vector:
+
+.. code::
+    :class: input
+
+    disp(sv)
+
+.. code::
+    :class: output
+
+    stateVector with properties:
+
+          Label: LGM Demo
+         Length: 1474560 rows
+      Variables: SST
+       Coupling: All variables coupled
+
+      Vector:
+          SST - 1474560 rows   |   site (122880) x time (12)   Show details
+
+we can see that the **SST** variable is now shorter because the ``run`` dimension has been converted to an ensemble dimension.
+
+
+
+
+
+
 Step 4: Implement Sequences
 ---------------------------
 You can use the ``stateVector.sequence`` command to implement any sequences. The syntax for this command is::
@@ -284,8 +384,8 @@ The inputs are as follows:
 You can also use the ``sequence`` command to specify a sequence for multiple dimensions at once. In this case, **dimensions** should be a string vector listing the names of the dimensions with sequences. The **indices** and **metadata** inputs should be cell vectors whose elements contain the sequence indices/metadata for the listed dimensions.
 
 
-*Demo*
-++++++
+*NTREND Demo*
++++++++++++++
 In this demo, we want the **T_monthly** variable to implement a sequence such that the variable includes data for each month of the year. As a reminder, we're need this sequence so that we can implement various seasonal means for the forward models. This sequence proceeds along the ``time`` dimension. We previously specified January as a reference month, so our sequence indices will be the values from 0 to 11 (the offsets of each month from January). We'll use the names of the months (the values from 1 to 12) as the metadata::
 
     indices = 0:11;
@@ -304,7 +404,7 @@ Inspecting the updated state vector:
 
     stateVector with properties:
 
-          Label: NTREND Temperature Demo
+          Label: NTREND Demo
          Length: 60480 rows
       Variables: T, T_index, T_monthly
        Coupling: All variables coupled
@@ -315,6 +415,22 @@ Inspecting the updated state vector:
           T_monthly - 51840 rows   |   lon (144) x lat (30) x time sequence (12)   Show details
 
 We can see that the **T_monthly** variable is now 12 times longer than before. This is because it now includes data for each of the 12 months of the year.
+
+
+*LGM Demo*
+++++++++++
+This demo doesn't require a sequence, but you might want to practice building sequences anyways. If so, try designing a sequence such that each ensemble member contains data from two consecutive climate model runs. For example::
+
+    % Implement sequences over 2 consecutive model runs
+    indices = [0 1];
+    metadata = ["First run"; "Second run"];
+    sv = sv.sequence('SST', 'run', indices, metadata);
+
+Afterwards, you can delete any sequences using::
+
+    sv = sv.sequence('SST', 'run', 'none')
+
+
 
 
 Step 5: Implement Means
@@ -353,8 +469,8 @@ Note that the ``weightedMean`` method does not allow you to specify :ref:`mean i
 2. Use ``weightedMean`` to specify the weights for those indices.
 
 
-*Demo*
-++++++
+*NTREND Demo*
++++++++++++++
 In the demo, we first need to implement a temporal mean over the **T** and **T_index** variables. Specifically, we'll need to implement a June, July, August (JJA) mean representing the summer season. The **T_index** variable should also implement a weighted spatial mean over the ``lat`` and ``lon`` dimensions. The climate model grid points in this spatial mean should be weighted by latitude to reflect the decreased area of grid points at higher latitudes.
 
 We'll start by using the ``stateVector.mean`` command to implement the temporal mean. Since ``time`` is an ensemble dimension, we'll need to provide mean indices. Since we previously specified January as the reference month, our mean indices will be 5, 6, and 7 (the offset of the June, July, and August months from each January reference point).
@@ -390,7 +506,7 @@ Examining the updated state vector:
 
     stateVector with properties:
 
-          Label: NTREND Temperature Demo
+          Label: NTREND Demo
          Length: 56161 rows
       Variables: T, T_index, T_monthly
        Coupling: All variables coupled
@@ -401,6 +517,40 @@ Examining the updated state vector:
           T_monthly - 51840 rows   |   lon (144) x lat (30) x time sequence (12)   Show details
 
 we can see that **T_index** now implements a spatial mean. We can also follow the ``Show details`` links to display the temporal means of the **T** and **T_index** variables.
+
+
+
+*LGM Demo*
+++++++++++
+In this demo, we'll implement an annual mean over the 12 monthly climatologies. The monthly climatologies are organized along the time dimension, which is currently a state dimension. Thus, we can implement the mean directly, without needing to use any mean indices::
+
+    % Use an annual mean
+    sv = sv.mean('SST', 'time');
+
+Inspecting the updated state vector:
+
+.. code::
+    :class: input
+
+    disp(sv)
+
+.. code::
+    :class: output
+
+    stateVector with properties:
+
+          Label: LGM Demo
+         Length: 122880 rows
+      Variables: SST
+       Coupling: All variables coupled
+
+      Vector:
+          SST - 122880 rows   |   site (122880) x time mean (1)   Show details
+
+we can see that the SST variable now implements a temporal mean. The length of the SST variable is more reasonable now, and includes one element per spatial point on the tripolar ocean grid.
+
+
+
 
 
 Step 6: Build an ensemble
@@ -431,7 +581,7 @@ You can use the ``'sequential'`` option to select ensemble members sequentially 
 
 *Ensemble File*
 +++++++++++++++
-You can use the ``'file'`` option to save the state vector ensemble to an ensemble file. We will discuss ensemble files in detail in the next section, but in brief, they are highly recommended because they provide additional tools for manipulating state vector ensembles. Here the syntax is::
+You can use the ``'file'`` option to save the state vector ensemble to an ensemble file. We will discuss ensemble files in the next section - for now, we'll simply note that they provide additional tools for manipulating state vector ensembles. As such, we highly recommend saving your ensembles to file. Here the syntax is::
 
     ens = obj.build(..., 'file', filename, ...)
 
@@ -446,50 +596,34 @@ You can also combine the ``'file'`` option with the ``'overwrite'`` option, whic
     ens = obj.build(..., 'file', filename, 'overwrite', true, ...)
 
 
-*Demo*
-++++++
+*NTREND Demo*
++++++++++++++
 In the demo, we will build an ensemble using every possible ensemble member. We will build the ensemble sequentially, so that the ensemble members are ordered in time. We'll save the ensemble in a file named ``ntrend.ens``::
 
     filename = 'ntrend.ens';
     ens = sv.build('all', 'sequential', true, 'file', filename);
 
 
-Step 7: Resolve Metadata Conflicts
-----------------------------------
-In some cases, the ``build`` command may not be able to select any ensemble members, and this can occur from a metadata conflict. A **metadata conflict** arises when
+*LGM Demo*
+++++++++++
+In this demo, we will build an ensemble using every possible ensemble member. We'll build the ensemble randomly, so each ensemble member will correspond to a random climate model run. We'll save the ensemble in a file named ``lgm.ens``::
 
-* Variables are derived from different gridfiles, and
-* The gridfiles use different metadata formats along an ensemble dimension
+    filename = 'lgm.ens';
+    ens = sv.build('all', 'file', filename);
 
-For example, if a variable from gridfile A has ``time`` metadata that uses a datetime format, and a variable from gridfile B has ``time`` metadata that uses a decimal-year format, then a metadata conflict will occur. These conflicts arise because the ``stateVector`` class uses metadata values to ensure that the variables in each ensemble member are derived from the same timestep and/or model run. When two variables use different metadata formats, ``stateVector`` is unable to compare the metadata from the different variables. However, you can use the ``stateVector.metadata`` command to resolve these conflicts.
 
-Essentially, the command allows you to provide alternate metadata for one or more variables. You can provide this metadata in one of two ways. Either (1) Provide the alternate metadata directly, or (2) Using a conversion function. If using a conversion function, then ``stateVector.build`` will apply the function to the gridfile metadata. The output of the function will be used as the alternate metadata. The base syntax for ``stateVector.metadata`` is::
-
-    obj = obj.metadata(variables, dimension, type, ...)
-
-Here, **variables** is a list of variable names or indices. These are the variables being given alternate metadata. The **dimension** input is the name of the dimension being given alternate metadata. The **type** input indicates how alternate metadata should be determined. Use ``'set'``, ``'s'``, or `1` to set the alternate metadata directly; use ``'convert'``, ``'c'``, or `2` to use a conversion function.
-
-If setting metadata directly, the syntax is::
-
-    obj = obj.metadata(variables, dimension, 'set', metadata)
-
-where **metadata** is the alternate metadata for the dimension. The number of rows should match the length of the gridfile dimension, and this metadata should use the same format as the other gridfiles.
-
-If using a conversion function, the syntax is::
-
-    obj = obj.metadata(variables, dimension, 'convert', functionHandle, functionArgs)
-
-where **functionHandle** is a function handle to the conversion function. The gridfile metadata will always be passed as the first input to this function, and the output will be used as the alternate metadata. The optional **functionArgs** input is a cell vector containing any additional inputs to the function (in the order they should be passed). You can read more details about ``stateVector.metadata`` using ``dash.doc('stateVector.metadata')``.
 
 
 Full Demo
 ---------
 This section recaps all the essential code from the demos. You can use it as a quick reference.
 
+**NTREND Demo**
+
 ::
 
     % Initialize a new state vector
-    label = "NTREND Temperature Demo";
+    label = "NTREND Demo";
     sv = stateVector(label);
 
     % Get the temperature gridfile and its metadata
@@ -529,3 +663,28 @@ This section recaps all the essential code from the demos. You can use it as a q
     % Build ensemble sequentially and save to file
     filename = 'ntrend.ens';
     ens = sv.build('all', 'sequential', true, 'file', filename);
+
+
+*LGM Demo*
+++++++++++
+
+::
+
+    % Initialize a new state vector
+    label = "LGM Demo";
+    sv = stateVector(label);
+
+    % Add the SST variable
+    variable = "SST";
+    catalogue = "SST.grid"
+    sv = sv.add(variable, catalogue);
+
+    % Set "run" as an ensemble dimension
+    sv = sv.design('SST', 'run', 'ensemble');
+
+    % Implement an annual average
+    sv = sv.mean('SST', 'time');
+
+    % Build a state vector ensemble and save it to file
+    filename = 'lgm.ens';
+    sv.build('all', 'file', filename);

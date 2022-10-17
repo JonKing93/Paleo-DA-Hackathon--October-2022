@@ -15,8 +15,16 @@ Before continuing, take a few minutes to explore your chosen demo dataset. As me
 where **filename** is a string that lists the name of a ``.grid`` file. Try it out!
 
 
-*NTREND Demo*
-+++++++++++++
+
+..
+    *NTREND Demo*
+    +++++++++++++
+
+.. raw:: html
+
+    <section class="accordion"><input type="checkbox" name="collapse" id="ntrend-1"><label for="ntrend-1"><strong>NTREND Demo</strong></label><div class="content">
+
+
 We'll use the ``gridfile`` command to examine the ``ntrend.grid`` dataset.
 
 .. code::
@@ -49,9 +57,23 @@ We'll use the ``gridfile`` command to examine the ``ntrend.grid`` dataset.
 
 From the output, we can see that this catalogue manages data from 54 proxy sites over the period 750-2011 CE. The catalogue includes metadata for each site, and this metadata includes each site's ID, latitude, longitude, and optimal growing season. The data in the catalogue is sourced from the ``ntrend.mat`` file that was downloaded with the demo.
 
+.. raw:: html
 
-*LGM Demo*
-++++++++++
+    </div></section>
+
+
+
+
+
+..
+    *LGM Demo*
+    +++++++++++++
+
+.. raw:: html
+
+    <section class="accordion"><input type="checkbox" name="collapse" id="lgm-1"><label for="lgm-1"><strong>LGM Demo</strong></label><div class="content">
+
+
 We'll use the ``gridfile`` command to examine the ``UK37.grid`` dataset.
 
 .. code::
@@ -84,6 +106,11 @@ We'll use the ``gridfile`` command to examine the ``UK37.grid`` dataset.
 
 From the output, we can see that this catalogue manages data from 146 UK'37 sites. The catalogue includes metadata for each site, and this metadata includes each site's ID, latitude, and longitude. The data in the catalogue is sourced from the ``UK37.mat`` file that was downloaded with the demo.
 
+.. raw:: html
+
+    </div></section>
+
+
 
 
 Step 2: Examine metadata
@@ -99,8 +126,13 @@ where **obj** is a gridfile object output by the ``gridfile`` command. Alternati
 In either case, the output is a metadata object that describes the dataset. You can use the metadata object like a matlab ``struct``. To get the metadata for a particular dimension, use ``metadata.<dimension name>``. See the demos below for examples.
 
 
-*NTREND Demo*
-+++++++++++++
+..
+    *NTREND Demo*
+    +++++++++++++
+
+.. raw:: html
+
+    <section class="accordion"><input type="checkbox" name="collapse" id="ntrend-2"><label for="ntrend-2"><strong>NTREND Demo</strong></label><div class="content">
 
 We'll first use the ``metadata`` command to obtain the metadata for the ``ntrend.grid`` catalogue:
 
@@ -160,9 +192,24 @@ and see the ID, latitude, longitude, and growing season for each site. Similarly
 
 and see that the proxy data ranges from 750 CE to 2011 CE.
 
+Now that you've examined the proxy data catalogue, try using these commands to investigate the climate model output.
 
-*LGM Demo*
-----------
+
+.. raw:: html
+
+    </div></section>
+
+
+
+
+..
+    *LGM Demo*
+    +++++++++++++
+
+.. raw:: html
+
+    <section class="accordion"><input type="checkbox" name="collapse" id="lgm-2"><label for="lgm-2"><strong>LGM Demo</strong></label><div class="content">
+
 We'll first use the ``metadata`` command to obtain the metadata for the ``uk37.grid`` catalogue:
 
 .. code::
@@ -201,7 +248,7 @@ From the output, we can see that the catalogue includes metadata for the ``site`
       "w8709a-8tc"       "42.242"      "-127.678"
       "yj"               "21.524"      "112.1347"
 
-and see the ID, latitude, longitude, and growing season for each site. Similarly, we can inspect the metadata for the ``time`` dimension:
+and see the ID, latitude, and longitude for each site. Similarly, we can inspect the metadata for the ``time`` dimension:
 
 .. code::
     :class: input
@@ -214,3 +261,9 @@ and see the ID, latitude, longitude, and growing season for each site. Similarly
     18.0010   21.0000
 
 and see that the proxy data is averaged over the interval from 18-21 ka.
+
+Now that you've examined the proxy data catalogue, try using these commands to investigate the climate model output.
+
+.. raw:: html
+
+    </div></section>

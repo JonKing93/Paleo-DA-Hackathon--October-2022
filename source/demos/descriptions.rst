@@ -23,7 +23,7 @@ The demo also includes two other files: ``ntrend.grid`` and ``temperature-cesm.g
 
 Demo 2
 ------
-The second demo is designed for a Last Glacial Maximum (LGM) assimilation. This demo uses a set of TEX'86 records to reconstruct sea surface temperatures (SSTs) at the LGM. The demo relies on (1) climate model output from 16 iCESM LGM simulations, and (2) 146 UK'37 proxy records. You can download the files for this demo here: `LGM demo`_. We will refer to this demo as the **LGM Demo** for the remainder of the workshop.
+The second demo is designed for a Last Glacial Maximum (LGM) assimilation. This demo uses a set of TEX'86 records to reconstruct sea surface temperatures (SSTs) at the LGM. The demo relies on (1) climate model output from 16 iCESM LGM simulations, and (2) 146 UK'37 proxy records. To generate proxy estimates, we will use the BaySPLINE forward model for UK'37. For the sake of simplicity, we will ignore seasonal considerations in this demo. You can download the files for this demo here: `LGM demo`_. We will refer to this demo as the **LGM Demo** for the remainder of the workshop.
 
 The downloaded demo includes the following data files:
 
@@ -31,7 +31,7 @@ The downloaded demo includes the following data files:
     This MAT-file holds data and metadata for the UK'37 proxy records. It also includes proxy uncertainties for the Kalman filter. The proxy records are time-averaged over the interval 18-21 ka.
 
 ``SST.mat``
-    This MAT-file holds sea-surface temperature (SST) climate model output from iCESM. The dataset includes output from 16 model runs at the LGM. The output is on a tripolar spatial field. The SSTs are annually averaged over 50 years of output produced with an LGM boundary condition.
+    This MAT-file holds sea-surface temperature (SST) climate model output from iCESM. The dataset includes output from 16 model runs, each using an LGM boundary condition. The output consists of the monthly climatologies for each model run. The output is provided on a tripolar ocean grid.
 
 The demo also includes two other files: ``UK37.grid`` and ``SST.grid``. These are the data catalogues that we'll examine in the next coding session. ``UK37.grid`` catalogues the proxy dataset, and ``SST.grid`` catalogues the climate model output.
 
