@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>stateVector Concepts &mdash; Paleo DA Hackathon 0.0.1 documentation</title>
@@ -17,6 +17,7 @@
         <script src="../_static/underscore.js"></script>
         <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -46,8 +47,10 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Workshop</span></p>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../introduction/outline.html">Introduction</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../gridfile/outline.html">gridfile</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../da-primer.html">DA Primer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../workshop-outline.html">Workshop Outline</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dash-intro/outline.html">Introducing DASH</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../demos/outline.html">Demos</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="outline.html">stateVector</a><ul class="current">
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Concepts</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#state-vectors">State Vectors</a></li>
@@ -58,18 +61,11 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="indices.html">Indices</a></li>
-<li class="toctree-l2"><a class="reference internal" href="code5.html">Open Coding 5</a></li>
+<li class="toctree-l2"><a class="reference internal" href="code2.html">Open Coding 2</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../ensemble/outline.html">ensemble</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../PSM/outline.html">PSM</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../kalmanFilter/outline.html">kalmanFilter</a></li>
-</ul>
-<p class="caption" role="heading"><span class="caption-text">Resources</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../demo.html">Demo</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../matlab-primer.html">Matlab Primer</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../da-primer.html">DA Primer</a></li>
 </ul>
 
         </div>
@@ -136,7 +132,7 @@
 </section>
 <section id="state-vector-variables">
 <span id="svv"></span><h2>State Vector Variables<a class="headerlink" href="#state-vector-variables" title="Permalink to this heading"></a></h2>
-<p>The <code class="docutils literal notranslate"><span class="pre">stateVector</span></code> class uses data from <code class="docutils literal notranslate"><span class="pre">gridfile</span></code> catalogues to build state vector ensembles. In this workshop, we will often refer to state vector variables. In the context of DASH, we define a <strong>state vector variable</strong> as some subset of data from a gridfile. Multiple variables can be derived from the same gridfile, and each individual variable forms a contiguous block of the state vector.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">stateVector</span></code> class uses data from <code class="docutils literal notranslate"><span class="pre">gridfile</span></code> data catalogues to build state vector ensembles. In this workshop, we will often refer to state vector variables. In the context of DASH, we define a <strong>state vector variable</strong> as some subset of data from a gridfile. Multiple variables can be derived from the same gridfile, and each individual variable forms a contiguous block of the state vector.</p>
 <p>Returning to our earlier figure:</p>
 <figure class="align-default" id="id4">
 <img alt="A single column runs from the top of the figure to the bottom and is labeled as a state vector. The column has three colored sections. A long, light-orange section runs from the top to the center and is labeled as monthly, gridded temperature. A short, dark-orange section in the center is labeled as annual, global mean temperature. A long, blue section runs from the center to the bottom and is labeled as monthly, gridded precipitation." src="../_images/state-vector.svg" /><figcaption>
@@ -144,7 +140,7 @@
 </figcaption>
 </figure>
 <p>we can see that the example state vector includes three variables: temperature (<strong>T</strong>), global mean temperature (<strong>Tmean</strong>), and precipitation (<strong>P</strong>). The <strong>T</strong> and <strong>Tmean</strong> variables are probably derived from the same gridfile (and possibly the <strong>P</strong> variable as well).</p>
-<p>Note that the definition of a state vector variable says nothing about specific <em>climate</em> variables. In fact, a given state vector variable can even include multiple climate variables, so long as those climate variables are derived from the same gridfile. (This can occur when a gridfile includes a <code class="docutils literal notranslate"><span class="pre">var</span></code> dimension with multiple variables). We’ll discuss state vector variables again in the <a class="reference internal" href="code5.html#sv-add"><span class="std std-ref">next coding session</span></a>. For now, the important point is that each variable is built from data in an associated gridfile.</p>
+<p>Note that the definition of a state vector variable says nothing about specific <em>climate</em> variables. In fact, a given state vector variable can even include multiple climate variables, so long as those climate variables are derived from the same gridfile. (This can occur when a gridfile includes a <code class="docutils literal notranslate"><span class="pre">var</span></code> dimension with multiple variables). We’ll discuss state vector variables again in the <a class="reference internal" href="code2.html#sv-add"><span class="std std-ref">next coding session</span></a>. For now, the important point is that each variable is built from data in an associated gridfile.</p>
 </section>
 <section id="ensemble-and-state-dimensions">
 <h2>Ensemble and State Dimensions<a class="headerlink" href="#ensemble-and-state-dimensions" title="Permalink to this heading"></a></h2>

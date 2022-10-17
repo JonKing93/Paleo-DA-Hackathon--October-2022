@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Outline &mdash; Paleo DA Hackathon 0.0.1 documentation</title>
+  <title>Demo Descriptions &mdash; Paleo DA Hackathon 0.0.1 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/matlab-io.css" type="text/css" />
@@ -21,8 +21,8 @@
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="stateVector Concepts" href="concepts.html" />
-    <link rel="prev" title="Open Coding 2" href="../demos/code2.html" /> 
+    <link rel="next" title="Open Coding 2" href="code2.html" />
+    <link rel="prev" title="Demo Datasets" href="outline.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -50,13 +50,16 @@
 <li class="toctree-l1"><a class="reference internal" href="../da-primer.html">DA Primer</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../workshop-outline.html">Workshop Outline</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../dash-intro/outline.html">Introducing DASH</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../demos/outline.html">Demos</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">stateVector</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="concepts.html">Concepts</a></li>
-<li class="toctree-l2"><a class="reference internal" href="indices.html">Indices</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="outline.html">Demos</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Demo Descriptions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#demo-1">Demo 1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#demo-2">Demo 2</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="code2.html">Open Coding 2</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="../stateVector/outline.html">stateVector</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../PSM/outline.html">PSM</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../kalmanFilter/outline.html">kalmanFilter</a></li>
 </ul>
@@ -75,7 +78,8 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
-      <li>Outline</li>
+          <li><a href="outline.html">Demo Datasets</a> &raquo;</li>
+      <li>Demo Descriptions</li>
       <li class="wy-breadcrumbs-aside">
       </li>
   </ul>
@@ -84,27 +88,36 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="outline">
-<h1>Outline<a class="headerlink" href="#outline" title="Permalink to this heading"></a></h1>
-<p>To implement an assimilation, we’ll need to (1) build a state vector ensemble, and then (2) combine the ensemble with forward models to generate proxy estimates. In this next lesson, we’ll design and build a state vector ensemble using the <code class="docutils literal notranslate"><span class="pre">stateVector</span></code> class. The lesson includes:</p>
+  <section id="demo-descriptions">
+<h1>Demo Descriptions<a class="headerlink" href="#demo-descriptions" title="Permalink to this heading"></a></h1>
+<section id="demo-1">
+<h2>Demo 1<a class="headerlink" href="#demo-1" title="Permalink to this heading"></a></h2>
+<p>The first demo dataset is designed for a Common Era assimilation. This demo uses a set of temperature-sensitive tree-ring records to reconstruct surface temperature in the Northern Hemisphere over the last millennium. The demo relies on (1) climate model output from the CESM Last Millennium Ensemble, and (2) the NTREND tree-ring network. To generate proxy estimates, we will use univariate linear forward models trained on the temperature at each site. You can download the files for this demo &lt;here INSERT LINK&gt;. We will refer to this demo as the <strong>NTREND Demo</strong> in the remainder of the workshop.</p>
+<p>The downloaded demo includes the following data files:</p>
 <dl class="simple">
-<dt><a class="reference internal" href="concepts.html"><span class="doc">Concepts</span></a></dt><dd><p>The process of designing state vectors will involve some new vocabulary, so we’ll begin by introducing some new concepts for the design process.</p>
-</dd>
-<dt><a class="reference internal" href="indices.html"><span class="doc">Indices</span></a></dt><dd><p>Next, we’ll take a quick look “under-the-hood” to illustrate how the <code class="docutils literal notranslate"><span class="pre">stateVector</span></code> class builds and selects different ensemble members.</p>
-</dd>
-<dt><a class="reference internal" href="code2.html"><span class="doc">Open Coding 2</span></a></dt><dd><p>Finally, we’ll move into the next open-coding session. We’ll examine some of the key methods in the <code class="docutils literal notranslate"><span class="pre">stateVector</span></code> class, and then use the class to build a state vector ensemble.</p>
+<dt><code class="docutils literal notranslate"><span class="pre">ntrend.mat</span></code></dt><dd><p>This MAT-file holds the data records and some metadata the NTREND tree-ring network. It also includes linear slopes for the forward models, and error variances for the Kalman filter.</p>
 </dd>
 </dl>
-<div class="toctree-wrapper compound">
-</div>
+<p><code class="docutils literal notranslate"><span class="pre">b.e11.BLMTRC5CN.f19_g16.002.cam.h0.TREFHT.085001-184912.nc</span></code>
+<code class="docutils literal notranslate"><span class="pre">b.e11.BLMTRC5CN.f19_g16.002.cam.h0.TREFHT.185001-200512.nc</span></code></p>
+<blockquote>
+<div><p>These NetCDF files hold surface temperature (TREFHT) output from the CESM Last Millennium Ensemble. (Specifically, output from full-forcing run 2). This output is a spatial field with a 1.9 x 2.5 (latitude x longitude) resolution. The output is provided on a monthly time step. The first file spans 850-1849 CE, and the second file spans 1850-2005 CE.</p>
+</div></blockquote>
+<p>The demo also includes two other files: <code class="docutils literal notranslate"><span class="pre">ntrend.grid</span></code> and <code class="docutils literal notranslate"><span class="pre">temperature-cesm.grid</span></code>. These are the data catalogue files that we will examine in the next open coding session.</p>
+</section>
+<section id="demo-2">
+<h2>Demo 2<a class="headerlink" href="#demo-2" title="Permalink to this heading"></a></h2>
+<p>The second demo is designed for a Last Glacial Maximum (LGM) assimilation. This demo uses a set of UK’37 records to reconstruct ??? at the LGM. The demo relies on (1) climate model output from ???, and (2) ??? proxy records. You can download the files for this demo &lt;here INSERT LINK&gt;. We will refer to this demo as the <strong>LGM Demo</strong> in the remainder of the workshop.</p>
+<p>The downloaded demo includes the following raw data files:</p>
+</section>
 </section>
 
 
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="../demos/code2.html" class="btn btn-neutral float-left" title="Open Coding 2" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="concepts.html" class="btn btn-neutral float-right" title="stateVector Concepts" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="outline.html" class="btn btn-neutral float-left" title="Demo Datasets" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="code2.html" class="btn btn-neutral float-right" title="Open Coding 2" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

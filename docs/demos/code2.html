@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Open Coding 2 &mdash; Paleo DA Hackathon 0.0.1 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/matlab-io.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Outline" href="../stateVector/outline.html" />
+    <link rel="prev" title="Demo Descriptions" href="descriptions.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> Paleo DA Hackathon
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">About</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../welcome.html">Welcome!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../prerequisites.html">Prerequisites</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Workshop</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../da-primer.html">DA Primer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../workshop-outline.html">Workshop Outline</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dash-intro/outline.html">Introducing DASH</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="outline.html">Demos</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="descriptions.html">Demo Descriptions</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Open Coding 2</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#goal">Goal</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#step-1-inspect-data-catalogues">Step 1: Inspect data catalogues</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#ntrend-demo"><em>NTREND Demo</em></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#step-2-examine-metadata">Step 2: Examine metadata</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id1"><em>NTREND Demo</em></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../stateVector/outline.html">stateVector</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../PSM/outline.html">PSM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../kalmanFilter/outline.html">kalmanFilter</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Paleo DA Hackathon</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="outline.html">Demo Datasets</a> &raquo;</li>
+      <li>Open Coding 2</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="open-coding-2">
+<h1>Open Coding 2<a class="headerlink" href="#open-coding-2" title="Permalink to this heading"></a></h1>
+<section id="goal">
+<h2>Goal<a class="headerlink" href="#goal" title="Permalink to this heading"></a></h2>
+<p>Explore the demo datasets using <code class="docutils literal notranslate"><span class="pre">gridfile</span></code> commands.</p>
+</section>
+<section id="step-1-inspect-data-catalogues">
+<h2>Step 1: Inspect data catalogues<a class="headerlink" href="#step-1-inspect-data-catalogues" title="Permalink to this heading"></a></h2>
+<p>Before continuing, take a few minutes to explore your chosen demo dataset. As mentioned, each dataset contains several files with a <code class="docutils literal notranslate"><span class="pre">.grid</span></code> extension. These are data catalogues built using DASH’s <code class="docutils literal notranslate"><span class="pre">gridfile</span></code> utility, and these catalogues will help facilitate the assimilations. You can inspect the data catalogues using the <code class="docutils literal notranslate"><span class="pre">gridfile</span></code> command with the name of a <code class="docutils literal notranslate"><span class="pre">.grid</span></code> file as input:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">gridfile</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
+<p>where <strong>filename</strong> is a string that lists the name of a <code class="docutils literal notranslate"><span class="pre">.grid</span></code> file. Try it out!</p>
+<section id="ntrend-demo">
+<h3><em>NTREND Demo</em><a class="headerlink" href="#ntrend-demo" title="Permalink to this heading"></a></h3>
+<p>We’ll use the <code class="docutils literal notranslate"><span class="pre">gridfile</span></code> command to examine the <code class="docutils literal notranslate"><span class="pre">ntrend.grid</span></code> dataset.</p>
+<div class="input highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">gridfile</span><span class="p">(</span><span class="s">&#39;ntrend&#39;</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
+<div class="output highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">gridfile</span><span class="w"> </span><span class="s">with</span><span class="w"> </span><span class="s">properties:</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">File</span><span class="p">:</span><span class="w"> </span><span class="n">some</span><span class="o">/</span><span class="nb">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">Hackathon</span><span class="o">/</span><span class="nb">demo</span><span class="o">/</span><span class="n">ntrend</span><span class="p">.</span><span class="n">grid</span><span class="w"></span>
+<span class="w">  </span><span class="n">Dimensions</span><span class="p">:</span><span class="w"> </span><span class="n">site</span><span class="p">,</span><span class="w"> </span><span class="nb">time</span><span class="w"></span>
+
+<span class="w">  </span><span class="n">Dimension</span><span class="w"> </span><span class="n">Sizes</span><span class="w"> </span><span class="n">and</span><span class="w"> </span><span class="n">Metadata</span><span class="p">:</span><span class="w"></span>
+<span class="w">      </span><span class="n">site</span><span class="p">:</span><span class="w">   </span><span class="mi">54</span><span class="w"></span>
+<span class="w">      </span><span class="nb">time</span><span class="p">:</span><span class="w"> </span><span class="mi">1262</span><span class="w">    </span><span class="p">(</span><span class="mi">750</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="mi">2011</span><span class="p">)</span><span class="w"></span>
+
+<span class="w">  </span><span class="n">Attributes</span><span class="p">:</span><span class="w"></span>
+<span class="w">      </span><span class="n">site_metadata_columns</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s">&quot;ID&quot;</span><span class="w">    </span><span class="s">&quot;Latitude&quot;</span><span class="w">    </span><span class="s">&quot;Longitude&quot;</span><span class="w">    </span><span class="s">&quot;Season&quot;</span><span class="p">]</span><span class="w"></span>
+
+<span class="w">  </span><span class="n">Fill</span><span class="w"> </span><span class="n">Value</span><span class="p">:</span><span class="w"> </span><span class="o">-</span><span class="mf">999.000000</span><span class="w"></span>
+
+<span class="w">  </span><span class="n">Data</span><span class="w"> </span><span class="n">Sources</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w"></span>
+
+<span class="n">Show</span><span class="w"> </span><span class="s">data</span><span class="w"> </span><span class="s">sources</span><span class="w"></span>
+
+<span class="w">      </span><span class="mf">1.</span><span class="w"> </span><span class="n">some</span><span class="o">/</span><span class="nb">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">Hackathon</span><span class="o">/</span><span class="nb">demo</span><span class="o">/</span><span class="n">ntrend</span><span class="p">.</span><span class="n">mat</span><span class="w">   </span><span class="n">Show</span><span class="w"> </span><span class="nb">details</span><span class="w"></span>
+</pre></div>
+</div>
+<p>From the output, we can see that this catalogue manages data from 54 proxy sites over the period 750-2011 CE. The catalogue includes metadata for each site, and this metadata includes each site’s ID, latitude, longitude, and optimal growing season. The data in the catalogue is sourced from the <code class="docutils literal notranslate"><span class="pre">ntrend.mat</span></code> file that was downloaded with the demo.</p>
+</section>
+</section>
+<section id="step-2-examine-metadata">
+<h2>Step 2: Examine metadata<a class="headerlink" href="#step-2-examine-metadata" title="Permalink to this heading"></a></h2>
+<p>Each gridfile catalogue includes metadata for each dimension of the dataset. This dimensional metadata will be helpful later in the workshop, so let’s examine it now. You can return the metadata for a gridfile catalogue using the <code class="docutils literal notranslate"><span class="pre">gridfile.metadata</span></code> command. Here the syntax is:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">metadata</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">obj</span><span class="p">.</span><span class="n">metadata</span><span class="w"></span>
+</pre></div>
+</div>
+<p>where <strong>obj</strong> is a gridfile object output by the <code class="docutils literal notranslate"><span class="pre">gridfile</span></code> command. Alternatively, you can combine the two commands using dot-indexing, via:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">metadata</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">gridfile</span><span class="p">(</span><span class="n">filename</span><span class="p">).</span><span class="n">metadata</span><span class="w"></span>
+</pre></div>
+</div>
+<p>In either case, the output is a metadata object that describes the dataset. You can use the metadata object like a matlab <code class="docutils literal notranslate"><span class="pre">struct</span></code>. To get the metadata for a particular dimension, use <code class="docutils literal notranslate"><span class="pre">metadata.&lt;dimension</span> <span class="pre">name&gt;</span></code>. See the demos below for examples.</p>
+<section id="id1">
+<h3><em>NTREND Demo</em><a class="headerlink" href="#id1" title="Permalink to this heading"></a></h3>
+<p>We’ll first use the <code class="docutils literal notranslate"><span class="pre">metadata</span></code> command to obtain the metadata for the <code class="docutils literal notranslate"><span class="pre">ntrend.grid</span></code> catalogue:</p>
+<div class="input highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">metadata</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">gridfile</span><span class="p">(</span><span class="s">&#39;ntrend&#39;</span><span class="p">).</span><span class="n">metadata</span><span class="w"></span>
+</pre></div>
+</div>
+<div class="output highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">metadata</span><span class="w"> </span><span class="p">=</span><span class="w"></span>
+
+<span class="w">  </span><span class="n">gridMetadata</span><span class="w"> </span><span class="n">with</span><span class="w"> </span><span class="n">metadata</span><span class="p">:</span><span class="w"></span>
+
+<span class="w">          </span><span class="n">site</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mi">54</span>×<span class="mi">4</span><span class="w"> </span><span class="nb">string</span><span class="p">]</span><span class="w"></span>
+<span class="w">          </span><span class="nb">time</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mi">1262</span>×<span class="mi">1</span><span class="w"> </span><span class="nb">double</span><span class="p">]</span><span class="w"></span>
+<span class="w">    </span><span class="n">attributes</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span>×<span class="mi">1</span><span class="w"> </span><span class="nb">struct</span><span class="p">]</span><span class="w"></span>
+</pre></div>
+</div>
+<p>From the output, we can see that the catalogue includes metadata for the <code class="docutils literal notranslate"><span class="pre">site</span></code> and <code class="docutils literal notranslate"><span class="pre">time</span></code> dimensions, as well as some non-dimensional attributes. We can inspect the metadata for the <code class="docutils literal notranslate"><span class="pre">site</span></code> dimension:</p>
+<div class="input highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">metadata</span><span class="p">.</span><span class="n">site</span><span class="w"></span>
+</pre></div>
+</div>
+<div class="output highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="mi">54</span>×<span class="mi">4</span><span class="w"> </span><span class="nb">string</span><span class="w"> </span><span class="n">array</span><span class="w"></span>
+
+<span class="w">  </span><span class="s">&quot;NTR&quot;</span><span class="w">       </span><span class="s">&quot;65.2833&quot;</span><span class="w">    </span><span class="s">&quot;-161.65&quot;</span><span class="w">      </span><span class="s">&quot;7,8&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="s">&quot;GOA&quot;</span><span class="w">       </span><span class="s">&quot;59.9167&quot;</span><span class="w">    </span><span class="s">&quot;-139.25&quot;</span><span class="w">      </span><span class="s">&quot;1,2,3,4,5,6,7,8,9&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="s">&quot;WRAx&quot;</span><span class="w">      </span><span class="s">&quot;62.5&quot;</span><span class="w">       </span><span class="s">&quot;-141.5&quot;</span><span class="w">       </span><span class="s">&quot;6,7,8&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="k">...</span><span class="w"></span>
+<span class="w">  </span><span class="s">&quot;Grid18&quot;</span><span class="w">    </span><span class="s">&quot;51.25&quot;</span><span class="w">      </span><span class="s">&quot;144.25&quot;</span><span class="w">       </span><span class="s">&quot;6,7&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="s">&quot;NJAP&quot;</span><span class="w">      </span><span class="s">&quot;43.3667&quot;</span><span class="w">    </span><span class="s">&quot;142.85&quot;</span><span class="w">       </span><span class="s">&quot;6,7&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="s">&quot;YAK&quot;</span><span class="w">       </span><span class="s">&quot;69&quot;</span><span class="w">         </span><span class="s">&quot;146&quot;</span><span class="w">          </span><span class="s">&quot;6&quot;</span><span class="w"></span>
+</pre></div>
+</div>
+<p>and see the ID, latitude, longitude, and growing season for each site. Similarly, we can inspect the metadata for the <code class="docutils literal notranslate"><span class="pre">time</span></code> dimension:</p>
+<div class="input highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">metadata</span><span class="p">.</span><span class="n">time</span><span class="w"></span>
+</pre></div>
+</div>
+<div class="output highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="w"> </span><span class="n">750</span><span class="w"></span>
+<span class="w"> </span><span class="s">751</span><span class="w"></span>
+<span class="w"> </span><span class="mi">752</span><span class="w"></span>
+<span class="w"> </span><span class="k">...</span><span class="w"></span>
+<span class="n">2009</span><span class="w"></span>
+<span class="s">2010</span><span class="w"></span>
+<span class="n">2011</span><span class="w"></span>
+</pre></div>
+</div>
+<p>and see that the proxy data ranges from 750 CE to 2011 CE.</p>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="descriptions.html" class="btn btn-neutral float-left" title="Demo Descriptions" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../stateVector/outline.html" class="btn btn-neutral float-right" title="Outline" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Jonathan King.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

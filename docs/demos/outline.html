@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Outline &mdash; Paleo DA Hackathon 0.0.1 documentation</title>
+  <title>Demo Datasets &mdash; Paleo DA Hackathon 0.0.1 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/matlab-io.css" type="text/css" />
@@ -17,11 +17,12 @@
         <script src="../_static/underscore.js"></script>
         <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="gridMetadata" href="gridMetadata.html" />
-    <link rel="prev" title="Open Coding 1" href="../introduction/code1.html" /> 
+    <link rel="next" title="Demo Descriptions" href="descriptions.html" />
+    <link rel="prev" title="Open Coding 1" href="../dash-intro/code1.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -46,25 +47,17 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Workshop</span></p>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../introduction/outline.html">Introduction</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">gridfile</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="gridMetadata.html">gridMetadata</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../da-primer.html">DA Primer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../workshop-outline.html">Workshop Outline</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dash-intro/outline.html">Introducing DASH</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Demos</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="descriptions.html">Demo Descriptions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="code2.html">Open Coding 2</a></li>
-<li class="toctree-l2"><a class="reference internal" href="gridfile.html">gridfile</a></li>
-<li class="toctree-l2"><a class="reference internal" href="code3.html">Open Coding 3</a></li>
-<li class="toctree-l2"><a class="reference internal" href="code4.html">Open Coding 4</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../stateVector/outline.html">stateVector</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../ensemble/outline.html">ensemble</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../PSM/outline.html">PSM</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../kalmanFilter/outline.html">kalmanFilter</a></li>
-</ul>
-<p class="caption" role="heading"><span class="caption-text">Resources</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../demo.html">Demo</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../matlab-primer.html">Matlab Primer</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../da-primer.html">DA Primer</a></li>
 </ul>
 
         </div>
@@ -81,7 +74,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
-      <li>Outline</li>
+      <li>Demo Datasets</li>
       <li class="wy-breadcrumbs-aside">
       </li>
   </ul>
@@ -90,19 +83,15 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="outline">
-<h1>Outline<a class="headerlink" href="#outline" title="Permalink to this heading"></a></h1>
-<p>In this section, we’ll examine the <code class="docutils literal notranslate"><span class="pre">gridfile</span></code> class, which is used to catalogue climate data and assign it human-readable metadata. The section includes of the following pages:</p>
+  <section id="demo-datasets">
+<h1>Demo Datasets<a class="headerlink" href="#demo-datasets" title="Permalink to this heading"></a></h1>
+<p>In the workshop, you’ll be using the DASH toolbox to implement an assimilation (specifically, a Kalman filter). To facilitate this, we’ve provided two demo datasets. Each demo is derived from a published assimilation and includes some climate model output, proxy records, and other data needed to implement the assimilation. Before continuing, you should choose and download one of these datasets. The next page provides descriptions of the demos and download links.</p>
+<p>In addition to raw data, each demo includes several data catalogues. These catalogues include some metadata for the datasets, and make it easier to use the datasets with DASH. The catalogues were built using DASH’s <code class="docutils literal notranslate"><span class="pre">gridfile</span></code> class. We won’t detail this class for the workshop, but we will examine a few key commands in the next open coding session.</p>
+<p>This section includes:</p>
 <dl class="simple">
-<dt><a class="reference internal" href="gridMetadata.html"><span class="doc">gridMetadata</span></a></dt><dd><p>We’ll start by examining <code class="docutils literal notranslate"><span class="pre">gridMetadata</span></code>, an auxiliary class used to define metadata for climate data sets.</p>
+<dt><a class="reference internal" href="descriptions.html"><span class="doc">Descriptions</span></a></dt><dd><p>The next page provides descriptions of the demos and download links.</p>
 </dd>
-<dt><a class="reference internal" href="code2.html"><span class="doc">Open Coding 2</span></a></dt><dd><p>We’ll then do a short open-coding session in order to practice using <code class="docutils literal notranslate"><span class="pre">gridMetadata</span></code></p>
-</dd>
-<dt><a class="reference internal" href="gridfile.html"><span class="doc">gridfile</span></a></dt><dd><p>With this background, we’ll then examine the <code class="docutils literal notranslate"><span class="pre">gridfile</span></code> class, and overview its key features</p>
-</dd>
-<dt><a class="reference internal" href="code3.html"><span class="doc">Open Coding 3</span></a></dt><dd><p>Next, we’ll examine some key <code class="docutils literal notranslate"><span class="pre">gridfile</span></code> commands, and we’ll use the class to catalogue our climate proxy datasets.</p>
-</dd>
-<dt><a class="reference internal" href="code4.html"><span class="doc">Open Coding 4</span></a></dt><dd><p>We’ll also do a separate coding session, this time using <code class="docutils literal notranslate"><span class="pre">gridfile</span></code> to catalogue our climate model output.</p>
+<dt><a class="reference internal" href="code2.html"><span class="doc">Open Coding 2</span></a></dt><dd><p>In the second open coding session, we’ll explore the demo datasets using a few key <code class="docutils literal notranslate"><span class="pre">gridfile</span></code> commands.</p>
 </dd>
 </dl>
 <div class="toctree-wrapper compound">
@@ -113,8 +102,8 @@
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="../introduction/code1.html" class="btn btn-neutral float-left" title="Open Coding 1" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="gridMetadata.html" class="btn btn-neutral float-right" title="gridMetadata" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="../dash-intro/code1.html" class="btn btn-neutral float-left" title="Open Coding 1" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="descriptions.html" class="btn btn-neutral float-right" title="Demo Descriptions" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

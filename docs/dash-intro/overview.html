@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>DASH Overview &mdash; Paleo DA Hackathon 0.0.1 documentation</title>
@@ -17,11 +17,12 @@
         <script src="../_static/underscore.js"></script>
         <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Object-Oriented Code" href="oop.html" />
-    <link rel="prev" title="Introduction" href="outline.html" /> 
+    <link rel="prev" title="Introducing DASH" href="outline.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -46,24 +47,19 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Workshop</span></p>
 <ul class="current">
-<li class="toctree-l1 current"><a class="reference internal" href="outline.html">Introduction</a><ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../da-primer.html">DA Primer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../workshop-outline.html">Workshop Outline</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="outline.html">Introducing DASH</a><ul class="current">
 <li class="toctree-l2 current"><a class="current reference internal" href="#">DASH Overview</a></li>
 <li class="toctree-l2"><a class="reference internal" href="oop.html">Object-Oriented Code</a></li>
 <li class="toctree-l2"><a class="reference internal" href="docs.html">Help and Documentation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="code1.html">Open Coding 1</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../gridfile/outline.html">gridfile</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../demos/outline.html">Demos</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../stateVector/outline.html">stateVector</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../ensemble/outline.html">ensemble</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../PSM/outline.html">PSM</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../kalmanFilter/outline.html">kalmanFilter</a></li>
-</ul>
-<p class="caption" role="heading"><span class="caption-text">Resources</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../demo.html">Demo</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../matlab-primer.html">Matlab Primer</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../da-primer.html">DA Primer</a></li>
 </ul>
 
         </div>
@@ -80,7 +76,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="outline.html">Introduction</a> &raquo;</li>
+          <li><a href="outline.html">Introducing DASH</a> &raquo;</li>
       <li>DASH Overview</li>
       <li class="wy-breadcrumbs-aside">
       </li>
@@ -92,14 +88,37 @@
              
   <section id="dash-overview">
 <h1>DASH Overview<a class="headerlink" href="#dash-overview" title="Permalink to this heading"></a></h1>
-<p>This page will give an overview of the DASH toolbox.</p>
+<p>DASH is a Matlab toolbox written to facilitate paleoclimate data assimilation. The code is designed for use from the command line as well as within scripts and functions. The toolbox is intended for users with some basic experience with MATLAB. In particular, users will benefit from knowing how to write a <code class="docutils literal notranslate"><span class="pre">for</span></code> loop, and how to index into arrays.</p>
+<p>DASH is organized into several different components, each implementing a particular task commonly required for paleoclimate data assimilation. The following list provides an overview of tasks supported by DASH, as well as the associated components of the toolbox</p>
+<ul class="simple">
+<li><dl class="simple">
+<dt>Organize and Catalogue Climate Data: <code class="docutils literal notranslate"><span class="pre">gridfile</span></code>, <code class="docutils literal notranslate"><span class="pre">gridMetadata</span></code></dt><dd><p>Data assimilation requires diverse types of data. This can include climate proxy data sets, climate model output, and instrumental observational records. Often, these data are saved in a variety of different formats. DASH thus provides tools to load data from different formats, and to catalogue datasets with human-readable metadata.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Build State Vector Ensembles: <code class="docutils literal notranslate"><span class="pre">stateVector</span></code></dt><dd><p>The state vector ensemble is a key component of any ensemble DA method. The <code class="docutils literal notranslate"><span class="pre">stateVector</span></code> class allows users to flexibly design and build ensembles in a variety of styles.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Proxy Forward Models: <code class="docutils literal notranslate"><span class="pre">PSM</span></code> and <code class="docutils literal notranslate"><span class="pre">ensembleMetadata</span></code></dt><dd><p>There are many different proxy forward models, written in a variety of styles. DASH provides the <code class="docutils literal notranslate"><span class="pre">PSM</span></code> interface to allow users to run external forward modeling codes within the DASH framework. A given forward model will require a unique set of climate variables, typically at a specific spatial location, as input. The <code class="docutils literal notranslate"><span class="pre">ensembleMetadata</span></code> class can assist users in locating these inputs within a state vector ensemble.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Data Assimilation Algorithms: <code class="docutils literal notranslate"><span class="pre">kalmanFilter</span></code>, <code class="docutils literal notranslate"><span class="pre">particleFilter</span></code>, and <code class="docutils literal notranslate"><span class="pre">optimalSensor</span></code></dt><dd><p>The DASH toolbox provides utilities to implement common paleoclimate DA algorithms (and different modifications of those algorithms). Currently, the toolbox includes components to implement offline Kalman filters, offline particle filters, and an optimal sensor algorithm.</p>
+</dd>
+</dl>
+</li>
+</ul>
 </section>
 
 
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="outline.html" class="btn btn-neutral float-left" title="Introduction" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="outline.html" class="btn btn-neutral float-left" title="Introducing DASH" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
         <a href="oop.html" class="btn btn-neutral float-right" title="Object-Oriented Code" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 

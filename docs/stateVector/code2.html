@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Open Coding 5 &mdash; Paleo DA Hackathon 0.0.1 documentation</title>
+  <title>Open Coding 2 &mdash; Paleo DA Hackathon 0.0.1 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/matlab-io.css" type="text/css" />
@@ -17,10 +17,11 @@
         <script src="../_static/underscore.js"></script>
         <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Outline" href="../ensemble/outline.html" />
+    <link rel="next" title="Outline" href="../PSM/outline.html" />
     <link rel="prev" title="stateVector Indices" href="indices.html" /> 
 </head>
 
@@ -46,15 +47,17 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Workshop</span></p>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../introduction/outline.html">Introduction</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../gridfile/outline.html">gridfile</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../da-primer.html">DA Primer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../workshop-outline.html">Workshop Outline</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dash-intro/outline.html">Introducing DASH</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../demos/outline.html">Demos</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="outline.html">stateVector</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="concepts.html">Concepts</a></li>
 <li class="toctree-l2"><a class="reference internal" href="indices.html">Indices</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Open Coding 5</a><ul>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Open Coding 2</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#goal">Goal</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#step-1-create-new-state-vector">Step 1: Create new state vector</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#demo"><em>Demo</em></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ntrend-demo"><em>NTREND Demo</em></a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#step-2-add-variables">Step 2: Add variables</a><ul>
@@ -64,21 +67,21 @@
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#step-3-design-variables">Step 3: Design variables</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#id1"><em>Demo</em></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#demo"><em>Demo</em></a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#step-4-implement-sequences">Step 4: Implement Sequences</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#id2"><em>Demo</em></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id1"><em>Demo</em></a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#step-5-implement-means">Step 5: Implement Means</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#id3"><em>Demo</em></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id2"><em>Demo</em></a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#step-6-build-an-ensemble">Step 6: Build an ensemble</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#sequential-build"><em>Sequential Build</em></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#ensemble-file"><em>Ensemble File</em></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id4"><em>Demo</em></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id3"><em>Demo</em></a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#step-7-resolve-metadata-conflicts">Step 7: Resolve Metadata Conflicts</a></li>
@@ -87,15 +90,8 @@
 </li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../ensemble/outline.html">ensemble</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../PSM/outline.html">PSM</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../kalmanFilter/outline.html">kalmanFilter</a></li>
-</ul>
-<p class="caption" role="heading"><span class="caption-text">Resources</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../demo.html">Demo</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../matlab-primer.html">Matlab Primer</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../da-primer.html">DA Primer</a></li>
 </ul>
 
         </div>
@@ -113,7 +109,7 @@
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
           <li><a href="outline.html">Outline</a> &raquo;</li>
-      <li>Open Coding 5</li>
+      <li>Open Coding 2</li>
       <li class="wy-breadcrumbs-aside">
       </li>
   </ul>
@@ -122,18 +118,18 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="open-coding-5">
-<h1>Open Coding 5<a class="headerlink" href="#open-coding-5" title="Permalink to this heading"></a></h1>
+  <section id="open-coding-2">
+<h1>Open Coding 2<a class="headerlink" href="#open-coding-2" title="Permalink to this heading"></a></h1>
 <section id="goal">
 <h2>Goal<a class="headerlink" href="#goal" title="Permalink to this heading"></a></h2>
 <p>Use the <code class="docutils literal notranslate"><span class="pre">stateVector</span></code> class to design and build a state vector ensemble.</p>
 </section>
 <section id="step-1-create-new-state-vector">
 <h2>Step 1: Create new state vector<a class="headerlink" href="#step-1-create-new-state-vector" title="Permalink to this heading"></a></h2>
-<p>Use the <code class="docutils literal notranslate"><span class="pre">stateVector</span></code> command to create a new <code class="docutils literal notranslate"><span class="pre">stateVector</span></code> object.</p>
-<blockquote>
-<div><p>newObject = stateVector</p>
-</div></blockquote>
+<p>Use the <code class="docutils literal notranslate"><span class="pre">stateVector</span></code> command to create a new <code class="docutils literal notranslate"><span class="pre">stateVector</span></code> object:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">newObject</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">stateVector</span><span class="w"></span>
+</pre></div>
+</div>
 <p>where <strong>newObject</strong> is the new state vector object.</p>
 <p>You can optionally label the object using the first input:</p>
 <div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">newObject</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">stateVector</span><span class="p">(</span><span class="n">label</span><span class="p">)</span><span class="w"></span>
@@ -145,8 +141,8 @@
 <p>You can also label an existing <code class="docutils literal notranslate"><span class="pre">stateVector</span></code> object using the <code class="docutils literal notranslate"><span class="pre">stateVector.label</span></code> command.</p>
 </div>
 <p>In either case, the new <code class="docutils literal notranslate"><span class="pre">stateVector</span></code> object will be empty. It does not yet have any variables, and so the state vector will initially have a length of zero. In the next section, we’ll start adding variables to the state vector.</p>
-<section id="demo">
-<h3><em>Demo</em><a class="headerlink" href="#demo" title="Permalink to this heading"></a></h3>
+<section id="ntrend-demo">
+<h3><em>NTREND Demo</em><a class="headerlink" href="#ntrend-demo" title="Permalink to this heading"></a></h3>
 <p>We’ll create a new <code class="docutils literal notranslate"><span class="pre">stateVector</span></code> object and label it as “NTREND Temperature Demo”</p>
 <div class="input highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">label</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&quot;NTREND Temperature Demo&quot;</span><span class="p">;</span><span class="w"></span>
 <span class="n">sv</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">stateVector</span><span class="p">(</span><span class="n">label</span><span class="p">)</span><span class="w"></span>
@@ -295,8 +291,8 @@
 <dt><strong>indices</strong></dt><dd><p>This input is a cell vector that includes the state/ensemble indices for each listed dimension. If you only listed a single dimension, you can also provide indices directly, rather than in a cell. Note that you can use an empty array <code class="docutils literal notranslate"><span class="pre">[]</span></code> to select all the elements along a dimension. Once again, we recommend using metadata to select indices (rather than listing indices directly) in order to improve the readability of your code.</p>
 </dd>
 </dl>
-<section id="id1">
-<h3><em>Demo</em><a class="headerlink" href="#id1" title="Permalink to this heading"></a></h3>
+<section id="demo">
+<h3><em>Demo</em><a class="headerlink" href="#demo" title="Permalink to this heading"></a></h3>
 <p>In our demo, we’ll be selecting ensemble members from individual years of model output. Thus, <code class="docutils literal notranslate"><span class="pre">time</span></code> is our ensemble dimension. Since we only want each year to be selected once, we should choose one month to use as the reference point for each year. We’ll use January as the reference month here.</p>
 <p>We’ll also use the command to limit all the variables to grid points north of 35°N. In the case of the <strong>T</strong> and <strong>T_mean</strong> variables, this is the desired reconstruction domain. For the <strong>T_monthly</strong> variable, we only need data from the grid points nearest to the proxy sites, and all of the proxy sites are located north of this boundary. Although limiting the domain of <strong>T_monthly</strong> is not strictly necessary, it will help remove unnecessary data elements from the state vector, which can help speed up later steps.</p>
 <p>For both dimensions, we’ll select indices using gridfile metadata. Also, since we’re applying the same indices to all three variables, we can use the <code class="docutils literal notranslate"><span class="pre">-1</span></code> option to select all the variables at once:</p>
@@ -351,8 +347,8 @@
 </dd>
 </dl>
 <p>You can also use the <code class="docutils literal notranslate"><span class="pre">sequence</span></code> command to specify a sequence for multiple dimensions at once. In this case, <strong>dimensions</strong> should be a string vector listing the names of the dimensions with sequences. The <strong>indices</strong> and <strong>metadata</strong> inputs should be cell vectors whose elements contain the sequence indices/metadata for the listed dimensions.</p>
-<section id="id2">
-<h3><em>Demo</em><a class="headerlink" href="#id2" title="Permalink to this heading"></a></h3>
+<section id="id1">
+<h3><em>Demo</em><a class="headerlink" href="#id1" title="Permalink to this heading"></a></h3>
 <p>In this demo, we want the <strong>T_monthly</strong> variable to implement a sequence such that the variable includes data for each month of the year. As a reminder, we’re need this sequence so that we can implement various seasonal means for the forward models. This sequence proceeds along the <code class="docutils literal notranslate"><span class="pre">time</span></code> dimension. We previously specified January as a reference month, so our sequence indices will be the values from 0 to 11 (the offsets of each month from January). We’ll use the names of the months (the values from 1 to 12) as the metadata:</p>
 <div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">indices</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">0</span><span class="p">:</span><span class="mi">11</span><span class="p">;</span><span class="w"></span>
 <span class="n">metadata</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="s">&quot;Jan&quot;</span><span class="p">;</span><span class="s">&quot;Feb&quot;</span><span class="p">;</span><span class="s">&quot;March&quot;</span><span class="p">;</span><span class="s">&quot;April&quot;</span><span class="p">;</span><span class="s">&quot;May&quot;</span><span class="p">;</span><span class="s">&quot;June&quot;</span><span class="p">;</span><span class="s">&quot;July&quot;</span><span class="p">;</span><span class="s">&quot;Aug&quot;</span><span class="p">;</span><span class="s">&quot;Sept&quot;</span><span class="p">;</span><span class="s">&quot;Oct&quot;</span><span class="p">;</span><span class="s">&quot;Nov&quot;</span><span class="p">;</span><span class="s">&quot;Dec&quot;</span><span class="p">];</span><span class="w"></span>
@@ -410,8 +406,8 @@
 <li><p>Use <code class="docutils literal notranslate"><span class="pre">stateVector.mean</span></code> to specify the mean indices, and then</p></li>
 <li><p>Use <code class="docutils literal notranslate"><span class="pre">weightedMean</span></code> to specify the weights for those indices.</p></li>
 </ol>
-<section id="id3">
-<h3><em>Demo</em><a class="headerlink" href="#id3" title="Permalink to this heading"></a></h3>
+<section id="id2">
+<h3><em>Demo</em><a class="headerlink" href="#id2" title="Permalink to this heading"></a></h3>
 <p>In the demo, we first need to implement a temporal mean over the <strong>T</strong> and <strong>T_index</strong> variables. Specifically, we’ll need to implement a June, July, August (JJA) mean representing the summer season. The <strong>T_index</strong> variable should also implement a weighted spatial mean over the <code class="docutils literal notranslate"><span class="pre">lat</span></code> and <code class="docutils literal notranslate"><span class="pre">lon</span></code> dimensions. The climate model grid points in this spatial mean should be weighted by latitude to reflect the decreased area of grid points at higher latitudes.</p>
 <p>We’ll start by using the <code class="docutils literal notranslate"><span class="pre">stateVector.mean</span></code> command to implement the temporal mean. Since <code class="docutils literal notranslate"><span class="pre">time</span></code> is an ensemble dimension, we’ll need to provide mean indices. Since we previously specified January as the reference month, our mean indices will be 5, 6, and 7 (the offset of the June, July, and August months from each January reference point).</p>
 <p>Since the spatial mean is not weighted by longitude (only by latitude), we can also use the <code class="docutils literal notranslate"><span class="pre">mean</span></code> method to take a mean over the <code class="docutils literal notranslate"><span class="pre">lon</span></code> dimension. Since <code class="docutils literal notranslate"><span class="pre">lon</span></code> is a state dimension, we won’t need any mean indices. Next, we’ll calculate latitude weights, and use the <code class="docutils literal notranslate"><span class="pre">weightedMean</span></code> method to implement the mean over the <code class="docutils literal notranslate"><span class="pre">lat</span></code> dimension. Note that we should only provide weights for the state indices along the <code class="docutils literal notranslate"><span class="pre">lat</span></code> dimension - recall that we previously selected state indices for data elements north of 35°N:</p>
@@ -493,8 +489,8 @@
 </pre></div>
 </div>
 </section>
-<section id="id4">
-<h3><em>Demo</em><a class="headerlink" href="#id4" title="Permalink to this heading"></a></h3>
+<section id="id3">
+<h3><em>Demo</em><a class="headerlink" href="#id3" title="Permalink to this heading"></a></h3>
 <p>In the demo, we will build an ensemble using every possible ensemble member. We will build the ensemble sequentially, so that the ensemble members are ordered in time. We’ll save the ensemble in a file named <code class="docutils literal notranslate"><span class="pre">ntrend.ens</span></code>:</p>
 <div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">filename</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&#39;ntrend.ens&#39;</span><span class="p">;</span><span class="w"></span>
 <span class="n">ens</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">sv</span><span class="p">.</span><span class="n">build</span><span class="p">(</span><span class="s">&#39;all&#39;</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;sequential&#39;</span><span class="p">,</span><span class="w"> </span><span class="nb">true</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;file&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">filename</span><span class="p">);</span><span class="w"></span>
@@ -529,41 +525,49 @@
 <section id="full-demo">
 <h2>Full Demo<a class="headerlink" href="#full-demo" title="Permalink to this heading"></a></h2>
 <p>This section recaps all the essential code from the demos. You can use it as a quick reference.</p>
-<blockquote>
-<div><p>% Initialize a new state vector
-label = “NTREND Temperature Demo”;
-sv = stateVector(label);</p>
-<p>% Get the temperature gridfile and its metadata
-temperature = gridfile(‘temperature-cesm’);
-metadata = temperature.metadata;</p>
-<p>% Add variables
-variables = [“T”, “T_index”, “T_monthly”];
-sv = sv.add(variables, temperature);</p>
-<p>% Locate January months and spatial sites north of 35 N
-january = month(metadata.time) == 1;
-extratropical = metadata.lat &gt; 35;</p>
-<p>% Make time an ensemble dimension with January reference moths.
-% Limit variables to spatial sites north of 35 N
-dimensions = [“time”,”lat”];
-types = [“ensemble”, “state”];
-indices = {january, extratropical};
-sv = sv.design(-1, dimensions, types, indices);</p>
-<p>% Implement a monthly sequence
-indices = 0:11;
-sequenceMetadata = [“Jan”;”Feb”;”March”;”April”;”May”;”June”;”July”;”Aug”;”Sept”;”Oct”;”Nov”;”Dec”];
-sv = sv.sequence(“T_monthly”, ‘time’, indices, sequenceMetadata);</p>
-<p>% Implement JJA temporal means
-jja = [5 6 7];
-sv = sv.mean(variables(1:2), “time”, jja);</p>
-<p>% Implement latitude-weighted spatial mean
-lats = metadata.lat(extratropical);
-weights = cosd(lats);
-sv = sv.mean(“T_index”, ‘lon’);
-sv = sv.weightedMean(“T_index”, ‘lat’, weights);</p>
-<p>% Build ensemble sequentially and save to file
-filename = ‘ntrend.ens’;
-ens = sv.build(‘all’, ‘sequential’, true, ‘file’, filename);</p>
-</div></blockquote>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">% Initialize a new state vector</span><span class="w"></span>
+<span class="n">label</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&quot;NTREND Temperature Demo&quot;</span><span class="p">;</span><span class="w"></span>
+<span class="n">sv</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">stateVector</span><span class="p">(</span><span class="n">label</span><span class="p">);</span><span class="w"></span>
+
+<span class="c">% Get the temperature gridfile and its metadata</span><span class="w"></span>
+<span class="n">temperature</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">gridfile</span><span class="p">(</span><span class="s">&#39;temperature-cesm&#39;</span><span class="p">);</span><span class="w"></span>
+<span class="n">metadata</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">temperature</span><span class="p">.</span><span class="n">metadata</span><span class="p">;</span><span class="w"></span>
+
+<span class="c">% Add variables</span><span class="w"></span>
+<span class="n">variables</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="s">&quot;T&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;T_index&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;T_monthly&quot;</span><span class="p">];</span><span class="w"></span>
+<span class="n">sv</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">sv</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">variables</span><span class="p">,</span><span class="w"> </span><span class="n">temperature</span><span class="p">);</span><span class="w"></span>
+
+<span class="c">% Locate January months and spatial sites north of 35 N</span><span class="w"></span>
+<span class="n">january</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">month</span><span class="p">(</span><span class="n">metadata</span><span class="p">.</span><span class="n">time</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"></span>
+<span class="n">extratropical</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">metadata</span><span class="p">.</span><span class="n">lat</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">35</span><span class="p">;</span><span class="w"></span>
+
+<span class="c">% Make time an ensemble dimension with January reference moths.</span><span class="w"></span>
+<span class="c">% Limit variables to spatial sites north of 35 N</span><span class="w"></span>
+<span class="n">dimensions</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="s">&quot;time&quot;</span><span class="p">,</span><span class="s">&quot;lat&quot;</span><span class="p">];</span><span class="w"></span>
+<span class="n">types</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="s">&quot;ensemble&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;state&quot;</span><span class="p">];</span><span class="w"></span>
+<span class="n">indices</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">{</span><span class="n">january</span><span class="p">,</span><span class="w"> </span><span class="n">extratropical</span><span class="p">};</span><span class="w"></span>
+<span class="n">sv</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">sv</span><span class="p">.</span><span class="n">design</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">dimensions</span><span class="p">,</span><span class="w"> </span><span class="n">types</span><span class="p">,</span><span class="w"> </span><span class="n">indices</span><span class="p">);</span><span class="w"></span>
+
+<span class="c">% Implement a monthly sequence</span><span class="w"></span>
+<span class="n">indices</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">0</span><span class="p">:</span><span class="mi">11</span><span class="p">;</span><span class="w"></span>
+<span class="n">sequenceMetadata</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="s">&quot;Jan&quot;</span><span class="p">;</span><span class="s">&quot;Feb&quot;</span><span class="p">;</span><span class="s">&quot;March&quot;</span><span class="p">;</span><span class="s">&quot;April&quot;</span><span class="p">;</span><span class="s">&quot;May&quot;</span><span class="p">;</span><span class="s">&quot;June&quot;</span><span class="p">;</span><span class="s">&quot;July&quot;</span><span class="p">;</span><span class="s">&quot;Aug&quot;</span><span class="p">;</span><span class="s">&quot;Sept&quot;</span><span class="p">;</span><span class="s">&quot;Oct&quot;</span><span class="p">;</span><span class="s">&quot;Nov&quot;</span><span class="p">;</span><span class="s">&quot;Dec&quot;</span><span class="p">];</span><span class="w"></span>
+<span class="n">sv</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">sv</span><span class="p">.</span><span class="n">sequence</span><span class="p">(</span><span class="s">&quot;T_monthly&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;time&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">indices</span><span class="p">,</span><span class="w"> </span><span class="n">sequenceMetadata</span><span class="p">);</span><span class="w"></span>
+
+<span class="c">% Implement JJA temporal means</span><span class="w"></span>
+<span class="n">jja</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="mi">5</span><span class="w"> </span><span class="mi">6</span><span class="w"> </span><span class="mi">7</span><span class="p">];</span><span class="w"></span>
+<span class="n">sv</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">sv</span><span class="p">.</span><span class="n">mean</span><span class="p">(</span><span class="n">variables</span><span class="p">(</span><span class="mi">1</span><span class="p">:</span><span class="mi">2</span><span class="p">),</span><span class="w"> </span><span class="s">&quot;time&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">jja</span><span class="p">);</span><span class="w"></span>
+
+<span class="c">% Implement latitude-weighted spatial mean</span><span class="w"></span>
+<span class="n">lats</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">metadata</span><span class="p">.</span><span class="n">lat</span><span class="p">(</span><span class="n">extratropical</span><span class="p">);</span><span class="w"></span>
+<span class="n">weights</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">cosd</span><span class="p">(</span><span class="n">lats</span><span class="p">);</span><span class="w"></span>
+<span class="n">sv</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">sv</span><span class="p">.</span><span class="n">mean</span><span class="p">(</span><span class="s">&quot;T_index&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;lon&#39;</span><span class="p">);</span><span class="w"></span>
+<span class="n">sv</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">sv</span><span class="p">.</span><span class="n">weightedMean</span><span class="p">(</span><span class="s">&quot;T_index&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;lat&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">weights</span><span class="p">);</span><span class="w"></span>
+
+<span class="c">% Build ensemble sequentially and save to file</span><span class="w"></span>
+<span class="n">filename</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&#39;ntrend.ens&#39;</span><span class="p">;</span><span class="w"></span>
+<span class="n">ens</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">sv</span><span class="p">.</span><span class="n">build</span><span class="p">(</span><span class="s">&#39;all&#39;</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;sequential&#39;</span><span class="p">,</span><span class="w"> </span><span class="nb">true</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;file&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">filename</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
 </section>
 </section>
 
@@ -572,7 +576,7 @@ ens = sv.build(‘all’, ‘sequential’, true, ‘file’, filename);</p>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="indices.html" class="btn btn-neutral float-left" title="stateVector Indices" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="../ensemble/outline.html" class="btn btn-neutral float-right" title="Outline" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="../PSM/outline.html" class="btn btn-neutral float-right" title="Outline" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
