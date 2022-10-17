@@ -18,7 +18,7 @@ If you are not redirected, please follow `this link <welcome>`_ or click the "Ne
 
     DA Primer           <da-primer>
     Workshop Outline    <workshop-outline>
-    Introducing DASH    <dash-intro/outline>
+    Introducing DASH    <dash/outline>
     Demos               <demos/outline>
     stateVector         <stateVector/outline>
     PSM                 <PSM/outline>

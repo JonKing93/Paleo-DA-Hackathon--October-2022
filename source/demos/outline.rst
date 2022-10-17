@@ -1,6 +1,6 @@
 Demo Datasets
 =============
-In the workshop, you'll be using the DASH toolbox to implement an assimilation (specifically, a Kalman filter). To facilitate this, we've provided two demo datasets. Each demo is derived from a published assimilation and includes some climate model output, proxy records, and other data needed to implement the assimilation. Before continuing, you should choose and download one of these datasets. The next page provides descriptions of the demos and download links.
+In the workshop, you'll be using the DASH toolbox to implement a Kalman filter assimilation. To facilitate this, we've provided two demo datasets. Each demo is derived from a published assimilation and includes some climate model output, proxy records, and other data needed to implement the assimilation. Before continuing, you should choose and download one of these datasets. The next page provides descriptions of the demos and download links.
 
 In addition to raw data, each demo includes several data catalogues. These catalogues include some metadata for the datasets, and make it easier to use the datasets with DASH. The catalogues were built using DASH's ``gridfile`` class. We won't detail this class for the workshop, but we will examine a few key commands in the next open coding session.
 
