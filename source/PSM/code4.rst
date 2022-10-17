@@ -755,16 +755,15 @@ we can see that R has an uncertainty estimate for each proxy record and ensemble
     R = mean(R, 2);
 
 
-
-
-Step 4b: Estimate proxies externally
-------------------------------------
-In some cases, you may want to run forward models outside of the DASH framework. For example, if you want to use a forward model not supported by DASH without needing to add a new forward model to the toolbox. It's perfectly fine to do so. In general, you should ensure that your final proxy estimates have one row per proxy record, and one column per ensemble member. You will likely find the commands in the ``ensembleMetadata`` class useful for locating forward model inputs.
-
-
 Full Demo
 ---------
 This section recaps all the essential code from the demos and may be useful as a quick reference. Note that the code from several of the demo sections has been combined into a single loop::
+
+
+NTREND Demo
++++++++++++
+
+::
 
     % Load the linear slopes
     slopes = load('ntrend-PSM-slopes.mat', 'slopes');
@@ -812,3 +811,44 @@ This section recaps all the essential code from the demos and may be useful as a
 
     % Run the forward models over the ensemble to produce proxy estimates
     Ye = PSM.estimate(models, ens);
+
+
+LGM Demo
+++++++++
+
+::
+
+    % Download the BaySPLINE forward model
+    PSM.download('bayspline');
+
+    % Get metadata for each proxy site
+    sites = gridfile('uk37').metadata.site;
+    names = sites(:,1);
+    lats = str2double(sites(:,2));
+    lons = str2double(sites(:,3));
+
+    % Get the ensemble and its metadata
+    ens = ensemble('uk37');
+    ensMeta = ens.metadata;
+
+    % Preallocate the cell vector for the PSM objects
+    nSite = numel(names);
+    models = cell(nSite, 1);
+
+    % Loop over the proxy records and create BaySPLINE PSM objects
+    for s = 1:nSite
+        model = PSM.bayspline;
+        model = model.label(names(s));
+
+        % Locate data from the closest climate model grid point
+        coordinates = [lats(s), lons(s)];
+        row = ensMeta.closestLatLon("SST", coordinates, 'site', [1 2]);
+
+        % Record the row and save the model
+        model = model.rows(row);
+        models{s} = model;
+    end
+
+    % Estimate proxy values and uncertainties
+    [Ye, R] = PSM.estimate(models, ens);
+    R = mean(R, 2);
