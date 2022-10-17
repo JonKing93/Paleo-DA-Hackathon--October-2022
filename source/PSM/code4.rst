@@ -581,9 +581,9 @@ Here, we'll demo the command for a single proxy record. We'll also use several `
     lon =
        14.0300
 
-   Here we can see that the site is located at 38.26N, 14.03E.
+Here we can see that the site is located at 38.26N, 14.03E.
 
-   Next, we'll use the ``closestLatLon`` command to locate the data elements in the **SST** variable from the climate model grid point closest to this proxy site. Since the **SST** dataset is on a tripolar grid, it uses the ``site`` dimension to organize climate model grid points. Thus, we'll use the "site" option with this command - note that the latitude coordinate is the first column of the site metadata in ``SST.grid``, and that longitude is the second column:
+Next, we'll use the ``closestLatLon`` command to locate the data elements in the **SST** variable from the climate model grid point closest to this proxy site. Since the **SST** dataset is on a tripolar grid, it uses the ``site`` dimension to organize climate model grid points. Thus, we'll use the "site" option with this command - note that the latitude coordinate is the first column of the site metadata in ``SST.grid``, and that longitude is the second column:
 
 .. code::
    :class: input
@@ -757,11 +757,11 @@ we can see that R has an uncertainty estimate for each proxy record and ensemble
 
 Full Demo
 ---------
-This section recaps all the essential code from the demos and may be useful as a quick reference. Note that the code from several of the demo sections has been combined into a single loop::
+This section recaps all the essential code from the demos and may be useful as a quick reference. Note that the code from several of the demo sections has been combined into a single loop.
 
 
-NTREND Demo
-+++++++++++
+*NTREND Demo*
++++++++++++++
 
 ::
 

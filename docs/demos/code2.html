@@ -8,6 +8,7 @@
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/matlab-io.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/accordion.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="../_static/js/html5shiv.min.js"></script>
   <![endif]-->
@@ -54,16 +55,8 @@
 <li class="toctree-l2"><a class="reference internal" href="descriptions.html">Demo Descriptions</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Open Coding 2</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#goal">Goal</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#step-1-inspect-data-catalogues">Step 1: Inspect data catalogues</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#ntrend-demo"><em>NTREND Demo</em></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#lgm-demo"><em>LGM Demo</em></a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#step-2-examine-metadata">Step 2: Examine metadata</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#id1"><em>NTREND Demo</em></a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#id2"><em>LGM Demo</em></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#step-1-inspect-data-catalogues">Step 1: Inspect data catalogues</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#step-2-examine-metadata">Step 2: Examine metadata</a></li>
 </ul>
 </li>
 </ul>
@@ -110,9 +103,7 @@
 </pre></div>
 </div>
 <p>where <strong>filename</strong> is a string that lists the name of a <code class="docutils literal notranslate"><span class="pre">.grid</span></code> file. Try it out!</p>
-<section id="ntrend-demo">
-<h3><em>NTREND Demo</em><a class="headerlink" href="#ntrend-demo" title="Permalink to this heading"></a></h3>
-<p>We’ll use the <code class="docutils literal notranslate"><span class="pre">gridfile</span></code> command to examine the <code class="docutils literal notranslate"><span class="pre">ntrend.grid</span></code> dataset.</p>
+<section class="accordion"><input type="checkbox" name="collapse" id="ntrend-1"><label for="ntrend-1"><strong>NTREND Demo</strong></label><div class="content"><p>We’ll use the <code class="docutils literal notranslate"><span class="pre">gridfile</span></code> command to examine the <code class="docutils literal notranslate"><span class="pre">ntrend.grid</span></code> dataset.</p>
 <div class="input highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">gridfile</span><span class="p">(</span><span class="s">&#39;ntrend&#39;</span><span class="p">)</span><span class="w"></span>
 </pre></div>
 </div>
@@ -138,10 +129,7 @@
 </pre></div>
 </div>
 <p>From the output, we can see that this catalogue manages data from 54 proxy sites over the period 750-2011 CE. The catalogue includes metadata for each site, and this metadata includes each site’s ID, latitude, longitude, and optimal growing season. The data in the catalogue is sourced from the <code class="docutils literal notranslate"><span class="pre">ntrend.mat</span></code> file that was downloaded with the demo.</p>
-</section>
-<section id="lgm-demo">
-<h3><em>LGM Demo</em><a class="headerlink" href="#lgm-demo" title="Permalink to this heading"></a></h3>
-<p>We’ll use the <code class="docutils literal notranslate"><span class="pre">gridfile</span></code> command to examine the <code class="docutils literal notranslate"><span class="pre">UK37.grid</span></code> dataset.</p>
+</div></section><section class="accordion"><input type="checkbox" name="collapse" id="lgm-1"><label for="lgm-1"><strong>LGM Demo</strong></label><div class="content"><p>We’ll use the <code class="docutils literal notranslate"><span class="pre">gridfile</span></code> command to examine the <code class="docutils literal notranslate"><span class="pre">UK37.grid</span></code> dataset.</p>
 <div class="input highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">gridfile</span><span class="p">(</span><span class="s">&#39;UK37&#39;</span><span class="p">)</span><span class="w"></span>
 </pre></div>
 </div>
@@ -151,7 +139,7 @@
 <span class="w">  </span><span class="n">Dimensions</span><span class="p">:</span><span class="w"> </span><span class="n">site</span><span class="p">,</span><span class="w"> </span><span class="nb">time</span><span class="w"></span>
 
 <span class="w">  </span><span class="n">Dimension</span><span class="w"> </span><span class="n">Sizes</span><span class="w"> </span><span class="n">and</span><span class="w"> </span><span class="n">Metadata</span><span class="p">:</span><span class="w"></span>
-<span class="w">      </span><span class="n">site</span><span class="p">:</span><span class="w"> </span><span class="mi">146</span><span class="w"></span>
+<span class="w">      </span><span class="n">site</span><span class="p">:</span><span class="w"> </span><span class="mi">139</span><span class="w"></span>
 <span class="w">      </span><span class="nb">time</span><span class="p">:</span><span class="w">   </span><span class="mi">1</span><span class="w"></span>
 
 <span class="w">  </span><span class="n">Attributes</span><span class="p">:</span><span class="w"></span>
@@ -166,9 +154,8 @@
 <span class="w">      </span><span class="mf">1.</span><span class="w"> </span><span class="n">some</span><span class="o">/</span><span class="nb">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">Hackathon</span><span class="o">/</span><span class="n">demos</span><span class="o">/</span><span class="n">LGM</span><span class="o">/</span><span class="n">UK37</span><span class="p">.</span><span class="n">mat</span><span class="w">   </span><span class="n">Show</span><span class="w"> </span><span class="nb">details</span><span class="w"></span>
 </pre></div>
 </div>
-<p>From the output, we can see that this catalogue manages data from 146 UK’37 sites. The catalogue includes metadata for each site, and this metadata includes each site’s ID, latitude, and longitude. The data in the catalogue is sourced from the <code class="docutils literal notranslate"><span class="pre">UK37.mat</span></code> file that was downloaded with the demo.</p>
-</section>
-</section>
+<p>From the output, we can see that this catalogue manages data from 139 UK’37 sites. The catalogue includes metadata for each site, and this metadata includes each site’s ID, latitude, and longitude. The data in the catalogue is sourced from the <code class="docutils literal notranslate"><span class="pre">UK37.mat</span></code> file that was downloaded with the demo.</p>
+</div></section></section>
 <section id="step-2-examine-metadata">
 <h2>Step 2: Examine metadata<a class="headerlink" href="#step-2-examine-metadata" title="Permalink to this heading"></a></h2>
 <p>Each gridfile catalogue includes metadata for each dimension of the dataset. This dimensional metadata will be helpful later in the workshop, so let’s examine it now. You can return the metadata for a gridfile catalogue using the <code class="docutils literal notranslate"><span class="pre">gridfile.metadata</span></code> command. Here the syntax is:</p>
@@ -180,9 +167,7 @@
 </pre></div>
 </div>
 <p>In either case, the output is a metadata object that describes the dataset. You can use the metadata object like a matlab <code class="docutils literal notranslate"><span class="pre">struct</span></code>. To get the metadata for a particular dimension, use <code class="docutils literal notranslate"><span class="pre">metadata.&lt;dimension</span> <span class="pre">name&gt;</span></code>. See the demos below for examples.</p>
-<section id="id1">
-<h3><em>NTREND Demo</em><a class="headerlink" href="#id1" title="Permalink to this heading"></a></h3>
-<p>We’ll first use the <code class="docutils literal notranslate"><span class="pre">metadata</span></code> command to obtain the metadata for the <code class="docutils literal notranslate"><span class="pre">ntrend.grid</span></code> catalogue:</p>
+<section class="accordion"><input type="checkbox" name="collapse" id="ntrend-2"><label for="ntrend-2"><strong>NTREND Demo</strong></label><div class="content"><p>We’ll first use the <code class="docutils literal notranslate"><span class="pre">metadata</span></code> command to obtain the metadata for the <code class="docutils literal notranslate"><span class="pre">ntrend.grid</span></code> catalogue:</p>
 <div class="input highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">metadata</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">gridfile</span><span class="p">(</span><span class="s">&#39;ntrend&#39;</span><span class="p">).</span><span class="n">metadata</span><span class="w"></span>
 </pre></div>
 </div>
@@ -224,11 +209,8 @@
 </pre></div>
 </div>
 <p>and see that the proxy data ranges from 750 CE to 2011 CE.</p>
-</section>
-</section>
-<section id="id2">
-<h2><em>LGM Demo</em><a class="headerlink" href="#id2" title="Permalink to this heading"></a></h2>
-<p>We’ll first use the <code class="docutils literal notranslate"><span class="pre">metadata</span></code> command to obtain the metadata for the <code class="docutils literal notranslate"><span class="pre">uk37.grid</span></code> catalogue:</p>
+<p>Now that you’ve examined the proxy data catalogue, try using these commands to investigate the climate model output.</p>
+</div></section><section class="accordion"><input type="checkbox" name="collapse" id="lgm-2"><label for="lgm-2"><strong>LGM Demo</strong></label><div class="content"><p>We’ll first use the <code class="docutils literal notranslate"><span class="pre">metadata</span></code> command to obtain the metadata for the <code class="docutils literal notranslate"><span class="pre">uk37.grid</span></code> catalogue:</p>
 <div class="input highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">metadata</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">gridfile</span><span class="p">(</span><span class="s">&#39;uk37&#39;</span><span class="p">).</span><span class="n">metadata</span><span class="w"></span>
 </pre></div>
 </div>
@@ -236,7 +218,7 @@
 
 <span class="w">  </span><span class="n">gridMetadata</span><span class="w"> </span><span class="n">with</span><span class="w"> </span><span class="n">metadata</span><span class="p">:</span><span class="w"></span>
 
-<span class="w">          </span><span class="n">site</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mi">146</span>×<span class="mi">3</span><span class="w"> </span><span class="nb">string</span><span class="p">]</span><span class="w"></span>
+<span class="w">          </span><span class="n">site</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mi">139</span>×<span class="mi">3</span><span class="w"> </span><span class="nb">string</span><span class="p">]</span><span class="w"></span>
 <span class="w">          </span><span class="nb">time</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mf">18.0010</span><span class="w"> </span><span class="mi">21</span><span class="p">]</span><span class="w"></span>
 <span class="w">    </span><span class="n">attributes</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span>×<span class="mi">1</span><span class="w"> </span><span class="nb">struct</span><span class="p">]</span><span class="w"></span>
 </pre></div>
@@ -251,12 +233,12 @@
 <span class="w">  </span><span class="s">&quot;ch07-98_ggc19&quot;</span><span class="w">    </span><span class="s">&quot;36.8667&quot;</span><span class="w">     </span><span class="s">&quot;-74.56667&quot;</span><span class="w"></span>
 <span class="w">  </span><span class="s">&quot;churruca&quot;</span><span class="w">         </span><span class="s">&quot;-53.0548&quot;</span><span class="w">    </span><span class="s">&quot;-73.92933&quot;</span><span class="w"></span>
 <span class="w">  </span><span class="k">...</span><span class="w"></span>
-<span class="w">  </span><span class="s">&quot;w8709a-8pc&quot;</span><span class="w">       </span><span class="s">&quot;42.242&quot;</span><span class="w">      </span><span class="s">&quot;-127.678&quot;</span><span class="w"></span>
-<span class="w">  </span><span class="s">&quot;w8709a-8tc&quot;</span><span class="w">       </span><span class="s">&quot;42.242&quot;</span><span class="w">      </span><span class="s">&quot;-127.678&quot;</span><span class="w"></span>
-<span class="w">  </span><span class="s">&quot;yj&quot;</span><span class="w">               </span><span class="s">&quot;21.524&quot;</span><span class="w">      </span><span class="s">&quot;112.1347&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="s">&quot;vm19-30&quot;</span><span class="w">           </span><span class="s">&quot;-3.383&quot;</span><span class="w">      </span><span class="s">&quot;-83.52&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="s">&quot;w8709a-8pc&quot;</span><span class="w">        </span><span class="s">&quot;42.242&quot;</span><span class="w">      </span><span class="s">&quot;-127.678&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="s">&quot;w8709a-8tc&quot;</span><span class="w">        </span><span class="s">&quot;42.242&quot;</span><span class="w">      </span><span class="s">&quot;-127.678&quot;</span><span class="w"></span>
 </pre></div>
 </div>
-<p>and see the ID, latitude, longitude, and growing season for each site. Similarly, we can inspect the metadata for the <code class="docutils literal notranslate"><span class="pre">time</span></code> dimension:</p>
+<p>and see the ID, latitude, and longitude for each site. Similarly, we can inspect the metadata for the <code class="docutils literal notranslate"><span class="pre">time</span></code> dimension:</p>
 <div class="input highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">metadata</span><span class="p">.</span><span class="n">time</span><span class="w"></span>
 </pre></div>
 </div>
@@ -264,7 +246,8 @@
 </pre></div>
 </div>
 <p>and see that the proxy data is averaged over the interval from 18-21 ka.</p>
-</section>
+<p>Now that you’ve examined the proxy data catalogue, try using these commands to investigate the climate model output.</p>
+</div></section></section>
 </section>
 
 

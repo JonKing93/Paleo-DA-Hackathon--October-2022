@@ -8,6 +8,7 @@
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/matlab-io.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/accordion.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="../_static/js/html5shiv.min.js"></script>
   <![endif]-->
@@ -21,8 +22,8 @@
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="PSM" href="psm.html" />
-    <link rel="prev" title="Open Coding 2" href="../stateVector/code2.html" /> 
+    <link rel="next" title="ensemble" href="ensemble.html" />
+    <link rel="prev" title="Open Coding 3" href="../stateVector/code3.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -53,8 +54,9 @@
 <li class="toctree-l1"><a class="reference internal" href="../demos/outline.html">Demos</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../stateVector/outline.html">stateVector</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">PSM</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="ensemble.html">ensemble</a></li>
 <li class="toctree-l2"><a class="reference internal" href="psm.html">PSM</a></li>
-<li class="toctree-l2"><a class="reference internal" href="code7.html">Open Coding 7</a></li>
+<li class="toctree-l2"><a class="reference internal" href="code4.html">Open Coding 4</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../kalmanFilter/outline.html">kalmanFilter</a></li>
@@ -85,11 +87,13 @@
              
   <section id="outline">
 <h1>Outline<a class="headerlink" href="#outline" title="Permalink to this heading"></a></h1>
-<p>In this section, we’ll examine the <code class="docutils literal notranslate"><span class="pre">PSM</span></code> interface. This interface allows users to run proxy forward models using inputs from a state vector ensemble.</p>
+<p>Now that we’ve built our ensemble, we’ll run forward models to generate our proxy estimates. We’ll do this using the <code class="docutils literal notranslate"><span class="pre">PSM</span></code> interface. This interface allows users to run external proxy forward modeling codes using inputs from a state vector ensemble.</p>
 <dl class="simple">
-<dt><a class="reference internal" href="psm.html"><span class="doc">PSM</span></a></dt><dd><p>We’ll start with an overview of the <code class="docutils literal notranslate"><span class="pre">PSM</span></code> interface. The interface is designed to allow users to run <em>external</em> forward modeling codes over state vector ensembles. We’ll examine the forward models officially supported by <code class="docutils literal notranslate"><span class="pre">DASH</span></code> and detail the main features of the interface.</p>
+<dt><a class="reference internal" href="ensemble.html"><span class="doc">ensemble</span></a></dt><dd><p>Before starting, we’ll briefly discuss our saved ensemble files, and some key DASH commands for working with ensembles.</p>
 </dd>
-<dt><a class="reference internal" href="code7.html"><span class="doc">Open Coding 7</span></a></dt><dd><p>We’ll then move to the next open-coding session and use the interface to generate proxy estimates for our proxy records.</p>
+<dt><a class="reference internal" href="psm.html"><span class="doc">PSM</span></a></dt><dd><p>Next, we’ll examine the <code class="docutils literal notranslate"><span class="pre">PSM</span></code> interface. The interface is designed to allow users to run <em>external</em> forward modeling codes over state vector ensembles. We’ll examine the forward models officially supported by <code class="docutils literal notranslate"><span class="pre">DASH</span></code> and detail the main features of the interface.</p>
+</dd>
+<dt><a class="reference internal" href="code4.html"><span class="doc">Open Coding 4</span></a></dt><dd><p>We’ll then move to the next open-coding session and use the interface to generate proxy estimates for our proxy records.</p>
 </dd>
 </dl>
 <div class="toctree-wrapper compound">
@@ -100,8 +104,8 @@
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="../stateVector/code2.html" class="btn btn-neutral float-left" title="Open Coding 2" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="psm.html" class="btn btn-neutral float-right" title="PSM" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="../stateVector/code3.html" class="btn btn-neutral float-left" title="Open Coding 3" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="ensemble.html" class="btn btn-neutral float-right" title="ensemble" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

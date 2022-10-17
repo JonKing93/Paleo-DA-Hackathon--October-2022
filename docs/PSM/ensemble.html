@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ensemble &mdash; Paleo DA Hackathon 0.0.1 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/matlab-io.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/accordion.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="PSM" href="psm.html" />
+    <link rel="prev" title="Outline" href="outline.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> Paleo DA Hackathon
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">About</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../welcome.html">Welcome!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../prerequisites.html">Prerequisites</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Workshop</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../da-primer.html">DA Primer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../workshop-outline.html">Workshop Outline</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dash/outline.html">Introducing DASH</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../demos/outline.html">Demos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../stateVector/outline.html">stateVector</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="outline.html">PSM</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">ensemble</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#ensemble-files">Ensemble Files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#the-ensemble-class">The <code class="docutils literal notranslate"><span class="pre">ensemble</span></code> Class</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#ensemble-command"><code class="docutils literal notranslate"><span class="pre">ensemble</span></code> command</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#ensemblemetadata-class"><code class="docutils literal notranslate"><span class="pre">ensembleMetadata</span></code> class</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#ensemble-metadata"><code class="docutils literal notranslate"><span class="pre">ensemble.metadata</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="psm.html">PSM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="code4.html">Open Coding 4</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../kalmanFilter/outline.html">kalmanFilter</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Paleo DA Hackathon</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="outline.html">Outline</a> &raquo;</li>
+      <li>ensemble</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="ensemble">
+<h1>ensemble<a class="headerlink" href="#ensemble" title="Permalink to this heading"></a></h1>
+<section id="ensemble-files">
+<h2>Ensemble Files<a class="headerlink" href="#ensemble-files" title="Permalink to this heading"></a></h2>
+<p>At the end of the last coding session, we discussed how the <code class="docutils literal notranslate"><span class="pre">stateVector.build</span></code> command can save a state vector ensemble to file, rather than returning the ensemble directly as an array. In general, we recommend saving ensembles to file because it allows you to interact with the ensemble using the <code class="docutils literal notranslate"><span class="pre">ensemble</span></code> class.</p>
+</section>
+<section id="the-ensemble-class">
+<h2>The <code class="docutils literal notranslate"><span class="pre">ensemble</span></code> Class<a class="headerlink" href="#the-ensemble-class" title="Permalink to this heading"></a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">ensemble</span></code> class provides a number of tools for manipulating saved state vector ensembles. Notably, the class allows you to manipulate ensembles without loading them to memory. This is advantageous, as large state vector ensembles can sometimes overwhelm active computer memory. Furthermore, the class includes commands for designing evolving (time-dependent) prior ensembles.</p>
+<p>We will not discuss <code class="docutils literal notranslate"><span class="pre">ensemble</span></code> in detail in this workshop. However, we’ll mention a few key commands that will appear throughout the remainder of the workshop.</p>
+<section id="ensemble-command">
+<h3><code class="docutils literal notranslate"><span class="pre">ensemble</span></code> command<a class="headerlink" href="#ensemble-command" title="Permalink to this heading"></a></h3>
+<p>You can use the <code class="docutils literal notranslate"><span class="pre">ensemble</span></code> command to return an object that represents a saved state vector ensemble. The command takes the name of an ensemble file as input.</p>
+<p>For example (from the NTREND demo):</p>
+<div class="input highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">ens</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">ensemble</span><span class="p">(</span><span class="s">&#39;ntrend.ens&#39;</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
+<div class="output highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">ens</span><span class="w"> </span><span class="p">=</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">static</span><span class="w"> </span><span class="n">ensemble</span><span class="w"> </span><span class="n">with</span><span class="w"> </span><span class="nb">properties</span><span class="p">:</span><span class="w"></span>
+
+<span class="w">          </span><span class="n">Label</span><span class="p">:</span><span class="w"> </span><span class="n">NTREND</span><span class="w"> </span><span class="n">Demo</span><span class="w"></span>
+<span class="w">      </span><span class="n">Variables</span><span class="p">:</span><span class="w"> </span><span class="n">T</span><span class="p">,</span><span class="w"> </span><span class="n">T_index</span><span class="p">,</span><span class="w"> </span><span class="n">T_monthly</span><span class="w"></span>
+<span class="w">         </span><span class="n">Length</span><span class="p">:</span><span class="w"> </span><span class="mi">56161</span><span class="w"></span>
+<span class="w">        </span><span class="n">Members</span><span class="p">:</span><span class="w"> </span><span class="mi">1156</span><span class="w"></span>
+</pre></div>
+</div>
+<p>we can see that this object represents a static (time-independent) ensemble with 3 variables and 1156 ensemble members.</p>
+<p>Analogously from the LGM demo:</p>
+<div class="input highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">ens</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">ensemble</span><span class="p">(</span><span class="s">&#39;lgm.ens&#39;</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
+<div class="output highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">ens</span><span class="w"> </span><span class="p">=</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">static</span><span class="w"> </span><span class="n">ensemble</span><span class="w"> </span><span class="n">with</span><span class="w"> </span><span class="nb">properties</span><span class="p">:</span><span class="w"></span>
+
+<span class="w">          </span><span class="n">Label</span><span class="p">:</span><span class="w"> </span><span class="n">LGM</span><span class="w"> </span><span class="n">Demo</span><span class="w"></span>
+<span class="w">      </span><span class="n">Variables</span><span class="p">:</span><span class="w"> </span><span class="n">SST</span><span class="w"></span>
+<span class="w">         </span><span class="n">Length</span><span class="p">:</span><span class="w"> </span><span class="mi">122880</span><span class="w"></span>
+<span class="w">        </span><span class="n">Members</span><span class="p">:</span><span class="w"> </span><span class="mi">16</span><span class="w"></span>
+</pre></div>
+</div>
+<p>we can see the output represents an ensemble with an SST variable over 16 ensemble members.</p>
+</section>
+</section>
+<section id="ensemblemetadata-class">
+<h2><code class="docutils literal notranslate"><span class="pre">ensembleMetadata</span></code> class<a class="headerlink" href="#ensemblemetadata-class" title="Permalink to this heading"></a></h2>
+<p>Each <code class="docutils literal notranslate"><span class="pre">ensemble</span></code> object can also return an <code class="docutils literal notranslate"><span class="pre">ensembleMetadata</span></code> object for a saved state vector ensemble. These metadata objects provide numerous utilities for working with state vectors and ensembles. We will not discuss the <code class="docutils literal notranslate"><span class="pre">ensembleMetadata</span></code> class in detail for the workshop, but we encourage you to read about its features in the dash documentation:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">dash</span><span class="p">.</span><span class="n">doc</span><span class="p">(</span><span class="s">&#39;ensembleMetadata&#39;</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
+<p>We’ll discuss a few key <code class="docutils literal notranslate"><span class="pre">ensembleMetadata</span></code> commands later in the workshop, as the need arises.</p>
+<section id="ensemble-metadata">
+<h3><code class="docutils literal notranslate"><span class="pre">ensemble.metadata</span></code><a class="headerlink" href="#ensemble-metadata" title="Permalink to this heading"></a></h3>
+<p>You can use the <code class="docutils literal notranslate"><span class="pre">ensemble.metadata</span></code> command to return an <code class="docutils literal notranslate"><span class="pre">ensembleMetadata</span></code> object for a saved state vector ensemble. The command does not require any inputs.</p>
+<p>For the NTREND demo:</p>
+<div class="input highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">ens</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">ensemble</span><span class="p">(</span><span class="s">&#39;ntrend&#39;</span><span class="p">);</span><span class="w"></span>
+<span class="n">metadata</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">ens</span><span class="p">.</span><span class="n">metadata</span><span class="w"></span>
+</pre></div>
+</div>
+<div class="output highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">ensembleMetadata</span><span class="w"> </span><span class="s">with</span><span class="w"> </span><span class="s">properties:</span><span class="w"></span>
+
+<span class="w">      </span><span class="n">Label</span><span class="p">:</span><span class="w"> </span><span class="n">NTREND</span><span class="w"> </span><span class="n">Demo</span><span class="w"></span>
+<span class="w">  </span><span class="n">Variables</span><span class="p">:</span><span class="w"> </span><span class="n">T</span><span class="p">,</span><span class="w"> </span><span class="n">T_index</span><span class="p">,</span><span class="w"> </span><span class="n">T_monthly</span><span class="w"></span>
+<span class="w">     </span><span class="n">Length</span><span class="p">:</span><span class="w"> </span><span class="mi">56161</span><span class="w"></span>
+<span class="w">    </span><span class="n">Members</span><span class="p">:</span><span class="w"> </span><span class="mi">1156</span><span class="w"></span>
+
+<span class="w">  </span><span class="n">Vector</span><span class="p">:</span><span class="w"></span>
+<span class="w">              </span><span class="n">T</span><span class="w"> </span><span class="o">-</span><span class="w">  </span><span class="mi">4320</span><span class="w"> </span><span class="n">rows</span><span class="w">   </span><span class="o">|</span><span class="w">   </span><span class="n">lon</span><span class="w"> </span><span class="p">(</span><span class="mi">144</span><span class="p">)</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="n">lat</span><span class="w"> </span><span class="p">(</span><span class="mi">30</span><span class="p">)</span><span class="w"></span>
+<span class="w">        </span><span class="n">T_index</span><span class="w"> </span><span class="o">-</span><span class="w">     </span><span class="mi">1</span><span class="w"> </span><span class="n">rows</span><span class="w">   </span><span class="o">|</span><span class="w">   </span><span class="n">lon</span><span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="n">lat</span><span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="w"></span>
+<span class="w">      </span><span class="n">T_monthly</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">51840</span><span class="w"> </span><span class="n">rows</span><span class="w">   </span><span class="o">|</span><span class="w">   </span><span class="n">lon</span><span class="w"> </span><span class="p">(</span><span class="mi">144</span><span class="p">)</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="n">lat</span><span class="w"> </span><span class="p">(</span><span class="mi">30</span><span class="p">)</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="nb">time</span><span class="w"> </span><span class="n">sequence</span><span class="w"> </span><span class="p">(</span><span class="mi">12</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Analogously for the LGM Demo:</p>
+<div class="input highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">metadata</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">ensemble</span><span class="p">(</span><span class="s">&#39;lgm&#39;</span><span class="p">).</span><span class="n">metadata</span><span class="w"></span>
+</pre></div>
+</div>
+<div class="output highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="w">  </span><span class="n">ensembleMetadata</span><span class="w"> </span><span class="s">with</span><span class="w"> </span><span class="s">properties:</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">Label</span><span class="p">:</span><span class="w"> </span><span class="n">LGM</span><span class="w"> </span><span class="n">Demo</span><span class="w"></span>
+<span class="w">    </span><span class="n">Variables</span><span class="p">:</span><span class="w"> </span><span class="n">SST</span><span class="w"></span>
+<span class="w">       </span><span class="n">Length</span><span class="p">:</span><span class="w"> </span><span class="mi">122880</span><span class="w"></span>
+<span class="w">      </span><span class="n">Members</span><span class="p">:</span><span class="w"> </span><span class="mi">16</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">Vector</span><span class="p">:</span><span class="w"></span>
+<span class="w">        </span><span class="n">SST</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">122880</span><span class="w"> </span><span class="n">rows</span><span class="w">   </span><span class="o">|</span><span class="w">   </span><span class="n">site</span><span class="w"> </span><span class="p">(</span><span class="mi">122880</span><span class="p">)</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="nb">time</span><span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="w"></span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="outline.html" class="btn btn-neutral float-left" title="Outline" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="psm.html" class="btn btn-neutral float-right" title="PSM" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Jonathan King.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -8,6 +8,7 @@
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/matlab-io.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/accordion.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="../_static/js/html5shiv.min.js"></script>
   <![endif]-->
@@ -21,8 +22,8 @@
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Open Coding 7" href="code7.html" />
-    <link rel="prev" title="Outline" href="outline.html" /> 
+    <link rel="next" title="Open Coding 4" href="code4.html" />
+    <link rel="prev" title="ensemble" href="ensemble.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -53,6 +54,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../demos/outline.html">Demos</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../stateVector/outline.html">stateVector</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="outline.html">PSM</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="ensemble.html">ensemble</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">PSM</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#supported-forward-models">Supported Forward Models</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#standard-workflow">Standard Workflow</a><ul>
@@ -64,7 +66,7 @@
 </li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="code7.html">Open Coding 7</a></li>
+<li class="toctree-l2"><a class="reference internal" href="code4.html">Open Coding 4</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../kalmanFilter/outline.html">kalmanFilter</a></li>
@@ -169,7 +171,7 @@
 <section id="locate-forward-model-inputs">
 <h3>Locate Forward Model Inputs<a class="headerlink" href="#locate-forward-model-inputs" title="Permalink to this heading"></a></h3>
 <p>Next, you’ll need to locate the elements of the state vector ensemble that are required to run each forward model. Every PSM object includes a <code class="docutils literal notranslate"><span class="pre">rows</span></code> command, which allows you to specify which state vector rows contain the inputs for a given forward model.</p>
-<p>You’ll typically use the <code class="docutils literal notranslate"><span class="pre">ensembleMetadata</span></code> class to locate these rows. The <code class="docutils literal notranslate"><span class="pre">closestLatLon</span></code> command is perhaps the most used - it will search a state vector variable for the data values closest to a proxy site. Other commands that may be useful include <code class="docutils literal notranslate"><span class="pre">ensembleMetadata.find</span></code>, which locates specific state vector variables, and <code class="docutils literal notranslate"><span class="pre">ensembleMetadata.variable</span></code>, which returns metadata along the rows of a state vector variable.</p>
+<p>You’ll typically use the <code class="docutils literal notranslate"><span class="pre">ensembleMetadata</span></code> class to locate these rows. The <code class="docutils literal notranslate"><span class="pre">closestLatLon</span></code> command is perhaps the most frequently used - it will search a state vector variable for the data values closest to a proxy site. Other commands that may be useful include <code class="docutils literal notranslate"><span class="pre">ensembleMetadata.find</span></code>, which locates specific state vector variables, and <code class="docutils literal notranslate"><span class="pre">ensembleMetadata.variable</span></code>, which returns metadata along the rows of a state vector variable.</p>
 </section>
 <section id="run-models-over-ensemble">
 <h3>Run Models over Ensemble<a class="headerlink" href="#run-models-over-ensemble" title="Permalink to this heading"></a></h3>
@@ -182,8 +184,8 @@
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="outline.html" class="btn btn-neutral float-left" title="Outline" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="code7.html" class="btn btn-neutral float-right" title="Open Coding 7" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="ensemble.html" class="btn btn-neutral float-left" title="ensemble" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="code4.html" class="btn btn-neutral float-right" title="Open Coding 4" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
