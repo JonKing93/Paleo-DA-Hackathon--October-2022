@@ -41,19 +41,6 @@ Use the ``dash.doc`` command to open the documentation as a webpage::
     >> dash.doc('dash.version')
 
 
-Step 4: Compare
----------------
-Compare the console help text for ``dash.doc``::
-
-    >> help dash.doc
-
-with its documentation page::
-
-    >> dash.doc('dash.doc')
-
-Notice the **"Examples"** section on the documentation page, which is not included in the help text.
-
-
 .. note::
 
     DASH documentation pages will often include usage examples, but these examples are not available when displaying help text in the console.

@@ -9,9 +9,9 @@ You can display help text for components of the DASH toolbox using Matlab's buil
 
     help kalmanFilter
 
-will display the help text for ``kalmanFilter`` class.
+will display the help text for the ``kalmanFilter`` class.
 
-To display help text for a function or method, use the full dot-indexing title of the method. For example, to display help for the ``run`` method of the ``kalmanFilter`` class, use::
+To display help text for a specific function or method, use the full dot-indexing title of the method. For example, to display help for the ``run`` method of the ``kalmanFilter`` class, use::
 
     help kalmanFilter.run
 
