@@ -1,6 +1,6 @@
-Introduction
-============
-In this first section, we'll give an overview of the DASH toolbox and review a few miscellaneous topics that will facilitate the workshop. The section contains the pages:
+Introducing DASH
+================
+In this section, we'll give an overview of the DASH toolbox and review a few miscellaneous topics that will facilitate the workshop. The section contains the pages:
 
 :doc:`overview`
     We'll begin with an overview of the DASH toolbox, and examine the types of tasks it can automate for DA analyses.
@@ -18,7 +18,7 @@ In this first section, we'll give an overview of the DASH toolbox and review a f
 .. toctree::
     :hidden:
 
-    da-primer
+    overview
     oop
     docs
     code1

@@ -16,17 +16,10 @@ If you are not redirected, please follow `this link <welcome>`_ or click the "Ne
     :caption: Workshop
     :hidden:
 
-    Introduction   <introduction/outline>
-    Demos          <demos/outline>
-    stateVector    <stateVector/outline>
-    PSM            <PSM/outline>
-    kalmanFilter   <kalmanFilter/outline>
-
-
-.. toctree::
-    :caption: Resources
-    :hidden:
-
-    demo
-    matlab-primer
-    da-primer
+    DA Primer           <da-primer>
+    Workshop Outline    <workshop-outline>
+    Introducing DASH    <dash-intro/outline>
+    Demos               <demos/outline>
+    stateVector         <stateVector/outline>
+    PSM                 <PSM/outline>
+    kalmanFilter        <kalmanFilter/outline>
