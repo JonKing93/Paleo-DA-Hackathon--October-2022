@@ -60,7 +60,7 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="kalmanFilter.html">kalmanFilter</a></li>
-<li class="toctree-l2"><a class="reference internal" href="code8.html">Open Coding 8</a></li>
+<li class="toctree-l2"><a class="reference internal" href="code5.html">Open Coding 5</a></li>
 </ul>
 </li>
 </ul>
@@ -91,8 +91,8 @@
              
   <section id="da-algorithms-in-dash">
 <h1>DA Algorithms in DASH<a class="headerlink" href="#da-algorithms-in-dash" title="Permalink to this heading"></a></h1>
-<p>The <code class="docutils literal notranslate"><span class="pre">DASH</span></code> toolbox contains code to implement three different data assimilation algorithms - specifically, the toolbox supports Kalman filter, particle filter, and optimal sensor analyses. Each of these algorithms is implemented by a class - specifically <code class="docutils literal notranslate"><span class="pre">kalmanFilter</span></code>, <code class="docutils literal notranslate"><span class="pre">particleFilter</span></code>, and <code class="docutils literal notranslate"><span class="pre">optimalSensor</span></code>. Each class implements an object that can be used to (1) set experimental parameters for a particular analysis, and (2) run the algorithm using those parameters. In this workshop, we’ll focus on using a Kalman filter, but you can find a summary of the other algorithms in the next section.</p>
-<p>It’s important to note that the three DA algorithms in DASH are independent of the rest of the toolbox. The other classes (<code class="docutils literal notranslate"><span class="pre">gridfile</span></code>, <code class="docutils literal notranslate"><span class="pre">stateVector</span></code>, <code class="docutils literal notranslate"><span class="pre">PSM</span></code>, etc.) are strictly meant for convenience. They are not required to implement an assimilation, and you can run any assimilation without them. However, we’ve included them in the workshop because we find they ultimately accelerate DA workflows.</p>
+<p>The DASH toolbox contains code to implement three different data assimilation algorithms - specifically, the toolbox supports Kalman filter, particle filter, and optimal sensor analyses. Each of these algorithms is implemented by a class - specifically <code class="docutils literal notranslate"><span class="pre">kalmanFilter</span></code>, <code class="docutils literal notranslate"><span class="pre">particleFilter</span></code>, and <code class="docutils literal notranslate"><span class="pre">optimalSensor</span></code>. Each class implements an object that can be used to (1) set experimental parameters for a particular analysis, and (2) run the algorithm using those parameters. In this workshop, we’ll focus on using a Kalman filter, but you can find a summary of the other algorithms in the next section.</p>
+<p>It’s important to note that the DA algorithms in DASH are independent of the rest of the toolbox. The other classes (<code class="docutils literal notranslate"><span class="pre">stateVector</span></code>, <code class="docutils literal notranslate"><span class="pre">PSM</span></code>, etc.) are strictly meant for your convenience. They are not required to implement an assimilation, and you can run any assimilation without them. However, we’ve included them in the workshop because we find they ultimately accelerate DA workflows.</p>
 <section id="algorithm-descriptions">
 <h2>Algorithm Descriptions<a class="headerlink" href="#algorithm-descriptions" title="Permalink to this heading"></a></h2>
 <p>The following section contains a brief description of the DA algorithms in DASH. You can find additional details within the DASH documentation and the paleoclimate DA literature.</p>

@@ -736,9 +736,10 @@ ens = ensemble(‘lgm’);</p>
 <p>This section recaps all the essential code from the demos and may be useful as a quick reference. Note that the code from several of the demo sections has been combined into a single loop.</p>
 <section id="id5">
 <h3><em>NTREND Demo</em><a class="headerlink" href="#id5" title="Permalink to this heading"></a></h3>
-<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">% Load the linear slopes</span><span class="w"></span>
-<span class="n">slopes</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">load</span><span class="p">(</span><span class="s">&#39;ntrend-PSM-slopes.mat&#39;</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;slopes&#39;</span><span class="p">);</span><span class="w"></span>
-<span class="n">slopes</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">slopes</span><span class="p">.</span><span class="n">slopes</span><span class="p">;</span><span class="w"></span>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">% Load the linear model parameters</span><span class="w"></span>
+<span class="n">parameters</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">load</span><span class="p">(</span><span class="s">&#39;ntrend.mat&#39;</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;slopes&#39;</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;intercepts&#39;</span><span class="p">);</span><span class="w"></span>
+<span class="n">slopes</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">parameters</span><span class="p">.</span><span class="n">slopes</span><span class="p">;</span><span class="w"></span>
+<span class="n">intercepts</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">parameters</span><span class="p">.</span><span class="n">intercepts</span><span class="p">;</span><span class="w"></span>
 
 <span class="c">% Get metadata for each proxy site</span><span class="w"></span>
 <span class="n">sites</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">gridfile</span><span class="p">(</span><span class="s">&#39;ntrend&#39;</span><span class="p">).</span><span class="n">metadata</span><span class="p">.</span><span class="n">site</span><span class="p">;</span><span class="w"></span>
@@ -765,7 +766,7 @@ ens = ensemble(‘lgm’);</p>
 <span class="w">    </span><span class="n">monthlySlopes</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">repmat</span><span class="p">(</span><span class="n">slope</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">nMonths</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">]);</span><span class="w"></span>
 
 <span class="w">    </span><span class="c">% Create a linear forward model. Label the model</span><span class="w"></span>
-<span class="w">    </span><span class="n">model</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">PSM</span><span class="p">.</span><span class="n">linear</span><span class="p">(</span><span class="n">monthlySlopes</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="n">model</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">PSM</span><span class="p">.</span><span class="n">linear</span><span class="p">(</span><span class="n">monthlySlopes</span><span class="p">,</span><span class="w"> </span><span class="n">intercepts</span><span class="p">(</span><span class="n">s</span><span class="p">));</span><span class="w"></span>
 <span class="w">    </span><span class="n">label</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">strcat</span><span class="p">(</span><span class="n">names</span><span class="p">(</span><span class="n">s</span><span class="p">),</span><span class="w"> </span><span class="s">&quot; - &quot;</span><span class="p">,</span><span class="w"> </span><span class="n">seasons</span><span class="p">(</span><span class="n">s</span><span class="p">));</span><span class="w"></span>
 <span class="w">    </span><span class="n">model</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">model</span><span class="p">.</span><span class="n">label</span><span class="p">(</span><span class="n">label</span><span class="p">);</span><span class="w"></span>
 
@@ -797,7 +798,7 @@ ens = ensemble(‘lgm’);</p>
 <span class="n">lons</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">str2double</span><span class="p">(</span><span class="n">sites</span><span class="p">(:,</span><span class="mi">3</span><span class="p">));</span><span class="w"></span>
 
 <span class="c">% Get the ensemble and its metadata</span><span class="w"></span>
-<span class="n">ens</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">ensemble</span><span class="p">(</span><span class="s">&#39;uk37&#39;</span><span class="p">);</span><span class="w"></span>
+<span class="n">ens</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">ensemble</span><span class="p">(</span><span class="s">&#39;lgm&#39;</span><span class="p">);</span><span class="w"></span>
 <span class="n">ensMeta</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">ens</span><span class="p">.</span><span class="n">metadata</span><span class="p">;</span><span class="w"></span>
 
 <span class="c">% Preallocate the cell vector for the PSM objects</span><span class="w"></span>
