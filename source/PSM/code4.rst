@@ -765,9 +765,10 @@ This section recaps all the essential code from the demos and may be useful as a
 
 ::
 
-    % Load the linear slopes
-    slopes = load('ntrend-PSM-slopes.mat', 'slopes');
-    slopes = slopes.slopes;
+    % Load the linear model parameters
+    parameters = load('ntrend.mat', 'slopes', 'intercepts');
+    slopes = parameters.slopes;
+    intercepts = parameters.intercepts;
 
     % Get metadata for each proxy site
     sites = gridfile('ntrend').metadata.site;
@@ -794,7 +795,7 @@ This section recaps all the essential code from the demos and may be useful as a
         monthlySlopes = repmat(slope, [nMonths, 1]);
 
         % Create a linear forward model. Label the model
-        model = PSM.linear(monthlySlopes);
+        model = PSM.linear(monthlySlopes, intercepts(s));
         label = strcat(names(s), " - ", seasons(s));
         model = model.label(label);
 
@@ -828,7 +829,7 @@ LGM Demo
     lons = str2double(sites(:,3));
 
     % Get the ensemble and its metadata
-    ens = ensemble('uk37');
+    ens = ensemble('lgm');
     ensMeta = ens.metadata;
 
     % Preallocate the cell vector for the PSM objects

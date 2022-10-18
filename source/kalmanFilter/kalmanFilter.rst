@@ -9,7 +9,7 @@ Essential Inputs
 There are 4 essential data inputs required to run a Kalman filter in DASH. These are
 
 1. A prior ensemble
-2. Proxy observations / records
+2. Proxy records (often called proxy *observations*)
 3. Proxy estimates, and
 4. Proxy uncertainties
 
@@ -38,7 +38,6 @@ Output Options
 The ``kalmanFilter`` class relies on an ensemble square root Kalman filter, which updates the ensemble mean separately from the ensemble deviations. Updating the deviations is computationally intensive, and the updated deviations can quickly overwhelm computer memory. Often, you'll only need the variance of the deviations, or a few select percentiles, so the ``kalmanFilter`` class includes several commands that allow you to select the quantities output by the algorithm.
 
 By default, the class will only update and return the ensemble mean when you run the algorithm. This updated ensemble mean is typically sufficient for exploratory analyses, and this approach is significantly faster than also updating the deviations. However, the updated deviations are important for uncertainty analyses, and you'll typically want to use them in conjunction with a final reconstruction. The following ``kalmanFilter`` commands will cause the algorithm to update the ensemble deviations and return an associated output field.
-
 
 ``deviations``
     Returns the full set of updated ensemble deviations. This option allows the most flexibility for uncertainty analyses. However, updated deviations can overwhelm computer memory when assimilating a large state vector or many time steps, so this option may not always be the most appropriate.

@@ -680,16 +680,16 @@ In this most basic syntax, the ``build`` command will select ensemble members at
 ++++++++++++++++++
 You can use the ``'sequential'`` option to select ensemble members sequentially from the ensemble dimensions, rather than at random. For example, if you select ensemble members from ``time``, then using the ``'sequential'`` option will cause the ensemble members to be ordered in time. This is often useful when designing an evolving (time-dependent ensemble) because you can more easily locate specific ensemble members. Here the syntax is::
 
-    [X, ensMeta] = obj.build(..., 'sequential', true, ...)
+    [X, ensMeta] = obj.build(.., 'sequential', true, ..)
 
-(where the ``...`` is the first input and any other options).
+(where the ``..`` is the first input and any other options).
 
 
 *Ensemble File*
 +++++++++++++++
 You can use the ``'file'`` option to save the state vector ensemble to an ensemble file. We will discuss ensemble files in the next section - for now, we'll simply note that they provide additional tools for manipulating state vector ensembles. As such, we highly recommend saving your ensembles to file. Here the syntax is::
 
-    ens = obj.build(..., 'file', filename, ...)
+    ens = obj.build(.., 'file', filename, ..)
 
 **filename**
     This input is the name to use for the new ensemble file.
