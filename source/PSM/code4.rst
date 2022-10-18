@@ -21,13 +21,32 @@ The ``download`` command will add the downloaded code to the active Matlab path 
 The ``download`` command requires that you have (1) an internet connection, and (2) git installed on your operating system. If you don't have git installed, you can use the ``PSM.githubInfo`` command to find the location of supported forward models on Github.
 
 
-*NTREND Demo*
-+++++++++++++
+..
+    *NTREND Demo*
+    +++++++++++++
+
+.. raw:: html
+
+    <section class="accordion"><input type="checkbox" name="collapse" id="ntrend-1"><label for="ntrend-1"><strong>NTREND Demo</strong></label><div class="content">
+
 In this demo, we'll be using the multi-variate linear forward model. The linear model is built-in directly to DASH, so we won't need to download anything. If you still want to practice using the ``PSM.download`` command, see the LGM demo for an example using the BaySPLINE forward model.
 
+.. raw:: html
 
-*LGM Demo*
-++++++++++
+    </div></section>
+
+
+
+
+
+..
+    *LGM Demo*
+    +++++++++++++
+
+.. raw:: html
+
+    <section class="accordion"><input type="checkbox" name="collapse" id="lgm-1"><label for="lgm-1"><strong>LGM Demo</strong></label><div class="content">
+
 For this demo, we'll need to download the BaySPLINE UK'37 forward model. Using the  ``PSM.info`` command:
 
 .. code::
@@ -54,6 +73,10 @@ we can see that DASH uses the name ``bayspline`` to identify this model. Try usi
 
 to download the code for this forward model. After running the command, your current directory should contain a folder named ``BAYSPLINE``, which holds the code for the forward model.
 
+.. raw:: html
+
+    </div></section>
+
 
 
 Step 2: Create PSM Objects
@@ -75,8 +98,14 @@ The DASH documentation should include a description of all required parameters, 
 When building PSM objects for a group of proxies, it's typically best to organize the collection of PSM objects in a cell vector. Each element of the cell vector should hold the PSM object for a particular proxy record. Consider using the ``PSM.label`` command to apply labels to the PSM objects, as this can help clarify what each model represents.
 
 
-*NTREND Demo*
-+++++++++++++
+..
+    *NTREND Demo*
+    +++++++++++++
+
+.. raw:: html
+
+    <section class="accordion"><input type="checkbox" name="collapse" id="ntrend-2"><label for="ntrend-2"><strong>NTREND Demo</strong></label><div class="content">
+
 In the demo, we'll be using univariate linear forward models for the proxy records. Each forward model should be calibrated to the seasonal temperature mean for the associated proxy. Each proxy has a unique window of seasonal sensitivity, so the months used in the seasonal means will vary with the proxies. The slopes to use for the forward models are stored in the ``ntrend.mat`` file (these slopes were calculated by calibrating the proxy records against instrumental seasonal means).
 
 Recall that the **T_monthly** variable stores the data required to run these forward models. We applied a sequence to **T_monthly** so that it stores data from each month in a given year. To run a given forward model, we'll want to locate the climate model grid point closest to the associated proxy record, extract the months of seasonal sensitivity, take the mean temperature over those months, and then apply a linear slope to that mean temperature. Since we're using a linear model, we can combine the last two steps into one. Specifically, we can divide the linear slope by the number of seasonally sensitive months (i.e. implementing a mean) and apply that slope to the temperature in each sensitive month.
@@ -178,10 +207,21 @@ we can see that the first PSM object is for the "NTR" proxy site, and that it im
 
 is for the "GOA" proxy site, and it implements a seasonal mean from January to September.
 
+.. raw:: html
+
+    </div></section>
 
 
-*LGM Demo*
-++++++++++
+
+
+..
+    *LGM Demo*
+    +++++++++++++
+
+.. raw:: html
+
+    <section class="accordion"><input type="checkbox" name="collapse" id="lgm-2"><label for="lgm-2"><strong>LGM Demo</strong></label><div class="content">
+
 In this demo, we'll be using the BAYSPLINE forward model for UKL'37. Reading the documentation of its constructor::
 
     help PSM.bayspline
@@ -244,6 +284,10 @@ we can see that "models" is a cell vector with 139 elements, and that each eleme
 
         Parameters:
         bayes: {}
+
+.. raw:: html
+
+    </div></section>
 
 
 
@@ -336,8 +380,14 @@ We will only cover the ``closestLatLon`` command in the workshop, but the ``ense
 These functions are also helpful for locating data inputs when running forward models outside of the ``DASH`` framework.
 
 
-*NTREND Demo: closestLatLon*
-++++++++++++++++++++++++++++
+..
+    *NTREND Demo: closestLatLon*
+    ++++++++++++++++++++++++++++
+
+.. raw:: html
+
+    <section class="accordion"><input type="checkbox" name="collapse" id="ntrend-3a"><label for="ntrend-3a"><strong>NTREND Demo: closestLatLon</strong></label><div class="content">
+
 We'll start with a quick exploration of the ``closestLatLon`` command. In the demo, we need to search through the **T_monthly** variable for data from the climate model grid point closest to each proxy record. Since **T_monthly** implements a sequence for each month of the year, the ``closestLatLon`` command should return 12 rows (one for each month of the year). We'll then select the rows that correspond to the months of the proxy's seasonal sensitivity.
 
 Here, we'll demo the command for a single proxy record. We'll also use several ``ensembleMetadata`` commands to verify that the selected rows point to the correct data. We'll start by getting the coordinates and seasonal sensitivity window of the NTR proxy record (this is the first proxy record in our dataset):
@@ -504,10 +554,21 @@ We can do a final verification to ensure that these rows represent July and Augu
         "July"
         "August"
 
+.. raw:: html
+
+    </div></section>
 
 
-*NTREND Demo: Record rows*
-++++++++++++++++++++++++++
+
+
+..
+    *NTREND Demo: Record rows*
+    ++++++++++++++++++++++++++
+
+.. raw:: html
+
+    <section class="accordion"><input type="checkbox" name="collapse" id="ntrend-3b"><label for="ntrend-3b"><strong>NTREND Demo: Record rows</strong></label><div class="content">
+
 Now that we've seen how to use the ``closestLatLon`` command, we can combine it with the ``rows`` command. Here, we need to update the forward model for each proxy record, so we'll be using these commands within a ``for`` loop. Within each loop iteration, we'll locate the appropriate state vector rows for the proxy record, and then pass these rows to the forward model using the ``rows`` command::
 
     % Get the coordinates and metadata for each proxy site
@@ -558,9 +619,19 @@ We can double-check the forward models to ensure they know which state vector ro
 
 we can see that the state vector rows have been set.
 
+.. raw:: html
 
-*LGM Demo: closestLatLon*
-+++++++++++++++++++++++++
+    </div></section>
+
+
+..
+    *LGM Demo: closestLatLon*
+    +++++++++++++++++++++++++
+
+.. raw:: html
+
+    <section class="accordion"><input type="checkbox" name="collapse" id="lgm-3a"><label for="lgm-3a"><strong>LGM Demo: closestLatLon</strong></label><div class="content">
+
 We'll start by exploring the ``closestLatLon`` command. In the demo, we need to search through the **SST** variable for data from the climate model grid point closest to each proxy record.
 
 Here, we'll demo the command for a single proxy record. We'll also use several ``ensembleMetadata`` commands to verify that the selected rows point to the correct data. We'll start by getting the coordinates of the "bs79-33" proxy record (this is the first proxy record in our dataset):
@@ -616,9 +687,21 @@ Here we can see the command returned the state vector row of the climate model g
 
        38.1033   13.7306
 
+.. raw:: html
 
-*LGM Demo: Record Rows*
-+++++++++++++++++++++++
+   </div></section>
+
+
+
+
+..
+   *LGM Demo: Record rows*
+   +++++++++++++++++++++++
+
+.. raw:: html
+
+   <section class="accordion"><input type="checkbox" name="collapse" id="lgm-3b"><label for="lgm-3b"><strong>LGM Demo: Record rows</strong></label><div class="content">
+
 Now that we've seen how to use the ``closestLatLon`` command, we can combine it with the ``rows`` command. Here, we need to update the forward model for each proxy record, so we'll be using these commands within a ``for`` loop. Within each loop iteration, we'll locate the appropriate state vector row for the proxy record, and then pass the row to the forward model using the ``rows`` command::
 
     % Get the coordinates for each proxy site
@@ -663,6 +746,10 @@ We can double-check the forward models to ensure they know which state vector ro
 
 we can see that the state vector row has been set.
 
+.. raw:: html
+
+    </div></section>
+
 
 
 Step 4: Estimate Proxies
@@ -688,8 +775,14 @@ You can run a set of forward models over an ensemble using the ``PSM.estimate`` 
     You can use the ``PSM.info`` method to see which forward models can estimate R variances.
 
 
-*NTREND Demo*
-+++++++++++++
+..
+    *NTREND Demo*
+    +++++++++++++
+
+.. raw:: html
+
+    <section class="accordion"><input type="checkbox" name="collapse" id="ntrend-4"><label for="ntrend-4"><strong>NTREND Demo</strong></label><div class="content">
+
 Here, we'll run the forward models over the ensemble to produce the proxy estimates. The linear forward model does not estimate error-variances, so we'll only compute proxy estimates here::
 
     % Get the ensemble object
@@ -713,9 +806,20 @@ Inspecting the output:
 
 we can see that Ye is a matrix with one row for each of the 54 proxy records, and a column for each of the 1156 ensemble members.
 
+.. raw:: html
 
-*LGM Demo*
-++++++++++
+    </div></section>
+
+
+
+..
+    *LGM Demo*
+    +++++++++++++
+
+.. raw:: html
+
+    <section class="accordion"><input type="checkbox" name="collapse" id="lgm-4"><label for="lgm-4"><strong>LGM Demo</strong></label><div class="content">
+
 Here, we'll run the forward models over the ensemble to produce proxy estimates. The BaySPLINE PSM is also able to estimate proxy uncertainties, so we'll also obtain those (as the second output):
 
     % Get the ensemble object
@@ -754,14 +858,25 @@ we can see that R has an uncertainty estimate for each proxy record and ensemble
 
     R = mean(R, 2);
 
+.. raw:: html
+
+    </div></section>
+
+
+
 
 Full Demo
 ---------
 This section recaps all the essential code from the demos and may be useful as a quick reference. Note that the code from several of the demo sections has been combined into a single loop.
 
 
-*NTREND Demo*
-+++++++++++++
+..
+    *NTREND Demo*
+    +++++++++++++
+
+.. raw:: html
+
+    <section class="accordion"><input type="checkbox" name="collapse" id="ntrend-full"><label for="ntrend-full"><strong>NTREND Demo</strong></label><div class="content">
 
 ::
 
@@ -813,9 +928,19 @@ This section recaps all the essential code from the demos and may be useful as a
     % Run the forward models over the ensemble to produce proxy estimates
     Ye = PSM.estimate(models, ens);
 
+.. raw:: html
 
-LGM Demo
-++++++++
+    </div></section>
+
+
+
+..
+    *LGM Demo*
+    +++++++++++++
+
+.. raw:: html
+
+    <section class="accordion"><input type="checkbox" name="collapse" id="lgm-full"><label for="lgm-full"><strong>LGM Demo</strong></label><div class="content">
 
 ::
 
@@ -853,3 +978,7 @@ LGM Demo
     % Estimate proxy values and uncertainties
     [Ye, R] = PSM.estimate(models, ens);
     R = mean(R, 2);
+
+.. raw:: html
+
+    </div></section>

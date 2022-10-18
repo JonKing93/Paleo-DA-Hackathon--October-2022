@@ -102,7 +102,7 @@ Next, we'll use the ``prior``, ``observations``, ``estimates``, and ``uncertaint
     The prior may either be provided via an ``ensemble`` object or as a data matrix. If using a matrix, each row should be an element of the state vector, and each column should be an ensemble member.
 
 **Y**
-    The proxy observations should be a data matrix. Each row holds a particular proxy record and each column holds the values for an assimilation time step. You can a NaN value when a proxy record does not have values for a particular time step.
+    The proxy observations should be a data matrix. Each row holds a particular proxy record and each column holds the values for an assimilation time step. You can use a NaN value when a proxy record does not have values for a particular time step.
 
 **Ye**
     The proxy estimates should be a matrix with one row per proxy record, and one column per ensemble member.
@@ -113,8 +113,8 @@ Next, we'll use the ``prior``, ``observations``, ``estimates``, and ``uncertaint
 You can also modify these commands to use different values in different assimilation time steps. (For example, to use an evolving prior). We will not discuss this syntax in the workshop, but you can read about it in the DASH documentation.
 
 
-``ensemble.useVariables``
-+++++++++++++++++++++++++
+*Select Reconstruction Targets*
++++++++++++++++++++++++++++++++
 When providing an assimilation prior, the prior only needs to contain state vector variables that represent reconstruction targets. Since we already generated proxy estimates, we don't need to assimilate variables used only as forward model inputs. You can use the ``ensemble.useVariables`` command to restrict an ensemble object to specific state vector variables. The syntax for the command is::
 
     obj = obj.useVariables(variables)
@@ -369,7 +369,7 @@ In this demo, we'll return the variance and quartiles of the posterior ensemble.
 
     kf = kf.variance(true);
 
-Then, we'll use the ``percentiles`` command to also request the quartiles of the ensemble as output
+Then, we'll use the ``percentiles`` command to also request the quartiles of the ensemble as output::
 
     percentages = [25 50 75];
     kf = kf.percentiles(percentages);

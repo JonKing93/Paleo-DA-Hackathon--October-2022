@@ -64,7 +64,7 @@
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#step-2-essential-inputs">Step 2: Essential Inputs</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#ensemble-usevariables"><code class="docutils literal notranslate"><span class="pre">ensemble.useVariables</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#select-reconstruction-targets"><em>Select Reconstruction Targets</em></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#id1"><em>NTREND Demo</em></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#id2"><em>LGM Demo</em></a></li>
 </ul>
@@ -197,7 +197,7 @@
 <dl class="simple">
 <dt><strong>X</strong></dt><dd><p>The prior may either be provided via an <code class="docutils literal notranslate"><span class="pre">ensemble</span></code> object or as a data matrix. If using a matrix, each row should be an element of the state vector, and each column should be an ensemble member.</p>
 </dd>
-<dt><strong>Y</strong></dt><dd><p>The proxy observations should be a data matrix. Each row holds a particular proxy record and each column holds the values for an assimilation time step. You can a NaN value when a proxy record does not have values for a particular time step.</p>
+<dt><strong>Y</strong></dt><dd><p>The proxy observations should be a data matrix. Each row holds a particular proxy record and each column holds the values for an assimilation time step. You can use a NaN value when a proxy record does not have values for a particular time step.</p>
 </dd>
 <dt><strong>Ye</strong></dt><dd><p>The proxy estimates should be a matrix with one row per proxy record, and one column per ensemble member.</p>
 </dd>
@@ -205,8 +205,8 @@
 </dd>
 </dl>
 <p>You can also modify these commands to use different values in different assimilation time steps. (For example, to use an evolving prior). We will not discuss this syntax in the workshop, but you can read about it in the DASH documentation.</p>
-<section id="ensemble-usevariables">
-<h3><code class="docutils literal notranslate"><span class="pre">ensemble.useVariables</span></code><a class="headerlink" href="#ensemble-usevariables" title="Permalink to this heading"></a></h3>
+<section id="select-reconstruction-targets">
+<h3><em>Select Reconstruction Targets</em><a class="headerlink" href="#select-reconstruction-targets" title="Permalink to this heading"></a></h3>
 <p>When providing an assimilation prior, the prior only needs to contain state vector variables that represent reconstruction targets. Since we already generated proxy estimates, we don’t need to assimilate variables used only as forward model inputs. You can use the <code class="docutils literal notranslate"><span class="pre">ensemble.useVariables</span></code> command to restrict an ensemble object to specific state vector variables. The syntax for the command is:</p>
 <div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">obj</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">obj</span><span class="p">.</span><span class="n">useVariables</span><span class="p">(</span><span class="n">variables</span><span class="p">)</span><span class="w"></span>
 </pre></div>
@@ -435,11 +435,11 @@
 <div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">kf</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">kf</span><span class="p">.</span><span class="n">variance</span><span class="p">(</span><span class="nb">true</span><span class="p">);</span><span class="w"></span>
 </pre></div>
 </div>
-<p>Then, we’ll use the <code class="docutils literal notranslate"><span class="pre">percentiles</span></code> command to also request the quartiles of the ensemble as output</p>
-<blockquote>
-<div><p>percentages = [25 50 75];
-kf = kf.percentiles(percentages);</p>
-</div></blockquote>
+<p>Then, we’ll use the <code class="docutils literal notranslate"><span class="pre">percentiles</span></code> command to also request the quartiles of the ensemble as output:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">percentages</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="mi">25</span><span class="w"> </span><span class="mi">50</span><span class="w"> </span><span class="mi">75</span><span class="p">];</span><span class="w"></span>
+<span class="n">kf</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">kf</span><span class="p">.</span><span class="n">percentiles</span><span class="p">(</span><span class="n">percentages</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
 <p>Inspecting the updated object:</p>
 <div class="input highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="nb">disp</span><span class="p">(</span><span class="n">kf</span><span class="p">)</span><span class="w"></span>
 </pre></div>
