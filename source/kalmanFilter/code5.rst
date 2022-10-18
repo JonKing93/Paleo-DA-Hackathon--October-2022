@@ -342,6 +342,71 @@ Inspecting the updated object:
 we can see that the object will now implement covariance localization when running a Kalman filter.
 
 
+*LGM Demo*
+++++++++++
+In this demo, we'll implement covariance localization with a localization radius of 15,000 km. We'll start by using the metadata in ``UK37.grid`` to obtain the proxy coordinates::
+
+    % Load the metadata for each site
+    site = gridfile('uk37').metadata.site;
+    lats = str2double(site(:,2));
+    lons = str2double(site(:,3));
+
+    % Get the proxy coordinates
+    proxyCoordinates = [lats, lons];
+
+Next, we'll use the ``ensembleMetadata.latlon`` command to return latitude-longitude coordinates for each element in the state vector. Our **SST** variable is located on a tripolar grid, so DASH treats the climate model output as a collection of unique spatial sites. The spatial metadata is thus organized along the "site" dimension, rather than "lat" and "lon". Because of this we'll use the first input to the ``latlon`` command to indicate that the first column of "site" metadata corresponds to latitude, and the second column is longitude::
+
+    % Get the ensembleMetadata object
+    ensMeta = ensemble('lgm').metadata;
+
+    % Get the latitude-longitude coordinates
+    siteColumns = [1 2];
+    stateCoordinates = ensMeta.latlon([1 2]);
+
+With these coordinates, we'll use the ``dash.localize.gc2d`` function to calculate localization weights::
+
+    % Calculate localization weights for a 15000 km radius
+    R = 15000;
+    [wloc, yloc] = dash.localize.gc2d(stateCoordinates, proxyCoordinates, R);
+
+Finally, we'll provide the localization weights to the ``kalmanFilter`` object::
+
+    kf = kf.localize(wloc, yloc);
+
+Inspecting the updated object:
+
+.. code::
+    :class: input
+
+    disp(kf)
+
+.. code::
+    :class: output
+
+    kalmanFilter with properties:
+
+                      Label: LGM Demo
+
+               Observations: set
+                      Prior: static
+                  Estimates: set
+              Uncertainties: variances
+
+          Observation Sites: 139
+        State Vector Length: 122880
+           Ensemble Members: 16
+                     Priors: 1
+                 Time Steps: 1
+
+                 Covariance:
+                      Localization
+
+                  Returning:
+                      Mean
+
+we can see that the object will now implement covariance localization when running a Kalman filter.
+
+
 
 
 Step 4: Select outputs
@@ -410,6 +475,48 @@ Inspecting the updated object:
 we can see that the object will return the variance of the ensemble, as well as the 3 requested percentiles, when the object runs the Kalman filter algorithm.
 
 
+*LGM Demo*
+----------
+In this demo, we'll return the full ensemble deviations. This is possible because we are only assimilating a single time step, so the output ensemble won't be too large. We'll use the ``deviations`` command to indicate that the algorithm should update and return the ensemble deviations::
+
+    kf = kf.deviations(true);
+
+Inspecting the updated object:
+
+.. code::
+    :class: input
+
+    disp(kf)
+
+.. code::
+    :class: output
+
+    kalmanFilter with properties:
+
+                      Label: LGM Demo
+
+               Observations: set
+                      Prior: static
+                  Estimates: set
+              Uncertainties: variances
+
+          Observation Sites: 139
+        State Vector Length: 122880
+           Ensemble Members: 16
+                     Priors: 1
+                 Time Steps: 1
+
+                 Covariance:
+                      Localization
+
+                  Returning:
+                      Mean
+                      Deviations
+
+we can see that the object will now return both the ensemble mean and deviations when running a Kalman filter.
+
+
+
 
 
 Step 5: Run the filter
@@ -452,6 +559,26 @@ Examining the output:
                  Aperc: [4321×3×1262 single]
 
 we can see it includes the updated ensemble mean for each of the 1262 assimilated time steps (Amean), the ensemble variance in each time step (Avar), and the 3 ensemble quartiles in each time step (Aperc). The output also includes the calibration ratio for each proxy record in each time step.
+
+
+
+*LGM Demo*
+++++++++++
+We'll use the ``run`` command to run the Kalman filter algorithm. As a reminder, the object will implement covariance localization with a localization radius of 15,000 km. Also, the algorithm should return both the updated ensemble mean and deviations::
+
+    output = kf.run;
+
+Examining the output:
+
+.. code::
+    :class: input
+
+    disp(output)
+
+.. code::
+    :class: output
+
+    
 
 
 

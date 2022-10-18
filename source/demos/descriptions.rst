@@ -23,7 +23,7 @@ The demo also includes two other files: ``ntrend.grid`` and ``temperature-cesm.g
 
 Demo 2
 ------
-The second demo is designed for a Last Glacial Maximum (LGM) assimilation. This demo uses a set of UK'37 records to reconstruct sea surface temperatures (SSTs) at the LGM. The demo relies on (1) climate model output from 16 iCESM LGM simulations, and (2) 139 UK'37 proxy records. To generate proxy estimates, we will use the BaySPLINE forward model for UK'37. For the sake of simplicity, we will ignore seasonal considerations in this demo. You can download the files for this demo here: `LGM demo`_. We will refer to this demo as the **LGM Demo** for the remainder of the workshop.
+The second demo is designed for a Last Glacial Maximum (LGM) assimilation. This demo uses a set of UK'37 records to reconstruct sea surface temperatures (SSTs) at the LGM. The demo relies on (1) climate model output from 16 iCESM LGM simulations, and (2) 89 UK'37 proxy records. To generate proxy estimates, we will use the BaySPLINE forward model for UK'37. For the sake of simplicity, we will ignore seasonal considerations in this demo. You can download the files for this demo here: `LGM demo`_. We will refer to this demo as the **LGM Demo** for the remainder of the workshop.
 
 The downloaded demo includes the following data files:
 

@@ -228,7 +228,7 @@ In this demo, we'll be using the BAYSPLINE forward model for UKL'37. Reading the
 
 we can see the BAYSPLINE model does not require any site-specific parameteers. Thus, we can create a BAYSPLINE object for each proxy record without requiring any inputs.
 
-In the following code, we'll create a BAYSPLINE PSM object for each of the 139 UK'37 records. We'll label each object with the name of the associated proxy record, and we'll group the set of PSM objects into a cell vector::
+In the following code, we'll create a BAYSPLINE PSM object for each of the 89 UK'37 records. We'll label each object with the name of the associated proxy record, and we'll group the set of PSM objects into a cell vector::
 
     % Get the ID for each proxy record
     metadata = gridfile('uk37').metadata;
@@ -259,7 +259,7 @@ In the following code, we'll create a BAYSPLINE PSM object for each of the 139 U
 
         models =
 
-          139×1 cell array
+          89×1 cell array
 
             {1×1 PSM.bayspline}
             {1×1 PSM.bayspline}
@@ -267,7 +267,7 @@ In the following code, we'll create a BAYSPLINE PSM object for each of the 139 U
             {1×1 PSM.bayspline}
             {1×1 PSM.bayspline}
 
-we can see that "models" is a cell vector with 139 elements, and that each element holds a bayspline PSM object for a particular proxy record. We can inspect the elements of the cell to see the individual PSMs. For example:
+we can see that "models" is a cell vector with 89 elements, and that each element holds a bayspline PSM object for a particular proxy record. We can inspect the elements of the cell to see the individual PSMs. For example:
 
 .. code::
     :class: input
@@ -839,9 +839,9 @@ Inspecting the output:
     :class: output
 
     siz =
-       139    16
+       89    16
 
-we can see that Ye is a matrix with one row for each of the 139 proxy records, and a column for each of the 16 ensemble members. Similarly examining R:
+we can see that Ye is a matrix with one row for each of the 89 proxy records, and a column for each of the 16 ensemble members. Similarly examining R:
 
 .. code::
     :class: input
@@ -852,7 +852,7 @@ we can see that Ye is a matrix with one row for each of the 139 proxy records, a
     :class: output
 
     siz =
-       139    16
+       89    16
 
 we can see that R has an uncertainty estimate for each proxy record and ensemble member. In reality, we only want one uncertainty estimate per proxy record, so we'll use the mean uncertainty estimates over the ensemble::
 
