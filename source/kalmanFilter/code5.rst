@@ -344,7 +344,7 @@ we can see that the object will now implement covariance localization when runni
 
 *LGM Demo*
 ++++++++++
-In this demo, we'll implement covariance localization with a localization radius of 15,000 km. We'll start by using the metadata in ``UK37.grid`` to obtain the proxy coordinates::
+In this demo, we'll implement covariance localization with a localization radius of 22,000 km. We'll start by using the metadata in ``UK37.grid`` to obtain the proxy coordinates::
 
     % Load the metadata for each site
     site = gridfile('uk37').metadata.site;
@@ -366,7 +366,7 @@ Next, we'll use the ``ensembleMetadata.latlon`` command to return latitude-longi
 With these coordinates, we'll use the ``dash.localize.gc2d`` function to calculate localization weights::
 
     % Calculate localization weights for a 15000 km radius
-    R = 15000;
+    R = 22000;
     [wloc, yloc] = dash.localize.gc2d(stateCoordinates, proxyCoordinates, R);
 
 Finally, we'll provide the localization weights to the ``kalmanFilter`` object::
@@ -588,8 +588,8 @@ we can see it includes the updated ensemble mean (Amean), and the updated deviat
 
 
 
-Step 6: Regrid state vectors
-----------------------------
+Step 6: Regrid state vector variables
+-------------------------------------
 At this point, you'll typically want to start mapping and visualizing the assimilation outputs. However, the assimilated variables are still organized as state vectors, which can hinder visualization. You can use the ``ensembleMetadata.regrid`` command to (1) extract a variable from a state vector, and (2) return the variable to its original data grid. The base syntax is::
 
     [V, metadata] = obj.regrid(variable, X)
@@ -662,16 +662,127 @@ includes values for the regridded lon and lat dimensions. The metadata does not 
 ++++++++++
 Here, we don't actually need to regrid the output. This is for two reasons. First, we assimilated a single state vector variable, so we don't need to extract the variable from the rest of the state vector. Second, because our variable is on a tripolar grid, the variable has a single ``site`` spatial dimension - as such, the variable would just be regridded as the current state vector. Instead, we will use Matlab's ``reshape`` command to return the tripolar grid to its original shape. Note that the original tripolar model output was organized on a 320 x 384 spatial grid::
 
-    SST = reshape(output.Amean, 320, 384, []);
+    % Reshape the updated SST field
+    SST = reshape(output.Amean, 320, 384);
 
-This regridded variable can now be used with various mapping utilities.
+We will also want to reshape the latitude and longitude metadata. We can use the ``ensembleMetadata`` object for the prior to obtain this metadata::
+
+    % Get the latitude and longitude metadata
+    ensMeta = ensemble('lgm').metadata;
+    latlon = ensMeta.latlon([1 2]);
+
+    % Reshape the metadata
+    lat = reshape(latlon(:,1), 320, 384);
+    lon = reshape(latlon(:,2), 320, 384);
+
+We can now use the regridded variable and metadata with various mapping utilties.
+
 
 
 Step 7: Visualize!
 ------------------
 That's it, the assimilation is complete! Try visualizing some of the outputs. Plotting data is outside of the scope of DASH, so use whatever mapping and visualization tools you prefer. You may be interested in:
 
-* `Matlab's mapping toolbox <https://www.mathworks.com/help/map/index.html>_, and
+* `Matlab's mapping toolbox <https://www.mathworks.com/help/map/index.html>`_, and
 * `The m_map package <https://www.eoas.ubc.ca/~rich/map.html>`_
 
 and there are many other resources online.
+
+
+Full Demo
+---------
+This section recaps all the essential code from the demos and may be useful as a quick reference.
+
+
+*NTREND Demo*
++++++++++++++
+
+::
+
+    % Load the proxy data catalogue, and the prior ensemble/its metadata
+    proxies = gridfile('ntrend');
+    ens = ensemble('ntrend');
+    ens = ens.useVariables(["T", "T_monthly"]);
+    ensMeta = ens.metadata;
+
+    % Create a kalman filter object
+    kf = kalmanFilter("NTREND Demo");
+
+    % Collect essential inputs
+    X = ens;
+    Y = proxies.load;
+    % Ye    (from PSM.estimate)
+    R = load('ntrend.mat','R').R;
+
+    % Provide essential inputs to the filter
+    kf = kf.prior(X);
+    kf = kf.observations(Y);
+    kf = kf.estimates(Ye);
+    kf = kf.uncertainties(R);
+
+    % Get localization weights
+    stateCoordinates = ensMeta.latlon;
+    proxyCoordinates = str2double( proxies.metadata.site(:,2:3) );
+    radius = 22000;
+    [wloc, yloc] = dash.localize.gc2d(stateCoordinates, proxyCoordinates, radius);
+
+    % Add localization to the filter
+    kf = kf.localize(wloc, yloc);
+
+    % Return ensemble variance and percentiles
+    percentages = [25 50 75];
+    kf = kf.percentiles(percentages);
+    kf = kf.variance(true);
+
+    % Run the filter
+    output = kf.run;
+
+    % Extract and regrid variables
+    [T, metadata] = ensMeta.regrid("T", output.Amean);
+
+
+*LGM Demo*
+++++++++++
+
+::
+
+    % Load the proxy data catalogue, and the prior ensemble/its metadata
+    proxies = gridfile('UK37');
+    ens = ensemble('lgm');
+    ensMeta = ens.metadata;
+
+    % Create a Kalman fitler object
+    kf = kalmanFilter('LGM Demo');
+
+    % Collect essential inputs
+    X = ens;
+    Y = proxies.load;
+    % Ye     (from PSM.estimate)
+    % R      (from PSM.estimate)
+
+    % Provide essential inputs to the filter
+    kf = kf.prior(ens);
+    kf = kf.observations(Y);
+    kf = kf.estimates(Ye);
+    kf = kf.uncertainties(R);
+
+    % Compute localization weights
+    stateCoordinates = ensMeta.latlon([1 2]);
+    proxyCoordinates = str2double( proxies.metadata.site(2:3) );
+    radius = 22000;
+    [wloc, yloc] = dash.localize.gc2d(stateCoordinates, proxyCoordinates, radius);
+
+    % Add localization to the filter
+    kf = kf.localize(wloc, yloc);
+
+    % Return the full ensemble deviations
+    kf = kf.deviations(true);
+
+    % Run the filter
+    output = kf.run;
+
+    % Reshape tripolar output
+    gridSize = [320 384];
+    SST = reshape(output.Amean, gridSize);
+    lat = reshape(stateCoordinates(:,1), gridSize);
+    lon = reshape(stateCoordinates(:,2), gridSize);
