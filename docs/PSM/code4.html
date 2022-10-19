@@ -72,6 +72,7 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../kalmanFilter/outline.html">kalmanFilter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../next-steps.html">Next Steps</a></li>
 </ul>
 
         </div>
@@ -241,7 +242,7 @@
 </pre></div>
 </div>
 <p>we can see the BAYSPLINE model does not require any site-specific parameteers. Thus, we can create a BAYSPLINE object for each proxy record without requiring any inputs.</p>
-<p>In the following code, we’ll create a BAYSPLINE PSM object for each of the 139 UK’37 records. We’ll label each object with the name of the associated proxy record, and we’ll group the set of PSM objects into a cell vector:</p>
+<p>In the following code, we’ll create a BAYSPLINE PSM object for each of the 89 UK’37 records. We’ll label each object with the name of the associated proxy record, and we’ll group the set of PSM objects into a cell vector:</p>
 <div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">% Get the ID for each proxy record</span><span class="w"></span>
 <span class="n">metadata</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">gridfile</span><span class="p">(</span><span class="s">&#39;uk37&#39;</span><span class="p">).</span><span class="n">metadata</span><span class="p">;</span><span class="w"></span>
 <span class="n">ID</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">metadata</span><span class="p">.</span><span class="n">site</span><span class="p">(:,</span><span class="mi">1</span><span class="p">);</span><span class="w"></span>
@@ -271,7 +272,7 @@
 
 <span class="w">    </span><span class="n">models</span><span class="w"> </span><span class="p">=</span><span class="w"></span>
 
-<span class="w">      </span><span class="mi">139</span>×<span class="mi">1</span><span class="w"> </span><span class="nb">cell</span><span class="w"> </span><span class="n">array</span><span class="w"></span>
+<span class="w">      </span><span class="mi">89</span>×<span class="mi">1</span><span class="w"> </span><span class="nb">cell</span><span class="w"> </span><span class="n">array</span><span class="w"></span>
 
 <span class="w">        </span><span class="p">{</span><span class="mi">1</span>×<span class="mi">1</span><span class="w"> </span><span class="n">PSM</span><span class="p">.</span><span class="n">bayspline</span><span class="p">}</span><span class="w"></span>
 <span class="w">        </span><span class="p">{</span><span class="mi">1</span>×<span class="mi">1</span><span class="w"> </span><span class="n">PSM</span><span class="p">.</span><span class="n">bayspline</span><span class="p">}</span><span class="w"></span>
@@ -280,7 +281,7 @@
 <span class="w">        </span><span class="p">{</span><span class="mi">1</span>×<span class="mi">1</span><span class="w"> </span><span class="n">PSM</span><span class="p">.</span><span class="n">bayspline</span><span class="p">}</span><span class="w"></span>
 </pre></div>
 </div>
-<p>we can see that “models” is a cell vector with 139 elements, and that each element holds a bayspline PSM object for a particular proxy record. We can inspect the elements of the cell to see the individual PSMs. For example:</p>
+<p>we can see that “models” is a cell vector with 89 elements, and that each element holds a bayspline PSM object for a particular proxy record. We can inspect the elements of the cell to see the individual PSMs. For example:</p>
 <div class="input highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">models</span><span class="p">{</span><span class="mi">1</span><span class="p">}</span><span class="w"></span>
 </pre></div>
 </div>
@@ -665,15 +666,15 @@ ens = ensemble(‘lgm’);</p>
 </pre></div>
 </div>
 <div class="output highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">siz</span><span class="w"> </span><span class="p">=</span><span class="w"></span>
-<span class="w">   </span><span class="mi">139</span><span class="w">    </span><span class="mi">16</span><span class="w"></span>
+<span class="w">   </span><span class="mi">89</span><span class="w">    </span><span class="mi">16</span><span class="w"></span>
 </pre></div>
 </div>
-<p>we can see that Ye is a matrix with one row for each of the 139 proxy records, and a column for each of the 16 ensemble members. Similarly examining R:</p>
+<p>we can see that Ye is a matrix with one row for each of the 89 proxy records, and a column for each of the 16 ensemble members. Similarly examining R:</p>
 <div class="input highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">siz</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">size</span><span class="p">(</span><span class="n">R</span><span class="p">)</span><span class="w"></span>
 </pre></div>
 </div>
 <div class="output highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">siz</span><span class="w"> </span><span class="p">=</span><span class="w"></span>
-<span class="w">   </span><span class="mi">139</span><span class="w">    </span><span class="mi">16</span><span class="w"></span>
+<span class="w">   </span><span class="mi">89</span><span class="w">    </span><span class="mi">16</span><span class="w"></span>
 </pre></div>
 </div>
 <p>we can see that R has an uncertainty estimate for each proxy record and ensemble member. In reality, we only want one uncertainty estimate per proxy record, so we’ll use the mean uncertainty estimates over the ensemble:</p>

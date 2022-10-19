@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Index &mdash; Paleo DA Hackathon 0.0.1 documentation</title>
+  <title>Next Steps &mdash; Paleo DA Hackathon 0.0.1 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/matlab-io.css" type="text/css" />
@@ -19,8 +20,9 @@
         <script src="_static/doctools.js"></script>
         <script src="_static/sphinx_highlight.js"></script>
     <script src="_static/js/theme.js"></script>
-    <link rel="index" title="Index" href="#" />
-    <link rel="search" title="Search" href="search.html" /> 
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Open Coding 5" href="kalmanFilter/code5.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -44,7 +46,7 @@
 <li class="toctree-l1"><a class="reference internal" href="prerequisites.html">Prerequisites</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Workshop</span></p>
-<ul>
+<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="da-primer.html">DA Primer</a></li>
 <li class="toctree-l1"><a class="reference internal" href="workshop-outline.html">Workshop Outline</a></li>
 <li class="toctree-l1"><a class="reference internal" href="dash/outline.html">Introducing DASH</a></li>
@@ -52,7 +54,7 @@
 <li class="toctree-l1"><a class="reference internal" href="stateVector/outline.html">stateVector</a></li>
 <li class="toctree-l1"><a class="reference internal" href="PSM/outline.html">PSM</a></li>
 <li class="toctree-l1"><a class="reference internal" href="kalmanFilter/outline.html">kalmanFilter</a></li>
-<li class="toctree-l1"><a class="reference internal" href="next-steps.html">Next Steps</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Next Steps</a></li>
 </ul>
 
         </div>
@@ -69,7 +71,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
-      <li>Index</li>
+      <li>Next Steps</li>
       <li class="wy-breadcrumbs-aside">
       </li>
   </ul>
@@ -78,17 +80,51 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-
-<h1 id="index">Index</h1>
-
-<div class="genindex-jumpbox">
- 
+  <section id="next-steps">
+<h1>Next Steps<a class="headerlink" href="#next-steps" title="Permalink to this heading"></a></h1>
+<p>Thanks for attending the Paleo DA Hackathon!</p>
+<p>After the workshop (or if you finish early), try experimenting with other tools in the DASH toolbox. Some possible ideas include:</p>
+<ul class="simple">
+<li><p>Run the demos with a different localization radius</p></li>
+<li><p>Run the demos with inflation instead of localization</p></li>
+<li><p>LGM Demo: Use <code class="docutils literal notranslate"><span class="pre">PSM.estimate</span></code> to generate validation proxies from the updated ensemble</p></li>
+<li><p>LGM Demo: Incorporating proxy seasonality into the PSMs</p></li>
+<li><p>NTREND Demo: Compute a temperature index from the updated field and compare it with the assimilated index</p></li>
+<li><p>NTREND Demo: Withhold some proxies from the assimilation</p></li>
+<li><p>Use the <code class="docutils literal notranslate"><span class="pre">ensemble.useMembers</span></code> command to rerun an assimilation with different ensemble members</p></li>
+<li><p>Create an evolving prior</p></li>
+<li><p>Run a particle filter or optimal sensor</p></li>
+<li><p>Build a <code class="docutils literal notranslate"><span class="pre">.grid</span></code> data catalogue</p></li>
+<li><p>Make a framework for online assimilation</p></li>
+<li><p>Or anything else that raises your interest</p></li>
+</ul>
+<p>Also keep an eye out for the official v4 release next week - the release will include an expanded version of this workshop that covers all the classes in DASH.</p>
+<p>You can also read in depth about the commands in the DASH toolbox in the reference guide at:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">dash</span><span class="p">.</span><span class="n">doc</span><span class="w"></span>
+</pre></div>
 </div>
+<p>We recommend reading the documentation of the different classes, as they contain outlines for working with their commands. A suggested reading order:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">gridMetadata</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">gridfile</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">stateVector</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ensemble</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ensembleMetadata</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">PSM</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">kalmanFilter</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">particleFilter</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">optimalSensor</span></code></p></li>
+</ul>
+<hr class="docutils" />
+<p>Finally, we welcome contributions and feedback. If you have any questions, find a command confusing, or have ideas for new features - don’t hesitate to reach out!</p>
+</section>
 
 
            </div>
           </div>
-          <footer>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="kalmanFilter/code5.html" class="btn btn-neutral float-left" title="Open Coding 5" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
 
   <hr/>
 
