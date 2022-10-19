@@ -4,6 +4,7 @@ Thanks for attending the Paleo DA Hackathon!
 
 After the workshop (or if you finish early), try experimenting with other tools in the DASH toolbox. Some possible ideas include:
 
+* Compare the time to update the ensemble mean vs. mean and deviations
 * Run the demos with a different localization radius
 * Run the demos with inflation instead of localization
 * LGM Demo: Use ``PSM.estimate`` to generate validation proxies from the updated ensemble

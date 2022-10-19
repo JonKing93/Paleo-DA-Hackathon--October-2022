@@ -815,7 +815,7 @@ This section recaps all the essential code from the demos. You can use it as a q
 
     % Add the SST variable
     variable = "SST";
-    catalogue = "SST.grid"
+    catalogue = "SST.grid";
     sv = sv.add(variable, catalogue);
 
     % Set "run" as an ensemble dimension

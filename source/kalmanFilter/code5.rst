@@ -925,7 +925,7 @@ This section recaps all the essential code from the demos and may be useful as a
 
     % Compute localization weights
     stateCoordinates = ensMeta.latlon([1 2]);
-    proxyCoordinates = str2double( proxies.metadata.site(2:3) );
+    proxyCoordinates = str2double( proxies.metadata.site(:, 2:3) );
     radius = 22000;
     [wloc, yloc] = dash.localize.gc2d(stateCoordinates, proxyCoordinates, radius);
 
