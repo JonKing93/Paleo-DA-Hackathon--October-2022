@@ -59,41 +59,17 @@
 <li class="toctree-l2"><a class="reference internal" href="kalmanFilter.html">kalmanFilter</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Open Coding 5</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#goal">Goal</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#step-1-create-kalmanfilter-object">Step 1: Create <code class="docutils literal notranslate"><span class="pre">kalmanFilter</span></code> object</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#ntrend-demo"><em>NTREND Demo</em></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#lgm-demo"><em>LGM Demo</em></a></li>
-</ul>
-</li>
+<li class="toctree-l3"><a class="reference internal" href="#step-1-create-kalmanfilter-object">Step 1: Create <code class="docutils literal notranslate"><span class="pre">kalmanFilter</span></code> object</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#step-2-essential-inputs">Step 2: Essential Inputs</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#select-reconstruction-targets"><em>Select Reconstruction Targets</em></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id1"><em>NTREND Demo</em></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id2"><em>LGM Demo</em></a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#step-3-covariance-adjustments">Step 3: Covariance Adjustments</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#id3"><em>NTREND Demo</em></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id4"><em>LGM Demo</em></a></li>
-</ul>
-</li>
+<li class="toctree-l3"><a class="reference internal" href="#step-3-covariance-adjustments">Step 3: Covariance Adjustments</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#step-4-select-outputs">Step 4: Select outputs</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id5"><em>NTREND Demo</em></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id6"><em>LGM Demo</em></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#step-5-run-the-filter">Step 5: Run the filter</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#id7"><em>NTREND Demo</em></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id8"><em>LGM Demo</em></a></li>
-</ul>
-</li>
+<li class="toctree-l3"><a class="reference internal" href="#step-5-run-the-filter">Step 5: Run the filter</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#step-6-regrid-state-vector-variables">Step 6: Regrid state vector variables</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id9"><em>NTREND Demo</em></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#id10"><em>LGM Demo</em></a></li>
-</ul>
-</li>
 <li class="toctree-l3"><a class="reference internal" href="#step-7-visualize">Step 7: Visualize!</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#full-demo">Full Demo</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#id11"><em>NTREND Demo</em></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id12"><em>LGM Demo</em></a></li>
-</ul>
-</li>
+<li class="toctree-l3"><a class="reference internal" href="#full-demo">Full Demo</a></li>
 </ul>
 </li>
 </ul>
@@ -146,9 +122,7 @@
 <p class="admonition-title">Tip</p>
 <p>You can also use the <code class="docutils literal notranslate"><span class="pre">kalmanFilter.label</span></code> command to label the object at any later point.</p>
 </div>
-<section id="ntrend-demo">
-<h3><em>NTREND Demo</em><a class="headerlink" href="#ntrend-demo" title="Permalink to this heading"></a></h3>
-<p>Here, we’ll create a <code class="docutils literal notranslate"><span class="pre">kalmanFilter</span></code> object for the NTREND demo. We’ll also apply a label to the object:</p>
+<section class="accordion"><input type="checkbox" name="collapse" id="ntrend-1"><label for="ntrend-1"><strong>NTREND Demo</strong></label><div class="content"><p>Here, we’ll create a <code class="docutils literal notranslate"><span class="pre">kalmanFilter</span></code> object for the NTREND demo. We’ll also apply a label to the object:</p>
 <div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">label</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&quot;NTREND Demo&quot;</span><span class="p">;</span><span class="w"></span>
 <span class="n">kf</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">kalmanFilter</span><span class="p">(</span><span class="n">label</span><span class="p">);</span><span class="w"></span>
 </pre></div>
@@ -171,10 +145,7 @@
 </pre></div>
 </div>
 <p>we can see the initialized Kalman filter. We can see that none of the 4 essential inputs (observations, prior, estimates, and uncertainties) have been set yet. We can also see that the object will only update and return the ensemble mean when running the Kalman filter algorithm.</p>
-</section>
-<section id="lgm-demo">
-<h3><em>LGM Demo</em><a class="headerlink" href="#lgm-demo" title="Permalink to this heading"></a></h3>
-<p>Here, we’ll create a <code class="docutils literal notranslate"><span class="pre">kalmanFilter</span></code> object for the LGM temperature assimilation. We’ll also apply a label to the object:</p>
+</div></section><section class="accordion"><input type="checkbox" name="collapse" id="lgm-1"><label for="lgm-1"><strong>LGM Demo</strong></label><div class="content"><p>Here, we’ll create a <code class="docutils literal notranslate"><span class="pre">kalmanFilter</span></code> object for the LGM temperature assimilation. We’ll also apply a label to the object:</p>
 <div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">label</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&quot;LGM Demo&quot;</span><span class="p">;</span><span class="w"></span>
 <span class="n">kf</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">kalmanFilter</span><span class="p">(</span><span class="n">label</span><span class="p">);</span><span class="w"></span>
 </pre></div>
@@ -197,8 +168,7 @@
 </pre></div>
 </div>
 <p>we can see the initialized Kalman filter. We can see that none of the 4 essential inputs (observations, prior, estimates, and uncertainties) have been set yet. We can also see that the object will only update and return the ensemble mean when running the Kalman filter algorithm.</p>
-</section>
-</section>
+</div></section></section>
 <section id="step-2-essential-inputs">
 <h2>Step 2: Essential Inputs<a class="headerlink" href="#step-2-essential-inputs" title="Permalink to this heading"></a></h2>
 <p>Next, we’ll use the <code class="docutils literal notranslate"><span class="pre">prior</span></code>, <code class="docutils literal notranslate"><span class="pre">observations</span></code>, <code class="docutils literal notranslate"><span class="pre">estimates</span></code>, and <code class="docutils literal notranslate"><span class="pre">uncertainties</span></code> commands to provide essential inputs to the Kalman filter. All four commands use a similar base syntax - each command takes a data array as input, and outputs an updated <code class="docutils literal notranslate"><span class="pre">kalmanFilter</span></code> object:</p>
@@ -231,10 +201,7 @@
 <dt><strong>obj</strong></dt><dd><p>The output is an updated ensemble object.</p>
 </dd>
 </dl>
-</section>
-<section id="id1">
-<h3><em>NTREND Demo</em><a class="headerlink" href="#id1" title="Permalink to this heading"></a></h3>
-<p>We’ll use the four input commands to provide the essential data values for our assimilation. We’ll start by providing the prior. Our prior will consist of the reconstruction targets <strong>T</strong> and <strong>T_index</strong>. We’ll use the <code class="docutils literal notranslate"><span class="pre">ensemble.useVariables</span></code> command to limit the reconstruction to these two variables:</p>
+<section class="accordion"><input type="checkbox" name="collapse" id="ntrend-2"><label for="ntrend-2"><strong>NTREND Demo</strong></label><div class="content"><p>We’ll use the four input commands to provide the essential data values for our assimilation. We’ll start by providing the prior. Our prior will consist of the reconstruction targets <strong>T</strong> and <strong>T_index</strong>. We’ll use the <code class="docutils literal notranslate"><span class="pre">ensemble.useVariables</span></code> command to limit the reconstruction to these two variables:</p>
 <div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">% Get an ensemble object</span><span class="w"></span>
 <span class="n">ens</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">ensemble</span><span class="p">(</span><span class="s">&#39;ntrend&#39;</span><span class="p">);</span><span class="w"></span>
 
@@ -293,10 +260,7 @@
 </pre></div>
 </div>
 <p>we can see that the Kalman filter now includes all four essential inputs. We can see it uses a static (time-independent) prior, and error-variances for the uncertainties. The output also shows a few key sizes, such as the number of observations sites, prior, assimilation time steps, etc.</p>
-</section>
-<section id="id2">
-<h3><em>LGM Demo</em><a class="headerlink" href="#id2" title="Permalink to this heading"></a></h3>
-<p>We’ll use the four input commands to provide the essential data values for our assimilation. We’ll start by providing the prior using an ensemble object:</p>
+</div></section><section class="accordion"><input type="checkbox" name="collapse" id="lgm-2"><label for="lgm-2"><strong>LGM Demo</strong></label><div class="content"><p>We’ll use the four input commands to provide the essential data values for our assimilation. We’ll start by providing the prior using an ensemble object:</p>
 <div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">% Get the ensemble object</span><span class="w"></span>
 <span class="n">ens</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">ensemble</span><span class="p">(</span><span class="s">&#39;lgm&#39;</span><span class="p">);</span><span class="w"></span>
 
@@ -343,7 +307,7 @@
 </pre></div>
 </div>
 <p>we can see that the Kalman filter now includes all four essential inputs. We can see it uses a static (time-independent) prior, and error-variances for the uncertainties. The output also shows a few key sizes, such as the number of observations sites, prior, assimilation time steps, etc.</p>
-</section>
+</div></section></section>
 </section>
 <section id="step-3-covariance-adjustments">
 <h2>Step 3: Covariance Adjustments<a class="headerlink" href="#step-3-covariance-adjustments" title="Permalink to this heading"></a></h2>
@@ -363,9 +327,7 @@
 <dt><strong>R</strong></dt><dd><p>The third input lists the localization radius in kilometers.</p>
 </dd>
 </dl>
-<section id="id3">
-<h3><em>NTREND Demo</em><a class="headerlink" href="#id3" title="Permalink to this heading"></a></h3>
-<p>In this demo, we’ll implement covariance localization with a localization radius of 15,000 km. We’ll start by using the metadata in <code class="docutils literal notranslate"><span class="pre">ntrend.grid</span></code> to obtain the proxy coordinates:</p>
+<section class="accordion"><input type="checkbox" name="collapse" id="ntrend-3"><label for="ntrend-3"><strong>NTREND Demo</strong></label><div class="content"><p>In this demo, we’ll implement covariance localization with a localization radius of 15,000 km. We’ll start by using the metadata in <code class="docutils literal notranslate"><span class="pre">ntrend.grid</span></code> to obtain the proxy coordinates:</p>
 <div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">% Load the metadata for each site</span><span class="w"></span>
 <span class="n">site</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">gridfile</span><span class="p">(</span><span class="s">&#39;ntrend&#39;</span><span class="p">).</span><span class="n">metadata</span><span class="p">.</span><span class="n">site</span><span class="p">;</span><span class="w"></span>
 <span class="n">lats</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">str2double</span><span class="p">(</span><span class="n">site</span><span class="p">(:,</span><span class="mi">2</span><span class="p">));</span><span class="w"></span>
@@ -424,10 +386,7 @@
 </pre></div>
 </div>
 <p>we can see that the object will now implement covariance localization when running a Kalman filter.</p>
-</section>
-<section id="id4">
-<h3><em>LGM Demo</em><a class="headerlink" href="#id4" title="Permalink to this heading"></a></h3>
-<p>In this demo, we’ll implement covariance localization with a localization radius of 22,000 km. We’ll start by using the metadata in <code class="docutils literal notranslate"><span class="pre">UK37.grid</span></code> to obtain the proxy coordinates:</p>
+</div></section><section class="accordion"><input type="checkbox" name="collapse" id="lgm-3"><label for="lgm-3"><strong>LGM Demo</strong></label><div class="content"><p>In this demo, we’ll implement covariance localization with a localization radius of 22,000 km. We’ll start by using the metadata in <code class="docutils literal notranslate"><span class="pre">UK37.grid</span></code> to obtain the proxy coordinates:</p>
 <div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">% Load the metadata for each site</span><span class="w"></span>
 <span class="n">site</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">gridfile</span><span class="p">(</span><span class="s">&#39;uk37&#39;</span><span class="p">).</span><span class="n">metadata</span><span class="p">.</span><span class="n">site</span><span class="p">;</span><span class="w"></span>
 <span class="n">lats</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">str2double</span><span class="p">(</span><span class="n">site</span><span class="p">(:,</span><span class="mi">2</span><span class="p">));</span><span class="w"></span>
@@ -483,8 +442,7 @@
 </pre></div>
 </div>
 <p>we can see that the object will now implement covariance localization when running a Kalman filter.</p>
-</section>
-</section>
+</div></section></section>
 <section id="step-4-select-outputs">
 <h2>Step 4: Select outputs<a class="headerlink" href="#step-4-select-outputs" title="Permalink to this heading"></a></h2>
 <p>As mentioned, you can use various commands to indicate that the Kalman filter should return specific outputs. In this workshop, we’ll focus on the <code class="docutils literal notranslate"><span class="pre">kalmanFilter.variance</span></code> and <code class="docutils literal notranslate"><span class="pre">kalmanFilter.deviations</span></code> commands, which share a similar syntax. Use:</p>
@@ -501,10 +459,7 @@
 </pre></div>
 </div>
 <p>where the <strong>percentages</strong> input is a vector of percentages for which to compute percentiles. The percentiles will be labeled as <strong>Aperc</strong> in the Kalman filter output.</p>
-</section>
-<section id="id5">
-<h2><em>NTREND Demo</em><a class="headerlink" href="#id5" title="Permalink to this heading"></a></h2>
-<p>In this demo, we’ll return the variance and quartiles of the posterior ensemble. First, we’ll use the <code class="docutils literal notranslate"><span class="pre">variance</span></code> command to indicate that the algorithm should update the ensemble deviations and return ensemble variance:</p>
+<section class="accordion"><input type="checkbox" name="collapse" id="ntrend-4"><label for="ntrend-4"><strong>NTREND Demo</strong></label><div class="content"><p>In this demo, we’ll return the variance and quartiles of the posterior ensemble. First, we’ll use the <code class="docutils literal notranslate"><span class="pre">variance</span></code> command to indicate that the algorithm should update the ensemble deviations and return ensemble variance:</p>
 <div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">kf</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">kf</span><span class="p">.</span><span class="n">variance</span><span class="p">(</span><span class="nb">true</span><span class="p">);</span><span class="w"></span>
 </pre></div>
 </div>
@@ -542,10 +497,7 @@
 </pre></div>
 </div>
 <p>we can see that the object will return the variance of the ensemble, as well as the 3 requested percentiles, when the object runs the Kalman filter algorithm.</p>
-</section>
-<section id="id6">
-<h2><em>LGM Demo</em><a class="headerlink" href="#id6" title="Permalink to this heading"></a></h2>
-<p>In this demo, we’ll return the full ensemble deviations. This is possible because we are only assimilating a single time step, so the output ensemble won’t be too large. We’ll use the <code class="docutils literal notranslate"><span class="pre">deviations</span></code> command to indicate that the algorithm should update and return the ensemble deviations:</p>
+</div></section><section class="accordion"><input type="checkbox" name="collapse" id="lgm-4"><label for="lgm-4"><strong>LGM Demo</strong></label><div class="content"><p>In this demo, we’ll return the full ensemble deviations. This is possible because we are only assimilating a single time step, so the output ensemble won’t be too large. We’ll use the <code class="docutils literal notranslate"><span class="pre">deviations</span></code> command to indicate that the algorithm should update and return the ensemble deviations:</p>
 <div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">kf</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">kf</span><span class="p">.</span><span class="n">deviations</span><span class="p">(</span><span class="nb">true</span><span class="p">);</span><span class="w"></span>
 </pre></div>
 </div>
@@ -577,7 +529,7 @@
 </pre></div>
 </div>
 <p>we can see that the object will now return both the ensemble mean and deviations when running a Kalman filter.</p>
-</section>
+</div></section></section>
 <section id="step-5-run-the-filter">
 <h2>Step 5: Run the filter<a class="headerlink" href="#step-5-run-the-filter" title="Permalink to this heading"></a></h2>
 <p>We’re finally ready to run the Kalman filter algorithm. We’ll do this using the <code class="docutils literal notranslate"><span class="pre">kalmanFilter.run</span></code> command. The base syntax for this command is:</p>
@@ -592,9 +544,7 @@
 <li><p>Aperc: Requested percentiles of the posterior ensemble</p></li>
 </ul>
 <p>as well as other output fields.</p>
-<section id="id7">
-<h3><em>NTREND Demo</em><a class="headerlink" href="#id7" title="Permalink to this heading"></a></h3>
-<p>We’ll use the <code class="docutils literal notranslate"><span class="pre">run</span></code> command to run the Kalman filter algorithm. As a reminder, the object will implement covariance localization with a localization radius of 15,000 km. Also, the algorithm should return the updated ensemble mean, ensemble variance, and ensemble quartiles for each assimilated time step:</p>
+<section class="accordion"><input type="checkbox" name="collapse" id="ntrend-5"><label for="ntrend-5"><strong>NTREND Demo</strong></label><div class="content"><p>We’ll use the <code class="docutils literal notranslate"><span class="pre">run</span></code> command to run the Kalman filter algorithm. As a reminder, the object will implement covariance localization with a localization radius of 15,000 km. Also, the algorithm should return the updated ensemble mean, ensemble variance, and ensemble quartiles for each assimilated time step:</p>
 <div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">output</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">kf</span><span class="p">.</span><span class="n">run</span><span class="p">;</span><span class="w"></span>
 </pre></div>
 </div>
@@ -611,10 +561,7 @@
 </pre></div>
 </div>
 <p>we can see it includes the updated ensemble mean for each of the 1262 assimilated time steps (Amean), the ensemble variance in each time step (Avar), and the 3 ensemble quartiles in each time step (Aperc). The output also includes the calibration ratio for each proxy record in each time step.</p>
-</section>
-<section id="id8">
-<h3><em>LGM Demo</em><a class="headerlink" href="#id8" title="Permalink to this heading"></a></h3>
-<p>We’ll use the <code class="docutils literal notranslate"><span class="pre">run</span></code> command to run the Kalman filter algorithm. As a reminder, the object will implement covariance localization with a localization radius of 15,000 km. Also, the algorithm should return both the updated ensemble mean and deviations:</p>
+</div></section><section class="accordion"><input type="checkbox" name="collapse" id="lgm-5"><label for="lgm-5"><strong>LGM Demo</strong></label><div class="content"><p>We’ll use the <code class="docutils literal notranslate"><span class="pre">run</span></code> command to run the Kalman filter algorithm. As a reminder, the object will implement covariance localization with a localization radius of 15,000 km. Also, the algorithm should return both the updated ensemble mean and deviations:</p>
 <div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">output</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">kf</span><span class="p">.</span><span class="n">run</span><span class="p">;</span><span class="w"></span>
 </pre></div>
 </div>
@@ -630,8 +577,7 @@
 </pre></div>
 </div>
 <p>we can see it includes the updated ensemble mean (Amean), and the updated deviations from the ensemble mean for each ensemble member (Adev). The output also includes the calibration ratio for each proxy record in each time step.</p>
-</section>
-</section>
+</div></section></section>
 <section id="step-6-regrid-state-vector-variables">
 <h2>Step 6: Regrid state vector variables<a class="headerlink" href="#step-6-regrid-state-vector-variables" title="Permalink to this heading"></a></h2>
 <p>At this point, you’ll typically want to start mapping and visualizing the assimilation outputs. However, the assimilated variables are still organized as state vectors, which can hinder visualization. You can use the <code class="docutils literal notranslate"><span class="pre">ensembleMetadata.regrid</span></code> command to (1) extract a variable from a state vector, and (2) return the variable to its original data grid. The base syntax is:</p>
@@ -651,10 +597,7 @@
 </dd>
 </dl>
 <p>A note on tripolar grids: DASH usually represents tripolar grids as a collection of unique spatial sites. The <code class="docutils literal notranslate"><span class="pre">regrid</span></code> command will reshape these spatial sites into a single <code class="docutils literal notranslate"><span class="pre">site</span></code> dimension, so you’ll often want to reshape the regridded <code class="docutils literal notranslate"><span class="pre">site</span></code> dimension to the size of the original tripolar output.</p>
-</section>
-<section id="id9">
-<h2><em>NTREND Demo</em><a class="headerlink" href="#id9" title="Permalink to this heading"></a></h2>
-<p>Here, we’ll regrid the updated ensemble mean of the temperature field (the <strong>T</strong> variable):</p>
+<section class="accordion"><input type="checkbox" name="collapse" id="ntrend-6"><label for="ntrend-6"><strong>NTREND Demo</strong></label><div class="content"><p>Here, we’ll regrid the updated ensemble mean of the temperature field (the <strong>T</strong> variable):</p>
 <div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">% Get the ensembleMetadata object for the prior</span><span class="w"></span>
 <span class="n">ens</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">ensemble</span><span class="p">(</span><span class="s">&#39;ntrend&#39;</span><span class="p">);</span><span class="w"></span>
 <span class="n">ens</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">ens</span><span class="p">.</span><span class="n">useVariables</span><span class="p">([</span><span class="s">&quot;T&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;T_index&quot;</span><span class="p">]);</span><span class="w"></span>
@@ -683,9 +626,7 @@
 </pre></div>
 </div>
 <p>includes values for the regridded lon and lat dimensions. The metadata does not include values for the third dimension, because assimilation time steps were not a dimension of the original data grid.</p>
-<section id="id10">
-<h3><em>LGM Demo</em><a class="headerlink" href="#id10" title="Permalink to this heading"></a></h3>
-<p>Here, we don’t actually need to regrid the output. This is for two reasons. First, we assimilated a single state vector variable, so we don’t need to extract the variable from the rest of the state vector. Second, because our variable is on a tripolar grid, the variable has a single <code class="docutils literal notranslate"><span class="pre">site</span></code> spatial dimension - as such, the variable would just be regridded as the current state vector. Instead, we will use Matlab’s <code class="docutils literal notranslate"><span class="pre">reshape</span></code> command to return the tripolar grid to its original shape. Note that the original tripolar model output was organized on a 320 x 384 spatial grid:</p>
+</div></section><section class="accordion"><input type="checkbox" name="collapse" id="lgm-6"><label for="lgm-6"><strong>LGM Demo</strong></label><div class="content"><p>Here, we don’t actually need to regrid the output. This is for two reasons. First, we assimilated a single state vector variable, so we don’t need to extract the variable from the rest of the state vector. Second, because our variable is on a tripolar grid, the variable has a single <code class="docutils literal notranslate"><span class="pre">site</span></code> spatial dimension - as such, the variable would just be regridded as the current state vector. Instead, we will use Matlab’s <code class="docutils literal notranslate"><span class="pre">reshape</span></code> command to return the tripolar grid to its original shape. Note that the original tripolar model output was organized on a 320 x 384 spatial grid:</p>
 <div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">% Reshape the updated SST field</span><span class="w"></span>
 <span class="n">SST</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">reshape</span><span class="p">(</span><span class="n">output</span><span class="p">.</span><span class="n">Amean</span><span class="p">,</span><span class="w"> </span><span class="mi">320</span><span class="p">,</span><span class="w"> </span><span class="mi">384</span><span class="p">);</span><span class="w"></span>
 </pre></div>
@@ -701,8 +642,7 @@
 </pre></div>
 </div>
 <p>We can now use the regridded variable and metadata with various mapping utilties.</p>
-</section>
-</section>
+</div></section></section>
 <section id="step-7-visualize">
 <h2>Step 7: Visualize!<a class="headerlink" href="#step-7-visualize" title="Permalink to this heading"></a></h2>
 <p>That’s it, the assimilation is complete! Try visualizing some of the outputs. Plotting data is outside of the scope of DASH, so use whatever mapping and visualization tools you prefer. You may be interested in:</p>
@@ -715,9 +655,7 @@
 <section id="full-demo">
 <h2>Full Demo<a class="headerlink" href="#full-demo" title="Permalink to this heading"></a></h2>
 <p>This section recaps all the essential code from the demos and may be useful as a quick reference.</p>
-<section id="id11">
-<h3><em>NTREND Demo</em><a class="headerlink" href="#id11" title="Permalink to this heading"></a></h3>
-<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">% Load the proxy data catalogue, and the prior ensemble/its metadata</span><span class="w"></span>
+<section class="accordion"><input type="checkbox" name="collapse" id="ntrend-full"><label for="ntrend-full"><strong>NTREND Demo</strong></label><div class="content"><div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">% Load the proxy data catalogue, and the prior ensemble/its metadata</span><span class="w"></span>
 <span class="n">proxies</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">gridfile</span><span class="p">(</span><span class="s">&#39;ntrend&#39;</span><span class="p">);</span><span class="w"></span>
 <span class="n">ens</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">ensemble</span><span class="p">(</span><span class="s">&#39;ntrend&#39;</span><span class="p">);</span><span class="w"></span>
 <span class="n">ens</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">ens</span><span class="p">.</span><span class="n">useVariables</span><span class="p">([</span><span class="s">&quot;T&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;T_monthly&quot;</span><span class="p">]);</span><span class="w"></span>
@@ -759,10 +697,7 @@
 <span class="p">[</span><span class="n">T</span><span class="p">,</span><span class="w"> </span><span class="n">metadata</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">ensMeta</span><span class="p">.</span><span class="n">regrid</span><span class="p">(</span><span class="s">&quot;T&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">output</span><span class="p">.</span><span class="n">Amean</span><span class="p">);</span><span class="w"></span>
 </pre></div>
 </div>
-</section>
-<section id="id12">
-<h3><em>LGM Demo</em><a class="headerlink" href="#id12" title="Permalink to this heading"></a></h3>
-<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">% Load the proxy data catalogue, and the prior ensemble/its metadata</span><span class="w"></span>
+</div></section><section class="accordion"><input type="checkbox" name="collapse" id="lgm-full"><label for="lgm-full"><strong>LGM Demo</strong></label><div class="content"><div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">% Load the proxy data catalogue, and the prior ensemble/its metadata</span><span class="w"></span>
 <span class="n">proxies</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">gridfile</span><span class="p">(</span><span class="s">&#39;UK37&#39;</span><span class="p">);</span><span class="w"></span>
 <span class="n">ens</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">ensemble</span><span class="p">(</span><span class="s">&#39;lgm&#39;</span><span class="p">);</span><span class="w"></span>
 <span class="n">ensMeta</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">ens</span><span class="p">.</span><span class="n">metadata</span><span class="p">;</span><span class="w"></span>
@@ -804,8 +739,7 @@
 <span class="n">lon</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">reshape</span><span class="p">(</span><span class="n">stateCoordinates</span><span class="p">(:,</span><span class="mi">2</span><span class="p">),</span><span class="w"> </span><span class="n">gridSize</span><span class="p">);</span><span class="w"></span>
 </pre></div>
 </div>
-</section>
-</section>
+</div></section></section>
 </section>
 
 
