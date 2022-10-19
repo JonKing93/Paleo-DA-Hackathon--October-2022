@@ -23,8 +23,17 @@ where **label** is a string.
     You can also use the ``kalmanFilter.label`` command to label the object at any later point.
 
 
-*NTREND Demo*
-+++++++++++++
+
+
+
+..
+    *NTREND Demo*
+    +++++++++++++
+
+.. raw:: html
+
+    <section class="accordion"><input type="checkbox" name="collapse" id="ntrend-1"><label for="ntrend-1"><strong>NTREND Demo</strong></label><div class="content">
+
 Here, we'll create a ``kalmanFilter`` object for the NTREND demo. We'll also apply a label to the object::
 
     label = "NTREND Demo";
@@ -54,9 +63,21 @@ Inspecting the object:
 
 we can see the initialized Kalman filter. We can see that none of the 4 essential inputs (observations, prior, estimates, and uncertainties) have been set yet. We can also see that the object will only update and return the ensemble mean when running the Kalman filter algorithm.
 
+.. raw:: html
 
-*LGM Demo*
-++++++++++
+    </div></section>
+
+
+
+
+..
+    *LGM Demo*
+    +++++++++++++
+
+.. raw:: html
+
+    <section class="accordion"><input type="checkbox" name="collapse" id="lgm-1"><label for="lgm-1"><strong>LGM Demo</strong></label><div class="content">
+
 Here, we'll create a ``kalmanFilter`` object for the LGM temperature assimilation. We'll also apply a label to the object::
 
     label = "LGM Demo";
@@ -85,6 +106,10 @@ Inspecting the object:
                 Mean
 
 we can see the initialized Kalman filter. We can see that none of the 4 essential inputs (observations, prior, estimates, and uncertainties) have been set yet. We can also see that the object will only update and return the ensemble mean when running the Kalman filter algorithm.
+
+.. raw:: html
+
+    </div></section>
 
 
 
@@ -126,8 +151,17 @@ When providing an assimilation prior, the prior only needs to contain state vect
     The output is an updated ensemble object.
 
 
-*NTREND Demo*
-+++++++++++++
+
+
+
+
+..
+    *NTREND Demo*
+    +++++++++++++
+
+.. raw:: html
+
+    <section class="accordion"><input type="checkbox" name="collapse" id="ntrend-2"><label for="ntrend-2"><strong>NTREND Demo</strong></label><div class="content">
 
 We'll use the four input commands to provide the essential data values for our assimilation. We'll start by providing the prior. Our prior will consist of the reconstruction targets **T** and **T_index**. We'll use the ``ensemble.useVariables`` command to limit the reconstruction to these two variables::
 
@@ -194,9 +228,19 @@ Inspecting the updated ``kalmanFilter`` object:
 
 we can see that the Kalman filter now includes all four essential inputs. We can see it uses a static (time-independent) prior, and error-variances for the uncertainties. The output also shows a few key sizes, such as the number of observations sites, prior, assimilation time steps, etc.
 
+.. raw:: html
 
-*LGM Demo*
-++++++++++
+    </div></section>
+
+
+
+..
+    *LGM Demo*
+    +++++++++++++
+
+.. raw:: html
+
+    <section class="accordion"><input type="checkbox" name="collapse" id="lgm-2"><label for="lgm-2"><strong>LGM Demo</strong></label><div class="content">
 
 We'll use the four input commands to provide the essential data values for our assimilation. We'll start by providing the prior using an ensemble object::
 
@@ -251,6 +295,10 @@ Inspecting the updated ``kalmanFilter`` object:
 
 we can see that the Kalman filter now includes all four essential inputs. We can see it uses a static (time-independent) prior, and error-variances for the uncertainties. The output also shows a few key sizes, such as the number of observations sites, prior, assimilation time steps, etc.
 
+.. raw:: html
+
+    </div></section>
+
 
 
 Step 3: Covariance Adjustments
@@ -274,8 +322,17 @@ where **wloc** and **yloc** are the localization weights between (1) the proxy e
 
 
 
-*NTREND Demo*
-+++++++++++++
+
+
+
+..
+    *NTREND Demo*
+    +++++++++++++
+
+.. raw:: html
+
+    <section class="accordion"><input type="checkbox" name="collapse" id="ntrend-3"><label for="ntrend-3"><strong>NTREND Demo</strong></label><div class="content">
+
 In this demo, we'll implement covariance localization with a localization radius of 15,000 km. We'll start by using the metadata in ``ntrend.grid`` to obtain the proxy coordinates::
 
     % Load the metadata for each site
@@ -341,9 +398,20 @@ Inspecting the updated object:
 
 we can see that the object will now implement covariance localization when running a Kalman filter.
 
+.. raw:: html
 
-*LGM Demo*
-++++++++++
+    </div></section>
+
+
+
+..
+    *LGM Demo*
+    +++++++++++++
+
+.. raw:: html
+
+    <section class="accordion"><input type="checkbox" name="collapse" id="lgm-3"><label for="lgm-3"><strong>LGM Demo</strong></label><div class="content">
+
 In this demo, we'll implement covariance localization with a localization radius of 22,000 km. We'll start by using the metadata in ``UK37.grid`` to obtain the proxy coordinates::
 
     % Load the metadata for each site
@@ -406,6 +474,9 @@ Inspecting the updated object:
 
 we can see that the object will now implement covariance localization when running a Kalman filter.
 
+.. raw:: html
+
+    </div></section>
 
 
 
@@ -428,8 +499,17 @@ You can also use the ``kalmanFilter.percentiles`` command to return specific per
 where the **percentages** input is a vector of percentages for which to compute percentiles. The percentiles will be labeled as **Aperc** in the Kalman filter output.
 
 
-*NTREND Demo*
--------------
+
+
+
+..
+    *NTREND Demo*
+    +++++++++++++
+
+.. raw:: html
+
+    <section class="accordion"><input type="checkbox" name="collapse" id="ntrend-4"><label for="ntrend-4"><strong>NTREND Demo</strong></label><div class="content">
+
 In this demo, we'll return the variance and quartiles of the posterior ensemble. First, we'll use the ``variance`` command to indicate that the algorithm should update the ensemble deviations and return ensemble variance::
 
     kf = kf.variance(true);
@@ -474,9 +554,20 @@ Inspecting the updated object:
 
 we can see that the object will return the variance of the ensemble, as well as the 3 requested percentiles, when the object runs the Kalman filter algorithm.
 
+.. raw:: html
 
-*LGM Demo*
-----------
+    </div></section>
+
+
+
+..
+    *LGM Demo*
+    +++++++++++++
+
+.. raw:: html
+
+    <section class="accordion"><input type="checkbox" name="collapse" id="lgm-4"><label for="lgm-4"><strong>LGM Demo</strong></label><div class="content">
+
 In this demo, we'll return the full ensemble deviations. This is possible because we are only assimilating a single time step, so the output ensemble won't be too large. We'll use the ``deviations`` command to indicate that the algorithm should update and return the ensemble deviations::
 
     kf = kf.deviations(true);
@@ -515,7 +606,9 @@ Inspecting the updated object:
 
 we can see that the object will now return both the ensemble mean and deviations when running a Kalman filter.
 
+.. raw:: html
 
+    </div></section>
 
 
 
@@ -535,8 +628,18 @@ The output is a struct with fields for the requested outputs. These may include:
 as well as other output fields.
 
 
-*NTREND Demo*
-+++++++++++++
+
+
+
+
+..
+    *NTREND Demo*
+    +++++++++++++
+
+.. raw:: html
+
+    <section class="accordion"><input type="checkbox" name="collapse" id="ntrend-5"><label for="ntrend-5"><strong>NTREND Demo</strong></label><div class="content">
+
 We'll use the ``run`` command to run the Kalman filter algorithm. As a reminder, the object will implement covariance localization with a localization radius of 15,000 km. Also, the algorithm should return the updated ensemble mean, ensemble variance, and ensemble quartiles for each assimilated time step::
 
     output = kf.run;
@@ -560,10 +663,20 @@ Examining the output:
 
 we can see it includes the updated ensemble mean for each of the 1262 assimilated time steps (Amean), the ensemble variance in each time step (Avar), and the 3 ensemble quartiles in each time step (Aperc). The output also includes the calibration ratio for each proxy record in each time step.
 
+.. raw:: html
+
+    </div></section>
 
 
-*LGM Demo*
-++++++++++
+
+..
+    *LGM Demo*
+    +++++++++++++
+
+.. raw:: html
+
+    <section class="accordion"><input type="checkbox" name="collapse" id="lgm-5"><label for="lgm-5"><strong>LGM Demo</strong></label><div class="content">
+
 We'll use the ``run`` command to run the Kalman filter algorithm. As a reminder, the object will implement covariance localization with a localization radius of 15,000 km. Also, the algorithm should return both the updated ensemble mean and deviations::
 
     output = kf.run;
@@ -585,6 +698,10 @@ Examining the output:
                   Adev: [122880×16 double]
 
 we can see it includes the updated ensemble mean (Amean), and the updated deviations from the ensemble mean for each ensemble member (Adev). The output also includes the calibration ratio for each proxy record in each time step.
+
+.. raw:: html
+
+    </div></section>
 
 
 
@@ -613,8 +730,17 @@ At this point, you'll typically want to start mapping and visualizing the assimi
 A note on tripolar grids: DASH usually represents tripolar grids as a collection of unique spatial sites. The ``regrid`` command will reshape these spatial sites into a single ``site`` dimension, so you'll often want to reshape the regridded ``site`` dimension to the size of the original tripolar output.
 
 
-*NTREND Demo*
--------------
+
+
+
+..
+    *NTREND Demo*
+    +++++++++++++
+
+.. raw:: html
+
+    <section class="accordion"><input type="checkbox" name="collapse" id="ntrend-6"><label for="ntrend-6"><strong>NTREND Demo</strong></label><div class="content">
+
 Here, we'll regrid the updated ensemble mean of the temperature field (the **T** variable)::
 
     % Get the ensembleMetadata object for the prior
@@ -655,11 +781,21 @@ we can see that the regridded output has dimensions of (longitude x latitude x a
 
 includes values for the regridded lon and lat dimensions. The metadata does not include values for the third dimension, because assimilation time steps were not a dimension of the original data grid.
 
+.. raw:: html
+
+    </div></section>
 
 
 
-*LGM Demo*
-++++++++++
+
+..
+    *LGM Demo*
+    +++++++++++++
+
+.. raw:: html
+
+    <section class="accordion"><input type="checkbox" name="collapse" id="lgm-6"><label for="lgm-6"><strong>LGM Demo</strong></label><div class="content">
+
 Here, we don't actually need to regrid the output. This is for two reasons. First, we assimilated a single state vector variable, so we don't need to extract the variable from the rest of the state vector. Second, because our variable is on a tripolar grid, the variable has a single ``site`` spatial dimension - as such, the variable would just be regridded as the current state vector. Instead, we will use Matlab's ``reshape`` command to return the tripolar grid to its original shape. Note that the original tripolar model output was organized on a 320 x 384 spatial grid::
 
     % Reshape the updated SST field
@@ -676,6 +812,11 @@ We will also want to reshape the latitude and longitude metadata. We can use the
     lon = reshape(latlon(:,2), 320, 384);
 
 We can now use the regridded variable and metadata with various mapping utilties.
+
+.. raw:: html
+
+    </div></section>
+
 
 
 
@@ -694,8 +835,13 @@ Full Demo
 This section recaps all the essential code from the demos and may be useful as a quick reference.
 
 
-*NTREND Demo*
-+++++++++++++
+..
+    *NTREND Demo*
+    +++++++++++++
+
+.. raw:: html
+
+    <section class="accordion"><input type="checkbox" name="collapse" id="ntrend-full"><label for="ntrend-full"><strong>NTREND Demo</strong></label><div class="content">
 
 ::
 
@@ -740,9 +886,20 @@ This section recaps all the essential code from the demos and may be useful as a
     % Extract and regrid variables
     [T, metadata] = ensMeta.regrid("T", output.Amean);
 
+.. raw:: html
 
-*LGM Demo*
-++++++++++
+    </div></section>
+
+
+
+
+..
+    *LGM Demo*
+    +++++++++++++
+
+.. raw:: html
+
+    <section class="accordion"><input type="checkbox" name="collapse" id="lgm-full"><label for="lgm-full"><strong>LGM Demo</strong></label><div class="content">
 
 ::
 
@@ -786,3 +943,7 @@ This section recaps all the essential code from the demos and may be useful as a
     SST = reshape(output.Amean, gridSize);
     lat = reshape(stateCoordinates(:,1), gridSize);
     lon = reshape(stateCoordinates(:,2), gridSize);
+
+.. raw:: html
+
+    </div></section>

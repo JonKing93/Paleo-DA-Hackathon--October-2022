@@ -19,6 +19,8 @@ After the workshop (or if you finish early), try experimenting with other tools 
 
 Also keep an eye out for the official v4 release next week - the release will include an expanded version of this workshop that covers all the classes in DASH.
 
+----
+
 You can also read in depth about the commands in the DASH toolbox in the reference guide at::
 
     dash.doc
