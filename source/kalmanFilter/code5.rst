@@ -240,7 +240,7 @@ Inspecting the updated ``kalmanFilter`` object:
                   Estimates: set
               Uncertainties: variances
 
-          Observation Sites: 139
+          Observation Sites: 89
         State Vector Length: 122880
            Ensemble Members: 16
                      Priors: 1
@@ -392,7 +392,7 @@ Inspecting the updated object:
                   Estimates: set
               Uncertainties: variances
 
-          Observation Sites: 139
+          Observation Sites: 89
         State Vector Length: 122880
            Ensemble Members: 16
                      Priors: 1
@@ -500,7 +500,7 @@ Inspecting the updated object:
                   Estimates: set
               Uncertainties: variances
 
-          Observation Sites: 139
+          Observation Sites: 89
         State Vector Length: 122880
            Ensemble Members: 16
                      Priors: 1
@@ -578,13 +578,19 @@ Examining the output:
 .. code::
     :class: output
 
-    
+    struct with fields:
+
+                 Amean: [122880×1 double]
+      calibrationRatio: [89×1 double]
+                  Adev: [122880×16 double]
+
+we can see it includes the updated ensemble mean (Amean), and the updated deviations from the ensemble mean for each ensemble member (Adev). The output also includes the calibration ratio for each proxy record in each time step.
 
 
 
 Step 6: Regrid state vectors
 ----------------------------
-At this point, you'll typically want to start mapping and visualizing the assimilation outputs. However, the assimilated variables are still organized as state vectors, which can hinder visualization. You can use the ``ensembleMetadata.regrid`` command to return state vector variables to their original data grids. The base syntax is::
+At this point, you'll typically want to start mapping and visualizing the assimilation outputs. However, the assimilated variables are still organized as state vectors, which can hinder visualization. You can use the ``ensembleMetadata.regrid`` command to (1) extract a variable from a state vector, and (2) return the variable to its original data grid. The base syntax is::
 
     [V, metadata] = obj.regrid(variable, X)
 
@@ -648,3 +654,24 @@ we can see that the regridded output has dimensions of (longitude x latitude x a
       lat: [30×1 double]
 
 includes values for the regridded lon and lat dimensions. The metadata does not include values for the third dimension, because assimilation time steps were not a dimension of the original data grid.
+
+
+
+
+*LGM Demo*
+++++++++++
+Here, we don't actually need to regrid the output. This is for two reasons. First, we assimilated a single state vector variable, so we don't need to extract the variable from the rest of the state vector. Second, because our variable is on a tripolar grid, the variable has a single ``site`` spatial dimension - as such, the variable would just be regridded as the current state vector. Instead, we will use Matlab's ``reshape`` command to return the tripolar grid to its original shape. Note that the original tripolar model output was organized on a 320 x 384 spatial grid::
+
+    SST = reshape(output.Amean, 320, 384, []);
+
+This regridded variable can now be used with various mapping utilities.
+
+
+Step 7: Visualize!
+------------------
+That's it, the assimilation is complete! Try visualizing some of the outputs. Plotting data is outside of the scope of DASH, so use whatever mapping and visualization tools you prefer. You may be interested in:
+
+* `Matlab's mapping toolbox <https://www.mathworks.com/help/map/index.html>_, and
+* `The m_map package <https://www.eoas.ubc.ca/~rich/map.html>`_
+
+and there are many other resources online.
