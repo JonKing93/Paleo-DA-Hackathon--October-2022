@@ -22,7 +22,7 @@ DASH Toolbox
 Please install the latest version of the DASH toolbox in your Matlab environment.
 
 1. Navigate to the `latest DASH release`_.
-2. From the "Assets" section, download the ``DASH-<version>.mltbx`` file.
+2. From the "Assets" section, download the ``DASH-v4.0.0-beta-4.mltbx`` file.
 3. Open the downloaded file. This should automatically install the toolbox in your Matlab environment.
 4. That's it, you're done! You can optionally verify your installation by entering::
 
