@@ -18,7 +18,7 @@ The ``DASH`` toolbox officially supports the following forward models:
 ===================  ===========
 `BayFOX`_            Bayesian model of planktic foraminiferal δ\ :sup:`18`\ O \ :sub:`c`
 `BayMAG`_            Bayesian model of planktic foraminiferal Mg/Ca
-`BaySPAR`_           Bayesian model for TEX'86
+`BaySPAR`_           Bayesian model for TEX86
 `BaySPLINE`_         Bayesian model for UK'37
 linear               General multi-variance linear model
 `PDSI`_              Palmer Drought-Severity Index estimator

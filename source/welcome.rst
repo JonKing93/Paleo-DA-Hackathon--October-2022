@@ -8,3 +8,10 @@ This workshop is designed to introduce attendees to DASH, a Matlab toolbox for p
 Before the workshop
 -------------------
 Please read and complete the `workshop prerequisites <prerequisites.html>`_ before attending.
+
+
+Workshop Recordings
+-------------------
+You can find recordings of the workshop here: `Workshop Recordings`_
+
+.. _Workshop Recordings: https://www.youtube.com/playlist?list=PL5v8hHkYC4RXc_dFwqb7dX2MlTf0V8lqj
